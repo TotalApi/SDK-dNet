@@ -1,0 +1,2123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TotalApi.Telematics.Api</name>
+    </assembly>
+    <members>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters">
+            <summary>
+            Parameters of breaks filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters.MinDistance">
+            <summary>
+            Minimum distance in km between coordinate points for detecting track break.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters.MaxDistance">
+            <summary>
+            Maximum distance in km between coordinate points for detecting track break.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters.AvgSpeed">
+            <summary>
+            Average speed in km/h.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.DefaultFilterParameters">
+            <summary>
+            Factory of the default coordinate filters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.DefaultFilterParameters.Create(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Creates abd adds default filters list to an source filters.
+            If the source filter list contains the only element equals <c>null</c> or <see cref="F:System.DBNull.Value"/> 
+            default filters won't be added.
+            </summary>
+            <param name="filters">Source filter list.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters">
+            <summary>
+            Parameters of rose point filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters.Radius">
+            <summary>
+            Radius in metres in which multiple coordinate points would be detected as one.
+            If less or equal 0 - filter would not be applied.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters.MinPointsCount">
+            <summary>
+            Minimal coordinate points count which could be interpreted as congestion.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/> class with default parameters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters.#ctor(System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters">
+            <summary>
+            Parameters of simplification filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters.Tolerance">
+            <summary>
+            Smoothing coefficient (1-100).
+            If less or equal 0 - filter would not be applied.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/> class.
+            </summary>
+            <param name="tolerance">The tolerance.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper">
+            <summary>
+            Speed filter helped needed for expanding track point information according to filter execution result.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension">
+            <summary>
+            Extends coordinate point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension.SpeedExceededFlag">
+            <summary>
+            Sets to <c>true</c> when overspeed.
+            As soon as the speed normilezes, the value sets to <c>false</c>.
+            At intermediate points between the beginning and the end of the overspeed - absent.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilter(TotalApi.Telematics.CoordinatePoint)">
+            <summary>
+            Spped filter. Detecting overspeed.
+            </summary>
+            <param name="coordinatePoint">The coordinate point.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters">
+            <summary>
+            Parameters for speed filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters.MaxSpeed">
+            <summary>
+            Maximum allowed speed in km/h.
+            Speed that is greater then this value would be interpreted as over speed.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters.Tolerance">
+            <summary>
+            Smotthing coefficient (1 - 100).
+            Bigger value - less precise computation would be applied.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper">
+            <summary>
+            Helper class for stop filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension">
+            <summary>
+            Extends coordinate point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopBeginDate">
+            <summary>
+            Gets or sets the stop begin date.
+            </summary>
+            <value>
+            The stop begin date.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopEndDate">
+            <summary>
+            Gets or sets the stop end date.
+            </summary>
+            <value>
+            The stop end date.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopDuration">
+            <summary>
+            Gets or sets the duration of the stop.
+            </summary>
+            <value>
+            The duration of the stop.
+            </value>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilter(TotalApi.Telematics.CoordinatePoint)">
+            <summary>
+            Stopses the filter.
+            </summary>
+            <param name="coordinatePoint">The coordinate point.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters">
+            <summary>
+            Parameters for stop filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.Action">
+            <summary>
+            Filter actions
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.Action.Default">
+            <summary>
+            Do not delete points from track - just put a sign of stop.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.Action.RemoveNonStops">
+            <summary>
+            Just keep stop points - the rest points will be deleted.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.Action.RemoveStops">
+            <summary>
+            Delete stop points.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.FilterAction">
+            <summary>
+            Actions for a filter over the track.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.MinSpeed">
+            <summary>
+            Minimal speed in km/h to determine the stop.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.MinStopDuration">
+            <summary>
+            Minimal stop time. Calculated values that are less then this are determined as no stop.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.ICoordinateFilter">
+            <summary>
+            Coordinate filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Coordinate">
+            <summary>
+            Represents a telematics coordinate object.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.UtcDate">
+            <summary>
+            Gets or sets the date and time in UTC format when the position's data was received from GPS source.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.Valid">
+            <summary>
+            Gets a byte representing whether the position's data is valid.
+            <remarks>
+               0 - coordinate is not valid;
+               1 - coordinate is valid.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.Altitude">
+            <summary>
+            Gets a double representing the position's altitude in metres, relative to sea level. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.Velocity">
+            <summary>
+            Gets a double representing the position's velocity of the device in meters per second.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.Direction">
+            <summary>
+            Gets a double representing the direction in which the device is traveling. 
+            This value, specified in degrees, indicates how far off from heading due north the device is. 
+            0 degrees represents true true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). 
+            If speed is 0, heading is NaN. If the device is unable to provide heading information, this value is null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.PDOP">
+            <summary>
+            Position Dilution of Precision (measure of accuracy in 3-D position), also called spherical DOP.
+            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.HDOP">
+            <summary>
+            Horizontal Dilution of Precision (measure of accuracy in 2-D position, for example Latitude and Longitude).
+            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.VDOP">
+            <summary>
+            Vertical Dilution of Precision (measure of accuracy in 1-D position, Height).
+            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.TDOP">
+            <summary>
+            Time Dilution of Precision (measure of accuracy in Time).
+            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.SatInUse">
+            <summary>
+            Number of satellites in use.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.SatInView">
+            <summary>
+            Number of satellites in view.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.DSTA">
+            <summary>
+            DSTA data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Coordinate.Extra">
+            <summary>
+            Extra data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.Coordinate"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.#ctor(System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.Coordinate"/> class.
+            </summary>
+            <param name="utcDate">The UTC date.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.#ctor(System.DateTime,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.Coordinate"/> class.
+            </summary>
+            <param name="utcDate">The UTC date.</param>
+            <param name="latitude">The latitude in radians.</param>
+            <param name="longitude">The longitude in radians.</param>
+            <param name="direction">The direction in degrees, indicates how far off from heading due north the device is.</param>
+            <param name="velocity">The velocity in meters per second.</param>
+            <param name="altitude">The altitude in metres, relative to sea level.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.#ctor(TotalApi.Telematics.Coordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.Coordinate"/> class.
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.IsValid">
+            <summary>
+            Determines whether this instance is valid.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/>, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.op_Equality(TotalApi.Telematics.Coordinate,TotalApi.Telematics.Coordinate)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="a">A.</param>
+            <param name="b">The b.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.op_Inequality(TotalApi.Telematics.Coordinate,TotalApi.Telematics.Coordinate)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="a">A.</param>
+            <param name="b">The b.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.GetIndexOfCoordinate(System.Collections.Generic.List{TotalApi.Telematics.Coordinate},System.DateTime)">
+            <summary>
+            Gets the index of coordinate.
+            </summary>
+            <param name="list">The list.</param>
+            <param name="dt">The dt.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.ToDbJson">
+            <summary>
+            Returns JSON string for saving into database - keeps only relevant values.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateConverter">
+            <summary>
+            Implements coordinate json converter
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param><param name="objectType">Type of the object.</param><param name="existingValue">The existing value of object being read.</param><param name="serializer">The calling serializer.</param>
+            <returns>
+            The object value.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilterTemplate">
+            <summary>
+            Template for a coordinate filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.FilterData">
+            <summary>
+            Gets or sets the filter data.
+            </summary>
+            <value>
+            The filter data.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.Filters">
+            <summary>
+            Gets the filters.
+            </summary>
+            <value>
+            The filters.
+            </value>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilterTemplate.AddFilter(System.String,System.Object)">
+            <summary>
+            Adds the filter.
+            </summary>
+            <param name="filterId">The filter identifier.</param>
+            <param name="filterParameters">The filter parameters.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilterTemplate.RemoveFilter(System.Int32)">
+            <summary>
+            Removes the filter.
+            </summary>
+            <param name="filterIndex">Index of the filter.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinatePoint">
+            <summary>
+            Class representing coordinate.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Coordinate">
+            <summary>
+            Gets the source coordinate.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.UtcDate">
+            <summary>
+            Gets the date and time in UTC format when the coordinate data was received from GPS source.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Velocity">
+            <summary>
+            Gets a double representing the velocity of the device in meters per second.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Direction">
+            <summary>
+            Gets a double representing the direction in which the device is traveling. 
+            This value, specified in degrees, indicates how far off from heading due north the device is. 
+            0 degrees represents true true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). 
+            If speed is 0, heading is NaN. If the device is unable to provide heading information, this value is null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Latitude">
+            <summary>
+            Gets a double representing the position's latitude in radians.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Longitude">
+            <summary>
+            Gets a double representing the position's longitude in radians.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Altitude">
+            <summary>
+            Gets a double representing the position's altitude in metres, relative to sea level. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.LatitudeDegree">
+            <summary>
+            Gets a double representing the position's latitude in degrees.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.LongitudeDegree">
+            <summary>
+            Gets a double representing the position's longitude in degrees.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.IsStop">
+            <summary>
+            The point is a stop. This property fills by stops filter (see <seealso cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters"/>).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.IsBreak">
+            <summary>
+            The point is a break point. This property fills by breaks filter (see <seealso cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/>).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.CanOptimize">
+            <summary>
+            Point could be optimized (removed) by filters.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.AdditionalInfo">
+            <summary>
+            Additional information - could be supplemented by filters during processing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoint.Item(System.String)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> with the specified name.
+            </summary>
+            <value>
+            The <see cref="T:System.Object"/>.
+            </value>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinatePoint.#ctor">
+            <summary>
+            Constructor without parameters needed for object deserialization.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinatePoint.#ctor(TotalApi.Telematics.Coordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinatePoint"/> class.
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinatePoints">
+            <summary>
+            Coordinate points representing class.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.UserData">
+            <summary>
+            Users data. Do not transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.TotalDistance">
+            <summary>
+            Total track length.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.TotalStops">
+            <summary>
+            Total track stops.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.MaxSpeed">
+            <summary>
+            Maximum track speed, based on the GPS data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.AvgSpeed">
+            <summary>
+            Average track speed, based on the GPS data.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinatePoints.AdditionalInfo">
+            <summary>
+            Additional information - could be expanded by filters during track processing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.Item(System.String)">
+            <summary>
+            Gets or sets the additional information with the specified name.
+            </summary>
+            <value>
+            The <see cref="T:System.Object"/>.
+            </value>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Telematics.CoordinatePoints.Points">
+            <summary>
+            Collection of coordinate points
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinatePoints.#ctor">
+            <summary>
+            Constructor without parameters needed for object deserialization.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinatePoints.#ctor(System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinatePoints"/> class.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinatePoints.RemoveDetailsInfo">
+            <summary>
+            Removes the coordinate dat, keeps only summary information.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Device">
+            <summary>
+            Represents a telematics device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Name">
+            <summary>
+            Internal name of the device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.PhoneNumber">
+            <summary>
+            Gets or sets phone number assotiated with the device.
+            This value can be null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Imei">
+            <summary>
+            Gets or sets the IMEI assotiated with the device.
+            This value can be null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Mac">
+            <summary>
+            Gets or sets the MAC-address assotiated with the device.
+            This value can be null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.OwnId">
+            <summary>
+            Gets or sets the own identifier assotiated with the device.
+            This value can be null.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.TimeToLive">
+            <summary>
+            Gets or sets time to live of the coordinates of the device.
+            Set <c>0</c> to use global default value of time to live.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.DeviceId">
+            <summary>
+            Gets or sets the device identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Model">
+            <summary>
+            Gets or sets the device model.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.ModelCode">
+            <summary>
+            Gets or sets the device model code.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Data">
+            <summary>
+            Gets or sets the binary data assotiated with the device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.IsOnLine">
+            <summary>
+            Gets or sets a value indicating whether this device is online.
+            </summary>
+            <value>
+            <c>true</c> if this instance is online; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.Tag">
+            <summary>
+            Gets or sets the device tag.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceIdentifier">
+            <summary>
+            Describes the structure that is identifies the device.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifier.Empty">
+            <summary>
+            Creates device identifier based on IMEI.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.DbId(System.String)">
+            <summary>
+            Creates device identifier based on database device identifier.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.PhoneNumber(System.String)">
+            <summary>
+            Creates device identifier based on telephon number.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.Imei(System.String)">
+            <summary>
+            Creates device identifier based on IMEI.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.Mac(System.String)">
+            <summary>
+            Creates device identifier based on MAC address.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.OwnId(System.String)">
+            <summary>
+            Creates device identifier based on internal identifier of the device.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.Create(TotalApi.Telematics.Device)">
+            <summary>
+            Returns device identifier.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.Create(System.String,TotalApi.Telematics.DeviceIdentifierTypes)">
+            <summary>
+            Creates device identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceIdentifier.Id">
+            <summary>
+            Retrieves device identifier, which has the meaning depending on type of the identifier (could be telephon number, MAC or IMEI).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceIdentifier.Type">
+            <summary>
+            Retrieves device identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceIdentifier.IsEmpty">
+            <summary>
+            Returns <c>true</c> if device identifier is not initialized yet.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.op_Equality(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="d1">The d1.</param>
+            <param name="d2">The d2.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.op_Inequality(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="d1">The d1.</param>
+            <param name="d2">The d2.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceIdentifier.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceIdentifierTypes">
+            <summary>
+            Types of the device identifiers.
+            Some devices could identify themselfs using multiple types at the same type
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifierTypes.DbId">
+            <summary>
+            Databse device identifier.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifierTypes.PhoneNumber">
+            <summary>
+            Phone number device identifier.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifierTypes.Imei">
+            <summary>
+            IMEI device identifier.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifierTypes.OwnId">
+            <summary>
+            Internal device identifier.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceIdentifierTypes.Mac">
+            <summary>
+            MAC address identifier.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceModel">
+            <summary>
+            Class, representing device model.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceModel.SystemCode">
+            <summary>
+            Internal model enum.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceModel.SystemCode.MobileTracker">
+            <summary>
+            The mobile tracker.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceModel.Equals(TotalApi.Telematics.DeviceModel)">
+            <summary>
+            Equalses the specified other.
+            </summary>
+            <param name="other">The other.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceModel.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceModel.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.Code">
+            <summary>
+            Device model code.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.Name">
+            <summary>
+            Device model name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.IdentifierTypes">
+            <summary>
+            Supported types of identifiers.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.SensorPorts">
+            <summary>
+            Sensor ports, supported by current model.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.Url">
+            <summary>
+            Address of data handler service for current model type.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceModel.SetupSmsCommand">
+            <summary>
+            SMS command for setting up device parameters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceModel.#ctor(System.Int32,System.String,TotalApi.Telematics.DeviceIdentifierTypes)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DeviceModel"/> class.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="name">The name.</param>
+            <param name="identifierTypes">The identifier types.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceModel.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceStates">
+            <summary>
+            Device states.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceStates.Unknown">
+            <summary>
+            Impossible to determine state.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceStates.Moved">
+            <summary>
+            Device is moving.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceStates.Connected">
+            <summary>
+            Device is connected.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DeviceStates.GpsConnected">
+            <summary>
+            GPS satellites connected.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.ICoordinatePoints">
+            <summary>
+            Interface representing coordinate point
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoints.UserData">
+            <summary>
+            Custom user data. Do not transfered over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoints.Points">
+            <summary>
+            The list of coordinate points.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorStatus">
+            <summary>
+            Device status (not moving, online, last coordinate, last coordinate date). 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorStatus.Id">
+            <summary>
+            Sensor identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorStatus.LastData">
+            <summary>
+            The recent (according to date of the device) data, received from the device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorStatus.LastActivityTime">
+            <summary>
+            UTC Date (date of the server) of the last connection session with device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorStatus.IsReceived">
+            <summary>
+            This flag sets by telematics module during retrieving device status on event (from another telematics module).
+            This happens during caches synchronization. In this case, the status would not be rebroadcasted by state monitor.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorStatusExtension">
+            <summary>
+            Extensions for <see cref="T:TotalApi.Telematics.SensorStatus"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorStatusExtension.ToTransportFormat(TotalApi.Telematics.SensorStatus)">
+            <summary>
+            Removes useless data from the data packet, simplifies and minifies it.
+            Fractional values are rounded to the required minimum size.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceStatus">
+            <summary>
+            Device status (not moving, online, last coordinate, last coordinate date). 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceStatus.Id">
+            <summary>
+            Device identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceStatus.LastCoordinate">
+            <summary>
+            The recent (according to date of the device) coordinate, received from the device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceStatus.LastActivityTime">
+            <summary>
+            UTC Date (date of the server) of the last connection session with device.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceStatus.LastStates">
+            <summary>
+            Last device state.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DeviceStatus.IsReceived">
+            <summary>
+            This flag sets by telematics module during retrieving device status on event (from another telematics module).
+            This happens during caches synchronization. In this case, the status would not be rebroadcasted by state monitor.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceStatusExtension">
+            <summary>
+            Extensions for <see cref="T:TotalApi.Telematics.DeviceStatus"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DeviceStatusExtension.ToTransportFormat(TotalApi.Telematics.DeviceStatus)">
+            <summary>
+            Removes unimportant data from data packet, simplifies and minifies it.
+            Fractional values are rounded to the required minimum size.
+            Altitude are NOT included.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.GeoPoint">
+            <summary>
+            Represents a telematics geo point object.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.GeoPoint.Latitude">
+            <summary>
+            Gets a double representing the position's latitude in radians.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.GeoPoint.Longitude">
+            <summary>
+            Gets a double representing the position's longitude in radians.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.GeoPoint.LatitudeDegree">
+            <summary>
+            Gets a double representing the position's latitude in degrees.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.GeoPoint.LongitudeDegree">
+            <summary>
+            Gets a double representing the position's longitude in degrees.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.GeoPoint"/> class.
+            </summary>
+            <param name="latitude">The latitude in radians.</param>
+            <param name="longitude">The longitude in radians.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.#ctor(TotalApi.Telematics.GeoPoint)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.GeoPoint"/> class.
+            </summary>
+            <param name="gp">The gp.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.op_Equality(TotalApi.Telematics.GeoPoint,TotalApi.Telematics.GeoPoint)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="a">A.</param>
+            <param name="b">The b.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.op_Inequality(TotalApi.Telematics.GeoPoint,TotalApi.Telematics.GeoPoint)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="a">A.</param>
+            <param name="b">The b.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.CreateFromDegree(System.Double,System.Double)">
+            <summary>
+            Creates from degree.
+            </summary>
+            <param name="latDegree">The latitude in degrees.</param>
+            <param name="lonDegree">The longitude in degrees.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.IsPointInRegion(System.Collections.Generic.List{TotalApi.Telematics.GeoPoint})">
+            <summary>
+            Determines whether [is point in region] [the specified points].
+            </summary>
+            <param name="points">The points.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.GeoPoint.ProjectOnLine(TotalApi.Telematics.GeoPoint,TotalApi.Telematics.GeoPoint)">
+            <summary>
+            Projects the on line.
+            </summary>
+            <param name="p1">The p1.</param>
+            <param name="p2">The p2.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.ICoordinatePoint">
+            <summary>
+            Interface for a coordinate point.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoint.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoint.LatitudeDegree">
+            <summary>
+            Gets the latitude degree.
+            </summary>
+            <value>
+            The latitude degree.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoint.LongitudeDegree">
+            <summary>
+            Gets the longitude degree.
+            </summary>
+            <value>
+            The longitude degree.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.ICoordinatePoint.CanOptimize">
+            <summary>
+            Gets or sets a value indicating whether this instance can optimize.
+            </summary>
+            <value>
+            <c>true</c> if this instance can optimize; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:TotalApi.Telematics.ISensorValuePoint">
+            <summary>
+            Interface respresenting sen value point.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorValuePoint.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorValuePoint.Value">
+            <summary>
+            Gets the sensor value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorValuePoint.CanOptimize">
+            <summary>
+            Gets or sets a value indicating whether sensor point can be optimize.
+            </summary>
+            <value>
+            <c>true</c> if this instance can optimize; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:TotalApi.Telematics.ISensorValues">
+            <summary>
+            Interface for a collection of sensor values.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorValues.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorValues.Values">
+            <summary>
+            The list of sensor values.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.ITelematicsDbContext">
+            <summary>
+            Implementation of ITelematicsDbContext.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindDevice(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Synchronous searching for a device by its <paramref name="deviceId"/>.
+            If device not found - return <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.WriteCoordinatesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Asynchronous write of GPS-coordinates for the device <paramref name="deviceId"/>.
+            If device not found - does nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
+            <summary>
+            Synchronous reading the coordinates of particulat device.
+            If device not found - return empty list;
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.GetDeviceLastStatus(System.String)">
+            <summary>
+            Synchronous getting the device last status by identifier.
+            If device not found - return <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
+            <summary>
+            Searching for a device's sensor by device identifier and port identifier.
+            If no device found, or the sensor on specified port is not configured - return <c>null</c>.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Port identifier.</param>
+            <param name="address">Sensor address.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.SensorType,System.Int32)">
+            <summary>
+            Synchronous searching for a sensor by its <paramref name="deviceId"/>.
+            If device not found - return <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Asynchronous write of sensor values for the device.
+            If device not found - does nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.GetSensorsLastStatus(System.String)">
+            <summary>
+            Gets device sensor data last values by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="deviceId">Device identifier according to its type.</param>
+            <returns><see cref="T:TotalApi.Telematics.SensorStatus"/> array or empty array if no sensor data found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)">
+            <summary>
+            Reads the sensors data of the particular device
+            </summary>
+            <param name="readParams">Parameters for reading sensors values <see cref="T:TotalApi.Telematics.ReadSensorValuesParams"/>.</param>
+            <returns>Collection of <see cref="T:TotalApi.Telematics.SensorValuePoint"/> or <c>null</c> if no sensor values found.</returns>
+        </member>
+        <member name="T:TotalApi.Telematics.PortType">
+            <summary>
+            Identifies sensor port types.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.PortType.Bool">
+            <summary>
+            Boolean sensor type.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.PortType.Int">
+            <summary>
+            Integer sensor type.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.PortType.Float">
+            <summary>
+            Float sensor type.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.ReadCoordinatesParams">
+            <summary>
+            Parameters for retrieving the array of coordinates.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadCoordinatesParams.DeviceId">
+            <summary>
+            Device identifier.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadCoordinatesParams.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadCoordinatesParams.#ctor(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
+            <summary>
+            Extended constructor
+            </summary>
+            <param name="id">Device database identifier</param>
+            <param name="from">Start date of the data request period (if <c>null</c> - from the beginning of data history).</param>
+            <param name="to">End date of the data request period (if <c>null</c> - to the end of data history).</param>
+            <param name="filters">Array of filters parameters used for data post-processing.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadCoordinatesParams.#ctor(TotalApi.Telematics.DeviceIdentifier,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
+            <summary>
+            Extended constructor
+            </summary>
+            <param name="deviceId">Device identifier</param>
+            <param name="from">Start date of the data request period (if <c>null</c> - from the beginning of data history).</param>
+            <param name="to">End date of the data request period (if <c>null</c> - to the end of data history).</param>
+            <param name="filters">Array of filters parameters used for data post-processing.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.ReadDeviceDataParams">
+            <summary>
+            Base class for retrieving the data from the device
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.From">
+            <summary>
+            Start date of the data request period (if <c>null</c> - from the beginning of data history).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.To">
+            <summary>
+            End date of the data request period (if <c>null</c> - to the end of data history).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.Filters">
+            <summary>
+            Array of filters parameters used for data post-processing.
+            Filters are determined automatically based on the definitions. Currently supported 5 types of filters decribed by correspondent parameters: 
+            <see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters"/>. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.FilterServiceContracts">
+            <summary>
+            Array of filters used for data post-processing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.SummaryInfoOnly">
+            <summary>
+            If <c>true</c> - no raw data will be returned, just post-processed, otherwise - response will contain raw data and post-processed
+            This option applies only when using at least one filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.IncludeOverPoints">
+            <summary>
+            If <c>true</c> - response will contain couple of extreme points, beyond the time range and are the closest ones to the time range.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadDeviceDataParams.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.ReadDeviceDataParams"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadDeviceDataParams.#ctor(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
+            <summary>
+            Extended constructor
+            </summary>
+            <param name="from">Start date of the data request period (if <c>null</c> - from the beginning of data history).</param>
+            <param name="to">End date of the data request period (if <c>null</c> - to the end of data history).</param>
+            <param name="filters">Array of filters parameters used for data post-processing.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.ReadSensorValuesParams">
+            <summary>
+            Parameters for retrieving the array of sensor values.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadSensorValuesParams.SensorId">
+            <summary>
+            Sensor database identifier
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadSensorValuesParams.DeviceId">
+            <summary>
+            Device identifier
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadSensorValuesParams.SensorType">
+            <summary>
+            Predefined sensor type
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadSensorValuesParams.SensorNumber">
+            <summary>
+            Sensor number (for the sensors of the same <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorType"/>)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadSensorValuesParams.#ctor">
+            <summary>
+            Creates the default parameters.
+            Using this constructor you must set either directrly set <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorId"/> or set <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.DeviceId"/>, <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorType"/> and <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorNumber"/> to identify the sensor.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ReadSensorValuesParams.#ctor(TotalApi.Telematics.Sensor,System.DateTime,System.DateTime,System.Object[])">
+            <summary>
+            Creates the parameters by source sensor.
+            </summary>
+            <param name="sensor">Source sensor info.</param>
+            <param name="from">Start date of the data request period (if <c>null</c> - from the beginning of data history).</param>
+            <param name="to">End date of the data request period (if <c>null</c> - to the end of data history).</param>
+            <param name="filters">Array of filters parameters used for data post-processing.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Sensor">
+            <summary>
+            Represents a telematics device sensor.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.DeviceId">
+            <summary>
+            Database identifier of the device
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.SensorType">
+            <summary>
+            Predefined sensor type
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.Number">
+            <summary>
+            Sensor number (for the sensors of the same <see cref="P:TotalApi.Telematics.Sensor.SensorType"/>)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.PortId">
+            <summary>
+            Internal port number of the sensor (comes from device model)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.Address">
+            <summary>
+            Sensor port address (used for external sensors).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.TimeToLive">
+            <summary>
+            Gets or sets time to live of the coordinates of the device.
+            Set <c>0</c> to use global default value of time to live.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.Threshold">
+            <summary>
+            Minimum threshold between two successive sensor values at which data will be written into the database. 
+            Used for removing the "bounce".
+            0 - means that all of incoming the data will be written, even if they have not changed.
+            It makes no sense for logical sensors.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.KeyPeriod">
+            <summary>
+            If the last recorded date earlier than this value (relative to current date), then the new value will be recorded, even if it exceeds the threshold.
+            Used to indicate that sensor is working and sends the data, even the same.
+            <see cref="F:System.TimeSpan.Zero"/> means that the parameter will be ignored.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorPort">
+            <summary>
+            Sensor port.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorPort.Id">
+            <summary>
+            Number of sensor port.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorPort.Type">
+            <summary>
+            Sensor port type.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorPort.Description">
+            <summary>
+            Sensor port description.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorPort.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorType">
+            <summary>
+            Known types of sensors.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.CustomInt">
+            <summary>
+            Integer type sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.CustomFloat">
+            <summary>
+            Float type sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.CustomBool">
+            <summary>
+            Boolean type sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.SOS">
+            <summary>
+            SOS button sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.Power">
+            <summary>
+            Power voltage.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.Charge">
+            <summary>
+            Battery charge level (0 means external power).
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.GSM">
+            <summary>
+            GSM signal level (0 - 31).
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsPower">
+            <summary>
+            Power source flag (0 - battery, 1 - external power).
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsGPS">
+            <summary>
+            GPS is active.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsGSM">
+            <summary>
+            Registration in GSM network.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsGPRS">
+            <summary>
+            GPRS is registered.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsSIM">
+            <summary>
+            SIM is accepted.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.IsCharge">
+            <summary>
+            Battery is charging.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.AccAxes">
+            <summary>
+            Accelerometer axes values.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.LLS">
+            <summary>
+            Fuel level sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.TEMP">
+            <summary>
+            Tempoerature sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.RFID">
+            <summary>
+            RFID sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.L3SA">
+            <summary>
+            3SA sensor.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.SensorType.SIV">
+            <summary>
+            WMS sensor (weight measurement system).
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorTypeExtensions">
+            <summary>
+            SensorType extensions
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorTypeExtensions.GetValueType(TotalApi.Telematics.SensorType)">
+            <summary>
+            Gets sensor data type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorTypeExtensions.ConvertValue(TotalApi.Telematics.SensorType,System.Object)">
+            <summary>
+            Converts sensor value to the type according to it.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorValuePoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.SensorData">
+            <summary>
+            Gets the source <seealso cref="P:TotalApi.Telematics.SensorValuePoint.SensorData"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.UtcDate">
+            <summary>
+            Gets the date and time in UTC format when the coordinate data was received from GPS source.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.Value">
+            <summary>
+            Gets a value of the sesor data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.CanOptimize">
+            <summary>
+            Such data can be optimized (removed) by filters.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.AdditionalInfo">
+            <summary>
+            Additional information - could be extended by filters during processing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValuePoint.Item(System.String)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> with the specified name.
+            </summary>
+            <value>
+            The <see cref="T:System.Object"/>.
+            </value>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorValuePoint.#ctor">
+            <summary>
+            Constructor without parameters needed for object deserialization.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorValuePoint.#ctor(TotalApi.Telematics.SensorData)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.SensorData"/> class.
+            </summary>
+            <param name="sensorData">Source sensor data</param>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorValues">
+            <summary>
+            Results of the getting sensor values
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValues.UserData">
+            <summary>
+            User data. Will not be transmitted over the network.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorValues.Values">
+            <summary>
+            List of the sensor values processed by filters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorValues.#ctor">
+            <summary>
+            Constructor without parameters needed for object deserialization.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorValues.#ctor(System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.SensorValues"/> class.
+            </summary>
+            <param name="values">Source sensor data values.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorValues.RemoveDetailsInfo">
+            <summary>
+            Removes sensors values, keeps only summary info.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Events.ITelematicEvents">
+            <summary>
+            Telematics events interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.ITelematicEvents.OnDeviceStatusChanged(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Called when device status changed.
+            </summary>
+            <param name="deviceStatus">The device status.</param>
+            <param name="apiKey">The API key.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.ITelematicEvents.OnSensorStatusChanged(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Called when sensor status changed.
+            </summary>
+            <param name="sensorStatus">The sensor status.</param>
+            <param name="apiKey">The API key.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Events.OnSensorStatusChanged">
+            <summary>
+            Notification about a device status changing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Events.OnSensorStatusChanged.SensorStatus">
+            <summary>
+            Gets the last sensor status.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStatusChanged.#ctor(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Contructor implementation.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStatusChanged.Post(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Posts the event.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Events.OnDeviceStatusChanged">
+            <summary>
+            Notification about a device status changing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Events.OnDeviceStatusChanged.DeviceStatus">
+            <summary>
+            Gets the last device status.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnDeviceStatusChanged.#ctor(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Contructor implementation.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnDeviceStatusChanged.Post(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Posts the event.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Interfaces.ICoordinateFilterManager">
+            <summary>
+            Control interface for managing coordinate filters.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Interfaces.ICoordinateFilterManager.Filters">
+            <summary>
+            Gets the list of registered coordinate filters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ICoordinateFilterManager.ApplyFilters(System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate},System.Object[])">
+            <summary>
+            Applying filters to the list of coordinates.
+            </summary>
+            <param name="coordinates">The list of <see cref="T:TotalApi.Telematics.Coordinate"/>.</param>
+            <param name="filterParameters">Filters tobe processed.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Interfaces.ISensorDataFilterManager">
+            <summary>
+            Control interface for managing sensor data filters.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Interfaces.ISensorDataFilterManager.Filters">
+            <summary>
+            Gets the list of registered sensor data filters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ISensorDataFilterManager.ApplyFilters(System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData},System.Object[])">
+            <summary>
+            Apply filters to the sensor data.
+            </summary>
+            <param name="sensorData">Sensors data.</param>
+            <param name="filterParameters">Filters to be applied.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Interfaces.ITelematics">
+            <summary>
+            Implementation methods of the telematics module.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.RegisterDeviceModel(TotalApi.Telematics.DeviceModel)">
+            <summary>
+            Registeres device model by device model plugin, that handles the data coming from device.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindDevice(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Finds device by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Device"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetDevices(System.Int32)">
+            <summary>
+            Returns the list of the devices of a specified model.
+            If no devices found - returns an empty list.
+            </summary>
+            <param name="modelCode">Device model code.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetDeviceModels">
+            <summary>
+            Receives the array of device models.
+            If no devices found returns an empty array.
+            The array of models is generated dynamically depending on the plugins-handlers of the data from the devices.
+            During the registration, plugin publishes the models it could handle.
+            </summary>
+            <returns>Device models array <see cref="T:TotalApi.Telematics.DeviceModel"/> or empty array if no device models found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetDeviceLastStatus(System.String)">
+            <summary>
+            Return sensor last knows status (not moving, online, last coordinate, date and time of the last coordinate).
+            If no device found - return <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetDeviceLastStatus(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Finds device last status by its Id.
+            If no device found returns <c>null</c>.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <returns><see cref="T:TotalApi.Telematics.DeviceStatus"/> or <c>null</c> if device status not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.WriteDeviceData(TotalApi.Telematics.DeviceIdentifier,System.Byte[])">
+            <summary>
+            Asynchronous write a binary data, associated with the specified device.
+            It should be small packet of data, in which device settings and device status might be stored.
+            If no device found - does nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.DeviceIdentifier,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
+             <summary>
+             Reads the coordinates of particulat device..
+             </summary>
+             <param name="deviceId">Device identifier.</param>
+             <param name="from">Start date of the data request period (if null - from the beginning of data history).</param>
+             <param name="to">End date of the data request period (if null - to the end of data history).</param>
+             <param name="filters">
+            Array of filters parameters used for data post-processing.
+            Filters are determined automatically based on the definitions.
+             Currently supported 5 types of filters decribed by correspondent parameters:
+             <list type="bullet">
+             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters"/></description></item>
+             </list>
+             </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
+            <summary>
+            Extended reading of coordinates.
+            </summary>
+            <param name="readParams">Parameters for reading coordinates.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Writes the coordinates data for the particular device. If no device found doing nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
+            <summary>
+            Searching for a device's sensor by device identifier and port identifier.
+            If no device found, or the sensor on specified port is not configured - return <c>null</c>.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Port identifier.</param>
+            <param name="address">Sensor address.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.SensorType,System.Int32)">
+            <summary>
+            Searches for a device sensor by its <paramref name="sensorType"/> and <paramref name="number"/>.
+            If device not found or if sensor on this port is not configured - returns <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Adds the sensor data to a queue for writing to database.
+            Sensor identifies by the sensor type and its number.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Adds the sensor data to a queue for writing to database.
+            Sensor identifies by the sensor type and its address. Values are transmitted by the list of key-value pairs [date, value].
+            If sensor with such port number and address is not registered - transmitted values will be ignored.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetLastSensorsStatus(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Gets device sensor data last values by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="deviceId">Device identifier according to its type.</param>
+            <returns><see cref="T:TotalApi.Telematics.SensorStatus"/> array or empty array if no sensor data found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)">
+            <summary>
+            Reads the sensors data of the particular device
+            </summary>
+            <param name="readParams">Parameters for reading sensors values <see cref="T:TotalApi.Telematics.ReadSensorValuesParams"/>.</param>
+            <returns>Collection of <see cref="T:TotalApi.Telematics.SensorValuePoint"/> or <c>null</c> if no sensor values found.</returns>
+        </member>
+        <member name="T:TotalApi.Telematics.Interfaces.ITelematicsInternal">
+            <summary>
+            Extended telematics module interface - includes methods, unavaliable through external API.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorData">
+            <summary>
+            Sensor values. 
+            POCO of the values stored in C* database.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorData.UtcDate">
+            <summary>
+            Gets or sets the date and time in UTC format when the position's data was received from GPS source.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorData.SensorType">
+            <summary>
+            Sensor type.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorData.Number">
+            <summary>
+            Sensor number (for the sensors of the same type).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SensorData.Value">
+            <summary>
+            Sensor value.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorData.ToDbJson">
+            <summary>
+            Returns JSON string for saving to database - keeps only relevant data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.SensorDataValueConverter">
+            <summary>
+            Implements default SensorData json converter
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataValueConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataValueConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param><param name="value">The value.</param><param name="serializer">The calling serializer.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataValueConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader"/> to read from.</param><param name="objectType">Type of the object.</param><param name="existingValue">The existing value of object being read.</param><param name="serializer">The calling serializer.</param>
+            <returns>
+            The object value.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.ServiceContracts.ITelematicsService">
+            <summary>
+            Telematics API.
+            Stores and handles the telematics data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindDevice(System.String,System.String)">
+            <summary>
+            Finds device by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="type">Device type.</param>
+            <param name="devId">Device identifier.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Device"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetDeviceModels">
+            <summary>
+            Receives the array of device models.
+            If no devices found returns an empty array.
+            The array of models is generated dynamically depending on the plugins-handlers of the data from the devices.
+            During the registration, plugin publishes the models it could handle.
+            </summary>
+            <returns>Device models array <see cref="T:TotalApi.Telematics.DeviceModel"/> or empty array if no device models found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.Coordinate[])">
+            <summary>
+            Writes the coordinates data for the particular device.
+            If no device found doing nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="coordinates">Array of coordinates.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
+            <summary>
+            Reads the coordinates of particulat device.
+            </summary>
+            <param name="readParams">Parameters for reading coordinates.</param>
+            <returns>Collection of <see cref="T:TotalApi.Telematics.CoordinatePoint"/> or <c>null</c> if no coordinate points found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetDeviceLastStatus(System.String)">
+            <summary>
+            Finds device last status by its Id.
+            If no device found returns <c>null</c>.
+            </summary>
+            <param name="id">Device database identifier.</param>
+            <returns><see cref="T:TotalApi.Telematics.DeviceStatus"/> or <c>null</c> if device status not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetDeviceIdentifierLastStatus(System.String,System.String)">
+            <summary>
+            Gets device last status by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If no device found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="type">Device type.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <returns><see cref="T:TotalApi.Telematics.DeviceStatus"/> or <c>null</c> if device status not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindSensor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Finds sensor by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>, type and port identifier.
+            If the sensor is not found returns <c>null</c>.
+            </summary>
+            <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <param name="portId">Sensor port number.</param>
+            <param name="address">Sensor address.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindSensorByType(System.String,System.String,System.String,System.String)">
+            <summary>
+            Finds sensor by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>, type and port identifier.
+            If the sensor is not found returns <c>null</c>.
+            </summary>
+            <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <param name="sensorType">Sensor type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.SensorType"/>.</param>
+            <param name="number">Sensor number.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="sensorData">Array of sensors data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
+            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Number of sensor port.</param>
+            <param name="address">Address of sensors data.</param>
+            <param name="values">DateTime - Value pairs of the sensor data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetLastSensorsStatus(System.String,System.String)">
+            <summary>
+            Gets device sensor data last values by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            Device type here is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.
+            </summary>
+            <param name="type">Device type.</param>
+            <param name="devId">Device identifier according to its type.</param>
+            <returns><see cref="T:TotalApi.Telematics.SensorData"/> array or empty array if no sensor data found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)">
+            <summary>
+            Reads the sensors data of the particular device
+            </summary>
+            <param name="readParams">Parameters for reading sensors values <see cref="T:TotalApi.Telematics.ReadSensorValuesParams"/>.</param>
+            <returns>Collection of <see cref="T:TotalApi.Telematics.SensorValuePoint"/> or <c>null</c> if no sensor values found.</returns>
+        </member>
+        <member name="T:TotalApi.Telematics.TelematicsApi">
+            <summary>
+            Static class, that should aggreegate all factories of internal interfaces of the system.
+            For better transparency, and ability for modules unit-testing, ANY access to internal system's interfaces should be provided through this class.
+            All internal interfaces, accessed by this class, are implemented as singletons.
+            In the case of using IoC frameworks for interfaces initialization, there is nothing to do,
+            but for unit testing, values of testing interfaces should be initialized by correspondent mock oblects.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TelematicsApi.Telematics">
+            <summary>
+            Telematics module interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TelematicsApi.Events">
+            <summary>
+            Interface, aggreegating all telematics events.
+            In the fact, this interface methods calls duplicate calls of <see cref="M:TotalApi.Core.Api.IEventManager.Publish(System.Object)"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TelematicsApi.CoordinateFilterManager">
+            <summary>
+            Interface for working with coordinates filters manager.
+            </summary>
+        </member>
+        <member name="T:TotalApi.DataModel.Telematics.Reference">
+            <summary>
+            Fake class, neede for referencing the assembly by the name of a public class.
+            </summary>
+        </member>
+    </members>
+</doc>
