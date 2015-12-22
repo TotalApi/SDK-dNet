@@ -29,11 +29,13 @@ SDK для своей работы использует платформу [MEF]
 В простейшем случае разработчик должен только указать значения  ключей (ApiKey или AppKey). 
 Указать значения ключей аутентификации можно либо через конфигурационный файл app.config (только для ApiKey / AppKey) либо явно в коде приложения.
 * Аутентификация по ApiKey в конфигурационном файле:
+
     	<appSettings>
 		    <add key="ApiKey" value="myApiKey" />
     	</appSettings>
     
 *  Аутентификация по AppKey в коде программы:
+
 		TotalApiAuth.AppKey = "myAppKey";
 		TotalApiAuth.UserLogin = "user1";	
 		TotalApiAuth.UserPassword = "pass";
