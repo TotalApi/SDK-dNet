@@ -42,7 +42,7 @@ TotalAPI предоставляет разработчикам удобный ф
   	Application[] apps = CoreApi.Repository.ExecuteQuery<Application>();
 
 ```
-[Другие примеры использования TotalAPI SDK](../../samples/SDK samples)
+[Пример простейшего приложения с TotalAPI SDK](../../samples/SDK samples/Startup)
 
 Документация и примеры
 -------------------------------------------

@@ -57,3 +57,6 @@
 ```C#
 device = CoreApi.Repository.ExecuteQuery<Device>(). First(d => this.IsMatched(d));
 ```
+Пример приложения
+-----------------------------------
+[Пример готового приложения](../../samples/SDK samples/Repository)
