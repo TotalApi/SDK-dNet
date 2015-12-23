@@ -58,8 +58,10 @@
 ```C#
     device = CoreApi.Repository.ExecuteQuery<Device>(). First(d => this.IsMatched(d));
 ```
+
 ### События
 Работа с[ распределёнными событиями](http://) программного комплекса TotalApi, осуществляется посредством интерфейса *CoreApi.EventManager*: 
+
 ```C#
     class Subscriber : IEvent, IEvent<OnPing>, IEvent<OnDeviceStatusChanged>
     {
