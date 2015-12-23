@@ -9,17 +9,31 @@ TotalAPI предоставляет разработчикам удобный ф
 -------------------------------------------
 1.  Скачайте [TotalAPI и metriX SDKs](../../dist/net45/) 
 2.  Скачайте также [Linq2Rest](https://www.nuget.org/packages/Linq2Rest/) и [Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/). Оба пакета доступны через Nuget.
-3.  Включите все библиотеки в проект
+3.  Включите все библиотеки в ваш проект
 
 Как начать использовать SDK
 ---------------------------------------------
-1. Выполните необходимые настройки в файле `yourapplication.exe.config`. [Подробнее о настройках SDK](sdksettings.md)
-2. Используйте [подробный пример использования TotalAPI SDK](sdkuse.md)
+### 1. Регистрация
+[Зарегистрируйте](http://welcome.totalapi.io) свое приложение и получите[ ключи ApiKey и AppKey](wiki/auth) для аутентификации ваших запросов а также адрес для подключения к сервису TotalAPI. 
+
+### 2. Инициализация SDK
+Выполните инициализацию SDK в файле `yourapplication.exe.config`.  Укажите адрес подключения к сервису TotalAPI и ключи аутентификации. [Подробнее о настройках SDK](sdksettings.md)
+```xml
+    <appSettings>
+    	<add key="serverProtocol" value="https" />
+    	<add key="serverHost" value="svc.totalapi.io:4444" />
+        <add key="ApiKey" value="myApiKey" />
+    </appSettings>
+```
+> Необходимые значения вы получите при регистрации.
+
+### 3.  
+4. Ознакомитесь с [руководством по быстрому старту использования TotalAPI SDK](sdkuse.md)
 
 Документация и примеры
 -------------------------------------------
 * [Настройки и инициализация TotalAPI SDK в приложении](sdksettings.md)
-* [Пример использования SDK](sdkuse.md)
+* [Примеры использования TotalAPI SDK](../../samples/SDK samples)
 * []()
 * []()
 * []()
