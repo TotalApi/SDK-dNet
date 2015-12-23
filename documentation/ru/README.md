@@ -30,30 +30,17 @@ TotalAPI предоставляет разработчикам удобный ф
 ### 3. Подключение модулей SDK  
 При старте приложения следует вызвать метод инициализации клиентского SDK:
 ```C#    
-    TotalApiBootstrapper.AppModulesSearchPattern = "myApp.*.dll";
     TotalApiBootstrapper.Create(".");    // Параметром вызова является каталог, в котором находятся файлы SDK. 
                                          // (Или список каталогов, разделённых точкой с запятой).
 ```
 [Подробнее о загрузке сборок.](sdkload.md)
 
 ### 4. Выполнение запроса к сервису TotalAPI
-Ниже пример запроса на создание новой записи в  [репозитарии](wiki.repo) устройств слежения.
+Ниже пример запроса на получение информации о зарегистрированном приложении.
 ```C#
 	 // The sample of the using Repository API
-	 // Getting entities count (without any condition)
-	 var startCount = CoreApi.Repository.Count<Device>();
-	
-	 // Creating a new entity
-	 var device = new Device
-	 {
-        	  Name = "My Device", 
-        	  ModelCode = 100,
-        	  PhoneNumber = "+555-1111"
-     };
-      device = CoreApi.Repository.Save(device, true);
-    
-      // Getting the Id of created entity
-      var deviceId = device.Id;
+  	Application[] apps = CoreApi.Repository.ExecuteQuery<Application>();
+
 ```
 [Другие примеры использования TotalAPI SDK](../../samples/SDK samples)
 
