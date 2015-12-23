@@ -12,6 +12,11 @@ namespace WebApp.TotalApi
     /// </summary>
     public class TotalApiBaseRepositortyApiController<TEntityObjectId> : AppApiController, IBaseRepositoryService<TEntityObjectId> where TEntityObjectId : class, IEntityObjectId, new()
     {
+        public int Count()
+        {
+            return CoreApi.Repository.Count<TEntityObjectId>();
+        }
+
         [HttpGet, Route("")]
         public virtual TEntityObjectId[] All()
         {

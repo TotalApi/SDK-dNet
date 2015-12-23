@@ -25,7 +25,7 @@ namespace Billing
             Console.Write("\r\nRetrieving users list...");
             var users = CoreApi.ApiUsers.ExecuteQuery();
             Console.Write("Done.\r\n");
-            users.ForEach(x => Console.WriteLine("User Id: {0}, Name: {1}", x.UserId, x.Login));
+            users.ForEach(x => Console.WriteLine("User Id: {0}, Name: {1}", x.Id, x.Login));
 
             Console.ReadKey();
         }

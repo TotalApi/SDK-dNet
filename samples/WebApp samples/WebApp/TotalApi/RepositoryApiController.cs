@@ -43,7 +43,6 @@ namespace WebApp.TotalApi
             }
             else if (entity is ApiUser)
             {
-                (entity as ApiUser).ApiKey = null;
                 (entity as ApiUser).Application = Sanity((entity as ApiUser).Application);
                 (entity as ApiUser).Password = null;
             }
@@ -53,6 +52,11 @@ namespace WebApp.TotalApi
                 (entity as SubSystem).ApiKeys.Clear();
             }
             return entity;
+        }
+
+        public int Count(string typeId)
+        {
+            throw new NotImplementedException();
         }
 
         [System.Web.Http.HttpGet, System.Web.Http.Route("")]
