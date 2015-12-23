@@ -14,7 +14,7 @@ namespace TotalApi.SampleModule.TestSubSystem
 
             /*
                 Copy SubSystemConfig.json from Config folder to bin folder.
-                Copy Navis3.SampleModule.dll and Navis3.SampleModule.Api.dll to bin/Modules folder.
+                Copy TotalApi.SampleModule.dll and TotalApi.SampleModule.Api.dll to bin/Modules folder.
             */
 
             Console.WriteLine("\r\nRunning bootstraping. Please, wait a second...\r\n");
