@@ -656,6 +656,11 @@
             Interface, responsible for SubSystems management.
             </summary>
         </member>
+        <member name="P:TotalApi.Core.Api.CoreApi.Statistics">
+            <summary>
+            Interface, responsible for Statistics management.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.IApplications">
             <summary>
             Interface of a Application repository item.
@@ -1231,6 +1236,29 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
+        <member name="T:TotalApi.Core.Api.TotalApiStatistics">
+            <summary>
+            Default implementation of the TotalApi statistics interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiStatistics.Instance">
+            <summary>
+            Instance of asynchronous task manager. 
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ITotalApiStatistics">
+            <summary>
+            Interface for gathering statistics information
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExecutionTime(System.String,System.DateTime,System.Int64)">
+            <summary>
+            Saves execution time for a method, in milliseconds.
+            </summary>
+            <param name="methodName">Method name.</param>
+            <param name="executionStartTime">Time of the execution start.</param>
+            <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
             Class that includes the information about task execution result.
@@ -1561,6 +1589,23 @@
             <param name="msg">The message.</param>
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
+        </member>
+        <member name="T:TotalApi.Core.Aspects.StatisticsLogger">
+            <summary>
+            Aspect attribute for gathering statistics. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.StatisticsLogger.OnEntry(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Catches method entry.
+            </summary>
+            <param name="args">Method execution arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.StatisticsLogger.OnExit(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Catches method exit.
+            </summary>
+            <param name="args">Method execution arguments.</param>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>
