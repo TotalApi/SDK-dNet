@@ -1,0 +1,183 @@
+﻿@using Lion.Utils.Mvc.Web
+
+
+<div class="container">
+
+    <h2 class="sdk_sample_step">Async tasks</h2>
+
+    <a class="stepProject" href="#">AsyncTasks</a>
+
+    <div class="sdk_content">
+
+        <h2>Functions overview</h2>
+        <p>
+            <ul>
+                <li>
+                    Getting a list of tasks
+                </li>
+                <li>
+                    Tasks management (start/cancel/suspend/resume/remove)
+                </li>
+                <li>
+                    Getting current task status/result
+                </li>
+                <li>
+                    Configuring tasks settings
+                </li>
+                <li>
+                    Generation of AsyncTasks API events
+                </li>
+            </ul>
+        </p>
+
+        <p>
+            To manage any asynchronous distributed tasks a universal API used, called AsyncTasks API. 
+            This API is the base for other API, which implements specific asynchronous tasks (for example, some report generation ).
+        </p>
+
+        <h2>Tasks settings</h2>
+        <p>
+            These settings affects the execution and storing the results, but do not affect the data returned by these tasks. 
+            This, for example, the storage of the results, caching time results timeout implementation, etc.
+        </p>
+
+        <h2>
+            The identifier of the task - AsyncTaskId
+        </h2>
+        <p>
+            At the start of asynchronous task, service method returns the process id of the task.
+            This string value can be used for further work with this task (getting the current status of execution, cancellation, results). 
+            Furthermore, during execution, the module fires event called OnProgress in which instanceId property is actually AsyncTaskId.
+        </p>
+
+        <h2>Avaliable tasks events</h2>
+
+        <h3>OnAsyncTaskStarted</h3>
+
+        <p>Fires when task is started</p>
+        <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <td>
+                        Property
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Type
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>taskId</td>
+                    <td>Task identifier</td>
+                    <td>string</td>
+                </tr>
+            <tr>
+                <td>task</td>
+                <td>Task parameters, also declares task type</td>
+                <td>AsyncTaskObject</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>OnAsyncTaskFinished</h3>
+
+        <p>Fires when task is finished</p>
+        <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <td>
+                        Property
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Type
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>taskId</td>
+                    <td>Task identifier</td>
+                    <td>string</td>
+                </tr>
+            <tr>
+                <td>task</td>
+                <td>Task parameters, also declares task type</td>
+                <td>AsyncTaskObject</td>
+            </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>Task execution status</td>
+                    <td>AsyncTaskStatus</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>OnProgress</h3>
+
+        <p>Fires task execution progress is changing</p>
+        <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <td>
+                        Property
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Type
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>instanceId</td>
+                    <td>Task identifier</td>
+                    <td>string</td>
+                </tr>
+                <tr>
+                    <td>progress</td>
+                    <td>Current task progress value</td>
+                    <td>int</td>
+                </tr>
+                <tr>
+                    <td>statusText</td>
+                    <td>Task execution status text</td>
+                    <td>string</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h2>Sample code overview</h2>
+
+        <h3>Creating task</h3>
+
+        <p>
+            To allow using custom modules you need to create class derived from AsyncTaskObject, the name of this class will be determined as the event name.
+            To implement the logic of the task, you need to create a handler class, derived from @Html.Span("AsyncTaskHandler<TTask, TResult>") , and export it as IAsyncTaskHandler.
+            After implementing logic in overriden Start method, the task will be ready.
+        </p>
+
+        <h3>Creating task event</h3>
+
+        <p>
+            Both OnAsyncTaskStarted and OnAsyncTaskFinished events are derived from OnAsyncTaskEvent class.
+            We can use this class to create a custom event that could be fired during asynk task execution.
+            In the sample code we created class called CustomAsyncTaskEvent, the only change from the base class is custom string Message property.
+            So, we can now fire this event through CoreApi.EventManager.Publish(...) method.
+            To catch this event, you need to use subscriber class, that must implement generic interface @Html.Span("IEvent<TTaskEvent>") of a newly created task event
+        </p>
+
+
+
+    </div>
+
+</div>

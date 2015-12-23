@@ -1,0 +1,91 @@
+﻿<div class="container">
+
+    <h2 class="sdk_sample_step">Events</h2>
+
+    <a class="stepProject" href="#">Events</a>
+
+    <script type="text/C#" id="event">
+        ///<summary>
+        /// Sample event class. Just a simple class.
+        ///</summary>
+        internal class SampleEventClass
+        {
+            public readonly string Message;
+            public SampleEventClass(int num)
+            {
+                Message = string.Format("Sample event message {0}", num);
+            }
+        }
+
+        ///<summary>
+        /// Subscriber for the events.
+        ///</summary>
+        internal class Subscriber : IEvent<SampleEventClass>//, you can implement several interfaces here, to support different events
+        {
+            private static readonly Lazy<Subscriber> _instance = new Lazy<Subscriber>(() => new Subscriber());
+            public static Subscriber Instance { get { return _instance.Value; } }
+
+            public void HandleEvent(SampleEventClass e)
+            {
+                ColorConsole.Do(ConsoleColor.Yellow, () =>
+                {
+                    Console.WriteLine("Event received: {0}", e.Message);
+                });
+            }
+        }
+    </script>
+
+    <div class="sdk_content">
+
+        <h2>Functions overview</h2>
+
+        <ul>
+            <li>
+                Subscribing/Unsubscribing to events
+            </li>
+            <li>
+                Receiving new events
+            </li>
+            <li>
+                Events publishing    
+            </li>
+        </ul>
+
+        <p>
+            API is implemented by the module. 
+            This module must be present in any subsystem, which publishes its own events or receives the events from outside.
+        </p>
+
+        <p>
+            Each subsystem should return a list of events that this subsystem can send to other subsystems. 
+            If an empty list given - subscribing to events from other sub-systems will not be applied.
+        </p>
+
+        <p>
+            Each subsystem should return a list of events that it can handle and which comes from other subsystems.
+            If an empty list given - the subsystem will not receive events from other subsystems. 
+            If the list wil contain the string "*" - subsystem will receive all the events.
+        </p>
+
+        <h2>Sample code overview</h2>
+
+        <p>
+            SDK contains TotalApiEventObject class - the base class for any existing or new event. You should create the class, derived from this, to be able to publish the event. 
+
+            TotalApiEventObject includes (optionally) information about access rights.
+            If ApiKey is not set - event will not be avaliable to subscribers,
+            otherwise if UserId is not set - event will be avaliable to all subscribers, authorized by ApiKey,
+            if UserId is set - additionally, only for subscribers with correspondent UserKey authorization.
+        </p>
+
+        <p>
+            In addition to TotalApiEventObject, there is an InternalEventObject class.
+            Events, derived from this class would not be distributed to external subsystems.
+            They will circulate only within a particular subsystem.
+        </p>
+
+        <pre class="brush: csharp" sample-id="event"></pre>
+
+    </div>
+
+</div>

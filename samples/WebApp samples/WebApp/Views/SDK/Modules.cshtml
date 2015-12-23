@@ -1,0 +1,124 @@
+﻿
+<div class="container">
+
+    <h2 class="sdk_sample_step">Developing modules</h2>
+
+    <a class="stepProject" href="#">Modules</a>
+
+    <script id="moduleNames" type="text">
+        TotalApi.{ModuleName}             //Service module part (for isolated module - this will is the only assembly)
+        TotalApi.{ModuleName}.{DbType}    //Service module part that implements IDbConext interface for working with module database (not neccessary)
+        TotalApi.{ModuleName}.Api         //Common part for service and client parts (interfaces definitions, POCO data models, extensions and helpers etc.)
+        TotalApi.{ModuleName}.Client      //Client module part
+    </script>
+
+    <script id="moduleProxy" type="text">[Export(typeof(I{ModuleName}))]
+        class {ModuleName}Client : I{ModuleName} { /* Implementation here */ }
+    </script>
+
+    <script id="moduleLocal" type="text">[Export(typeof(IFactory<I{ServiceContract}>))]
+        class {ServiceContract}ServiceProxy : IFactory<I{ServiceContract}> { /* Implementation here */ }
+    </script>
+
+<script id="moduleDistributed" type="text">[Export(typeof(IFactory<I{ServiceContract}>))]
+class {ServiceContract}ServiceProxy : ApiServiceProxy<I{ServiceContract}> { /* Implementation here */ }
+</script>
+
+<script id="moduleOrder" type="text">[Order(/* Order integer value*/)]
+[Export(typeof(IModuleInitializer))]
+class Startup : IModuleInitializer
+{
+    public void Init()
+    {
+        /* Do some stuff */
+    }
+}
+</script>
+
+    <div class="sdk_content">
+
+        <h3>Introduction</h3>
+
+        <p>
+            Modules can be isolated, service and client.
+        </p>
+
+        <p>
+            Isolated Module - a module that does not have its own interface and interact with the system only
+            using interfaces of other modules (e.g. through the Repository module or Events module).
+        </p>
+
+        <p>
+            Service modules - modules that executes on subsystem's core and implements its own API to the outside world through the WCF/WEB-services.
+        </p>
+
+        <p>
+            If we want to use the API of the service modules - we need to use the client module that implements the API of that
+            module by calling the appropriate WCF/WEB-service methods.
+        </p>
+
+
+        <h3>Creating modules</h3>
+
+        <p>
+            1. Module must be located in folder $(SolutionDir)\Modules\{ModuleName}
+        </p>
+
+        <p>
+            2. Module assemblies must have the following names:
+
+            <pre class="brush: csharp;" sample-id="moduleNames"></pre>
+        </p>
+
+        <p>
+            3. If module is isolated - no additional actions are necessary.
+        </p>
+
+        <p>
+            4. The client module should include two classes:
+
+            
+            The proxy class implementation of isolated module's API interface:
+            <pre class="brush: csharp;" sample-id="moduleProxy"></pre>
+
+            The proxy class implementation of service module's API interface:
+
+            <ul>
+                <li>
+                    For a proxy class of not distributed module.
+
+                    <pre class="brush: csharp;" sample-id="moduleLocal"></pre>
+                </li>
+                <li>
+                    For a proxy class of distributed module.
+
+                    <pre class="brush: csharp;" sample-id="moduleDistributed"></pre>
+                </li>
+            </ul>
+           
+            The difference in definitions is due to the fact that the distributed module itself should support the external API
+            for Repository interface of its own business objects (IRepositoryApi) and this is already implemented in the class ApiServiceProxy<>.
+            It is not necessary for distributed modules to implement this interface, because it is already implemented in a standard isolated RepositoryApi module.
+        </p>
+
+        <p>
+            5. Client module project might have assembly attribute [assembly: Guid()] (absolutelly required for distributed modules) equal to
+            the corresponding value for this attribute in the main module. Provides correspondence between business objects jointly processed by a given pair of modules. 
+            If such correspondence will be corrupted - the system can not guarantee the correct and optimal work with the RepositoryAPI of distributed modules.
+        </p>
+
+        <p>
+            6. If you want to provide some initial setup for the module after loading, implement the following class:
+
+            <pre class="brush: csharp;" sample-id="moduleOrder"></pre>
+        </p>
+
+        <p>
+            In general, if a class implements and exports IModuleInitializer interface -
+            method IModuleInitializer.Init() will be automatically fired after modules loading.
+            If [Order] attribute defined - it will set the order of initialization methods calls.
+        </p>
+                              
+    </div>
+
+</div>

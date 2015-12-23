@@ -3859,6 +3859,52 @@
               <c>true</c> if dont save coordinates; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:TotalApi.Core.Exceptions.TotalApiException">
+            <summary>
+            Serves as the base class for system TotalApi exceptions.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.SubSystemNotRegistered">
+            <summary>
+            Subsystem could not be registered because it does not exist.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical">
+            <summary>
+            Gets or set the critical flag of the exception.
+            Application must terminate its work if catch an exception with the <see cref="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical"/> flag set.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.TotalApiException"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error code.
+            <param name="errorCode">The code that describes the error. </param>
+            <param name="isCritical">Defines whether the exception is critical./</param>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error message and code.
+            </summary>
+            <param name="message">The message that describes the error. </param>
+            <param name="errorCode">The code that describes the error. </param>
+            <param name="isCritical">Defines whether the exception is critical./</param>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Exception,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error message, code and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception. </param>
+            <param name="innerException">The exception that is the cause of the current exception. If the 
+            <paramref name="innerException"/> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param>
+            <param name="errorCode">The code that describes the error. </param>
+            <param name="isCritical">Defines whether the exception is critical./</param>
+        </member>
         <member name="T:TotalApi.Core.ServiceContracts.ApiServiceProxy`1">
             <summary>
             Api service proxy class.
@@ -4114,6 +4160,11 @@
             Logs the error.
             </summary>
             <param name="error">The error.</param>
+        </member>
+        <member name="M:TotalApi.Core.ServiceContracts.TotalApiFaultErrorHandler.CreateFaultException(System.Exception)">
+            <summary>
+            Overrides the base method.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.ServiceContracts.RepositoryApi.IBaseRepositoryService">
             <summary>
@@ -5172,9 +5223,17 @@
             <summary>
             Gets or sets a flag whether the subsystem is hidden for the clients.
             <remarks>
-            This flag can be set in the SubSystemConfig.json file only. By default it equals <c>false</c>.
             Hidden subsystems won't handle client applications requests. 
             It is used for isolation critical performanced subsystem from additional load from clients. 
+            </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.IsDisabled">
+            <summary>
+            Gets or sets a flag whether the subsystem is disabled for the clients.
+            <remarks>
+            Disabled subsystems will be ignored by the clients and subsystems. 
+            It is used for temporary or persistent remove subsystem from TotalApi. 
             </remarks> 
             </summary>
         </member>

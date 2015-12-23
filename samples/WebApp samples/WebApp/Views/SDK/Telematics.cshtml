@@ -1,0 +1,60 @@
+﻿<div class="container">
+
+    <h2 class="sdk_sample_step">Telematics</h2>
+
+    <a class="stepProject" href="#">Telematics</a>
+
+    <script type="text/C#" id="telematics">
+        var device = CoreApi.Repository.ExecuteQuery<Device>().First();
+        
+        CoreApi.EventManager.Subscribe(Subscriber.Instance);
+        
+        TelematicsApi.Telematics.WriteCoordinates(DeviceIdentifier.DbId(device.Id), new List<Coordinate>
+                {
+                    new Coordinate(DateTime.UtcNow, 20, 30, 40, 50, 60, 0)
+                });
+
+        var status = TelematicsApi.Telematics.GetDeviceLastStatus(device.Id);
+        
+        var filteredTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id));
+        
+        var fullTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id), null, null, DBNull.Value);
+    </script>
+
+    <div class="sdk_content">
+
+        <h3>Functions overview</h3>
+
+        <ul>
+            <li>
+                Represents CRUD operations over devices and sensors.
+            </li>
+            <li>
+                Declares events of devices/sensors changes, their telematics data and statuses.
+            </li>
+        </ul>
+
+        <h3>Sample overview</h3>
+
+        <p>Sample code includes some Telematics methods execution, like reading coordinates, creating new device, retrieving last status</p>
+
+        <pre class="brush: csharp" sample-id="telematics"></pre>
+            
+        <p>
+            Code on lines 12 and 14 are used for retrieving track or device. By default all filters are included, if no filters are set (line 12).
+            In order to retrieve full track you need to pass DBNull.Value as filters parameter.
+            You can setup filters by passing one or multiple filter parameters classes:
+
+        </p>
+
+        <ul>
+            <li>BreaksFilterParameters</li>
+            <li>RosePointsFilterParameters</li>
+            <li>SimplificateFilterParameters</li>
+            <li>SpeedFilterParameters</li>
+            <li>StopsFilterParameters</li>
+</ul>
+
+    </div>
+
+</div>

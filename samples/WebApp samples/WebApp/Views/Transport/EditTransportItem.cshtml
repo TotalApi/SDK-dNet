@@ -1,0 +1,76 @@
+﻿<div class="container">
+    <div class="col-md-8">
+        <div class="panel panel-primary form-panel">
+            <div class="panel-heading">Transport item</div>
+            <div class="panel-body">
+                <form>
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Transport Name" autofocus>
+                        </div>
+                    </fieldset>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Tracking device</div>
+                        <div class="panel-body">
+                            <fieldset>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="d-id-type">ID Type</label>
+                                        <select name="deviceIdType" class="form-control" id="d-id-type">
+                                            <option value="1">Phone number</option>
+                                            <option value="2">IMEI</option>
+                                            <option value="4">Own ID</option>
+                                            <option value="8">MAC address</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="d-id-value">ID Value</label>
+                                        <input type="text" name="deviceIdValue" class="form-control" id="d-id-value" placeholder="Device ID Value">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <fieldset>
+                        <button type="submit" class="btn btn-primary button-save">Save</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well">
+            <h5><b>For the test you can add some transports and link them with existing test devices.</b></h5>
+            <h5><b>The devices can be identified either by "Phone Number" or by "OwnId".</b></h5>
+            <h5><b>Here is the list of valid devices:</b></h5>
+            <h5>Device №1</h5>
+            <ul>
+                <li>PhoneNumber: +555-0001</li>
+                <li>OwnId: 1111</li>
+            </ul>
+            <h5>Device №2</h5>
+            <ul>
+                <li>PhoneNumber: +555-0002</li>
+                <li>OwnId: 2222</li>
+            </ul>
+            <h5>Device №3</h5>
+            <ul>
+                <li>PhoneNumber: +555-0003</li>
+                <li>OwnId: 3333</li>
+            </ul>
+            <h5>Device №4</h5>
+            <ul>
+                <li>PhoneNumber: +555-0004</li>
+                <li>OwnId: 4444</li>
+            </ul>
+            <div><i><sup>*</sup> The added transports will be "alive" in hour.</i></div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/app/editTransportItem.js"></script>
+}

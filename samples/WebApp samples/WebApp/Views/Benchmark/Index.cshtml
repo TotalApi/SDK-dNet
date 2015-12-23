@@ -1,0 +1,24 @@
+﻿<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary form-panel">
+            <div class="panel-heading">Benchmark</div>
+            <div class="panel-body">
+                <form>
+                    <fieldset class="period-select">
+                        <legend>Select the period (min - 1, max - 48 hours)</legend>
+                        <div class="label label-info range-display">24</div>
+                        <div class="form-group">
+                            <input type="range" class="range-input" value="24" min="1" max="48">
+                        </div>
+                        <button type="submit" class="btn btn-success button-load">Load</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="msg-box"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/app/benchmark.js"></script>
+}

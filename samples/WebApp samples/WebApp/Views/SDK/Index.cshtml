@@ -1,0 +1,270 @@
+﻿
+<div class="container">
+
+    <h2 class="sdk_sample_step">SDK first step</h2>
+
+<ul>
+    <li>@Html.ActionLink("Authentication", "Authentication")</li>
+    <li>@Html.ActionLink("AsyncTasks", "AsyncTasks")</li>
+    <li>@Html.ActionLink("Events", "Events")</li>
+    <li>@Html.ActionLink("Modules", "Modules")</li>
+    <li>@Html.ActionLink("Repository", "Repository")</li>
+    <li>@Html.ActionLink("Telematics", "Telematics")</li>
+</ul>
+
+
+
+<script id="appConfig" type="text"><configuration>
+    <configSections>
+        <section name="totalapi.log" type="TotalApi.Core.Api.FileLoggerConfiguration, TotalApi.Core"/>
+    </configSections>
+
+    <navis.log>
+        <files>
+            <add file="log.txt" console="true"/>
+        </files>
+    </navis.log>
+    <appSettings>
+        <add key="appId" value="TotalApi.TestClient"/>
+        <add key="appTitle" value="TestClient"/>
+
+        <add key="serverHost" value="000.000.000.000:1111" />
+        <add key="apiKey" value="SampleApiKey" />
+    </appSettings>
+...
+...</script>
+
+    <script id="loggerExtendedConfig" type="text">....
+    <navis.log>
+        <files>
+            <add file="con" level="7" />
+            <add file="..\..\log\log.txt" console="true" append="true" />
+        </files>
+    </navis.log>
+....</script>
+
+        <div class="sdk_content">
+
+            In order to start using TotalApi SDK you must:
+
+            1. Include Navis3 SDK libraries as the references to the project.
+
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="library">TotalApi.Core.dll</span></td>
+                        <td>Core library, including interfaces and methods to access Repository, Tasks etc. apis.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="library">TotalApi.*.Client</span></td>
+                        <td>
+                            System components client libraries, using MEF to export interfaces aggregated by TotalApi.Core.
+                            No public methods avaliable, just include it to get access to system components of Billing, Telematics, Events.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="library">TotalApi.Utils.*</span></td>
+                        <td>
+                            Utils libraries. Includes helper classes used by other other libraries.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        <p>
+            In addition to these libraries, you must include <span class="codeMethod">Linq2Rest</span> and <span class="codeMethod">Newtonsoft.Json</span>.
+            Both are avaliable through Nuget.
+        </p>
+
+        2. Edit you application config file and initialize properties that is needed:
+
+            <pre class="brush: xml;" sample-id="appConfig"></pre>
+
+            There is the set of parameters that could be used:
+
+            <h3>General settings</h3>
+
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Default value
+                </td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="setting">isDebugMode</span>
+                        </td>
+                        <td>indicate that application is running in debug mode (applied only to web applications)</td>
+                        <td>False</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">totalapi.log</span></td>
+                        <td>logging settings (see below)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">modulesFolder</span></td>
+                        <td>
+                            Folders list, delimited by semicolon, that used as the source folders for modules.
+                            You could provide relative addressing relative to applications startup path.
+                            Recursive subfolders loading are supported.
+                        </td>
+                        <td>Modules</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">logThreadEnabled</span></td>
+                        <td>
+                            If True - all logger messages falls into queue that handles by a single separate thread.
+                            If False - no queue used, could significantly slow down the performance.
+                        </td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">isDebugMode</span></td>
+                        <td>indicate that application is running in debug mode (applied only to web applications)</td>
+                        <td>False</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h3>Connection settings</h3>
+
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Default value
+                </td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="setting">serverHost</span></td>
+                        <td>ip address/host and, optionally, port address to connect to billing server.</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">serverProtocol</span></td>
+                        <td>Protocol of billing services</td>
+                        <td>https</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">serverEndpoint</span></td>
+                        <td>
+                            Template of a billing server connection string.
+                            Temlates in a brackets will be replaced by correspondent values during address construction.
+                        </td>
+                        <td>{Protocol}://{Host}/{ApplicationName}/api/{ApiVersion}/{ApiType}/{ServiceContract}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">apiKey</span></td>
+                        <td>
+                            ApiKey of the client.
+                            If not indicated - it is possible to set this property programmatically by setting up TotalApiAuth.ApiKey property before initialization of MefBootstrapper.
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">appKey</span></td>
+                        <td>
+                            AppKey of the client.
+                            If not indicated - it is possible to set this property programmatically by setting up TotalApiAuth.AppKey property before initialization of MefBootstrapper.
+                            If both ApiKey and AppKey properties are indicated - AppKey property would be ignored.
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Logging settings</h3>
+
+            These settings influences on data output implemented by ILogger interface. By default, the application uses FileLogger class, controlled by the following commands:
+
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive">
+                <thead>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Description
+                </td>
+                <td>
+                    Default value
+                </td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="setting">totalapi.log.file</span></td>
+                        <td>
+                            Name of the log file.
+                            If full path not specified - applications startup path would be used.
+                            If "CON" value - log output will be written to applications console.
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">totalapi.log.level</span></td>
+                        <td>
+                            Logging level bit mask.
+                            1 - informational messages,
+                            2 - warnings,
+                            4 - errors
+                        </td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">totalapi.log.append</span></td>
+                        <td>
+                            If True - log file will be created or rewritten each time the application starts, otherwise - log messages will be appending to existing log file.
+                        </td>
+                        <td>False</td>
+                    </tr>
+                    <tr>
+                        <td><span class="setting">totalapi.log.console</span></td>
+                        <td>
+                            Replicate logger output to console.
+                        </td>
+                        <td>
+                            In DEBUG mode - this parameter would be True by default, otherwise - False.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            It is possible to specify multiple logging settings by following settings:
+
+            <pre class="brush: xml;" sample-id="loggerExtendedConfig"></pre>
+            
+        3. In order to use the SDK you need to initialize MEF by calling <span class="codeMethod">TotalApiBootstrapper.Create(".") method.</span>
+            Constructor parameter used to specify folder from which system modules should be loaded.
+
+            <h3 class="stepResult"></h3>
+
+        After this, you will have access to system modules. 
+
+        </div>
+
+
+</div>

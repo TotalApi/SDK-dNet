@@ -1,0 +1,6 @@
+﻿{
+    "SSID": "SampleSSID",
+    "Description": "SampleModule SubSystem",
+    "ApiKeys": ["ApiKey1"],
+    "AppKeys": ["AppKey1"]
+}

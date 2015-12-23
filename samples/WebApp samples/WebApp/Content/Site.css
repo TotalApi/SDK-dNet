@@ -1,0 +1,115 @@
+﻿/* Main styles */
+.body-content,
+.leaflet-top .leaflet-control {
+    margin-top: 60px;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border: none;
+    background-color: #222;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+
+/* Map */
+.map-container {
+    height: 100vh;
+    margin-top: -60px;
+}
+
+.button-clear-track {
+    position: absolute;
+    bottom: 26px;
+    right: 10px;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+    .button-clear-track {
+        bottom: 40px;
+    }
+}
+
+
+/* Transport */
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+
+/* Benchmark */
+.range-display {
+    display: inline-block;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+input[type=range].range-input {
+    width: 50%;
+}
+
+
+/* Animation for loading button */
+.spin {
+    -moz-animation: spin 1s linear infinite;
+    -o-animation: spin 1s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from { -moz-transform:rotate(0);
+           -ms-transform:rotate(0);
+           -o-transform:rotate(0);
+           -webkit-transform:rotate(0);
+           transform:rotate(0);
+    }
+    to { -moz-transform:rotate(360deg);
+         -ms-transform:rotate(360deg);
+         -o-transform:rotate(360deg);
+         -webkit-transform:rotate(360deg);
+         transform:rotate(360deg);
+    }
+}
