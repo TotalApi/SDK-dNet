@@ -82,7 +82,7 @@
      */
     function handleTransport(transport) {
         if (!Array.isArray(transport))
-            transport = new Array(transport);
+            transport = [transport];
 
         // adding each transport item to map
         transport.forEach(function (t) {
@@ -121,7 +121,6 @@
 
         data.$values.forEach(function (t) {
             if (t.IsStop) {
-                console.log(t);
                 // creating stop markers
                 var stopMarker = L.circleMarker([t.LatitudeDegree, t.LongitudeDegree], {
                     color: 'red',
@@ -225,7 +224,6 @@
      * Subscribe on event of data changing
      */
     app.events.Subscribe('OnDataChanged', function (event) {
-
         function findAndRemoveMarker(markerId) {
             markers.forEach(function (m) {
                 if (m.options.markerId === markerId)
