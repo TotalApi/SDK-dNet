@@ -11,17 +11,17 @@ class Subscriber : IEvent, IEvent<OnPing>, IEvent<OnDeviceStatusChanged>
 
     public void HandleEvent(object e)
     {
-       Console.WriteLine("1. IEvent: " + e.GetType().FullName));
+       Console.WriteLine("1. IEvent: " + e.GetType().FullName);
     }
 
     public void HandleEvent(OnPing e)
     {
-        Console.WriteLine("2. OnPing: " + e.Content));
+        Console.WriteLine("2. OnPing: " + e.Content);
     }
 
     public void HandleEvent(OnDeviceStatusChanged e)
     {
-        Console.WriteLine("3. OnDeviceStatusaChanged: {0}".Fmt(e.DeviceStatus.Id)));
+        Console.WriteLine("3. OnDeviceStatusaChanged: {0}".Fmt(e.DeviceStatus.Id));
     }
 }  
     ...
