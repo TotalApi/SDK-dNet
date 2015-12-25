@@ -7,8 +7,9 @@ TotalAPI предоставляет разработчикам удобный ф
 
 Инсталляция
 -------------------------------------------
-1.  Скачайте [TotalAPI и metriX SDKs](../../dist/net45/) 
-2.  Включите **клиентские** библиотеки в ваш проект
+1.  Скачайте [TotalAPI и metriX SDKs](../../dist/net45/)
+2.  Скачайте также [Linq2Rest](https://www.nuget.org/packages/Linq2Rest/) и [Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/). Оба пакета доступны через Nuget.
+3.  Включите [Linq2Rest](https://www.nuget.org/packages/Linq2Rest/), [Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/) и **клиентские** библиотеки SDK в ваш проект
 
 Как начать использовать SDK
 ---------------------------------------------
@@ -29,22 +30,24 @@ TotalAPI предоставляет разработчикам удобный ф
 ### 3. Подключение модулей SDK  
 Для использования `TotalApi SDK` в клиентском приложении необходимо наличие следующих библиотек:
 
-* **TotalApi.Utils.Common**
-* **TotalApi.Utils.IoC**
-* **TotalApi.Utils.Wcf**
-* **TotalApi.Core**
-* **TotalApi.Billing.Client**
-* TotalApi.Telematics.Api
-* TotalApi.Telematics.Client
+* Linq2Rest
+* Newtonsoft.Json
+* TotalApi.Utils.Common
+* TotalApi.Utils.IoC
+* TotalApi.Utils.Wcf
+* TotalApi.Core
+* TotalApi.Billing.Client
+* TotalApi.EventManager.Client
+* *TotalApi.Telematics.Api*
+* *TotalApi.Telematics.Client*
 
 Последние две библиотеки необходимы, если вы собираетесь использовать телематическую часть подсистемы `metrixApi`. 
 
-> При написании *клиентского* приложения не включайте в проект и не помещайте в папку SDK другие библиотеки из полного состава. В противном случае возможна некорректная работа приложения.
+> При написании *клиентского* приложения не включайте в проект другие библиотеки из полного состава. В противном случае возможна некорректная работа приложения.
 
 При старте приложения следует вызвать метод инициализации клиентского SDK:
 ```C#    
-    TotalApiBootstrapper.Create("."); // Параметром вызова является каталог, в котором находятся файлы SDK. 
-                                      // (Или список каталогов, разделённых точкой с запятой).
+    TotalApiBootstrapper.Create();
 ```
 [Подробнее о загрузке сборок.](sdkload.md)
 
