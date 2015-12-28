@@ -1767,74 +1767,6 @@
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
         </member>
-        <member name="T:TotalApi.Core.Aspects.BaseMethodAspect">
-            <summary>
-            Base class for methods aspects.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.BaseMethodAspect.StatisticsOwner">
-            <summary>
-            Gets the caller statistics.
-            </summary>
-            <value>
-            The caller statistics.
-            </value>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.BaseMethodAspect.Operation">
-            <summary>
-            Gets the operation.
-            </summary>
-            <value>
-            The operation.
-            </value>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.GetExecutingMethodName(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Gets the name of the executing method.
-            </summary>
-            <param name="args">The arguments.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.OnEntry(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Catches method entry.
-            </summary>
-            <param name="args">Method execution arguments.</param>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.OnExit(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Called when exiting method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Entering method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.MethodExit(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Exiting method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
-        <member name="T:TotalApi.Core.Aspects.ExceptionStatsAspect">
-            <summary>
-            Aspect attribute for gathering statistics. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.ExceptionStatsAspect.#ctor(System.Type[])">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.ExceptionStatsAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Entering method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
         <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.MethodName">
             <summary>
             Executing method name.
@@ -1858,28 +1790,6 @@
             <param name="startDateTime">The start date time.</param>
             <param name="operationName">Name of the operation.</param>
             <returns></returns>
-        </member>
-        <member name="T:TotalApi.Core.Aspects.MethodExecutionStatsAspect">
-            <summary>
-            Aspect attribute for gathering statistics. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Entering method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.MethodExit(PostSharp.Aspects.MethodExecutionArgs)">
-            <summary>
-            Exiting method.
-            </summary>
-            <param name="args">The arguments.</param>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Aspects.MethodExecutionStatsAspect"/> class.
-            </summary>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>

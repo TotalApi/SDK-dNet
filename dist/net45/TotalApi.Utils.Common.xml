@@ -19,6 +19,21 @@
             Object properties.
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.CompiledActivator">
+            <summary>
+            Contains optimized methods to create types of objects locally.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.CompiledActivator.CreateInstance``1(System.Object[])">
+            <summary>
+            Creates an instance of the type designated by the specified generic type parameter, using the constructor with needed parameters count.
+            </summary>
+            
+            <returns>
+            A reference to the newly created object.
+            </returns>
+            <typeparam name="T">The type to create.</typeparam>
+        </member>
         <member name="T:TotalApi.Utils.Expressions.ConstantMemberExpressionVisitor">
             <summary>
             Преобразовывает выражение и все его подвыражения, которые могут быть вычислены как константа в константу
