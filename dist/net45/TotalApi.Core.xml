@@ -1043,9 +1043,15 @@
         </member>
         <member name="M:TotalApi.Core.Api.ISubSystems.Update(TotalApi.Billing.SubSystem)">
             <summary>
-            Refreshes all subsystems data, including billing information.
+            Updates subsystem information.
             </summary>
             <returns>Updated subsystem.</returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.ISubSystems.Create(TotalApi.Billing.SubSystem)">
+            <summary>
+            Creates subsystem information.
+            </summary>
+            <returns>Created subsystem.</returns>
         </member>
         <member name="M:TotalApi.Core.Api.ISubSystems.Delete(System.String)">
             <summary>
@@ -1236,6 +1242,171 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatistics">
+            <summary>
+            Class for representing basic statistics of method call by the remote client.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.MethodName">
+            <summary>
+            Executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.OperationName">
+            <summary>
+            Executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ExecutionStartTime">
+            <summary>
+            Get the execution start time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Operation name.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.DateTime,System.String)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Operation name.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Instance">
+            <summary>
+            The instance
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.DateTime,System.String)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Operation name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents the execution.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents the execution.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics">
+            <summary>
+            Class for representing basic statistics of method call by the remote client.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.RaisedException">
+            <summary>
+            Gets the raised exception.
+            </summary>
+            <value>
+            The raised exception.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.String,System.Exception,System.DateTime)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="exception">The raised exception.</param>
+            <param name="startDateTime">The start date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents caller statistics.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents caller statistics.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.String,System.Exception,System.DateTime,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="exception">Exception</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Name of the operation.</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics">
+            <summary>
+            Class for representing basic statistics of method call by the remote client.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._authInfo">
+            <summary>
+            The _auth information
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.AuthInfo">
+            <summary>
+            Gets totalapi principal info.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
+            <summary>
+            Returns current operation context as string.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._callerIpAddress">
+            <summary>
+            Returns caller ip address.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
+            <summary>
+            Returns caller ip address.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.DateTime,System.String)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents caller statistics.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents caller statistics.
+            </returns>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Instance">
+            <summary>
+            Gets the instance.
+            </summary>
+            <value>
+            The instance.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics" /> class.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Name of the operation.</param>
+        </member>
         <member name="T:TotalApi.Core.Api.TotalApiStatistics">
             <summary>
             Default implementation of the TotalApi statistics interface.
@@ -1251,13 +1422,19 @@
             Interface for gathering statistics information
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExecutionTime(System.String,System.DateTime,System.Int64)">
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExecutionTime``1(``0,System.Int64)">
             <summary>
             Saves execution time for a method, in milliseconds.
             </summary>
-            <param name="methodName">Method name.</param>
-            <param name="executionStartTime">Time of the execution start.</param>
+            <param name="callerStatistics">Caller statistics.</param>
             <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExceptionInfo``1(``0,System.Exception)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
         </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
@@ -1590,22 +1767,119 @@
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
         </member>
-        <member name="T:TotalApi.Core.Aspects.StatisticsLogger">
+        <member name="T:TotalApi.Core.Aspects.BaseMethodAspect">
             <summary>
-            Aspect attribute for gathering statistics. 
+            Base class for methods aspects.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Aspects.StatisticsLogger.OnEntry(PostSharp.Aspects.MethodExecutionArgs)">
+        <member name="P:TotalApi.Core.Aspects.BaseMethodAspect.StatisticsOwner">
+            <summary>
+            Gets the caller statistics.
+            </summary>
+            <value>
+            The caller statistics.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Aspects.BaseMethodAspect.Operation">
+            <summary>
+            Gets the operation.
+            </summary>
+            <value>
+            The operation.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.GetExecutingMethodName(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Gets the name of the executing method.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.OnEntry(PostSharp.Aspects.MethodExecutionArgs)">
             <summary>
             Catches method entry.
             </summary>
             <param name="args">Method execution arguments.</param>
         </member>
-        <member name="M:TotalApi.Core.Aspects.StatisticsLogger.OnExit(PostSharp.Aspects.MethodExecutionArgs)">
+        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.OnExit(PostSharp.Aspects.MethodExecutionArgs)">
             <summary>
-            Catches method exit.
+            Called when exiting method.
             </summary>
-            <param name="args">Method execution arguments.</param>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Entering method.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.BaseMethodAspect.MethodExit(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Exiting method.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="T:TotalApi.Core.Aspects.ExceptionStatsAspect">
+            <summary>
+            Aspect attribute for gathering statistics. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.ExceptionStatsAspect.#ctor(System.Type[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.ExceptionStatsAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Entering method.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.MethodName">
+            <summary>
+            Executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.OperationName">
+            <summary>
+            Executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.ExecutionStartTime">
+            <summary>
+            Get the execution start time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.IStatisticsOwner.Create(System.String,System.DateTime,System.String)">
+            <summary>
+            Creates the specified owner.
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Name of the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Aspects.MethodExecutionStatsAspect">
+            <summary>
+            Aspect attribute for gathering statistics. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.MethodEnter(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Entering method.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.MethodExit(PostSharp.Aspects.MethodExecutionArgs)">
+            <summary>
+            Exiting method.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Aspects.MethodExecutionStatsAspect.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Aspects.MethodExecutionStatsAspect"/> class.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>
@@ -2303,6 +2577,26 @@
             Identification data for which the session was created.
             </summary>
         </member>
+        <member name="T:TotalApi.Core.Billing.SubSystemExtensions">
+            <summary>
+            Implementation SubSystem extension methods
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUrl``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service contract string url of the subsystem
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUri``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service contract uri of the subsystem
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetService``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service of the subsystem
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Billing.SubSystemManager">
             <summary>
             Subsystem manager.
@@ -2322,11 +2616,6 @@
             <summary>
             Subsystem identifier of current subsystem.
             Equals <c>null</c> if current domain is not registered as the separate subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentSSIDPrincipal">
-            <summary>
-            Gets the current subsystem identifier principal.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
@@ -2760,6 +3049,14 @@
             </summary>
         </member>
         <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.ITotalApiEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Creates the data changed event.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.IEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
             <summary>
             Creates the data changed event.
             </summary>
@@ -3950,6 +4247,58 @@
             <param name="errorCode">The code that describes the error. </param>
             <param name="isCritical">Defines whether the exception is critical./</param>
         </member>
+        <member name="T:TotalApi.Core.Exceptions.TotalApiFault">
+            <summary>
+            Class representing TotalApi exceptions.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiFault.HResult">
+            <summary>
+            Gets or sets the h result.
+            </summary>
+            <value>
+            The h result.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiFault.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiFault.IsCritical">
+            <summary>
+            Gets or sets a value indicating whether the fault is critical.
+            </summary>
+            <value>
+            <c>true</c> if the fault is critical; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiFault.Source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+            <value>
+            The source.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiFault.StackTrace">
+            <summary>
+            Gets or sets the stack trace.
+            </summary>
+            <value>
+            The stack trace.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiFault.Create(System.Exception)">
+            <summary>
+            Creates the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <returns></returns>
+        </member>
         <member name="T:TotalApi.Core.ServiceContracts.ApiServiceProxy`1">
             <summary>
             Api service proxy class.
@@ -4168,6 +4517,13 @@
             </summary>
             <param name="entity">Subsystem to update.</param>
             <returns>Updated <see cref="T:TotalApi.Billing.SubSystem"/>.</returns>
+        </member>
+        <member name="M:TotalApi.Core.ServiceContracts.Billing.ISubSystemsService.Create(TotalApi.Billing.SubSystem)">
+            <summary>
+            Creates <see cref="T:TotalApi.Billing.SubSystem"/>.
+            </summary>
+            <param name="entity">Subsystem to update.</param>
+            <returns>Created <see cref="T:TotalApi.Billing.SubSystem"/>.</returns>
         </member>
         <member name="M:TotalApi.Core.ServiceContracts.Billing.ISubSystemsService.Delete(System.String)">
             <summary>
@@ -5262,6 +5618,12 @@
             After loading from the database this flag is <c>false</c>. After registering of the subsystem - the flag is set to <c>true</c>.
             If connection to the subsystem endpoint is failed - the flag is set to <c>false</c>.
             </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.AvailableAttemptCount">
+            <summary>
+            Count of the check if the subsystem is available.
+            Reset to 0 when <see cref="P:TotalApi.Billing.SubSystem.IsAvailable"/> set to <c>true</c>.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.IsHidden">
