@@ -14,10 +14,10 @@ Installation
 Getting started
 ---------------------------------------------
 ### 1. Register your App
-Please, [register](http://192.168.3.202:4202/#/applications) your app and the authentification keys ([ApiKey & AppKey](auth.md)) and the service URL will be provided. 
+Please, [register](http://192.168.3.202:4202/#/applications) your app and you will be provided with the authentication keys ([ApiKey & AppKey](auth.md)) and the service URL. 
 
 ### 2. Tune the SDK with intial settings
-Please, define some settings in  the application configuration file `yourapplication.exe.config`.  One should define TotalAPI service URL and authentification key. Please, see about the SDK settings details [here](sdksettings.md).
+Please, define some settings in  the application configuration file `yourapplication.exe.config`.  One should define TotalAPI service URL and authentication key. Please, see about the SDK settings details [here](sdksettings.md).
 SDK Init settings example:
 ```xml
     <appSettings>
@@ -42,10 +42,10 @@ Please, include into your project following libs:
 * *TotalApi.Telematics.Api*
 * *TotalApi.Telematics.Client*
 
-The two last libs (*TotalApi.Telematics.Api* and *TotalApi.Telematics.Client*) are required if you would like to utilise telematic funtionality of the `metrixApi`. 
+The two last libs (*TotalApi.Telematics.Api* and *TotalApi.Telematics.Client*) are required if you would like to utilise telematic funtionality of the `metrixAPI`. 
 
 > **Attention!** 
-> In ultimate most cases you do not need to include into the project the rest of libs from [here](../../dist/net45/). One needs these libs if he/she develops new TotalAPI service only. Otherwise your app cpold work unpropperly.
+> In vast most cases you do not need to include into the project the rest of libs from [here](../../dist/net45/). One needs all libraries included if he/she implements a new TotalAPI service only.  Otherwise your app could work improperly.
 
 ### 4. Start the SDK in your app
 Please, invoke the SDK initialization method when your app starts:
