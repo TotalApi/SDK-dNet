@@ -80,7 +80,7 @@ Known issues
 --------------------------------------------------------------
 [Please see here](https://github.com/TotalApi/SDK-dNet/issues)
 
-Lisence
+License
 ------------------------------------------------------------
-TotalAPI SDK dstributed with [MIT lisence](../../LISENCE.txt)
+TotalAPI SDK dstributed with [MIT License](../../LIENSE.txt)
  
