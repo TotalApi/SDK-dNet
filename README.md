@@ -1,6 +1,7 @@
 [Russian](documentation/ru/README.md)
 TotalAPI SDK .NET
 ====================
+[TOC]
 Introduction
 ----------------------------------------
 TotalAPI is a cloud service providing various API for program complexes development and SDK , which will allow to easily using these API.
@@ -8,7 +9,7 @@ TotalAPI provides the developers with user-friendly framework which lowers labor
 
 Installation
 -------------------------------------------
-1.  Download [TotalAPI и metriX SDKs](../../dist/net45/)
+1.  Download [TotalAPI and metriX SDKs](../../dist/net45/)
 2.  Download [Linq2Rest](https://www.nuget.org/packages/Linq2Rest/) and [Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/). You could get the packages from Nuget.
 3.  Include [Linq2Rest](https://www.nuget.org/packages/Linq2Rest/), [Newtonsoft.Json](https://www.nuget.org/packages/newtonsoft.json/) and  **client** SDK libs into your project.
 
