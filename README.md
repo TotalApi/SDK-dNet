@@ -15,7 +15,7 @@ Installation
 Getting started
 ---------------------------------------------
 ### 1. Register your App
-Please, [register](http://192.168.3.202:4202/#/applications) your app and you will be provided with the authentication keys ([ApiKey & AppKey](auth.md)) and the service URL.
+Please, [register](http://192.168.3.202:4202/#/applications) your app and you will be provided with the authentication keys ([ApiKey & AppKey](/documentation/auth.md)) and the service URL.
 
 ### 2. Tune the SDK with intial settings
 Please, define some settings in  the application configuration file `yourapplication.exe.config`.  One should define TotalAPI service URL and authentication key. Please, see about the SDK settings details [here](sdksettings.md).
