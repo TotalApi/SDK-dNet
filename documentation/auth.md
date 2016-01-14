@@ -10,11 +10,11 @@ For light backendless applications one can use AppKey authentication. TotalAPI s
 How to use it
 -------------------------------------------------------
 TotalAPI authentication requires to define one or more properties of `TotalApiAuth` class and transmitt the data with one of the following ways:
-1. In the Endpoint URL of the service as "auth" parameter in a JSON object of TotalApiAuth:
+ 1. In the Endpoint URL of the service as "auth" parameter in a JSON object of TotalApiAuth:
 `https://totalapi.io/api/v1/wcf/ITelematicsService?auth={ApiKey:”456”}`
-1. In the HTTP request header as Authorization field  in a JSON object of TotalApiAuth:
+ 1. In the HTTP request header as Authorization field  in a JSON object of TotalApiAuth:
 `Authorization: TOTALAPI {ApiKey:”456”}`
-1. In the WCF message header as TotalApiAuth object, for WCF API only.
+ 1. In the WCF message header as TotalApiAuth object, for WCF API only.
 
 Authentication types of TotalAPI
 -----------------------------------------------------------
@@ -33,9 +33,9 @@ Requires ApiKey суперадминистративного приложени�
 
 Общие рекомендации по аутентификации TotalAPI
 -------------------------------------------------------------------------------
-1. Держите свой ApiKey в секрете. В случае компрометации – получите новый ключ взамен старого.
-1. По возможности, обращайтесь к сервисам API из защищенной среды выполнения вашего приложения. Например, реализуйте все запросы к API на серверной стороне (backend).
-1. Используйте AppKey только в простых приложениях, не имеющих серверной части (backendless).
+ 1. Держите свой ApiKey в секрете. В случае компрометации – получите новый ключ взамен старого.
+ 1. По возможности, обращайтесь к сервисам API из защищенной среды выполнения вашего приложения. Например, реализуйте все запросы к API на серверной стороне (backend).
+ 1. Используйте AppKey только в простых приложениях, не имеющих серверной части (backendless).
 
 Класс аутентификации
 --------------------------------------------------
