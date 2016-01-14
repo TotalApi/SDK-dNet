@@ -1,11 +1,10 @@
 [Russian](documentation/ru/README.md)
 TotalAPI SDK .NET
 ====================
-[TOC]
 Introduction
 ----------------------------------------
 TotalAPI is a cloud service providing various API for program complexes development and SDK , which will allow to easily using these API.
-TotalAPI provides the developers with user-friendly framework which lowers labor inputs and risks during routine tasks development which are faced within distributed business applications. For instance, management of messages exchange among program systems, access to business objects and organization of program modules interfaces.  
+TotalAPI provides the developers with user-friendly framework which lowers labor inputs and risks during routine tasks development which are faced within distributed business applications. For instance, management of messages exchange among program systems, access to business objects and organization of program modules interfaces.
 
 Installation
 -------------------------------------------
@@ -16,7 +15,7 @@ Installation
 Getting started
 ---------------------------------------------
 ### 1. Register your App
-Please, [register](http://192.168.3.202:4202/#/applications) your app and you will be provided with the authentication keys ([ApiKey & AppKey](auth.md)) and the service URL. 
+Please, [register](http://192.168.3.202:4202/#/applications) your app and you will be provided with the authentication keys ([ApiKey & AppKey](auth.md)) and the service URL.
 
 ### 2. Tune the SDK with intial settings
 Please, define some settings in  the application configuration file `yourapplication.exe.config`.  One should define TotalAPI service URL and authentication key. Please, see about the SDK settings details [here](sdksettings.md).
