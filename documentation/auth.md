@@ -26,10 +26,7 @@ Requires AppKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. Al
 Requires AppKey, UserLogin, UserPassword defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides access to data which belongs to the particular user whose username was provided.
 - **SessionKey- Authentication**
 Requires SessionKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. The session key is provided by GetSessionKey method which should been requested in advance. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides the same access control which was granted when GetSessionKey method was requested. The SessionKey method requires ApiKey or AppUser authentication.
-<!--**SSID- Authentication**
-Requires SSID. Используется только при работе подсистем с подсистемой биллинга.
-**SuperApiKey- Authentication**
-Requires ApiKey суперадминистративного приложения. Используется исключительно при работе с Billing API административным приложением. При успешной аутентификации предоставляется полный доступ ко всем данным биллинга. (Не нужно публично документировать эту возможность).-->
+
 Resume
 -------------------------------------------------------------------------------
 1. Keep the Api Key in secret. In case of compromising of the ApiKey ask for a new one.
