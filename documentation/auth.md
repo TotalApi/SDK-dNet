@@ -18,13 +18,13 @@ TotalAPI authentication requires to define one or more properties of [`TotalApiA
 
 Authentication types of TotalAPI
 -----------------------------------------------------------
-**ApiKey- Authentication**
+- **ApiKey- Authentication**
 Requires ApiKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class.  This is an essential TotalAPI authentication type. One should use this authentication in a secure environment like server side application. Successful authentication provides full access to any data which belongs to the particular TotalAPI client application.
-**AppKey- Authentication**
+- **AppKey- Authentication**
 Requires AppKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. Along with this auithentication type only creating a new user allowed. One could use this type of authentication in unsecure environments like web client or desctop applications.
-**AppUser- Authentication**
+- **AppUser- Authentication**
 Requires AppKey, UserLogin, UserPassword defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides access to data which belongs to the particular user whose username was provided.
-**SessionKey- Authentication**
+- **SessionKey- Authentication**
 Requires SessionKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. The session key is provided by GetSessionKey method which should been requested in advance. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides the same access control which was granted when GetSessionKey method was requested. The SessionKey method requires ApiKey or AppUser authentication.
 <!--**SSID- Authentication**
 Requires SSID. Используется только при работе подсистем с подсистемой биллинга.
