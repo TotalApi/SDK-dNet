@@ -1,4 +1,4 @@
-[Russian](/ru/auth.md)
+[Russian](./ru/auth.md)
 
 TotalAPI authentication
 ==========================
@@ -9,7 +9,7 @@ For light backendless applications one can use AppKey authentication. TotalAPI s
 
 How to use it
 -------------------------------------------------------
-TotalAPI authentication requires to define one or more properties of `TotalApiAuth` class and transmitt the data with one of the following ways:
+TotalAPI authentication requires to define one or more properties of [`TotalApiAuth`](http://apiref.totalapi.io) class and transmitt the data with one of the following ways:
  1. In the Endpoint URL of the service as "auth" parameter in a JSON object of TotalApiAuth:
 `https://totalapi.io/api/v1/wcf/ITelematicsService?auth={ApiKey:”456”}`
  1. In the HTTP request header as Authorization field  in a JSON object of TotalApiAuth:
@@ -19,24 +19,23 @@ TotalAPI authentication requires to define one or more properties of `TotalApiAu
 Authentication types of TotalAPI
 -----------------------------------------------------------
 **ApiKey- Authentication**
-Requires ApiKey. Используется при работе с API в защищенной среде (например, в backend Web-приложения). При успешной аутентификации предоставляется полный доступ ко всем данным приложения, для которого сгенерирован этот ключ.
+Requires ApiKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class.  This is an essential TotalAPI authentication type. One should use this authentication in a secure environment like server side application. Successful authentication provides full access to any data which belongs to the particular TotalAPI client application.
 **AppKey- Authentication**
-Requires AppKey. Используется при работе с API в незащищенных клиентских приложениях исключительно для регистрации нового пользователя приложения. При успешной аутентификации разрешены только методы API для задания имени и пароля нового пользователя. Для удаления созданного пользователя требуется ApiKey- аутентификация.
+Requires AppKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. Along with this auithentication type only creating a new user allowed. One could use this type of authentication in unsecure environments like web client or desctop applications.
 **AppUser- Authentication**
-Requires AppKey, UserLogin, UserPassword. Используется при работе с API в незащищенных клиентских приложениях. При успешной аутентификации предоставляется доступ ко всем данным только указанного пользователя.
+Requires AppKey, UserLogin, UserPassword defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides access to data which belongs to the particular user whose username was provided.
 **SessionKey- Authentication**
-Requires SessionKey, полученного предварительным вызовом метода GetSessionKey. Используется при работе с API в незащищенных клиентских приложениях.  При успешной аутентификации уровень доступа к данным такой-же, как и при вызове метода GetSessionKey. Для получения SessionKey необходима ApiKey или AppUser аутентификация.
+Requires SessionKey defined in [`TotalApiAuth`](http://apiref.totalapi.io) class. The session key is provided by GetSessionKey method which should been requested in advance. One could use this type of authentication in unsecure environments like web client or desctop applications. Successful authentication provides the same access control which was granted when GetSessionKey method was requested. The SessionKey method requires ApiKey or AppUser authentication.
 <!--**SSID- Authentication**
 Requires SSID. Используется только при работе подсистем с подсистемой биллинга.
 **SuperApiKey- Authentication**
 Requires ApiKey суперадминистративного приложения. Используется исключительно при работе с Billing API административным приложением. При успешной аутентификации предоставляется полный доступ ко всем данным биллинга. (Не нужно публично документировать эту возможность).-->
-
-Общие рекомендации по аутентификации TotalAPI
+Resume
 -------------------------------------------------------------------------------
- 1. Держите свой ApiKey в секрете. В случае компрометации – получите новый ключ взамен старого.
- 1. По возможности, обращайтесь к сервисам API из защищенной среды выполнения вашего приложения. Например, реализуйте все запросы к API на серверной стороне (backend).
- 1. Используйте AppKey только в простых приложениях, не имеющих серверной части (backendless).
+1. Keep the Api Key in secret. In case of compromising of the ApiKey ask for a new one.
+1. Use the ApiKey in a secure environment only like server side application.
+1. Use the AppKey in simple backendless applications.
 
-Класс аутентификации
+Authentication class
 --------------------------------------------------
-[Описание класса TotalApiAuth](http://apiref.totalapi.io), передающего эту информацию.
+Please see reference of [TotalApiAuth class](http://apiref.totalapi.io) for more detailes.
