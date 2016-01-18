@@ -1,3 +1,5 @@
+[Russian](/ru/sdksettings.md)
+
 TotalAPI SDK Settings
 ================================================================
 All SDK settings defined in section  `<appSettings>` of configuration file `app.exe.config` of user application.
