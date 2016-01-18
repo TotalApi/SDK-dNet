@@ -1724,6 +1724,18 @@
             <param name="defValue">Default value</param>
             <author>Lion</author>
         </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1},System.Boolean)">
+            <summary>
+            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
+            </summary>
+            <typeparam name="TKey">Type of key</typeparam>
+            <typeparam name="TValue">Type of result</typeparam>
+            <param name="self">Dictionary object</param>
+            <param name="key">Key value</param>
+            <param name="createValue">The new value factory</param>
+            <param name="skipNulls">Do not store null values to cache</param>
+            <author>Lion</author>
+        </member>
         <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1},System.Boolean)">
             <summary>
             Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
@@ -1735,6 +1747,11 @@
             <param name="createValue">The new value factory</param>
             <param name="skipNulls">Do not store null values to cache</param>
             <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
+            </summary>
         </member>
         <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(``0[],System.Func{``0,System.Boolean})">
             <summary>

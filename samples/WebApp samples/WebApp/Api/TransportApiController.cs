@@ -36,9 +36,11 @@ namespace WebApp.Api
                 transport.LastStatus = TelematicsApi.Telematics.GetDeviceLastStatus(transport.DeviceIdentifier);
                 if (transport.LastStatus != null)
                 {
-                    transport.LastStatus.LastActivityTime = DateTime.SpecifyKind(transport.LastStatus.LastActivityTime.ToUniversalTime(), DateTimeKind.Utc);
-                    if (transport.LastStatus.LastCoordinate != null)
-                        transport.LastStatus.LastCoordinate.UtcDate = DateTime.SpecifyKind(transport.LastStatus.LastCoordinate.UtcDate.ToUniversalTime(), DateTimeKind.Utc);
+                    /*
+                                        transport.LastStatus.LastActivityTime = DateTime.SpecifyKind(transport.LastStatus.LastActivityTime.ToUniversalTime(), DateTimeKind.Utc);
+                                        if (transport.LastStatus.LastCoordinate != null)
+                                            transport.LastStatus.LastCoordinate.UtcDate = DateTime.SpecifyKind(transport.LastStatus.LastCoordinate.UtcDate.ToUniversalTime(), DateTimeKind.Utc);
+                    */
                 }
             }
             catch

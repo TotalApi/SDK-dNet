@@ -9,6 +9,153 @@
             Interface of a Customer repository item.
             </summary>
         </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartupTask">
+            <summary>
+            Interface for automatic modules async task startup.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartupTask"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartupTask.Run"/> 
+            will be automatically called immediatelly after MEF components composition as an async task.
+            Method are called AFTER initializing authentication, subsystem registration and all <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartupTask.Run">
+            <summary>
+            Async runs the module task.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager">
+            <summary>
+            Handler of keyboard keys for console applications.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.StartListeningConsole">
+            <summary>
+            Starts the console listening.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.Init">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler">
+            <summary>
+            Used for handling keyboard keys.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.Init">
+            <summary>
+            Called on the start of the application. Could be used for displaying commands decription in a console.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
+            <summary>
+            Keyboard key press handler.
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
+            <summary>
+            Base data filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Id">
+            <summary>
+            Filter identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Name">
+            <summary>
+            Filter name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Description">
+            <summary>
+            Filter description.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.DependsOn">
+            <summary>
+            List of filters, which should be executed before current filter.
+            If no dependent filters - could return <c>null</c> or empty list.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.IsFinalFilter">
+            <summary>
+            If <c>true</c>, the filter will be added at the end of filters pipeline.
+            Filters, dependent from this filter will be certainly added after this filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
+            <summary>
+            Type, distributing the parameters class of current filter.
+            This type should have public constructor without parameters and be serializeable.
+            Even if there is no parameters - it should return the type of an empty class.
+            Types of parameters should be unique across different filters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Execute(System.Object,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters - type of the parameters defines by the value of <see cref="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType" /> property</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartup">
+            <summary>
+            Interface for automatic modules startup.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartup"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/> 
+            will be automatically called immediatelly after MEF components composition.
+            Method are called AFTER initializing authentication and subsystem registration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start">
+            <summary>
+            Starts module.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.InitOrders">
+            <summary>
+            Class declaring constants used for ordering modules composition.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Billing">
+            <summary>
+            The Billing subsystem order value.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.BillingClient">
+            <summary>
+            The Billing client order value.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Database">
+            <summary>
+            The Database module order value.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ISensorDataFilter">
+            <summary>
+            Все фильтры для данных датчиков должны реализовывать и экспортировать этот интерфейс.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ICoordinateFilter">
+            <summary>
+            Coordinate filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleInitializer">
+            <summary>
+            Interface for automatic modules initialization.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleInitializer"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init"/> 
+            will be automatically called immediatelly after MEF components composition.
+            Method are called BEFORE initializing authentication and subsystem registration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.AggregateLogger">
             <summary>
             Aggregated logger.
@@ -489,140 +636,6 @@
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
         </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager">
-            <summary>
-            Handler of keyboard keys for console applications.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.StartListeningConsole">
-            <summary>
-            Starts the console listening.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.Init">
-            <summary>
-            Initializes this instance.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler">
-            <summary>
-            Used for handling keyboard keys.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.Init">
-            <summary>
-            Called on the start of the application. Could be used for displaying commands decription in a console.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
-            <summary>
-            Keyboard key press handler.
-            </summary>
-            <param name="key"></param>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
-            <summary>
-            Base data filter interface.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Id">
-            <summary>
-            Filter identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Name">
-            <summary>
-            Filter name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Description">
-            <summary>
-            Filter description.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.DependsOn">
-            <summary>
-            List of filters, which should be executed before current filter.
-            If no dependent filters - could return <c>null</c> or empty list.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.IsFinalFilter">
-            <summary>
-            If <c>true</c>, the filter will be added at the end of filters pipeline.
-            Filters, dependent from this filter will be certainly added after this filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
-            <summary>
-            Type, distributing the parameters class of current filter.
-            This type should have public constructor without parameters and be serializeable.
-            Even if there is no parameters - it should return the type of an empty class.
-            Types of parameters should be unique across different filters.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Execute(System.Object,System.Object)">
-            <summary>
-            Starts processing of passing series of data.
-            </summary>
-            <param name="series">Series of data with metadata</param>
-            <param name="prms">Filter parameters - type of the parameters defines by the value of <see cref="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType" /> property</param>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartup">
-            <summary>
-            Interface for automatic modules startup.
-            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartup"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/> 
-            will be automatically called immediatelly after MEF components composition.
-            Method are called AFTER initializing authentication and subsystem registration.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start">
-            <summary>
-            Starts module initialization.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.InitOrders">
-            <summary>
-            Class declaring constants used for ordering modules composition.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Billing">
-            <summary>
-            The Billing subsystem order value.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.BillingClient">
-            <summary>
-            The Billing client order value.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Database">
-            <summary>
-            The Database module order value.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ISensorDataFilter">
-            <summary>
-            Все фильтры для данных датчиков должны реализовывать и экспортировать этот интерфейс.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ICoordinateFilter">
-            <summary>
-            Coordinate filter interface.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IModuleInitializer">
-            <summary>
-            Interface for automatic modules initialization.
-            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleInitializer"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init"/> 
-            will be automatically called immediatelly after MEF components composition.
-            Method are called BEFORE initializing authentication and subsystem registration.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init">
-            <summary>
-            Initializes this instance.
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.Api.CoreApi">
             <summary>
             Static class, that should aggreegate all factories of internal interfaces of the system.
@@ -883,6 +896,13 @@
             <param name="password1">The password1.</param>
             <param name="password2">The password2.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.IApiUsers.IsExists(System.String)">
+            <summary>
+            Checks whether the user <paramref name="login"/> exists.
+            </summary>
+            <param name="login">The user login.</param>
+            <returns><c>true</c> if user login exists. <c>false</c> otherwise.</returns>
         </member>
         <member name="T:TotalApi.Core.Api.IRepository`1">
             <summary>
@@ -1961,7 +1981,7 @@
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser">
             <summary>
-            Application key authorization type.
+            Application key + User login authorization type.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKeyUser">
@@ -2002,7 +2022,7 @@
             Authentication information that should be transfered during services requests.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuth.ChechAuth">
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuth.CheckAuth">
             <summary>
             Delegate to check authetication.
             Returns true if authenctication is valid.
@@ -4480,6 +4500,13 @@
             <param name="password1">First password.</param>
             <param name="password2">Second password.</param>
             <returns>True if passwords are equal, otherwise false.</returns>
+        </member>
+        <member name="M:TotalApi.Core.ServiceContracts.Billing.IApiUsersService.IsExists(System.String)">
+            <summary>
+            Checks whether the user <paramref name="login"/> exists.
+            </summary>
+            <param name="login">The user login.</param>
+            <returns><c>true</c> if user login exists. <c>false</c> otherwise.</returns>
         </member>
         <member name="T:TotalApi.Core.ServiceContracts.Billing.IApplicationsService">
             <summary>

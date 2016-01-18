@@ -1030,11 +1030,12 @@
             Extensions for <see cref="T:TotalApi.Telematics.DeviceStatus"/>.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.DeviceStatusExtension.ToTransportFormat(TotalApi.Telematics.DeviceStatus)">
+        <member name="M:TotalApi.Telematics.DeviceStatusExtension.ToTransportFormat(TotalApi.Telematics.DeviceStatus,System.String)">
             <summary>
             Removes unimportant data from data packet, simplifies and minifies it.
             Fractional values are rounded to the required minimum size.
             Altitude are NOT included.
+            Optional you can pass na identifier of the transport linked with the device to pass it to frontend.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.GeoPoint">
