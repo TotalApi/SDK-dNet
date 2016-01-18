@@ -1,4 +1,4 @@
-[Russian](/ru/sdksettings.md)
+[Russian](ru/sdksettings.md)
 
 TotalAPI SDK Settings
 ================================================================
