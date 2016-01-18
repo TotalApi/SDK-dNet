@@ -1076,6 +1076,22 @@
             The stream name.
             </returns>
         </member>
+        <member name="T:TotalApi.Utils.MailService">
+            <summary>
+            Implements service for SMTP mailing
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.MailService.SendMailAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.String)">
+            <summary>
+            Makes sending an email via SMTP server.
+            </summary>
+            <param name="from"></param>
+            <param name="mailto"></param>
+            <param name="subject"></param>
+            <param name="message"></param>
+            <param name="attachFile"></param>
+            <returns></returns>
+        </member>
         <member name="T:TotalApi.Utils.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -2079,9 +2095,17 @@
         <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDateTime(System.Object,System.DateTime)">
             <summary>
             Converts object to date and time. Returns default value for null objects. 
-            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
             </summary>
             <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Time zone undepended DateTime representation of object.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDateTime(System.Object,System.DateTimeKind,System.DateTime)">
+            <summary>
+            Converts object to date and time. Returns default value for null objects. 
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="kind">DateTime kind</param>
             <param name="defValue">Value that will be return if object is null</param>
             <returns>Time zone undepended DateTime representation of object.</returns>
         </member>

@@ -1975,9 +1975,36 @@
         </member>
         <member name="T:TotalApi.Telematics.ServiceContracts.ITelematicsService">
             <summary>
-            Telematics API.
+            Telematics API service.
             Stores and handles the telematics data.
             </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.Coordinate[])">
+            <summary>
+            Writes the coordinates data for the particular device.
+            If no device found doing nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="coordinates">Array of coordinates.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
+            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Number of sensor port.</param>
+            <param name="address">Address of sensors data.</param>
+            <param name="values">DateTime - Value pairs of the sensor data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="sensorData">Array of sensors data.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindDevice(System.String,System.String)">
             <summary>
@@ -1997,14 +2024,6 @@
             During the registration, plugin publishes the models it could handle.
             </summary>
             <returns>Device models array <see cref="T:TotalApi.Telematics.DeviceModel"/> or empty array if no device models found.</returns>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.Coordinate[])">
-            <summary>
-            Writes the coordinates data for the particular device.
-            If no device found doing nothing.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="coordinates">Array of coordinates.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
             <summary>
@@ -2052,25 +2071,6 @@
             <param name="sensorType">Sensor type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.SensorType"/>.</param>
             <param name="number">Sensor number.</param>
             <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
-            <summary>
-            Writes data from the sensors of specified device.
-            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="sensorData">Array of sensors data.</param>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
-            <summary>
-            Writes data from the sensors of specified device.
-            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
-            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="portId">Number of sensor port.</param>
-            <param name="address">Address of sensors data.</param>
-            <param name="values">DateTime - Value pairs of the sensor data.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetLastSensorsStatus(System.String,System.String)">
             <summary>
