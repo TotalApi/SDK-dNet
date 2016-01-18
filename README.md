@@ -53,7 +53,7 @@ Please, invoke the SDK initialization method when your app starts:
 ```C#    
     TotalApiBootstrapper.Create();
 ```
-[More detailes concerning assambles loading.](sdkload.md)
+[More detailes concerning assambles loading.](/documentation/sdkload.md)
 
 ### 5. Do a simple query to the TotalAPI service
 One can test the sevice with following request:
@@ -63,19 +63,19 @@ One can test the sevice with following request:
 
 ```
 The responce contains registration data.
-[Please, see more samples with TotalAPI SDK](../../samples/SDK samples/Startup)
+[Please, see more samples with TotalAPI SDK](/samples/SDK samples/Startup)
 
 Documentation and Samples
 -------------------------------------------
-* [TotalAPI SDK settings](sdksettings.md)
-* [Various code samples](../../samples/SDK samples)
- * [Telemetric sample application](sdksamplestele.md)
- * [Distributed repositary](sdksamplesrepo.md)
- * [distributed events](sdksamplesevent.md)
- * [Application log](sdksampleslog.md)
+* [TotalAPI SDK settings](/documentation/sdksettings.md)
+* [Various code samples](/samples/SDK samples)
+ * [Telemetric sample application](/documentation/sdksamplestele.md)
+ * [Distributed repositary](/documentation/sdksamplesrepo.md)
+ * [distributed events](/documentation/sdksamplesevent.md)
+ * [Application log](/documentation/sdksampleslog.md)
 * [API documentation]()
 * [TotalAPI SDK functions description]()
-* [User autentification in Total API](auth.md)
+* [User autentification in Total API](/documentation/auth.md)
 
 Known issues
 --------------------------------------------------------------
@@ -83,5 +83,5 @@ Known issues
 
 License
 ------------------------------------------------------------
-TotalAPI SDK dstributed with [MIT License](../../LIENSE.txt)
+TotalAPI SDK dstributed with [MIT License](LIENSE.txt)
  
