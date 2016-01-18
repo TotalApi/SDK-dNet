@@ -373,14 +373,14 @@
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.BaseLogger"/> class.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.BaseLogger.Log(System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.BaseLogger.Info(System.String,System.Object[])">
             <summary>
             Logs the specified message.
             </summary>
             <param name="msg">The message.</param>
             <param name="args">The arguments.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.BaseLogger.LogInstance(System.Object,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.BaseLogger.InfoInstance(System.Object,System.String,System.Object[])">
             <summary>
             Logs the informational message from the source.
             </summary>
@@ -434,6 +434,36 @@
             <param name="source">The source.</param>
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.DebugInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a debug message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.Statistic(System.String,System.Object[])">
+            <summary>
+            Logs a statistic message.
+            </summary>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.StatisticInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a statistic message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
         </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.EnqueueLog(System.String,TotalApi.Core.Api.LogMessageType,System.Object)">
             <summary>
@@ -1652,6 +1682,16 @@
             The error message.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.LogMessageType.Debug">
+            <summary>
+            The debug message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.LogMessageType.Statistic">
+            <summary>
+            The statistic message.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.OnLogDelegate">
             <summary>
             Logging delegate.
@@ -1666,16 +1706,16 @@
             Interface for a loggers implementations.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.ILogger.Log(System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.ILogger.Info(System.String,System.Object[])">
             <summary>
-            Logs the specified message.
+            Logs an informational specified message.
             </summary>
             <param name="msg">The message.</param>
             <param name="args">The arguments.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.ILogger.LogInstance(System.Object,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.ILogger.InfoInstance(System.Object,System.String,System.Object[])">
             <summary>
-            Logs the informational message from the source.
+            Logs an informational message from the source.
             </summary>
             <param name="source">The source.</param>
             <param name="msg">The message.</param>
@@ -1683,7 +1723,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Warning(System.String,System.Object[])">
             <summary>
-            Logs the warning message.
+            Logs a warning message.
             </summary>
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
@@ -1698,7 +1738,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Error(System.String,System.Object[])">
             <summary>
-            Logs the error message.
+            Logs an error message.
             </summary>
             <param name="msg">The error message.</param>
             <param name="args">The arguments.</param>
@@ -1713,7 +1753,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Error(System.Exception,System.String,System.Object[])">
             <summary>
-            Logs the error message caused by specified exception.
+            Logs an error message caused by specified exception.
             </summary>
             <param name="e">The exception.</param>
             <param name="msg">The error message.</param>
@@ -1721,12 +1761,42 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.ErrorInstance(System.Object,System.Exception,System.String,System.Object[])">
             <summary>
-            Logs the error message from the source caused by specified exception.
+            Logs an error message from the source caused by specified exception.
             </summary>
             <param name="e">The exception.</param>
             <param name="source">The source.</param>
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.DebugInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a debug message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.Statistic(System.String,System.Object[])">
+            <summary>
+            Logs a statistic message.
+            </summary>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.StatisticInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a statistic message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
         </member>
         <member name="E:TotalApi.Core.Api.ILogger.OnLog">
             <summary>
@@ -1900,12 +1970,6 @@
             Used as a role when <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AuthPropertyName"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/> used.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SuperApiKey">
-            <summary>
-            Super api-key authorization.
-            Used as a role.
-            </summary>
-        </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey">
             <summary>
             Api key authorization.
@@ -1925,6 +1989,12 @@
             <summary>
             Session key authorization.
             This authorization type could be set for a short time just for initial check. After check - authorization type could change to <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/>.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SuperApiKeyRole">
+            <summary>
+            Super api-key authorization.
+            Used as a role.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiAuth">
@@ -1957,6 +2027,14 @@
             Throws the expired exception.
             </summary>
             <exception cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException">Session key is expired.</exception>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiAuth.IsSuperApiKey(System.String)">
+            <summary>
+            Returns <c>true</c> if <paramref name="apiKey"/> is the SUPER ApiKey or <c>false</c> otherwise.
+            If <paramref name="apiKey"/> is not set the current <seealso cref="P:TotalApi.Core.Authentication.TotalApiAuth.ApiKey"/> value will be used.
+            </summary>
+            <param name="apiKey">Checked value</param>
+            <returns><c>true</c> if <paramref name="apiKey"/> is the SUPER ApiKey or <c>false</c> otherwise.</returns>
         </member>
         <member name="P:TotalApi.Core.Authentication.TotalApiAuth.ApiKey">
             <summary>
@@ -2727,6 +2805,16 @@
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnSubSytemCacheChanged">
+            <summary>
+            Event, fires when subsystem cache is changed. This event is not fired out from the subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnSubSytemCacheChanged.Post">
+            <summary>
+            Posts the event.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Events.TotalApiEventObject">
             <summary>
@@ -4121,6 +4209,11 @@
             Subsystem could not be registered because it does not exist.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.SubSystemDisabled">
+            <summary>
+            Subsystem could not be registered because it is disabled.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical">
             <summary>
             Gets or set the critical flag of the exception.
@@ -4972,7 +5065,7 @@
             This class is needed for setting the addresses of module's WCF services.
             It is possible, for any module of the system to be hosted on a separate workstation and even have another endpoint,
             that is because we need the possibility to resolve the addresses of modules services based on their contracts.
-            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
+            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
             and if such is not found, default value would be used, specified in a configuration file, and even if so is not found - takes default values,
             specified in static fields  <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceHost"/> and <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/>.
             Parameter <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/> should (and must) contain string templates <c>{ServiceHost}</c> and <c>{ServiceContract}</c>, 
@@ -5045,25 +5138,27 @@
             <typeparam name="TServiceContract">The type of the service contract.</typeparam>
             <returns></returns>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
             <param name="serviceContractName">Short name of the service contract.</param>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
             <param name="serviceContractName">Short name of the service contract.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
@@ -5071,29 +5166,33 @@
             <param name="apiType">API type.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String,System.Int32)">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
         <member name="M:TotalApi.Core.TotalApiEndpoint.GetBinding(System.String)">
             <summary>
@@ -5521,21 +5620,6 @@
             Do not use this field to set the application list of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.ApiKeys"/> instead.
             </summary>
         </member>
-        <member name="P:TotalApi.Billing.SubSystem.IsAvailable">
-            <summary>
-            Gets or sets a flag whether the subsystem is available in the moment.
-            <remarks>
-            After loading from the database this flag is <c>false</c>. After registering of the subsystem - the flag is set to <c>true</c>.
-            If connection to the subsystem endpoint is failed - the flag is set to <c>false</c>.
-            </remarks> 
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystem.AvailableAttemptCount">
-            <summary>
-            Count of the check if the subsystem is available.
-            Reset to 0 when <see cref="P:TotalApi.Billing.SubSystem.IsAvailable"/> set to <c>true</c>.
-            </summary>
-        </member>
         <member name="P:TotalApi.Billing.SubSystem.IsHidden">
             <summary>
             Gets or sets a flag whether the subsystem is hidden for the clients.
@@ -5554,6 +5638,33 @@
             </remarks> 
             </summary>
         </member>
+        <member name="P:TotalApi.Billing.SubSystem.IsAvailable">
+            <summary>
+            Gets or sets a flag whether the subsystem is available in the moment.
+            <remarks>
+            After loading from the database this flag is <c>false</c>. After registering of the subsystem - the flag is set to <c>true</c>.
+            If connection to the subsystem endpoint is failed - the flag is set to <c>false</c>.
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.AvailableAttemptCount">
+            <summary>
+            Count of the check if the subsystem is available.
+            Reset to 0 when <see cref="P:TotalApi.Billing.SubSystem.IsAvailable"/> set to <c>true</c>.
+            <remarks>
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.HasSubscriptions">
+            <summary>
+            Gets or sets a value indicating whether this instance has subscriptions.
+            <remarks>
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
         <member name="M:TotalApi.Billing.SubSystem.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Billing.SubSystem"/> class.
@@ -5564,11 +5675,6 @@
             Clones this instance.
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystem.HasSubscriptions">
-            <summary>
-            Gets or sets a value indicating whether this instance has subscriptions.
-            </summary>
         </member>
         <member name="T:TotalApi.Billing.ApiUser">
             <summary>
