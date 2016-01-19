@@ -5,7 +5,6 @@ using TotalApi.Utils.Console;
 
 namespace DemoChat
 {
-    // Customer
     public class Subscriber : IEvent<ChatEventObject>
     {
         public static Subscriber Instance { get; } = new Subscriber();
@@ -15,12 +14,12 @@ namespace DemoChat
             if (e.UserName == TotalApiAuth.UserLogin)
                 ColorConsole.Do(ConsoleColor.Yellow, () =>
                 {
-                    Console.WriteLine($"\n                                               Me: {e.Message}");
+                    Console.WriteLine($"\n                                               {e.EventTime} - Me > {e.Message}");
                 });
             else
                 ColorConsole.Do(ConsoleColor.Green, () =>
                 {
-                    Console.WriteLine($"\n{e.UserName}: {e.Message}");
+                    Console.WriteLine($"\n{e.EventTime} - {e.UserName} > {e.Message}");
                 });
             Console.Write("> ") ;
         }

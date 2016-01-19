@@ -24,28 +24,30 @@ namespace DemoChat
                 var userPassword = Console.ReadLine();
                 try
                 {
+                    // AppKey-authority is used in this call
                     isExists = CoreApi.ApiUsers.IsExists(userLogin);
                     if (!isExists)
                     {
                         // User is not registered - auto register it and sign in
+                        // AppKey-authority is used in this call
                         CoreApi.ApiUsers.Save(new ApiUser { Login = userLogin, Password = userPassword }, true);
                     }
-
+                    // Set AppUser auth information
                     TotalApiAuth.UserLogin = userLogin;
                     TotalApiAuth.UserPassword = userPassword;
-
-
+                    // Check whether auth information is valid
+                    // AppUser-authority is used in this call
                     isExists = CoreApi.ApiUsers.IsExists(userLogin);
-
+                    // If auth is valid - initialize subscriber, otherwise exception will be thrown
                     CoreApi.EventManager.Subscribe(Subscriber.Instance);
                 }
                 catch (Exception e)
                 {
+                    // Clear AppUser auth information
                     TotalApiAuth.UserLogin = null;
-                    TotalApiAuth.UserPassword = null;
                     isExists = false;
+                    // Display error text
                     ColorConsole.Do(ConsoleColor.Red, () => Console.WriteLine(e.FullMessage()));
-                    CoreApi.Logger.Error(e);
                 }
             }
 
@@ -57,7 +59,7 @@ namespace DemoChat
 
             while (true)
             {
-                var inputString = Convert.ToString(Console.ReadLine());
+                var inputString = Console.ReadLine();
                 CoreApi.EventManager.Publish(new ChatEventObject(inputString));
             }
             // ReSharper disable once FunctionNeverReturns
