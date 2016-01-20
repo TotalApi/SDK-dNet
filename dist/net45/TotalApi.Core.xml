@@ -465,6 +465,11 @@
             Base abstract class for any custom loggers.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.BaseLogger.AsyncLogging">
+            <summary>
+            Gets or set whether log writing is asyncronous.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.BaseLogger.LogInstanceInfo">
             <summary>
             Class, describing metadata information about the logged message.
@@ -1292,6 +1297,59 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
+        <member name="T:TotalApi.Core.Api.RealtimeTotalApiStatistics">
+            <summary>
+            Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.RealtimeTotalApiStatistics.TimeWindowWidth">
+            <summary>
+            Gets or sets the width of the time window.
+            </summary>
+            <value>
+            The width of the time window.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveExecutionTime``1(``0,System.Int64)">
+            <summary>
+            Saves execution time for a method, in milliseconds.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveExceptionInfo``1(``0,System.Exception)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.IncrementPerformanceCounter``1(``0)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SetPerformanceCounterValue``1(``0,System.Int64)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveLoadInfo``1(``0,System.Int64,System.Int64)">
+            <summary>
+            Saves the load information, actually number of total method calls per period set by <see cref="P:TotalApi.Core.Api.RealtimeTotalApiStatistics.TimeWindowWidth" />.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="load">Number of method calls per second.</param>
+            <param name="time">Time in milliseconds</param>
+        </member>
         <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
@@ -1307,7 +1365,7 @@
             Executing method name.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ExecutionStartTime">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ExecutionStartTimeUtc">
             <summary>
             Get the execution start time.
             </summary>
@@ -1317,7 +1375,7 @@
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
             </summary>
             <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
             <param name="operationName">Operation name.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
@@ -1327,7 +1385,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.DateTime,System.String)">
             <summary>
-            Creates the statistics class.
+            Creates the statistics source class.
             </summary>
             <param name="methodName">Name of the method.</param>
             <param name="startDateTime">The start date time.</param>
@@ -1339,11 +1397,12 @@
             The instance
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.DateTime,System.String,System.String)">
             <summary>
             Creates the statistics class.
             </summary>
             <param name="startDateTime">The start date time.</param>
+            <param name="methodName">Method name.</param>
             <param name="operationName">Operation name.</param>
             <returns></returns>
         </member>
@@ -1391,7 +1450,7 @@
             </summary>
             <param name="methodName">Name of the method.</param>
             <param name="exception">Exception</param>
-            <param name="startDateTime">The start date time.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
             <param name="operationName">Name of the operation.</param>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics">
@@ -1454,8 +1513,106 @@
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics" /> class.
             </summary>
             <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
             <param name="operationName">Name of the operation.</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1">
+            <summary>
+            Performance counter for operations.
+            </summary>
+            <typeparam name="T">Statistics object as the target of performance counter.</typeparam>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IsRunning">
+            <summary>
+            Gets or sets a value indicating whether the counter is running.
+            </summary>
+            <value>
+            <c>true</c> if the counter is running; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Source">
+            <summary>
+            Gets the statistics object.
+            </summary>
+            <value>
+            The statistics object.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.#ctor(`0,System.Boolean,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="startImmediate">if set to <c>true</c> starts immediate.</param>
+            <param name="timeWindowMs">The time window in ms.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Start">
+            <summary>
+            Starts this counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Stop">
+            <summary>
+            Stops thie counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IncrementCounter(System.Int32)">
+            <summary>
+            Increments the counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.SetRawValue(System.Int64)">
+            <summary>
+            Sets the raw value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Reset">
+            <summary>
+            Resets the counter and raw value.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs">
+            <summary>
+            Arguments for counter timer elapsed.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimestampUtc">
+            <summary>
+            Gets the timestamp.
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimeElapsedMs">
+            <summary>
+            Gets the time elapsed in ms.
+            </summary>
+            <value>
+            The time elapsed in ms.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.Count">
+            <summary>
+            Gets the calls count.
+            </summary>
+            <value>
+            The calls count.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.#ctor(System.DateTime,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs"/> class.
+            </summary>
+            <param name="timeStamp">TimestampUtc of the single counter calculation.</param>
+            <param name="count">The calls count.</param>
+            <param name="time">The time elapsed.</param>
+        </member>
+        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceMeasured">
+            <summary>
+            Occurs when performance counter period exceeded.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Api.TotalApiStatistics">
             <summary>
@@ -1464,7 +1621,7 @@
         </member>
         <member name="P:TotalApi.Core.Api.TotalApiStatistics.Instance">
             <summary>
-            Instance of asynchronous task manager. 
+            Instance of statistics handler. 
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.ITotalApiStatistics">
@@ -1485,6 +1642,29 @@
             </summary>
             <param name="callerStatistics">Caller statistics.</param>
             <param name="exception">The exception.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.IncrementPerformanceCounter``1(``0)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SetPerformanceCounterValue``1(``0,System.Int64)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveLoadInfo``1(``0,System.Int64,System.Int64)">
+            <summary>
+            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="load">Number of method calls per second.</param>
+            <param name="time">Time in milliseconds</param>
         </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
@@ -1857,29 +2037,32 @@
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
         </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.MethodName">
+        <member name="T:TotalApi.Core.Aspects.IStatisticsSource">
+            <summary>
+            Interface representing the source object of the statistics data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.MethodName">
             <summary>
             Executing method name.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.OperationName">
+        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.OperationName">
             <summary>
             Executing method name.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.ExecutionStartTime">
+        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.ExecutionStartTimeUtc">
             <summary>
             Get the execution start time.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Aspects.IStatisticsOwner.Create(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Aspects.IStatisticsSource.Update(TotalApi.Core.Aspects.IStatisticsSource,System.Nullable{System.DateTime})">
             <summary>
-            Creates the specified owner.
+            Updates the specified owner.
             </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName">Name of the operation.</param>
-            <returns></returns>
+            <param name="source">The event source.</param>
+            <param name="executionStartTimeUtc">Force <see cref="P:TotalApi.Core.Aspects.IStatisticsSource.ExecutionStartTimeUtc"/> to update its value</param>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>
@@ -5367,7 +5550,12 @@
             Creates this instance.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Init">
+        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Create``1(System.String)">
+            <summary>
+            Creates this instance.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Init(System.String)">
             <summary>
             Initializes this instance.
             </summary>
