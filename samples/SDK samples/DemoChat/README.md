@@ -42,7 +42,7 @@ Demo Chat
 ```C#
 TotalApiBootstrapper.Create();
 ```
-При создании, бутстраппер загружает все необходимые сборки, выполняет настройку MEF-композиции, необходимой для работы приложения. Связывается с сервером TotalApi и получает необходимую информацию о подсистемах программного комплекса и т.д.   
+При создании, бутстраппер загружает все необходимые сборки, выполняет настройку MEF-композиции, необходимой для работы приложения. Связывается с сервером TotalApi и получает необходимую информацию о подсистемах программного комплекса.   
 
 
 Класс события
@@ -159,14 +159,14 @@ CoreApi.EventManager.Subscribe(Subscriber.Instance);
     }
 
 ```
-Небольшое пояснение к данному коду. В самом начале после запроса пароля клиент использует [AppKey-авторизацию](). Она позволяет вызывать всего два метода TotalApi: `CoreApi.ApiUsers.IsExists(userLogin)` для проверки, есть ли такой пользователь или нет и `CoreApi.ApiUsers.Save(user)` для создания/регистрации нового пользователя.
-Если пользователь существует - настраиваем [AppUser-авторизацию]()
+Небольшое пояснение к данному коду. В самом начале после запроса пароля клиент использует [AppKey-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi). Она позволяет вызывать всего два метода TotalApi: `CoreApi.ApiUsers.IsExists(userLogin)` для проверки, есть ли такой пользователь или нет и `CoreApi.ApiUsers.Save(user)` для создания/регистрации нового пользователя.
+Если пользователь существует - настраиваем [AppUser-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi)
 ```C#
     TotalApiAuth.UserLogin = userLogin;
     TotalApiAuth.UserPassword = userPassword;
 ```
-после чего последующий код клиента будет использовать [AppUser-авторизацию]() если переданный пароль верный. В противном случае будет выброшено исключение `Not authorized`.
-В случае исключения необходимо обязательно очистить значение `TotalApiAuth.UserLogin` чтобы переключиться обратно на [AppKey-авторизацию]().
+после чего последующий код клиента будет использовать [AppUser-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi) если переданный пароль верный. В противном случае будет выброшено исключение `Not authorized`.
+В случае исключения необходимо обязательно очистить значение `TotalApiAuth.UserLogin` чтобы переключиться обратно на [AppKey-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi).
 
 Заключение
 ----------
