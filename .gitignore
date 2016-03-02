@@ -1,7 +1,13 @@
 bin
 obj
+.vs
 *.pdb
 *.vspscc
 *.stackdump
 *.pubxml
+*.min.map
+*.js.map
+*.css.map
+*.csproj.user
+
 
