@@ -218,6 +218,12 @@
             Minimal stop time. Calculated values that are less then this are determined as no stop.
             </summary>
         </member>
+        <member name="M:TotalApi.Telematics.DeviceWriteMonitor.BeginWriteBlock(System.String)">
+            <summary>
+            Отмечает начало записи данных (координат и сенсоров) для данного устройства.
+            Может вызываться 
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.ICoordinateFilter">
             <summary>
             Coordinate filter interface.
@@ -249,7 +255,7 @@
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.Velocity">
             <summary>
-            Gets a double representing the position's velocity of the device in meters per second.
+            Gets a double representing the position's velocity of the device in km/h.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.Direction">
@@ -480,7 +486,7 @@
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.Velocity">
             <summary>
-            Gets a double representing the velocity of the device in meters per second.
+            Gets a double representing the velocity of the device in km/h.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.Direction">
@@ -934,12 +940,12 @@
         </member>
         <member name="F:TotalApi.Telematics.DeviceStates.Connected">
             <summary>
-            Device is connected.
+            Device is connected to server and sending data.
             </summary>
         </member>
         <member name="F:TotalApi.Telematics.DeviceStates.GpsConnected">
             <summary>
-            GPS satellites connected.
+            Device GPS sensor is connected to satellites and getting actual data.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.ICoordinatePoints">
@@ -1030,11 +1036,12 @@
             Extensions for <see cref="T:TotalApi.Telematics.DeviceStatus"/>.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.DeviceStatusExtension.ToTransportFormat(TotalApi.Telematics.DeviceStatus)">
+        <member name="M:TotalApi.Telematics.DeviceStatusExtension.ToTransportFormat(TotalApi.Telematics.DeviceStatus,System.String)">
             <summary>
             Removes unimportant data from data packet, simplifies and minifies it.
             Fractional values are rounded to the required minimum size.
             Altitude are NOT included.
+            Optional you can pass na identifier of the transport linked with the device to pass it to frontend.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.GeoPoint">
@@ -1207,6 +1214,7 @@
             <summary>
             Asynchronous write of GPS-coordinates for the device <paramref name="deviceId"/>.
             If device not found - does nothing.
+            Returns <c>true</c> if writting was successful.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.ITelematicsDbContext.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
@@ -1240,6 +1248,7 @@
             <summary>
             Asynchronous write of sensor values for the device.
             If device not found - does nothing.
+            Returns <c>true</c> if writting was successful.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.ITelematicsDbContext.GetSensorsLastStatus(System.String)">
@@ -1914,6 +1923,24 @@
             Extended telematics module interface - includes methods, unavaliable through external API.
             </summary>
         </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteCoordinatesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Async writes the coordinates data for the particular device. If no device found doing nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Async writes sensor data to database.
+            Sensor identifies by the sensor type and its number.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Async writes sensor data to database.
+            Sensor identifies by the sensor type and its address. Values are transmitted by the list of key-value pairs [date, value].
+            If sensor with such port number and address is not registered - transmitted values will be ignored.
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.SensorData">
             <summary>
             Sensor values. 
@@ -1975,9 +2002,36 @@
         </member>
         <member name="T:TotalApi.Telematics.ServiceContracts.ITelematicsService">
             <summary>
-            Telematics API.
+            Telematics API service.
             Stores and handles the telematics data.
             </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.Coordinate[])">
+            <summary>
+            Writes the coordinates data for the particular device.
+            If no device found doing nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="coordinates">Array of coordinates.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
+            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Number of sensor port.</param>
+            <param name="address">Address of sensors data.</param>
+            <param name="values">DateTime - Value pairs of the sensor data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="sensorData">Array of sensors data.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindDevice(System.String,System.String)">
             <summary>
@@ -1997,14 +2051,6 @@
             During the registration, plugin publishes the models it could handle.
             </summary>
             <returns>Device models array <see cref="T:TotalApi.Telematics.DeviceModel"/> or empty array if no device models found.</returns>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.Coordinate[])">
-            <summary>
-            Writes the coordinates data for the particular device.
-            If no device found doing nothing.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="coordinates">Array of coordinates.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
             <summary>
@@ -2052,25 +2098,6 @@
             <param name="sensorType">Sensor type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.SensorType"/>.</param>
             <param name="number">Sensor number.</param>
             <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
-            <summary>
-            Writes data from the sensors of specified device.
-            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="sensorData">Array of sensors data.</param>
-        </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
-            <summary>
-            Writes data from the sensors of specified device.
-            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
-            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
-            </summary>
-            <param name="deviceId">Device identifier.</param>
-            <param name="portId">Number of sensor port.</param>
-            <param name="address">Address of sensors data.</param>
-            <param name="values">DateTime - Value pairs of the sensor data.</param>
         </member>
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetLastSensorsStatus(System.String,System.String)">
             <summary>

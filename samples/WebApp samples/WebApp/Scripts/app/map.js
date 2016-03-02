@@ -24,7 +24,8 @@
         });
 
         // loading and displaying tile layers on the map
-        L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+//        L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution:
                 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
@@ -87,8 +88,8 @@
         // adding each transport item to map
         transport.forEach(function (t) {
             if (t.LastStatus && t.LastStatus.LastCoordinate) {
-                var lat = t.LastStatus.LastCoordinate.LatitudeDegree;
-                var lng = t.LastStatus.LastCoordinate.LongitudeDegree;
+                var lat = t.LastStatus.LastCoordinate.Latitude * 180 / Math.PI;
+                var lng = t.LastStatus.LastCoordinate.Longitude * 180 / Math.PI;
                 addMarkerToMap([lat, lng], t.Device.Id, t.Name);
             }
         });
@@ -114,7 +115,7 @@
         if (trackLayerGroup)
             map.removeLayer(trackLayerGroup);
 
-        trackLatlngs = data.$values.map(function (t) { return [t.LatitudeDegree, t.LongitudeDegree] });
+        trackLatlngs = data.$values.map(function (t) { return [t.Latitude * 180 / Math.PI, t.Longitude * 180 / Math.PI] });
         // creating track
         var track = L.polyline(trackLatlngs, { color: 'green' });
         trackLayers.push(track);
@@ -122,7 +123,7 @@
         data.$values.forEach(function (t) {
             if (t.IsStop) {
                 // creating stop markers
-                var stopMarker = L.circleMarker([t.LatitudeDegree, t.LongitudeDegree], {
+                var stopMarker = L.circleMarker([t.Latitude * 180 / Math.PI, t.Longitude * 180 / Math.PI], {
                     color: 'red',
                     fillOpacity: 0.5,
                     weight: 1,
@@ -215,7 +216,8 @@
                 // converting latitude and longitude to degree
                 var lat = deviceStatus.LastCoordinate.Latitude * 180 / Math.PI;
                 var lng = deviceStatus.LastCoordinate.Longitude * 180 / Math.PI;
-                markerToMove.setLatLng([lat, lng]);
+                if (lat && lng)
+                    markerToMove.setLatLng([lat, lng]);
             }
         });
     });

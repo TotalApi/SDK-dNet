@@ -9,6 +9,153 @@
             Interface of a Customer repository item.
             </summary>
         </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartupTask">
+            <summary>
+            Interface for automatic modules async task startup.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartupTask"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartupTask.Run"/> 
+            will be automatically called immediatelly after MEF components composition as an async task.
+            Method are called AFTER initializing authentication, subsystem registration and all <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartupTask.Run">
+            <summary>
+            Async runs the module task.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager">
+            <summary>
+            Handler of keyboard keys for console applications.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.StartListeningConsole">
+            <summary>
+            Starts the console listening.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.Init">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler">
+            <summary>
+            Used for handling keyboard keys.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.Init">
+            <summary>
+            Called on the start of the application. Could be used for displaying commands decription in a console.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
+            <summary>
+            Keyboard key press handler.
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
+            <summary>
+            Base data filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Id">
+            <summary>
+            Filter identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Name">
+            <summary>
+            Filter name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Description">
+            <summary>
+            Filter description.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.DependsOn">
+            <summary>
+            List of filters, which should be executed before current filter.
+            If no dependent filters - could return <c>null</c> or empty list.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.IsFinalFilter">
+            <summary>
+            If <c>true</c>, the filter will be added at the end of filters pipeline.
+            Filters, dependent from this filter will be certainly added after this filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
+            <summary>
+            Type, distributing the parameters class of current filter.
+            This type should have public constructor without parameters and be serializeable.
+            Even if there is no parameters - it should return the type of an empty class.
+            Types of parameters should be unique across different filters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Execute(System.Object,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters - type of the parameters defines by the value of <see cref="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType" /> property</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartup">
+            <summary>
+            Interface for automatic modules startup.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartup"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/> 
+            will be automatically called immediatelly after MEF components composition.
+            Method are called AFTER initializing authentication and subsystem registration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start">
+            <summary>
+            Starts module.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.InitOrders">
+            <summary>
+            Class declaring constants used for ordering modules composition.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Billing">
+            <summary>
+            The Billing subsystem order value.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.BillingClient">
+            <summary>
+            The Billing client order value.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Database">
+            <summary>
+            The Database module order value.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ISensorDataFilter">
+            <summary>
+            Все фильтры для данных датчиков должны реализовывать и экспортировать этот интерфейс.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.ICoordinateFilter">
+            <summary>
+            Coordinate filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.ControlApi.IModuleInitializer">
+            <summary>
+            Interface for automatic modules initialization.
+            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleInitializer"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init"/> 
+            will be automatically called immediatelly after MEF components composition.
+            Method are called BEFORE initializing authentication and subsystem registration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.AggregateLogger">
             <summary>
             Aggregated logger.
@@ -318,6 +465,11 @@
             Base abstract class for any custom loggers.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.BaseLogger.AsyncLogging">
+            <summary>
+            Gets or set whether log writing is asyncronous.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.BaseLogger.LogInstanceInfo">
             <summary>
             Class, describing metadata information about the logged message.
@@ -373,14 +525,14 @@
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.BaseLogger"/> class.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.BaseLogger.Log(System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.BaseLogger.Info(System.String,System.Object[])">
             <summary>
             Logs the specified message.
             </summary>
             <param name="msg">The message.</param>
             <param name="args">The arguments.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.BaseLogger.LogInstance(System.Object,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.BaseLogger.InfoInstance(System.Object,System.String,System.Object[])">
             <summary>
             Logs the informational message from the source.
             </summary>
@@ -435,6 +587,36 @@
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
         </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.DebugInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a debug message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.Statistic(System.String,System.Object[])">
+            <summary>
+            Logs a statistic message.
+            </summary>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.StatisticInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a statistic message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.EnqueueLog(System.String,TotalApi.Core.Api.LogMessageType,System.Object)">
             <summary>
             Enqueues the log message.
@@ -458,140 +640,6 @@
             <param name="msg">The message.</param>
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager">
-            <summary>
-            Handler of keyboard keys for console applications.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.StartListeningConsole">
-            <summary>
-            Starts the console listening.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.Init">
-            <summary>
-            Initializes this instance.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler">
-            <summary>
-            Used for handling keyboard keys.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.Init">
-            <summary>
-            Called on the start of the application. Could be used for displaying commands decription in a console.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
-            <summary>
-            Keyboard key press handler.
-            </summary>
-            <param name="key"></param>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
-            <summary>
-            Base data filter interface.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Id">
-            <summary>
-            Filter identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Name">
-            <summary>
-            Filter name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Description">
-            <summary>
-            Filter description.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.DependsOn">
-            <summary>
-            List of filters, which should be executed before current filter.
-            If no dependent filters - could return <c>null</c> or empty list.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.IsFinalFilter">
-            <summary>
-            If <c>true</c>, the filter will be added at the end of filters pipeline.
-            Filters, dependent from this filter will be certainly added after this filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
-            <summary>
-            Type, distributing the parameters class of current filter.
-            This type should have public constructor without parameters and be serializeable.
-            Even if there is no parameters - it should return the type of an empty class.
-            Types of parameters should be unique across different filters.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Execute(System.Object,System.Object)">
-            <summary>
-            Starts processing of passing series of data.
-            </summary>
-            <param name="series">Series of data with metadata</param>
-            <param name="prms">Filter parameters - type of the parameters defines by the value of <see cref="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType" /> property</param>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartup">
-            <summary>
-            Interface for automatic modules startup.
-            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleStartup"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start"/> 
-            will be automatically called immediatelly after MEF components composition.
-            Method are called AFTER initializing authentication and subsystem registration.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IModuleStartup.Start">
-            <summary>
-            Starts module initialization.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.InitOrders">
-            <summary>
-            Class declaring constants used for ordering modules composition.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Billing">
-            <summary>
-            The Billing subsystem order value.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.BillingClient">
-            <summary>
-            The Billing client order value.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Database">
-            <summary>
-            The Database module order value.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ISensorDataFilter">
-            <summary>
-            Все фильтры для данных датчиков должны реализовывать и экспортировать этот интерфейс.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ICoordinateFilter">
-            <summary>
-            Coordinate filter interface.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IModuleInitializer">
-            <summary>
-            Interface for automatic modules initialization.
-            If module exports interface <see cref="T:TotalApi.Core.Api.ControlApi.IModuleInitializer"/>, its method <see cref="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init"/> 
-            will be automatically called immediatelly after MEF components composition.
-            Method are called BEFORE initializing authentication and subsystem registration.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IModuleInitializer.Init">
-            <summary>
-            Initializes this instance.
-            </summary>
         </member>
         <member name="T:TotalApi.Core.Api.CoreApi">
             <summary>
@@ -853,6 +901,13 @@
             <param name="password1">The password1.</param>
             <param name="password2">The password2.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.IApiUsers.IsExists(System.String)">
+            <summary>
+            Checks whether the user <paramref name="login"/> exists.
+            </summary>
+            <param name="login">The user login.</param>
+            <returns><c>true</c> if user login exists. <c>false</c> otherwise.</returns>
         </member>
         <member name="T:TotalApi.Core.Api.IRepository`1">
             <summary>
@@ -1242,9 +1297,153 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader">
+            <summary>
+            Interface for gathering statistics information
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.Priority">
+            <summary>
+            Gets the writer priority.
+            </summary>
+            <value>
+            The priority.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExecutionTime(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the execution time for a method, in milliseconds.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExceptionInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the exception information.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetPerformanceCounterValues(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Get the performance counter values.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetLoadInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the load information, actually number of total method calls per period./>.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticsAnalyzer">
+            <summary>
+            Interface for analyzing statistics information
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter">
+            <summary>
+            Interface for gathering statistics information
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExecutionTime``1(``0,System.Int64)">
+            <summary>
+            Saves execution time for a method, in milliseconds.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExceptionInfo``1(``0,System.Exception)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.IncrementPerformanceCounter``1(``0)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SetPerformanceCounterValue``2(``0,``1)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <typeparam name="T">Type of the statistic source.</typeparam>
+            <typeparam name="TValue">Type of value.</typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
+            <summary>
+            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="load">Number of method calls per second.</param>
+            <param name="timeMs">Time in milliseconds</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter">
+            <summary>
+            Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
+            <summary>
+            Gets or sets the width of the time window.
+            </summary>
+            <value>
+            The width of the time window.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExecutionTime``1(``0,System.Int64)">
+            <summary>
+            Saves execution time for a method, in milliseconds.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExceptionInfo``1(``0,System.Exception)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.IncrementPerformanceCounter``1(``0)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SetPerformanceCounterValue``2(``0,``1)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <typeparam name="T">Type of the statistic source.</typeparam>
+            <typeparam name="TValue">Type of value.</typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
+            <summary>
+            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="load">Number of method calls per second.</param>
+            <param name="timeMs">Time in milliseconds</param>
+        </member>
         <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Id">
+            <summary>
+            Statistics source unique identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ModuleName">
+            <summary>
+            ModuleName name.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.MethodName">
@@ -1257,44 +1456,41 @@
             Executing method name.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ExecutionStartTime">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Tags">
+            <summary>
+            Gets the tags values.
+            </summary>
+            <value>
+            The tags.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.TimeStampUtc">
             <summary>
             Get the execution start time.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
             </summary>
+            <param name="moduleName">Name of the module.</param>
             <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
             <param name="operationName">Operation name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
             <summary>
             Prevents a default instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics"/> class from being created.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Creates the statistics class.
             </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
             <param name="operationName">Operation name.</param>
-            <returns></returns>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Instance">
-            <summary>
-            The instance
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.DateTime,System.String)">
-            <summary>
-            Creates the statistics class.
-            </summary>
+            <param name="methodName">Method name.</param>
+            <param name="moduleName">ModuleName name.</param>
             <param name="startDateTime">The start date time.</param>
-            <param name="operationName">Operation name.</param>
             <returns></returns>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.ToString">
@@ -1318,14 +1514,26 @@
             The raised exception.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.String,System.Exception,System.DateTime)">
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Creates the statistics class.
             </summary>
-            <param name="methodName">Name of the method.</param>
             <param name="exception">The raised exception.</param>
-            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
+            </summary>
+            <param name="exception">Exception</param>
+            <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.ToString">
             <summary>
@@ -1335,61 +1543,10 @@
             A <see cref="T:System.String" /> that represents caller statistics.
             </returns>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.String,System.Exception,System.DateTime,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="exception">Exception</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName">Name of the operation.</param>
-        </member>
         <member name="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
             </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._authInfo">
-            <summary>
-            The _auth information
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.AuthInfo">
-            <summary>
-            Gets totalapi principal info.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
-            <summary>
-            Returns current operation context as string.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._callerIpAddress">
-            <summary>
-            Returns caller ip address.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
-            <summary>
-            Returns caller ip address.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.DateTime,System.String)">
-            <summary>
-            Creates the statistics class.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents caller statistics.
-            </summary>
-            <returns>
-            A <see cref="T:System.String" /> that represents caller statistics.
-            </returns>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Instance">
             <summary>
@@ -1399,42 +1556,241 @@
             The instance.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="operationName"></param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics" /> class.
             </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
             <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
         </member>
-        <member name="T:TotalApi.Core.Api.TotalApiStatistics">
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
+            <summary>
+            Returns current operation context as string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
+            <summary>
+            Returns caller ip address.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents caller statistics.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents caller statistics.
+            </returns>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1">
+            <summary>
+            Performance counter for operations.
+            </summary>
+            <typeparam name="T">Statistics object as the target of performance counter.</typeparam>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IsRunning">
+            <summary>
+            Gets or sets a value indicating whether the counter is running.
+            </summary>
+            <value>
+            <c>true</c> if the counter is running; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Source">
+            <summary>
+            Gets the statistics object.
+            </summary>
+            <value>
+            The statistics object.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.#ctor(`0,System.Boolean,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="startImmediate">if set to <c>true</c> starts immediate.</param>
+            <param name="timeWindowMs">The time window in ms.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Start">
+            <summary>
+            Starts this counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Stop">
+            <summary>
+            Stops thie counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IncrementCounter(System.Int32)">
+            <summary>
+            Increments the counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.SetRawValue(System.Int64)">
+            <summary>
+            Sets the raw value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Reset">
+            <summary>
+            Resets the counter and raw value.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs">
+            <summary>
+            Arguments for counter timer elapsed.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimestampUtc">
+            <summary>
+            Gets the timestamp.
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimeElapsedMs">
+            <summary>
+            Gets the time elapsed in ms.
+            </summary>
+            <value>
+            The time elapsed in ms.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.Count">
+            <summary>
+            Gets the calls count.
+            </summary>
+            <value>
+            The calls count.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.#ctor(System.DateTime,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs"/> class.
+            </summary>
+            <param name="timeStamp">TimestampUtc of the single counter calculation.</param>
+            <param name="count">The calls count.</param>
+            <param name="time">The time elapsed.</param>
+        </member>
+        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceMeasured">
+            <summary>
+            Occurs when performance counter period exceeded.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceCounterValueChanged">
+            <summary>
+            Occurs when performance counter value changed.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.TotalApiStatistics">
+            <summary>
+            Default implementation of the TotalApi statistics interface.
+            </summary>
+            <summary>
+            Default implementation of the TotalApi statistics interface.
+            </summary>
             <summary>
             Default implementation of the TotalApi statistics interface.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.TotalApiStatistics.Instance">
+        <member name="P:TotalApi.Core.Api.Statistics.TotalApiStatistics.Instance">
             <summary>
-            Instance of asynchronous task manager. 
+            Instance of statistics handler. 
             </summary>
         </member>
-        <member name="T:TotalApi.Core.Api.ITotalApiStatistics">
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatistics">
             <summary>
             Interface for gathering statistics information
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExecutionTime``1(``0,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatistics.StatisticWritersHandlers">
             <summary>
-            Saves execution time for a method, in milliseconds.
+            Gets the statistics handlers.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="executionTimeMs">Execution time in milliseconds.</param>
+            <value>
+            The statistics handlers.
+            </value>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExceptionInfo``1(``0,System.Exception)">
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatistics.StatisticReadersHandlers">
             <summary>
-            Saves the exception information.
+            Gets the statistics handlers.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="exception">The exception.</param>
+            <value>
+            The statistics handlers.
+            </value>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.IStatisticsSource">
+            <summary>
+            Interface representing the source object of the statistics data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Id">
+            <summary>
+            Statistics source unique identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.SubSystemName">
+            <summary>
+            Statistics source subsystem name.
+            For client application - equal entry assembly name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.SSID">
+            <summary>
+            Statistics source subsystem SSID.
+            For client application and billing sybsystem - empty string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ComputerName">
+            <summary>
+            Statistics source computer name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ModuleName">
+            <summary>
+            Statistics source main module name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.MethodName">
+            <summary>
+            Statistics source executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.OperationName">
+            <summary>
+            Statistics source operation name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Tags">
+            <summary>
+            Statistics source tags values.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc">
+            <summary>
+            Get the execution start time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.IStatisticsSource.Update(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Nullable{System.DateTime})">
+            <summary>
+            Updates the specified owner.
+            </summary>
+            <param name="source">The event source.</param>
+            <param name="timeStampUtc">Force <see cref="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc"/> to update its value</param>
         </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
@@ -1652,6 +2008,16 @@
             The error message.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.LogMessageType.Debug">
+            <summary>
+            The debug message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.LogMessageType.Statistic">
+            <summary>
+            The statistic message.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.OnLogDelegate">
             <summary>
             Logging delegate.
@@ -1666,16 +2032,16 @@
             Interface for a loggers implementations.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.ILogger.Log(System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.ILogger.Info(System.String,System.Object[])">
             <summary>
-            Logs the specified message.
+            Logs an informational specified message.
             </summary>
             <param name="msg">The message.</param>
             <param name="args">The arguments.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.ILogger.LogInstance(System.Object,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.Api.ILogger.InfoInstance(System.Object,System.String,System.Object[])">
             <summary>
-            Logs the informational message from the source.
+            Logs an informational message from the source.
             </summary>
             <param name="source">The source.</param>
             <param name="msg">The message.</param>
@@ -1683,7 +2049,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Warning(System.String,System.Object[])">
             <summary>
-            Logs the warning message.
+            Logs a warning message.
             </summary>
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
@@ -1698,7 +2064,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Error(System.String,System.Object[])">
             <summary>
-            Logs the error message.
+            Logs an error message.
             </summary>
             <param name="msg">The error message.</param>
             <param name="args">The arguments.</param>
@@ -1713,7 +2079,7 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.Error(System.Exception,System.String,System.Object[])">
             <summary>
-            Logs the error message caused by specified exception.
+            Logs an error message caused by specified exception.
             </summary>
             <param name="e">The exception.</param>
             <param name="msg">The error message.</param>
@@ -1721,12 +2087,42 @@
         </member>
         <member name="M:TotalApi.Core.Api.ILogger.ErrorInstance(System.Object,System.Exception,System.String,System.Object[])">
             <summary>
-            Logs the error message from the source caused by specified exception.
+            Logs an error message from the source caused by specified exception.
             </summary>
             <param name="e">The exception.</param>
             <param name="source">The source.</param>
             <param name="msg">The warning message.</param>
             <param name="args">The arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.DebugInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a debug message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Debug message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.Statistic(System.String,System.Object[])">
+            <summary>
+            Logs a statistic message.
+            </summary>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.StatisticInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs a statistic message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
         </member>
         <member name="E:TotalApi.Core.Api.ILogger.OnLog">
             <summary>
@@ -1766,30 +2162,6 @@
             <param name="msg">The message.</param>
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.MethodName">
-            <summary>
-            Executing method name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.OperationName">
-            <summary>
-            Executing method name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsOwner.ExecutionStartTime">
-            <summary>
-            Get the execution start time.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.IStatisticsOwner.Create(System.String,System.DateTime,System.String)">
-            <summary>
-            Creates the specified owner.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName">Name of the operation.</param>
-            <returns></returns>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>
@@ -1891,19 +2263,13 @@
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser">
             <summary>
-            Application key authorization type.
+            Application key + User login authorization type.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKeyUser">
             <summary>
             Authorization using application user key or api key.
             Used as a role when <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AuthPropertyName"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/> used.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SuperApiKey">
-            <summary>
-            Super api-key authorization.
-            Used as a role.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey">
@@ -1927,12 +2293,18 @@
             This authorization type could be set for a short time just for initial check. After check - authorization type could change to <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/>.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SuperApiKeyRole">
+            <summary>
+            Super api-key authorization.
+            Used as a role.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiAuth">
             <summary>
             Authentication information that should be transfered during services requests.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuth.ChechAuth">
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuth.CheckAuth">
             <summary>
             Delegate to check authetication.
             Returns true if authenctication is valid.
@@ -1957,6 +2329,14 @@
             Throws the expired exception.
             </summary>
             <exception cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException">Session key is expired.</exception>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiAuth.IsSuperApiKey(System.String)">
+            <summary>
+            Returns <c>true</c> if <paramref name="apiKey"/> is the SUPER ApiKey or <c>false</c> otherwise.
+            If <paramref name="apiKey"/> is not set the current <seealso cref="P:TotalApi.Core.Authentication.TotalApiAuth.ApiKey"/> value will be used.
+            </summary>
+            <param name="apiKey">Checked value</param>
+            <returns><c>true</c> if <paramref name="apiKey"/> is the SUPER ApiKey or <c>false</c> otherwise.</returns>
         </member>
         <member name="P:TotalApi.Core.Authentication.TotalApiAuth.ApiKey">
             <summary>
@@ -2727,6 +3107,16 @@
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnSubSytemCacheChanged">
+            <summary>
+            Event, fires when subsystem cache is changed. This event is not fired out from the subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnSubSytemCacheChanged.Post">
+            <summary>
+            Posts the event.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Events.TotalApiEventObject">
             <summary>
@@ -4121,6 +4511,11 @@
             Subsystem could not be registered because it does not exist.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.SubSystemDisabled">
+            <summary>
+            Subsystem could not be registered because it is disabled.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical">
             <summary>
             Gets or set the critical flag of the exception.
@@ -4387,6 +4782,13 @@
             <param name="password1">First password.</param>
             <param name="password2">Second password.</param>
             <returns>True if passwords are equal, otherwise false.</returns>
+        </member>
+        <member name="M:TotalApi.Core.ServiceContracts.Billing.IApiUsersService.IsExists(System.String)">
+            <summary>
+            Checks whether the user <paramref name="login"/> exists.
+            </summary>
+            <param name="login">The user login.</param>
+            <returns><c>true</c> if user login exists. <c>false</c> otherwise.</returns>
         </member>
         <member name="T:TotalApi.Core.ServiceContracts.Billing.IApplicationsService">
             <summary>
@@ -4972,7 +5374,7 @@
             This class is needed for setting the addresses of module's WCF services.
             It is possible, for any module of the system to be hosted on a separate workstation and even have another endpoint,
             that is because we need the possibility to resolve the addresses of modules services based on their contracts.
-            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
+            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
             and if such is not found, default value would be used, specified in a configuration file, and even if so is not found - takes default values,
             specified in static fields  <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceHost"/> and <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/>.
             Parameter <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/> should (and must) contain string templates <c>{ServiceHost}</c> and <c>{ServiceContract}</c>, 
@@ -5045,25 +5447,27 @@
             <typeparam name="TServiceContract">The type of the service contract.</typeparam>
             <returns></returns>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
             <param name="serviceContractName">Short name of the service contract.</param>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
             <param name="serviceContractName">Short name of the service contract.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
@@ -5071,29 +5475,33 @@
             <param name="apiType">API type.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String,System.Int32)">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
         <member name="M:TotalApi.Core.TotalApiEndpoint.GetBinding(System.String)">
             <summary>
@@ -5241,7 +5649,12 @@
             Creates this instance.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Init">
+        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Create``1(System.String)">
+            <summary>
+            Creates this instance.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.PerformanceCounters.TotalApiPerformanceCounterManager.Init(System.String)">
             <summary>
             Initializes this instance.
             </summary>
@@ -5521,21 +5934,6 @@
             Do not use this field to set the application list of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.ApiKeys"/> instead.
             </summary>
         </member>
-        <member name="P:TotalApi.Billing.SubSystem.IsAvailable">
-            <summary>
-            Gets or sets a flag whether the subsystem is available in the moment.
-            <remarks>
-            After loading from the database this flag is <c>false</c>. After registering of the subsystem - the flag is set to <c>true</c>.
-            If connection to the subsystem endpoint is failed - the flag is set to <c>false</c>.
-            </remarks> 
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystem.AvailableAttemptCount">
-            <summary>
-            Count of the check if the subsystem is available.
-            Reset to 0 when <see cref="P:TotalApi.Billing.SubSystem.IsAvailable"/> set to <c>true</c>.
-            </summary>
-        </member>
         <member name="P:TotalApi.Billing.SubSystem.IsHidden">
             <summary>
             Gets or sets a flag whether the subsystem is hidden for the clients.
@@ -5554,6 +5952,33 @@
             </remarks> 
             </summary>
         </member>
+        <member name="P:TotalApi.Billing.SubSystem.IsAvailable">
+            <summary>
+            Gets or sets a flag whether the subsystem is available in the moment.
+            <remarks>
+            After loading from the database this flag is <c>false</c>. After registering of the subsystem - the flag is set to <c>true</c>.
+            If connection to the subsystem endpoint is failed - the flag is set to <c>false</c>.
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.AvailableAttemptCount">
+            <summary>
+            Count of the check if the subsystem is available.
+            Reset to 0 when <see cref="P:TotalApi.Billing.SubSystem.IsAvailable"/> set to <c>true</c>.
+            <remarks>
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystem.HasSubscriptions">
+            <summary>
+            Gets or sets a value indicating whether this instance has subscriptions.
+            <remarks>
+            This flag makes sence for client only and must not to send outside.
+            </remarks> 
+            </summary>
+        </member>
         <member name="M:TotalApi.Billing.SubSystem.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Billing.SubSystem"/> class.
@@ -5564,11 +5989,6 @@
             Clones this instance.
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystem.HasSubscriptions">
-            <summary>
-            Gets or sets a value indicating whether this instance has subscriptions.
-            </summary>
         </member>
         <member name="T:TotalApi.Billing.ApiUser">
             <summary>

@@ -34,6 +34,16 @@
             </returns>
             <typeparam name="T">The type to create.</typeparam>
         </member>
+        <member name="T:TotalApi.Utils.CpuUsage">
+            <summary>
+            Implementation of the CPU usage calculation.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.CpuUsage.CurrentValue">
+            <summary>
+            Gets the current value of CPU usage of the current process.
+            </summary>
+        </member>
         <member name="T:TotalApi.Utils.Expressions.ConstantMemberExpressionVisitor">
             <summary>
             Преобразовывает выражение и все его подвыражения, которые могут быть вычислены как константа в константу
@@ -90,6 +100,1373 @@
             <summary>
             Expression visitor which replace parameter of one type to another one.
             </summary>
+        </member>
+        <member name="T:TotalApi.Utils.Extensions.StreamExtension">
+            <summary>
+            Implements extensions for <see cref="T:System.IO.Stream"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StreamExtension.ToBytesAsync(System.IO.Stream)">
+            <summary>
+            Async converts <paramref name="stream"/> to byte array from beggining of the stream.
+            </summary>
+            <param name="stream">Source stream</param>
+            <returns>Byte array or <c>null</c> if <paramref name="stream"/> is <c>null</c>.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StreamExtension.ToBytes(System.IO.Stream)">
+            <summary>
+            Converts <paramref name="stream"/> to byte array from beggining of the stream.
+            </summary>
+            <param name="stream">Source stream</param>
+            <returns>Byte array or <c>null</c> if <paramref name="stream"/> is <c>null</c>.</returns>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.RegExpr.PhpVar">
+            <summary>
+            Expression of the form: xxxx $var1 xxxx $var_2 xxxx $var3.prop1.prop2 xxx
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.RegExpr.FormatExpr">
+            <summary>
+            Expression of the form: xxxx {var1} xxxx {var_2} xxxx {var3.prop1.prop2} xxx
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.RegExpr.MacroExpr">
+            <summary>
+            Expression of the form: xxxx %var1% xxxx %var_2% xxxx %var3.prop1.prop2% xxx
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TempFiles.DeleteTempFiles">
+            <summary>
+            Removes all the temporary files created in the current session.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TempFiles.ClearTempDirectory(System.String)">
+            <summary>
+            Removes all non-locked files in the tenporary directory
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceStream(System.Reflection.Assembly,System.String)">
+            <summary>
+            Returns stream of the embedded stream of the specified assembly.
+            </summary>
+            <param name="assembly">Specified assembly</param>
+            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceReader(System.Reflection.Assembly,System.String)">
+            <summary>
+            Returns stream text reader of the embedded stream of the specified assembly.
+            </summary>
+            <param name="assembly">Specified assembly</param>
+            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceAllText(System.Reflection.Assembly,System.String)">
+            <summary>
+            Returns text of the embedded stream of the specified assembly.
+            </summary>
+            <param name="assembly">Specified assembly</param>
+            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceBytes(System.Reflection.Assembly,System.String)">
+            <summary>
+            Returns byte array of the embedded stream of the specified assembly.
+            </summary>
+            <param name="assembly">Specified assembly</param>
+            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.IsCollectionEquals(System.Collections.ICollection,System.Collections.CollectionBase)">
+            <summary>
+            Comparing two collections with item-to-item method
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.Delete``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Removing list items by condition from generic collection passed as this parameter
+            </summary>
+            <returns>The same list</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ChangeIndex``1(System.Collections.Generic.IList{``0},``0,System.Int32)">
+            <summary>
+            Changes <paramref name="item"/> index to <paramref name="delta"/> value.
+            </summary>
+            <param name="self">Source list</param>
+            <param name="item">The list item to change index</param>
+            <param name="delta">The delta value of index changing</param>
+            <returns>The source list</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.MoveIndex``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            Move the list item index from <paramref name="fromIndex"/> to <paramref name="toIndex"/> value.
+            </summary>
+            <param name="self">Source list</param>
+            <param name="fromIndex">The index of the item to be changed.</param>
+            <param name="toIndex">The new index of the item</param>
+            <returns>The source list</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0},TotalApi.Utils.NotifyCollectionChangedEventHandlerEx,System.Boolean)">
+            <summary>
+            Creates an ObservableCollectionEx from <paramref name="source"/>.
+            </summary>
+            <param name="source">Source enumeration</param>
+            <param name="onCollectionChanged">Callback method fired on collection changed.</param>
+            <param name="totalSubscription">Sets whether the subscription must be applied to child INotifyPropertyChanged-based objects of the collection</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,TotalApi.Utils.NotifyCollectionChangedEventHandlerEx,System.Boolean)">
+            <summary>
+            Creates an ObservableCollectionEx from <paramref name="source"/>.
+            </summary>
+            <param name="source">Source enumeration</param>
+            <param name="onCollectionChanged">Callback method fired on collection changed.</param>
+            <param name="totalSubscription">Sets whether the subscription must be applied to child INotifyPropertyChanged-based objects of the collection</param>
+            <returns></returns>
+        </member>
+        <member name="E:TotalApi.Utils.Extensions.DataRowExtension.OnGetFieldValue">
+            <summary>
+            Event is invoked after field value was read
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.Extensions.DataRowExtension.OnSetFieldValue">
+            <summary>
+            Event is invoked before field value is written
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.DataRowExtension.TrimStringValueExtendedPropertyName">
+            <summary>
+            If DataTable has extended property of this name - its value sets TrimStringValues for string data of this table
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DataRowExtension.InitWithDefaultValues(System.Data.DataRow,System.Boolean,System.Type[])">
+            <summary>
+            Fill all DBNull-valued columns with default value of their type.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetOfType``1(System.Collections.IDictionary,System.Object,``0)">
+            <summary>
+            Gets value of specified key from dictionary. If no key contains in dictionary - returns default value
+            </summary>
+            <typeparam name="TValue">Type of result</typeparam>
+            <param name="self">Dictionary object</param>
+            <param name="key">Key value</param>
+            <param name="defValue">Default value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.Get``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            Gets value of specified key from strong typed dictionary. If no key contains in dictionary - returns default value
+            </summary>
+            <typeparam name="TKey">Type of key</typeparam>
+            <typeparam name="TValue">Type of result</typeparam>
+            <param name="self">Dictionary object</param>
+            <param name="key">Key value</param>
+            <param name="defValue">Default value</param>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1},System.Boolean,System.Boolean)">
+            <summary>
+            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
+            </summary>
+            <typeparam name="TKey">Type of key</typeparam>
+            <typeparam name="TValue">Type of result</typeparam>
+            <param name="self">Dictionary object</param>
+            <param name="key">Key value</param>
+            <param name="createValue">The new value factory</param>
+            <param name="skipNulls">Do not store null values to cache</param>
+            <param name="noLock">If <c>true</c> new value factory will be call without locking.</param>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1},System.Boolean,System.Boolean)">
+            <summary>
+            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
+            </summary>
+            <typeparam name="TKey">Type of key</typeparam>
+            <typeparam name="TValue">Type of result</typeparam>
+            <param name="self">Dictionary object</param>
+            <param name="key">Key value</param>
+            <param name="createValue">The new value factory</param>
+            <param name="skipNulls">Do not store null values to cache</param>
+            <param name="noLock">If <c>true</c> new value factory will be call without locking.</param>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(``0[],System.Func{``0,System.Boolean})">
+            <summary>
+            Removing array items by condition 
+            </summary>
+            <returns>Result is new List</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Removing list items by condition from generic list passed as this parameter
+            </summary>
+            <returns>The same list</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.DeleteUntyped``1(System.Collections.IList,System.Func{``0,System.Boolean})">
+            <summary>
+            Removing list items by condition from non-generic list passed as this parameter
+            </summary>
+            <returns>The same list</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(``0[],System.Action{``0})">
+            <summary>
+            Enumeration array items
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Enumeration IEnumerable items 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+            Enumeration IEnumerable items of specified type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Find``1(System.Collections.ICollection,System.Func{``0,System.Boolean})">
+            <summary>
+            Find first element of specified type satisfied given condition. If such element not found returns null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="self"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Split``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Делит входящую коллекцию на набор коллекций исходя из разделителя
+            </summary>
+            <typeparam name="T">Тип данных коллекции</typeparam>
+            <param name="list">Исходная коллекция</param>
+            <param name="divider">Разделитель</param>
+            <returns>Результирующий набор</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.AddRangeEx``2(``0,System.Collections.Generic.IEnumerable{``1},System.Func{``1,System.Boolean})">
+            <summary>
+            Adds the elements of the specified collection to the end of the <paramref name="list"/>.
+            </summary>
+            <param name="list">The collection whose elements should be added to the end of the <see cref="T:System.Collections.Generic.List`1"/>. The collection itself cannot be null, but it can contain elements that are null, if type <typeparamref name="TClass"/> is a reference type.</param><exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is null.</exception>
+            <param name="collection">The collection whose elements should be added to the end of the <see cref="T:System.Collections.Generic.List`1"/>. The collection itself cannot be null, but it can contain elements that are null, if type <typeparamref name="TClass"/> is a reference type.</param>
+            <param name="canAdd">Implements the indicatior whether the item can be added or not.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.IsSet(System.Enum,System.Enum,System.Boolean)">
+            <summary>
+            Determines whether enum has testing flags.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.IsNotSet(System.Enum,System.Enum,System.Boolean)">
+            <summary>
+            Determines whether enum hasn't testing flags.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Has(System.Enum,System.Enum)">
+            <summary>
+            Determines whether enum has at least one of testing flags
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Include``1(System.Enum,``0)">
+            <summary>
+            Add flags to enum. Equal to Add().
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Add``1(System.Enum,``0)">
+            <summary>
+            Add flags to enum. Equal to Include().
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Exclude``1(System.Enum,``0)">
+            <summary>
+            Remove flags from enum. Equal to Remove(). 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Remove``1(System.Enum,``0)">
+            <summary>
+            Remove flags from enum. Equal to Exclude().
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.SetFlags``1(System.Enum,``0,System.Boolean)">
+            <summary>
+            Set (add or remove) flags to/from enum. Parameter setFlag determines whether the flags would be added or removed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetDescription(System.Enum)">
+            <summary>
+            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetCustomAttributeEx``1(System.Enum)">
+            <summary>
+            Convert enum item to the value of specified type. <para></para>
+            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetCustomAttributes``1(System.Enum)">
+            <summary>
+            Convert enum item to the value of specified type. <para></para>
+            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.EnumTo``1(System.Enum,``0)">
+            <summary>
+            Convert enum item to the value of specified type. <para></para>
+            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.String,System.Boolean,``0)">
+            <summary>
+            Convert string value to enum item. <para></para>
+            To convert enum value EnumValueAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.Int32,``0)">
+            <summary>
+            Convert int value to enum item. <para></para>
+            To convert enum value EnumValueAttribute, EnumValueIntAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.Char,``0)">
+            <summary>
+            Convert char value to enum item. <para></para>
+            To convert enum value EnumValueAttribute, EnumValueCharAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Extensions.FileSystemExtension.DefaultBaseDirIsAppDir">
+            <summary>
+            Gets or sets whether application directory is default directory for expanding relative pathes.
+            If value is false default directory is current directory.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetCurrentDirectory(System.Boolean)">
+            <summary>
+            Returns current directory taking into account the value of property DefaultBaseDirIsAppDir.
+            If current directory is empty application directory will be current one anyway.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractDirectory(System.String,System.Boolean,System.Char)">
+            <summary>
+            Extracts directory from path
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractFileName(System.String)">
+            <summary>
+            Extracts file name from path (supports long file pathes > 260 characters)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractOnlyFileName(System.String)">
+            <summary>
+            Extracts file name without extension from path (supports long file pathes > 260 characters)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetRelativePath(System.String,System.String)">
+            <summary>
+            Returns relative path from specified base directory.
+            </summary>
+            <param name="path">Source path</param>
+            <param name="basePath">Base path</param>
+            <returns>Relative path</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExpandPath(System.String,System.String)">
+            <summary>
+            Expand relative path to full path from specified base path.<para></para>
+            <c>%AppDir%</c> will be expanded from Apllication Exe Directory <para>
+            <c>%MyDocuments%</c> will be expanded from User Documents Folder (Environment.SpecialFolder.MyDocuments) </para>
+            <c>%AppData%</c> will be expanded from User application roaming data (Environment.SpecialFolder.ApplicationData - %UserProfile%\AppData\Roaming for Vista/Win7) <para>
+            <c>%CommonAppData%</c> will be expanded from all users application roaming data (Environment.SpecialFolder.CommonApplicationData) </para>
+            <c>%Temp%</c> will be expanded from User temporary folder <para> </para>
+            <c>%AppTemp%</c> will be expanded from Application temporary folder <see cref="P:TotalApi.Utils.Extensions.TempFiles.DefaultTempDir"/>.<para> </para>
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.FileSystemExtension.GetCustomVariableValue">
+            <summary>
+            Use for method ExpandPath - you can overload substituting %variable% values in input path 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.DeleteDirectory(System.String,System.Boolean)">
+            <summary>
+            Delete directory and all files and subdirectories in it.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.IsNetworkPath(System.String)">
+            <summary>
+            Checks whether the path is network path.
+            </summary>
+            <param name="path">Checking path.</param>
+            <returns>Returns true if path is network one.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetShortFileName(System.String)">
+            <summary>
+            Gets short name of existing file. If file doesn't exist returns empty string
+            </summary>
+            <param name="fileName">Long file name</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CreateDirectory(System.String,System.Boolean)">
+            <summary>
+            Creates directory if it doesn't exist. Returns short name of the directory and set access right if <paramref name="setAllUsersAccess"/> set to true.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ReadAllBytes(System.String)">
+            <summary>
+            Read all file content into array of bytes. Supports long file pathes > 260 characters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CheckFileName(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Check file name unique and/or file name length
+            </summary>
+            <param name="fileName">Source file name</param>
+            <param name="autoCreateUnique">Create unique file name if file exists</param>
+            <param name="maxFileNameLength">Limit file name length</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CheckFileName(System.String,System.Int32)">
+            <summary>
+            Check file name length
+            </summary>
+            <param name="fileName">Source file name</param>
+            <param name="maxFileNameLength">Limit file name length</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.DrawRoundedRectangle(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Drawing.Pen,System.Drawing.Brush)">
+            <summary>
+            Draws rectangle with rounded corners
+            </summary>
+            <param name="gfx">Drawing graphic object</param>
+            <param name="bounds">Bounds of rectangle</param>
+            <param name="cornerRadius">Radius of the corners</param>
+            <param name="drawPen">Drawing pen. Must be not null.</param>
+            <param name="fillBrush">Filling brush. Must be not null.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.DrawRoundedRectangle(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Drawing.Pen,System.Drawing.Color)">
+            <summary>
+            Draws rectangle with rounded corners
+            </summary>
+            <param name="gfx">Drawing graphic object</param>
+            <param name="bounds">Bounds of rectangle</param>
+            <param name="cornerRadius">Radius of the corners</param>
+            <param name="drawPen">Drawing pen. Must be not null.</param>
+            <param name="fillColor">Color of filling solid brush</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.ToImage(System.Byte[])">
+            <summary>
+            Converts byte array to image.
+            </summary>
+            <param name="bytes">Source byte array</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.ToBytes(System.Drawing.Image,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Converts image to byte array.
+            </summary>
+            <param name="image">Source image</param>
+            <param name="imageFormat">Saving image format</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.Resize(System.Drawing.Image,System.Int32,System.Int32)">
+            <summary>
+            Resizes source image to bitmap with defined size with saving aspect ration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.TrimBitmap(System.IO.Stream)">
+            <summary>
+            Removes whole transparent area around the image
+            </summary>
+            <param name="source">Source bitmap stream</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.TrimBitmap(System.Drawing.Bitmap)">
+            <summary>
+            Removes whole transparent area around the image
+            </summary>
+            <param name="source">Source bitmap</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsNull``1(``0)">
+            <summary>
+            Checks whether parameter is null or DBNull. For not-nullable types returns false.
+            </summary>
+            <typeparam name="T">Type of parameter</typeparam>
+            <param name="obj">Checking parameter</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsNotNull``1(``0)">
+            <summary>
+            Checks whether parameter is not null or DBNull. For not-nullable types returns true.
+            </summary>
+            <typeparam name="T">Type of parameter</typeparam>
+            <param name="obj">Checking parameter</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsString(System.Object,System.String)">
+            <summary>
+            Converts object to string. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>String representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsInt(System.Object,System.Int32)">
+            <summary>
+            Converts object to integer. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Integer representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsInt64(System.Object,System.Int64)">
+            <summary>
+            Converts object to long integer. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Integer representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsFloat(System.Object,System.Single)">
+            <summary>
+            Converts object to float. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Float representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDouble(System.Object,System.Double)">
+            <summary>
+            Converts object to double. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Double representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDecimal(System.Object,System.Decimal)">
+            <summary>
+            Converts object to decimal. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Decimal representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsBool(System.Object,System.Boolean)">
+            <summary>
+            Converts object to boolean. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Boolean representation of object</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDateTime(System.Object,System.DateTime)">
+            <summary>
+            Converts object to date and time. Returns default value for null objects. 
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Time zone undepended DateTime representation of object.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDateTime(System.Object,System.DateTimeKind,System.DateTime)">
+            <summary>
+            Converts object to date and time. Returns default value for null objects. 
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="kind">DateTime kind</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Time zone undepended DateTime representation of object.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.RoundDate(System.DateTime)">
+            <summary>
+            Converts date with time to date without time.
+            If time less than 12:00 - returns only date without time, otherwise returns date + 1 day without time.
+            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
+            </summary>
+            <returns>Time zone undepended date representation of DateTime.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDate(System.Object,System.DateTime)">
+            <summary>
+            Converts object to date without time. Returns default value for null objects.
+            If time less than 12:00 - returns only date without time, otherwise returns date + 1 day without time.
+            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+            <returns>Time zone undepended date representation of object.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.As``1(System.Object,``0)">
+            <summary>
+            Converts object to specified type. Returns default value for null objects.
+            </summary>
+            <typeparam name="T">Type of result</typeparam>
+            <param name="obj">Converting object</param>
+            <param name="defValue">Value that will be return if object is null</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsType(System.Object,System.Type,System.Object)">
+            <summary>
+            Converts object to specified type. Returns default value for null objects.
+            </summary>
+            <param name="obj">Converting object</param>
+            <param name="type">Type of result</param>
+            <param name="defValue">Value that will be return if object is null</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.In``1(``0,``0[])">
+            <summary>
+            Checks whether the value in spesified set
+            </summary>
+            <typeparam name="T">Type of value and set</typeparam>
+            <param name="self">Checking value</param>
+            <param name="list">Checking set</param>
+            <returns>Returns true if value in set and false otherwise</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.NotIn``1(``0,``0[])">
+            <summary>
+            Checks whether the value not in spesified set
+            </summary>
+            <typeparam name="T">Type of value and set</typeparam>
+            <param name="self">Checking value</param>
+            <param name="list">Checking set</param>
+            <returns>Returns true if value not in set and false otherwise</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.In``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Checks whether the value in spesified set
+            </summary>
+            <typeparam name="T">Type of value and set</typeparam>
+            <param name="self">Checking value</param>
+            <param name="list">Checking set</param>
+            <returns>Returns true if value in set and false otherwise</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.NotIn``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Checks whether the value not in spesified set
+            </summary>
+            <typeparam name="T">Type of value and set</typeparam>
+            <param name="self">Checking value</param>
+            <param name="list">Checking set</param>
+            <returns>Returns true if value not in set and false otherwise</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.Limit(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Limits specified value with minimum and maximum values. 
+            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
+            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.Limit(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Limits specified value with minimum and maximum values. 
+            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
+            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="minValue">Minimum value</param>
+            <param name="maxValue">Maximum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMin(System.Int32,System.Int32)">
+            <summary>
+            Limits specified value with minimum value. 
+            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="minValue">Minimum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMin(System.Int64,System.Int64)">
+            <summary>
+            Limits specified value with minimum value. 
+            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="minValue">Minimum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMax(System.Int32,System.Int32)">
+            <summary>
+            Limits specified value with maximum values. 
+            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="maxValue">Maximum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMax(System.Int64,System.Int64)">
+            <summary>
+            Limits specified value with maximum values. 
+            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
+            </summary>
+            <param name="self">Operationg value</param>
+            <param name="maxValue">Maximum value</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsPropsEquals(System.Object,System.Object,System.Boolean,System.String[])">
+            <summary>
+            <para>Сравнение двух объектов, путем сравнения значений каждого свойства объета.</para>
+            <para>Проверяются только к public свойства.</para>
+            </summary>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsFieldsEquals(System.Object,System.Object)">
+            <summary>
+            <para>Сравнение двух объектов, путем сравнения значений каждого поля объета.</para>
+            <para>Проверяются только к public поля.</para>
+            </summary>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsEquals(System.Object,System.Object)">
+            <summary>
+            Compare object with defined object 
+            </summary>
+            <param name="self">First object</param>
+            <param name="obj">Second object</param>
+            <returns>True if objects is equals</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsEqualsData(System.Object,System.Object)">
+            <summary>
+            <para>Сравнение двух объектов, путем сравнения значений каждого поля и свойства объета.</para>
+            <para>Проверяются только к public поля и свойства.</para>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.FieldByName(System.Object,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Получить ссылку на поле объекта по имени.</para>
+            <para>Если такого поля нет - возвращает null.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.GetFieldValue(System.Object,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Get value of object field by its name.</para>
+            <para>If field doesn't exists - return null.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SetFieldValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Set value of object public field by its name.</para>
+            <para>If field doesn't exists or readonly - do nothing.</para>
+            <para>Return previous field value.</para>
+            </summary>
+            <param name="self">Working object</param>
+            <param name="fieldName">Field name</param>
+            <param name="fieldValue">Field value</param>
+            <param name="includeNonPublic">If true method can change non public fields.</param>
+            <param name="includeInherited">If true method can change inherited fields. </param>
+            <returns>Return previous field value.</returns>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFieldsTo``1(System.Object,``0)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых полей с одинаковыми именами в другой объект.</para>
+            <para>Копируются только public поля.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFieldsFrom``1(``0,System.Object)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых полей с одинаковыми именами из другого объекта.</para>
+            <para>Копируются только public поля.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.PropByName(System.Object,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Получить ссылку на public свойство объекта по имени.</para>
+            <para>Если такого свойства нет - возвращает null.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.GetPropValue(System.Object,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Get value of object property by its name.</para>
+            <para>If property doesn't exists or writeonly - return null.</para>
+            </summary>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SetPropValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Set value of object public property by its name.</para>
+            <para>If property doesn't exists or readonly - do nothing.</para>
+            <para>Return previous property value if can.</para>
+            </summary>
+            <param name="self">Working object</param>
+            <param name="propName">Property name</param>
+            <param name="propValue">Property value</param>
+            <param name="forcedWrite">If false - value sets only if properties has different values</param>
+            <param name="includeNonPublic">If true method can change non public properties.</param>
+            <param name="includeInherited">If true method can change inherited properties.</param>
+            <returns>Return previous value of property if can.</returns>
+            <author>LionSoft</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyPropsTo``1(System.Object,``0,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых свойств с одинаковыми именами в другой объект.</para>
+            <para>Копируются только public свойства.</para>
+            </summary>
+            <param name="source">Source object</param>
+            <param name="target">Target object</param>
+            <param name="forcedCopy">If false - value copies only if properties has different values</param>
+            <param name="useXmlIgnoreAttribute">If true - properties with XmlIgnore attribute will be skipped</param>
+            <param name="skipAttributeNames">List of the attributes name which copying will be skipped</param>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyPropsFrom``1(``0,System.Object,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых свойств с одинаковыми именами из другого объекта.</para>
+            <para>Копируются только public свойства.</para>
+            </summary>
+            <param name="target">Target object</param>
+            <param name="source">Source object</param>
+            <param name="forcedCopy">If false - value copies only if properties has different values</param>
+            <param name="useXmlIgnoreAttribute">If true - properties with XmlIgnore attribute will be skipped</param>
+            <param name="skipAttributeNames">List of the attributes name which copying will be skipped</param>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyTo``1(System.Object,``0)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых полей и свойств с одинаковыми именами в другой объект.</para>
+            <para>Копируются только public поля и свойства.</para>
+            </summary>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyTo``1(System.Object)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых полей и свойств с одинаковыми именами в другой объект.</para>
+            <para>Копируются только public поля и свойства.</para>
+            </summary>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFrom``1(``0,System.Object)">
+            <summary>
+            <para>(c) LionSoft</para>
+            <para>Копирование значений простых свойств с одинаковыми именами из другого объекта.</para>
+            <para>Копируются только к public поля.</para>
+            </summary>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SameText(System.Object,System.Object)">
+            <summary>
+            Сравнивает два объекта как строки без учета регистра
+            </summary>
+            <param name="self"></param>
+            <param name="obj"></param>
+            <returns></returns>
+            <author>Lion</author>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.Parent(System.Diagnostics.Process)">
+            <summary>
+            Gets parent process of current process
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.Owner(System.Diagnostics.Process)">
+            <summary>
+            Gets parent process of current process in format DOMAIN\USERNAME
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.GetApplicationType(System.Diagnostics.Process)">
+            <summary>
+            Determines type of specified application
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsConsole(System.Diagnostics.Process)">
+            <summary>
+            Gets whether current process is console application
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsService(System.Diagnostics.Process)">
+            <summary>
+            Gets whether current process is windows service application
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsWow64(System.Diagnostics.Process)">
+            <summary>
+            Gets whether process is x64
+            </summary>
+            <param name="process"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetEventField(System.Type,System.String)">
+            <summary>
+            Returns <see cref="T:System.Reflection.FieldInfo"/> assigned with specified <paramref name="eventName"/>.
+            </summary>
+            <param name="type">Source type.</param>
+            <param name="eventName">Event name.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetEventInvocations(System.Object,System.String)">
+            <summary>
+            Returns array of all delegates assigned with the event with specified <paramref name="eventName"/>.
+            </summary>
+            <param name="obj">Source object instance.</param>
+            <param name="eventName">Event name.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.ClearEventInvocations(System.Object,System.String)">
+            <summary>
+            Clears all assigned event invocations. 
+            </summary>
+            <param name="obj">Source object instance.</param>
+            <param name="eventName">Event name.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.CopyNotificationEvents``1(``0,``0,System.Boolean)">
+            <summary>
+            Copies all assigned events <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> of <paramref name="source"/> to <paramref name="target"/> object if the types is equals.
+            </summary>
+            <param name="source">Source object</param>
+            <param name="target">Target object</param>
+            <param name="totalSubscription">If <c>true</c> the method will be called recursively for inner object instances.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetMemberInfo(System.Linq.Expressions.Expression)">
+            <summary>
+            Converts an expression into a <see cref="T:System.Reflection.MemberInfo"/>.
+            
+            </summary>
+            <param name="expression">The expression to convert.</param>
+            <returns>
+            The member info.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.FindInnerException(System.Exception,System.Type)">
+            <summary>
+            Searches for inner exception of a given type
+            </summary>
+            <param name="ex">Exception to be checked</param>
+            <param name="exceptionType">Type of the exception</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsEmpty(System.String,System.Boolean)">
+            <summary>
+            Checks whether string is null or empty.
+            </summary>
+            <param name="s">Testing string</param>
+            <param name="trimString">Makes trim() before testing</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsNotEmpty(System.String,System.Boolean)">
+            <summary>
+            Checks whether string is not null or empty.
+            </summary>
+            <param name="s">Testing string</param>
+            <param name="trimString">Makes trim() before testing</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.LeftPart(System.String,System.Int32)">
+            <summary>
+            Returns left part of string defined length. If string length is less than parameter length - returns whole string.
+            </summary>
+            <param name="s">Source string</param>
+            <param name="length">Length of the left part.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.RightPart(System.String,System.Int32)">
+            <summary>
+            Returns right part of string defined length. If string length is less than parameter length - returns whole string.
+            </summary>
+            <param name="s">Source string</param>
+            <param name="length">Length of the right part.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.SameText(System.String,System.String)">
+            <summary>
+            Compares two strings ignoring case according current culture.
+            </summary>
+            <param name="str1">First string - can be null</param>
+            <param name="str2">Second string - can be null</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.Fmt(System.String,System.Object[])">
+            <summary>
+            Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
+            </summary>
+            <param name="format">A composite format string</param>
+            <param name="args">An object array that contains zero or more objects to format</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.FmtSql(System.String,System.Object[])">
+            <summary>
+            Replaces the format item in a specified query string with the string representation of a corresponding object in a specified array in sql format.
+            </summary>
+            <param name="sql">A composite format query string</param>
+            <param name="args">An object array that contains zero or more parameters to format</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.Duplicate(System.String,System.Int32)">
+            <summary>
+            Duplicates specified string <paramref name="count"/> times.
+            </summary>
+            <param name="str">String to duplicate</param>
+            <param name="count">Duplicate counter</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.QuotedStr(System.String,System.Char)">
+            <summary>
+            Quotes string with specified quote char
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.DequotedStr(System.String,System.String)">
+            <summary>
+            Dequotes string if it whole is quoted with quotes that is any char in <paramref name="quotes"/> string.<para></para>
+            If not whole string is quoted or quotation is wrong - returns source string without any changing.<para></para>
+            </summary>
+            <param name="s">Source string</param>
+            <param name="quotes">Quotes set</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.Encrypt(System.String,System.String,System.Boolean)">
+            <summary>
+            Encrypts string with DES
+            </summary>
+            <param name="str">Source string</param>
+            <param name="salt">Secure salt value</param>
+            <param name="ignoreError">If true - returns input string as result when error is raised</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.Decrypt(System.String,System.String,System.Boolean)">
+            <summary>
+            Decripts string with DES
+            </summary>
+            <param name="str">Source string</param>
+            <param name="salt">Secure salt value, deffered when encription has made</param>
+            <param name="ignoreError">If true - returns input string as result when error is raised</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.Hash(System.String,System.String,System.Boolean)">
+            <summary>
+            Hash string with MD5
+            </summary>
+            <param name="str">Source string</param>
+            <param name="salt">Secure salt value, deffered when hashing has made</param>
+            <param name="ignoreError">If true - returns input string as result when error is raised</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceText(System.String,System.String,System.String)">
+            <summary>
+            Заменяет подстроку в строке без учета регистра (используются регекспы)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceRegex(System.String,System.String,System.String,System.Boolean,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Заменяет regexp-паттерны в строке на указанное значение c подстановкой вместо {0}/{1}/../{n} соответствующих значений групп.
+            <para>Sample:</para>
+            <code>
+                "\[(span|div)(.*)\]".ReplaceRegex("[a]") - заменит  [span 123] и [div xxx] на [a]
+                "\[(span|div)(.*)\]".ReplaceRegex("--{0}{1}--") - заменит  [span 123] и [div xxx] на --span 123-- и --div xxx-- соответственно
+            </code>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceRegex(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator,System.Boolean,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Заменяет regexp-паттерны в строке на значение, отдаваемое функцией.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.WildcardToRegex(System.String)">
+            <summary>
+            Converts wildcard pattern to regex pattern
+            </summary>
+            <param name="pattern">Wild card pattern</param>
+            <returns>Regex pattern</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsMatch(System.String,System.String,System.Boolean)">
+            <summary>
+            Checks whether string is matched determines wildcard pattern. 
+            </summary>
+            <param name="input">Testing string</param>
+            <param name="pattern">Wildcard pattern - can use * or ?</param>
+            <param name="ignoreCase">Ignore case flag</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceChars(System.String,System.String,System.String)">
+            <summary>
+            Replace chars in the string str. oldChars - set of chars to be replaced with appropriate char in newChars.
+            <para>
+            <example>
+            str = "3a2q31", oldChars = '123', newChars = 'abc', result = "cabqca"
+            </example>
+            </para>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.ContinueWithUI(System.Threading.Tasks.Task,System.Action{System.Threading.Tasks.Task})">
+            <summary>
+            Continues the task in the UI thread.<para></para>
+            You should initialize <see cref="T:TotalApi.Utils.ThreadInvoker"/> before using this method.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.ContinueWithUI``1(System.Threading.Tasks.Task{``0},System.Action{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Continues the task in the UI thread.<para></para>
+            You should initialize <see cref="T:TotalApi.Utils.ThreadInvoker"/> before using this method.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Threading.Tasks.TaskScheduler,System.Action)">
+            <summary>
+            Starts the task in the specified task scheduler w/o cancellation ability.
+            </summary>
+            <param name="scheduler">Task scheduler for the starting task.</param>
+            <param name="action">The action of the starting task.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Threading.Tasks.TaskScheduler,System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in the specified task scheduler with cancellation ability.
+            </summary>
+            <param name="scheduler">Task scheduler for the starting task.</param>
+            <param name="action">The action of the starting task.</param>
+            <param name="cancellationToken">Cancellation token to cancel the task.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Threading.Tasks.TaskScheduler,System.Func{``0})">
+            <summary>
+            Starts the task in the specified task scheduler w/o cancellation ability.
+            </summary>
+            <param name="scheduler">Task scheduler for the starting task.</param>
+            <param name="action">The action of the starting task.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Threading.Tasks.TaskScheduler,System.Func{``0},System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in the specified task scheduler with cancellation ability.
+            </summary>
+            <param name="scheduler">Task scheduler for the starting task.</param>
+            <param name="action">The action of the starting task.</param>
+            <param name="cancellationToken">Cancellation token to cancel the task.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta(System.Action)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta``1(System.Func{``0})">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta(System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta``1(System.Func{``0},System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta(System.Action)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta``1(System.Func{``0})">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta(System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta``1(System.Func{``0},System.Threading.CancellationToken)">
+            <summary>
+            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Action,System.Boolean)">
+            <summary>
+            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Action,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunLong(System.Action,System.Boolean)">
+            <summary>
+            Создаёт и запускает задачу, которая будет выполняться долго. (с параметром TaskCreationOptions.LongRunning).
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunLong(System.Action,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу, которая будет выполняться долго. (с параметром TaskCreationOptions.LongRunning).
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Func{``0})">
+            <summary>
+            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Func{``0},System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},System.Func{``0},System.Boolean)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},``0,System.Boolean)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},``0,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},System.Func{``0},System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},``0)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},System.Func{``0})">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},System.Func{``0},System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},``0,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
+            <summary>
+            Создаёт и запускает задачу c предварительно созданным контекстом. 
+            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
+            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.DefaultValue(System.Type,System.Boolean)">
+            <summary>
+            Creates instance of type default value.
+            </summary>
+            <param name="self"></param>
+            <param name="getForStringAndArraysEmptyValue">For strings returns empty string - NOT null. For arrays returns empty array - NOT null</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsInteger(System.Type,System.Boolean)">
+            <summary>
+            Checks the type is one of integer types (byte, int, long, etc.)
+            </summary>
+            <param name="self"></param>
+            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNumeric(System.Type,System.Boolean)">
+            <summary>
+            Checks the type is one of numeric types (float, double, decimal)
+            <param name="self"></param>
+            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
+            <returns></returns>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNumber(System.Type,System.Boolean)">
+            <summary>
+            Checks the type is one of integer or numeric types (int, byte, float, double, decimal, etc.)
+            <param name="self"></param>
+            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
+            <returns></returns>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNullableType(System.Type)">
+            <summary>
+            Checks if specified type Nullable, ex. int?, DateTime?
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetNonNullableType(System.Type)">
+            <summary>
+            Returns generic base type from Nullable: int? -> int, DateTime? -> DateTime
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.CanBeNull(System.Type)">
+            <summary>
+            Checks if specified type could assign null values (all reference types and Nullable types)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetDescription(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetDescription(System.Reflection.MemberInfo,System.Globalization.CultureInfo)">
+            <summary>
+            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsChildOf(System.Type,System.Type)">
+            <summary>
+            Implementation of the method <see cref="M:System.Type.IsSubclassOf(System.Type)"/> that we can use to get the derived types of any class (including generic ones). <para></para>
+            Also return <c>true</c> if <paramref name="baseType"/> is an interface and <paramref name="type"/> implements this one.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsChildOf``1(System.Type)">
+            <summary>
+            Implementation of the method <see cref="M:System.Type.IsSubclassOf(System.Type)"/> that we can use to get the derived types of any class (including generic ones). <para></para>
+            Also return <c>true</c> if <typeparamref name="TBaseType"/> is an interface and <paramref name="type"/> implements this one.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetPropertyInfo(System.Type,System.String)">
+            <summary>
+            Searches for the public property with the specified path.
+            </summary>
+            
+            <returns>
+            An object representing the public property with the specified path, if found; otherwise, null.
+            </returns>
+            <param name="t">Searching type</param>
+            <param name="path">The string containing the path to the the public property to get in format <c>Prop1.SubProp2.Prop</c>. </param><exception cref="T:System.Reflection.AmbiguousMatchException">More than one property is found with the specified name. See Remarks.</exception><exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null. </exception><filterpriority>2</filterpriority>
+        </member>
+        <member name="T:TotalApi.Utils.FileSystemWatcherEx">
+            <summary>
+            Implementation of the expanded class of <see cref="T:System.IO.FileSystemWatcher"/>.
+            The class can subscribe to many destination folders and has a single event raises when matched files has been changed, renamed, deleted or created.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.FileSystemWatcherEx.Changed">
+            <summary>
+            Fires when file or folder has been changed/renamed/deleted/created.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.#ctor(System.IO.FileSystemEventHandler,System.String[])">
+            <summary>
+            Crerates an instance and adds watches of file system.
+            </summary>
+            <param name="onChanged">On changed event</param>
+            <param name="targets">Strings of the full path and file masks to watch targets. If value is a directory - all the files in the directory will be watched.</param>
+        </member>
+        <member name="P:TotalApi.Utils.FileSystemWatcherEx.Default">
+            <summary>
+            Default instance of the watcher.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.Suspend">
+            <summary>
+            Suspends watching file system.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.Resume">
+            <summary>
+            Resumes watching file system.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.FileSystemWatcherEx.Watch(System.String[])">
+            <summary>
+            Add watches of file system.
+            </summary>
+            <param name="targets">Strings of the full path and file masks to watch targets. If value is a directory - all the files in the directory will be watched.</param>
         </member>
         <member name="T:TotalApi.Utils.Io.Ntfs.AlternateDataStreamInfo">
             <summary>
@@ -1076,6 +2453,80 @@
             The stream name.
             </returns>
         </member>
+        <member name="T:TotalApi.Utils.MailService">
+            <summary>
+            Implements service for SMTP mailing
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.MailService.SendMailAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.String)">
+            <summary>
+            Makes sending an email via SMTP server.
+            </summary>
+            <param name="from"></param>
+            <param name="mailto"></param>
+            <param name="subject"></param>
+            <param name="message"></param>
+            <param name="attachFile"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Utils.SystemPerformanceCounter">
+            <summary>
+            Implemntation of the getting performance counter values
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.SystemPerformanceCounter.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor of the instance ProcessPerformanceCounter
+            </summary>
+            <param name="categoryName">Performance counter category name</param>
+            <param name="counterName">Performance counter name</param>
+            <param name="instanceName">Instance Name</param>
+        </member>
+        <member name="P:TotalApi.Utils.SystemPerformanceCounter.Value">
+            <summary>
+            Gets the next value of the counter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.AggregatePerformanceCounter">
+            <summary>
+            Implemntation of the getting performance counter values all the instances of counter
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.AggregatePerformanceCounter.#ctor(System.String,System.String)">
+            <summary>
+            Constructor of the instance ProcessPerformanceCounter
+            </summary>
+            <param name="categoryName">Performance counter category name</param>
+            <param name="counterName">Performance counter name</param>
+        </member>
+        <member name="P:TotalApi.Utils.AggregatePerformanceCounter.Value">
+            <summary>
+            Gets the next value of the counter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ProcessPerformanceCounter">
+            <summary>
+            Implemntation of the getting performance counter values for specified process
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ProcessPerformanceCounter.ProcessorTimePercentage">
+            <summary>
+            Get ProcessorTimePercentage performance counter for current process.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ProcessPerformanceCounter.#ctor(System.String,System.String,System.Diagnostics.Process)">
+            <summary>
+            Constructor of the instance ProcessPerformanceCounter
+            </summary>
+            <param name="categoryName">Performance counter category name</param>
+            <param name="counterName">Performance counter name</param>
+            <param name="process">Process</param>
+        </member>
+        <member name="P:TotalApi.Utils.ProcessPerformanceCounter.Value">
+            <summary>
+            Gets the next value of the counter.
+            </summary>
+        </member>
         <member name="T:TotalApi.Utils.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -1567,1278 +3018,6 @@
             <summary>
             Этот метод генерирует хэшкод-строку на основании типа объекта и значений его публичных свойств.
             </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.RegExpr.PhpVar">
-            <summary>
-            Expression of the form: xxxx $var1 xxxx $var_2 xxxx $var3.prop1.prop2 xxx
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.RegExpr.FormatExpr">
-            <summary>
-            Expression of the form: xxxx {var1} xxxx {var_2} xxxx {var3.prop1.prop2} xxx
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.RegExpr.MacroExpr">
-            <summary>
-            Expression of the form: xxxx %var1% xxxx %var_2% xxxx %var3.prop1.prop2% xxx
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TempFiles.DeleteTempFiles">
-            <summary>
-            Removes all the temporary files created in the current session.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TempFiles.ClearTempDirectory(System.String)">
-            <summary>
-            Removes all non-locked files in the tenporary directory
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceStream(System.Reflection.Assembly,System.String)">
-            <summary>
-            Returns stream of the embedded stream of the specified assembly.
-            </summary>
-            <param name="assembly">Specified assembly</param>
-            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceReader(System.Reflection.Assembly,System.String)">
-            <summary>
-            Returns stream text reader of the embedded stream of the specified assembly.
-            </summary>
-            <param name="assembly">Specified assembly</param>
-            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceAllText(System.Reflection.Assembly,System.String)">
-            <summary>
-            Returns text of the embedded stream of the specified assembly.
-            </summary>
-            <param name="assembly">Specified assembly</param>
-            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.AssemblyExtension.GetResourceBytes(System.Reflection.Assembly,System.String)">
-            <summary>
-            Returns byte array of the embedded stream of the specified assembly.
-            </summary>
-            <param name="assembly">Specified assembly</param>
-            <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.IsCollectionEquals(System.Collections.ICollection,System.Collections.CollectionBase)">
-            <summary>
-            Comparing two collections with item-to-item method
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.Delete``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Removing list items by condition from generic collection passed as this parameter
-            </summary>
-            <returns>The same list</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ChangeIndex``1(System.Collections.Generic.IList{``0},``0,System.Int32)">
-            <summary>
-            Changes <paramref name="item"/> index to <paramref name="delta"/> value.
-            </summary>
-            <param name="self">Source list</param>
-            <param name="item">The list item to change index</param>
-            <param name="delta">The delta value of index changing</param>
-            <returns>The source list</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.MoveIndex``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
-            <summary>
-            Move the list item index from <paramref name="fromIndex"/> to <paramref name="toIndex"/> value.
-            </summary>
-            <param name="self">Source list</param>
-            <param name="fromIndex">The index of the item to be changed.</param>
-            <param name="toIndex">The new index of the item</param>
-            <returns>The source list</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0},TotalApi.Utils.NotifyCollectionChangedEventHandlerEx,System.Boolean)">
-            <summary>
-            Creates an ObservableCollectionEx from <paramref name="source"/>.
-            </summary>
-            <param name="source">Source enumeration</param>
-            <param name="onCollectionChanged">Callback method fired on collection changed.</param>
-            <param name="totalSubscription">Sets whether the subscription must be applied to child INotifyPropertyChanged-based objects of the collection</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.CollectionBaseExtension.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,TotalApi.Utils.NotifyCollectionChangedEventHandlerEx,System.Boolean)">
-            <summary>
-            Creates an ObservableCollectionEx from <paramref name="source"/>.
-            </summary>
-            <param name="source">Source enumeration</param>
-            <param name="onCollectionChanged">Callback method fired on collection changed.</param>
-            <param name="totalSubscription">Sets whether the subscription must be applied to child INotifyPropertyChanged-based objects of the collection</param>
-            <returns></returns>
-        </member>
-        <member name="E:TotalApi.Utils.Extensions.DataRowExtension.OnGetFieldValue">
-            <summary>
-            Event is invoked after field value was read
-            </summary>
-        </member>
-        <member name="E:TotalApi.Utils.Extensions.DataRowExtension.OnSetFieldValue">
-            <summary>
-            Event is invoked before field value is written
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.DataRowExtension.TrimStringValueExtendedPropertyName">
-            <summary>
-            If DataTable has extended property of this name - its value sets TrimStringValues for string data of this table
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.DataRowExtension.InitWithDefaultValues(System.Data.DataRow,System.Boolean,System.Type[])">
-            <summary>
-            Fill all DBNull-valued columns with default value of their type.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetOfType``1(System.Collections.IDictionary,System.Object,``0)">
-            <summary>
-            Gets value of specified key from dictionary. If no key contains in dictionary - returns default value
-            </summary>
-            <typeparam name="TValue">Type of result</typeparam>
-            <param name="self">Dictionary object</param>
-            <param name="key">Key value</param>
-            <param name="defValue">Default value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.Get``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
-            <summary>
-            Gets value of specified key from strong typed dictionary. If no key contains in dictionary - returns default value
-            </summary>
-            <typeparam name="TKey">Type of key</typeparam>
-            <typeparam name="TValue">Type of result</typeparam>
-            <param name="self">Dictionary object</param>
-            <param name="key">Key value</param>
-            <param name="defValue">Default value</param>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1},System.Boolean)">
-            <summary>
-            Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
-            </summary>
-            <typeparam name="TKey">Type of key</typeparam>
-            <typeparam name="TValue">Type of result</typeparam>
-            <param name="self">Dictionary object</param>
-            <param name="key">Key value</param>
-            <param name="createValue">The new value factory</param>
-            <param name="skipNulls">Do not store null values to cache</param>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(``0[],System.Func{``0,System.Boolean})">
-            <summary>
-            Removing array items by condition 
-            </summary>
-            <returns>Result is new List</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Removing list items by condition from generic list passed as this parameter
-            </summary>
-            <returns>The same list</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.DeleteUntyped``1(System.Collections.IList,System.Func{``0,System.Boolean})">
-            <summary>
-            Removing list items by condition from non-generic list passed as this parameter
-            </summary>
-            <returns>The same list</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(``0[],System.Action{``0})">
-            <summary>
-            Enumeration array items
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
-            <summary>
-            Enumeration IEnumerable items 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.ForEach``1(System.Collections.IEnumerable,System.Action{``0})">
-            <summary>
-            Enumeration IEnumerable items of specified type
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Find``1(System.Collections.ICollection,System.Func{``0,System.Boolean})">
-            <summary>
-            Find first element of specified type satisfied given condition. If such element not found returns null.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="self"></param>
-            <param name="condition"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Split``1(System.Collections.Generic.IEnumerable{``0},``0)">
-            <summary>
-            Делит входящую коллекцию на набор коллекций исходя из разделителя
-            </summary>
-            <typeparam name="T">Тип данных коллекции</typeparam>
-            <param name="list">Исходная коллекция</param>
-            <param name="divider">Разделитель</param>
-            <returns>Результирующий набор</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.AddRangeEx``2(``0,System.Collections.Generic.IEnumerable{``1},System.Func{``1,System.Boolean})">
-            <summary>
-            Adds the elements of the specified collection to the end of the <paramref name="list"/>.
-            </summary>
-            <param name="list">The collection whose elements should be added to the end of the <see cref="T:System.Collections.Generic.List`1"/>. The collection itself cannot be null, but it can contain elements that are null, if type <typeparamref name="TClass"/> is a reference type.</param><exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is null.</exception>
-            <param name="collection">The collection whose elements should be added to the end of the <see cref="T:System.Collections.Generic.List`1"/>. The collection itself cannot be null, but it can contain elements that are null, if type <typeparamref name="TClass"/> is a reference type.</param>
-            <param name="canAdd">Implements the indicatior whether the item can be added or not.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.IsSet(System.Enum,System.Enum,System.Boolean)">
-            <summary>
-            Determines whether enum has testing flags.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.IsNotSet(System.Enum,System.Enum,System.Boolean)">
-            <summary>
-            Determines whether enum hasn't testing flags.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Has(System.Enum,System.Enum)">
-            <summary>
-            Determines whether enum has at least one of testing flags
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Include``1(System.Enum,``0)">
-            <summary>
-            Add flags to enum. Equal to Add().
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Add``1(System.Enum,``0)">
-            <summary>
-            Add flags to enum. Equal to Include().
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Exclude``1(System.Enum,``0)">
-            <summary>
-            Remove flags from enum. Equal to Remove(). 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.Remove``1(System.Enum,``0)">
-            <summary>
-            Remove flags from enum. Equal to Exclude().
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.SetFlags``1(System.Enum,``0,System.Boolean)">
-            <summary>
-            Set (add or remove) flags to/from enum. Parameter setFlag determines whether the flags would be added or removed.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetDescription(System.Enum)">
-            <summary>
-            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetCustomAttributeEx``1(System.Enum)">
-            <summary>
-            Convert enum item to the value of specified type. <para></para>
-            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.GetCustomAttributes``1(System.Enum)">
-            <summary>
-            Convert enum item to the value of specified type. <para></para>
-            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.EnumTo``1(System.Enum,``0)">
-            <summary>
-            Convert enum item to the value of specified type. <para></para>
-            To convert enum value EnumValueAttribute, EnumValue&lt;TYPE&gt;Attribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.String,System.Boolean,``0)">
-            <summary>
-            Convert string value to enum item. <para></para>
-            To convert enum value EnumValueAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.Int32,``0)">
-            <summary>
-            Convert int value to enum item. <para></para>
-            To convert enum value EnumValueAttribute, EnumValueIntAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.EnumExtension.ToEnum``1(System.Char,``0)">
-            <summary>
-            Convert char value to enum item. <para></para>
-            To convert enum value EnumValueAttribute, EnumValueCharAttribute, LocalizableDescriptionAttribute and DescriptionAttribute are used.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Extensions.FileSystemExtension.DefaultBaseDirIsAppDir">
-            <summary>
-            Gets or sets whether application directory is default directory for expanding relative pathes.
-            If value is false default directory is current directory.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetCurrentDirectory(System.Boolean)">
-            <summary>
-            Returns current directory taking into account the value of property DefaultBaseDirIsAppDir.
-            If current directory is empty application directory will be current one anyway.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractDirectory(System.String,System.Boolean,System.Char)">
-            <summary>
-            Extracts directory from path
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractFileName(System.String)">
-            <summary>
-            Extracts file name from path (supports long file pathes > 260 characters)
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExtractOnlyFileName(System.String)">
-            <summary>
-            Extracts file name without extension from path (supports long file pathes > 260 characters)
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetRelativePath(System.String,System.String)">
-            <summary>
-            Returns relative path from specified base directory.
-            </summary>
-            <param name="path">Source path</param>
-            <param name="basePath">Base path</param>
-            <returns>Relative path</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExpandPath(System.String,System.String)">
-            <summary>
-            Expand relative path to full path from specified base path.<para></para>
-            <c>%AppDir%</c> will be expanded from Apllication Exe Directory <para>
-            <c>%MyDocuments%</c> will be expanded from User Documents Folder (Environment.SpecialFolder.MyDocuments) </para>
-            <c>%AppData%</c> will be expanded from User application roaming data (Environment.SpecialFolder.ApplicationData - %UserProfile%\AppData\Roaming for Vista/Win7) <para>
-            <c>%CommonAppData%</c> will be expanded from all users application roaming data (Environment.SpecialFolder.CommonApplicationData) </para>
-            <c>%Temp%</c> will be expanded from User temporary folder <para> </para>
-            <c>%AppTemp%</c> will be expanded from Application temporary folder <see cref="P:TotalApi.Utils.Extensions.TempFiles.DefaultTempDir"/>.<para> </para>
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.FileSystemExtension.GetCustomVariableValue">
-            <summary>
-            Use for method ExpandPath - you can overload substituting %variable% values in input path 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.DeleteDirectory(System.String,System.Boolean)">
-            <summary>
-            Delete directory and all files and subdirectories in it.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.IsNetworkPath(System.String)">
-            <summary>
-            Checks whether the path is network path.
-            </summary>
-            <param name="path">Checking path.</param>
-            <returns>Returns true if path is network one.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.GetShortFileName(System.String)">
-            <summary>
-            Gets short name of existing file. If file doesn't exist returns empty string
-            </summary>
-            <param name="fileName">Long file name</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CreateDirectory(System.String,System.Boolean)">
-            <summary>
-            Creates directory if it doesn't exist. Returns short name of the directory and set access right if <paramref name="setAllUsersAccess"/> set to true.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ReadAllBytes(System.String)">
-            <summary>
-            Read all file content into array of bytes. Supports long file pathes > 260 characters
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CheckFileName(System.String,System.Boolean,System.Int32)">
-            <summary>
-            Check file name unique and/or file name length
-            </summary>
-            <param name="fileName">Source file name</param>
-            <param name="autoCreateUnique">Create unique file name if file exists</param>
-            <param name="maxFileNameLength">Limit file name length</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CheckFileName(System.String,System.Int32)">
-            <summary>
-            Check file name length
-            </summary>
-            <param name="fileName">Source file name</param>
-            <param name="maxFileNameLength">Limit file name length</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.DrawRoundedRectangle(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Drawing.Pen,System.Drawing.Brush)">
-            <summary>
-            Draws rectangle with rounded corners
-            </summary>
-            <param name="gfx">Drawing graphic object</param>
-            <param name="bounds">Bounds of rectangle</param>
-            <param name="cornerRadius">Radius of the corners</param>
-            <param name="drawPen">Drawing pen. Must be not null.</param>
-            <param name="fillBrush">Filling brush. Must be not null.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.DrawRoundedRectangle(System.Drawing.Graphics,System.Drawing.Rectangle,System.Int32,System.Drawing.Pen,System.Drawing.Color)">
-            <summary>
-            Draws rectangle with rounded corners
-            </summary>
-            <param name="gfx">Drawing graphic object</param>
-            <param name="bounds">Bounds of rectangle</param>
-            <param name="cornerRadius">Radius of the corners</param>
-            <param name="drawPen">Drawing pen. Must be not null.</param>
-            <param name="fillColor">Color of filling solid brush</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.ToImage(System.Byte[])">
-            <summary>
-            Converts byte array to image.
-            </summary>
-            <param name="bytes">Source byte array</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.ToBytes(System.Drawing.Image,System.Drawing.Imaging.ImageFormat)">
-            <summary>
-            Converts image to byte array.
-            </summary>
-            <param name="image">Source image</param>
-            <param name="imageFormat">Saving image format</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.Resize(System.Drawing.Image,System.Int32,System.Int32)">
-            <summary>
-            Resizes source image to bitmap with defined size with saving aspect ration.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.TrimBitmap(System.IO.Stream)">
-            <summary>
-            Removes whole transparent area around the image
-            </summary>
-            <param name="source">Source bitmap stream</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.GraphicsExtension.TrimBitmap(System.Drawing.Bitmap)">
-            <summary>
-            Removes whole transparent area around the image
-            </summary>
-            <param name="source">Source bitmap</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsNull``1(``0)">
-            <summary>
-            Checks whether parameter is null or DBNull. For not-nullable types returns false.
-            </summary>
-            <typeparam name="T">Type of parameter</typeparam>
-            <param name="obj">Checking parameter</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsNotNull``1(``0)">
-            <summary>
-            Checks whether parameter is not null or DBNull. For not-nullable types returns true.
-            </summary>
-            <typeparam name="T">Type of parameter</typeparam>
-            <param name="obj">Checking parameter</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsString(System.Object,System.String)">
-            <summary>
-            Converts object to string. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>String representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsInt(System.Object,System.Int32)">
-            <summary>
-            Converts object to integer. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Integer representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsInt64(System.Object,System.Int64)">
-            <summary>
-            Converts object to long integer. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Integer representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsFloat(System.Object,System.Single)">
-            <summary>
-            Converts object to float. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Float representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDouble(System.Object,System.Double)">
-            <summary>
-            Converts object to double. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Double representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDecimal(System.Object,System.Decimal)">
-            <summary>
-            Converts object to decimal. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Decimal representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsBool(System.Object,System.Boolean)">
-            <summary>
-            Converts object to boolean. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Boolean representation of object</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDateTime(System.Object,System.DateTime)">
-            <summary>
-            Converts object to date and time. Returns default value for null objects. 
-            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Time zone undepended DateTime representation of object.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.RoundDate(System.DateTime)">
-            <summary>
-            Converts date with time to date without time.
-            If time less than 12:00 - returns only date without time, otherwise returns date + 1 day without time.
-            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
-            </summary>
-            <returns>Time zone undepended date representation of DateTime.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsDate(System.Object,System.DateTime)">
-            <summary>
-            Converts object to date without time. Returns default value for null objects.
-            If time less than 12:00 - returns only date without time, otherwise returns date + 1 day without time.
-            Date time kind is set to DateTimeKind.Unspecified to be time zone undepended.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-            <returns>Time zone undepended date representation of object.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.As``1(System.Object,``0)">
-            <summary>
-            Converts object to specified type. Returns default value for null objects.
-            </summary>
-            <typeparam name="T">Type of result</typeparam>
-            <param name="obj">Converting object</param>
-            <param name="defValue">Value that will be return if object is null</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.AsType(System.Object,System.Type,System.Object)">
-            <summary>
-            Converts object to specified type. Returns default value for null objects.
-            </summary>
-            <param name="obj">Converting object</param>
-            <param name="type">Type of result</param>
-            <param name="defValue">Value that will be return if object is null</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.In``1(``0,``0[])">
-            <summary>
-            Checks whether the value in spesified set
-            </summary>
-            <typeparam name="T">Type of value and set</typeparam>
-            <param name="self">Checking value</param>
-            <param name="list">Checking set</param>
-            <returns>Returns true if value in set and false otherwise</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.NotIn``1(``0,``0[])">
-            <summary>
-            Checks whether the value not in spesified set
-            </summary>
-            <typeparam name="T">Type of value and set</typeparam>
-            <param name="self">Checking value</param>
-            <param name="list">Checking set</param>
-            <returns>Returns true if value not in set and false otherwise</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.In``1(``0,System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Checks whether the value in spesified set
-            </summary>
-            <typeparam name="T">Type of value and set</typeparam>
-            <param name="self">Checking value</param>
-            <param name="list">Checking set</param>
-            <returns>Returns true if value in set and false otherwise</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.NotIn``1(``0,System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Checks whether the value not in spesified set
-            </summary>
-            <typeparam name="T">Type of value and set</typeparam>
-            <param name="self">Checking value</param>
-            <param name="list">Checking set</param>
-            <returns>Returns true if value not in set and false otherwise</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.Limit(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Limits specified value with minimum and maximum values. 
-            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
-            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="minValue">Minimum value</param>
-            <param name="maxValue">Maximum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.Limit(System.Int64,System.Int64,System.Int64)">
-            <summary>
-            Limits specified value with minimum and maximum values. 
-            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
-            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="minValue">Minimum value</param>
-            <param name="maxValue">Maximum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMin(System.Int32,System.Int32)">
-            <summary>
-            Limits specified value with minimum value. 
-            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="minValue">Minimum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMin(System.Int64,System.Int64)">
-            <summary>
-            Limits specified value with minimum value. 
-            Returns <paramref name="minValue"/> if source value less than <paramref name="minValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="minValue">Minimum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMax(System.Int32,System.Int32)">
-            <summary>
-            Limits specified value with maximum values. 
-            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="maxValue">Maximum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.LimitMax(System.Int64,System.Int64)">
-            <summary>
-            Limits specified value with maximum values. 
-            Returns <paramref name="maxValue"/> if source value greater than <paramref name="maxValue"/>.
-            </summary>
-            <param name="self">Operationg value</param>
-            <param name="maxValue">Maximum value</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsPropsEquals(System.Object,System.Object,System.Boolean,System.String[])">
-            <summary>
-            <para>Сравнение двух объектов, путем сравнения значений каждого свойства объета.</para>
-            <para>Проверяются только к public свойства.</para>
-            </summary>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsFieldsEquals(System.Object,System.Object)">
-            <summary>
-            <para>Сравнение двух объектов, путем сравнения значений каждого поля объета.</para>
-            <para>Проверяются только к public поля.</para>
-            </summary>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsEquals(System.Object,System.Object)">
-            <summary>
-            Compare object with defined object 
-            </summary>
-            <param name="self">First object</param>
-            <param name="obj">Second object</param>
-            <returns>True if objects is equals</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.IsEqualsData(System.Object,System.Object)">
-            <summary>
-            <para>Сравнение двух объектов, путем сравнения значений каждого поля и свойства объета.</para>
-            <para>Проверяются только к public поля и свойства.</para>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.FieldByName(System.Object,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Получить ссылку на поле объекта по имени.</para>
-            <para>Если такого поля нет - возвращает null.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.GetFieldValue(System.Object,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Get value of object field by its name.</para>
-            <para>If field doesn't exists - return null.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SetFieldValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Set value of object public field by its name.</para>
-            <para>If field doesn't exists or readonly - do nothing.</para>
-            <para>Return previous field value.</para>
-            </summary>
-            <param name="self">Working object</param>
-            <param name="fieldName">Field name</param>
-            <param name="fieldValue">Field value</param>
-            <param name="includeNonPublic">If true method can change non public fields.</param>
-            <param name="includeInherited">If true method can change inherited fields. </param>
-            <returns>Return previous field value.</returns>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFieldsTo``1(System.Object,``0)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых полей с одинаковыми именами в другой объект.</para>
-            <para>Копируются только public поля.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFieldsFrom``1(``0,System.Object)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых полей с одинаковыми именами из другого объекта.</para>
-            <para>Копируются только public поля.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.PropByName(System.Object,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Получить ссылку на public свойство объекта по имени.</para>
-            <para>Если такого свойства нет - возвращает null.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.GetPropValue(System.Object,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Get value of object property by its name.</para>
-            <para>If property doesn't exists or writeonly - return null.</para>
-            </summary>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SetPropValue(System.Object,System.String,System.Object,System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Set value of object public property by its name.</para>
-            <para>If property doesn't exists or readonly - do nothing.</para>
-            <para>Return previous property value if can.</para>
-            </summary>
-            <param name="self">Working object</param>
-            <param name="propName">Property name</param>
-            <param name="propValue">Property value</param>
-            <param name="forcedWrite">If false - value sets only if properties has different values</param>
-            <param name="includeNonPublic">If true method can change non public properties.</param>
-            <param name="includeInherited">If true method can change inherited properties.</param>
-            <returns>Return previous value of property if can.</returns>
-            <author>LionSoft</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyPropsTo``1(System.Object,``0,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых свойств с одинаковыми именами в другой объект.</para>
-            <para>Копируются только public свойства.</para>
-            </summary>
-            <param name="source">Source object</param>
-            <param name="target">Target object</param>
-            <param name="forcedCopy">If false - value copies only if properties has different values</param>
-            <param name="useXmlIgnoreAttribute">If true - properties with XmlIgnore attribute will be skipped</param>
-            <param name="skipAttributeNames">List of the attributes name which copying will be skipped</param>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyPropsFrom``1(``0,System.Object,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых свойств с одинаковыми именами из другого объекта.</para>
-            <para>Копируются только public свойства.</para>
-            </summary>
-            <param name="target">Target object</param>
-            <param name="source">Source object</param>
-            <param name="forcedCopy">If false - value copies only if properties has different values</param>
-            <param name="useXmlIgnoreAttribute">If true - properties with XmlIgnore attribute will be skipped</param>
-            <param name="skipAttributeNames">List of the attributes name which copying will be skipped</param>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyTo``1(System.Object,``0)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых полей и свойств с одинаковыми именами в другой объект.</para>
-            <para>Копируются только public поля и свойства.</para>
-            </summary>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyTo``1(System.Object)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых полей и свойств с одинаковыми именами в другой объект.</para>
-            <para>Копируются только public поля и свойства.</para>
-            </summary>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.CopyFrom``1(``0,System.Object)">
-            <summary>
-            <para>(c) LionSoft</para>
-            <para>Копирование значений простых свойств с одинаковыми именами из другого объекта.</para>
-            <para>Копируются только к public поля.</para>
-            </summary>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ObjectExtension.SameText(System.Object,System.Object)">
-            <summary>
-            Сравнивает два объекта как строки без учета регистра
-            </summary>
-            <param name="self"></param>
-            <param name="obj"></param>
-            <returns></returns>
-            <author>Lion</author>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.Parent(System.Diagnostics.Process)">
-            <summary>
-            Gets parent process of current process
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.Owner(System.Diagnostics.Process)">
-            <summary>
-            Gets parent process of current process in format DOMAIN\USERNAME
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.GetApplicationType(System.Diagnostics.Process)">
-            <summary>
-            Determines type of specified application
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsConsole(System.Diagnostics.Process)">
-            <summary>
-            Gets whether current process is console application
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsService(System.Diagnostics.Process)">
-            <summary>
-            Gets whether current process is windows service application
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ProcessExtensions.IsWow64(System.Diagnostics.Process)">
-            <summary>
-            Gets whether process is x64
-            </summary>
-            <param name="process"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetEventField(System.Type,System.String)">
-            <summary>
-            Returns <see cref="T:System.Reflection.FieldInfo"/> assigned with specified <paramref name="eventName"/>.
-            </summary>
-            <param name="type">Source type.</param>
-            <param name="eventName">Event name.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetEventInvocations(System.Object,System.String)">
-            <summary>
-            Returns array of all delegates assigned with the event with specified <paramref name="eventName"/>.
-            </summary>
-            <param name="obj">Source object instance.</param>
-            <param name="eventName">Event name.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.ClearEventInvocations(System.Object,System.String)">
-            <summary>
-            Clears all assigned event invocations. 
-            </summary>
-            <param name="obj">Source object instance.</param>
-            <param name="eventName">Event name.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.CopyNotificationEvents``1(``0,``0,System.Boolean)">
-            <summary>
-            Copies all assigned events <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> of <paramref name="source"/> to <paramref name="target"/> object if the types is equals.
-            </summary>
-            <param name="source">Source object</param>
-            <param name="target">Target object</param>
-            <param name="totalSubscription">If <c>true</c> the method will be called recursively for inner object instances.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.GetMemberInfo(System.Linq.Expressions.Expression)">
-            <summary>
-            Converts an expression into a <see cref="T:System.Reflection.MemberInfo"/>.
-            
-            </summary>
-            <param name="expression">The expression to convert.</param>
-            <returns>
-            The member info.
-            </returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.ReflectionExtension.FindInnerException(System.Exception,System.Type)">
-            <summary>
-            Searches for inner exception of a given type
-            </summary>
-            <param name="ex">Exception to be checked</param>
-            <param name="exceptionType">Type of the exception</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsEmpty(System.String,System.Boolean)">
-            <summary>
-            Checks whether string is null or empty.
-            </summary>
-            <param name="s">Testing string</param>
-            <param name="trimString">Makes trim() before testing</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsNotEmpty(System.String,System.Boolean)">
-            <summary>
-            Checks whether string is not null or empty.
-            </summary>
-            <param name="s">Testing string</param>
-            <param name="trimString">Makes trim() before testing</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.LeftPart(System.String,System.Int32)">
-            <summary>
-            Returns left part of string defined length. If string length is less than parameter length - returns whole string.
-            </summary>
-            <param name="s">Source string</param>
-            <param name="length">Length of the left part.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.RightPart(System.String,System.Int32)">
-            <summary>
-            Returns right part of string defined length. If string length is less than parameter length - returns whole string.
-            </summary>
-            <param name="s">Source string</param>
-            <param name="length">Length of the right part.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.SameText(System.String,System.String)">
-            <summary>
-            Compares two strings ignoring case according current culture.
-            </summary>
-            <param name="str1">First string - can be null</param>
-            <param name="str2">Second string - can be null</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.Fmt(System.String,System.Object[])">
-            <summary>
-            Replaces the format item in a specified string with the string representation of a corresponding object in a specified array.
-            </summary>
-            <param name="format">A composite format string</param>
-            <param name="args">An object array that contains zero or more objects to format</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.FmtSql(System.String,System.Object[])">
-            <summary>
-            Replaces the format item in a specified query string with the string representation of a corresponding object in a specified array in sql format.
-            </summary>
-            <param name="sql">A composite format query string</param>
-            <param name="args">An object array that contains zero or more parameters to format</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.Duplicate(System.String,System.Int32)">
-            <summary>
-            Duplicates specified string <paramref name="count"/> times.
-            </summary>
-            <param name="str">String to duplicate</param>
-            <param name="count">Duplicate counter</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.QuotedStr(System.String,System.Char)">
-            <summary>
-            Quotes string with specified quote char
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.DequotedStr(System.String,System.String)">
-            <summary>
-            Dequotes string if it whole is quoted with quotes that is any char in <paramref name="quotes"/> string.<para></para>
-            If not whole string is quoted or quotation is wrong - returns source string without any changing.<para></para>
-            </summary>
-            <param name="s">Source string</param>
-            <param name="quotes">Quotes set</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.Encrypt(System.String,System.String,System.Boolean)">
-            <summary>
-            Encrypts string with DES
-            </summary>
-            <param name="str">Source string</param>
-            <param name="salt">Secure salt value</param>
-            <param name="ignoreError">If true - returns input string as result when error is raised</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.Decrypt(System.String,System.String,System.Boolean)">
-            <summary>
-            Decripts string with DES
-            </summary>
-            <param name="str">Source string</param>
-            <param name="salt">Secure salt value, deffered when encription has made</param>
-            <param name="ignoreError">If true - returns input string as result when error is raised</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.Hash(System.String,System.String,System.Boolean)">
-            <summary>
-            Hash string with MD5
-            </summary>
-            <param name="str">Source string</param>
-            <param name="salt">Secure salt value, deffered when hashing has made</param>
-            <param name="ignoreError">If true - returns input string as result when error is raised</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceText(System.String,System.String,System.String)">
-            <summary>
-            Заменяет подстроку в строке без учета регистра (используются регекспы)
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceRegex(System.String,System.String,System.String,System.Boolean,System.Text.RegularExpressions.RegexOptions)">
-            <summary>
-            Заменяет regexp-паттерны в строке на указанное значение c подстановкой вместо {0}/{1}/../{n} соответствующих значений групп.
-            <para>Sample:</para>
-            <code>
-                "\[(span|div)(.*)\]".ReplaceRegex("[a]") - заменит  [span 123] и [div xxx] на [a]
-                "\[(span|div)(.*)\]".ReplaceRegex("--{0}{1}--") - заменит  [span 123] и [div xxx] на --span 123-- и --div xxx-- соответственно
-            </code>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceRegex(System.String,System.String,System.Text.RegularExpressions.MatchEvaluator,System.Boolean,System.Text.RegularExpressions.RegexOptions)">
-            <summary>
-            Заменяет regexp-паттерны в строке на значение, отдаваемое функцией.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.WildcardToRegex(System.String)">
-            <summary>
-            Converts wildcard pattern to regex pattern
-            </summary>
-            <param name="pattern">Wild card pattern</param>
-            <returns>Regex pattern</returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.IsMatch(System.String,System.String,System.Boolean)">
-            <summary>
-            Checks whether string is matched determines wildcard pattern. 
-            </summary>
-            <param name="input">Testing string</param>
-            <param name="pattern">Wildcard pattern - can use * or ?</param>
-            <param name="ignoreCase">Ignore case flag</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.StringExtension.ReplaceChars(System.String,System.String,System.String)">
-            <summary>
-            Replace chars in the string str. oldChars - set of chars to be replaced with appropriate char in newChars.
-            <para>
-            <example>
-            str = "3a2q31", oldChars = '123', newChars = 'abc', result = "cabqca"
-            </example>
-            </para>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.ContinueWithUI(System.Threading.Tasks.Task,System.Action{System.Threading.Tasks.Task})">
-            <summary>
-            Continues the task in the UI thread.<para></para>
-            You should initialize <see cref="T:TotalApi.Utils.ThreadInvoker"/> before using this method.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.ContinueWithUI``1(System.Threading.Tasks.Task{``0},System.Action{System.Threading.Tasks.Task{``0}})">
-            <summary>
-            Continues the task in the UI thread.<para></para>
-            You should initialize <see cref="T:TotalApi.Utils.ThreadInvoker"/> before using this method.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Threading.Tasks.TaskScheduler,System.Action)">
-            <summary>
-            Starts the task in the specified task scheduler w/o cancellation ability.
-            </summary>
-            <param name="scheduler">Task scheduler for the starting task.</param>
-            <param name="action">The action of the starting task.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Threading.Tasks.TaskScheduler,System.Action,System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in the specified task scheduler with cancellation ability.
-            </summary>
-            <param name="scheduler">Task scheduler for the starting task.</param>
-            <param name="action">The action of the starting task.</param>
-            <param name="cancellationToken">Cancellation token to cancel the task.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Threading.Tasks.TaskScheduler,System.Func{``0})">
-            <summary>
-            Starts the task in the specified task scheduler w/o cancellation ability.
-            </summary>
-            <param name="scheduler">Task scheduler for the starting task.</param>
-            <param name="action">The action of the starting task.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Threading.Tasks.TaskScheduler,System.Func{``0},System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in the specified task scheduler with cancellation ability.
-            </summary>
-            <param name="scheduler">Task scheduler for the starting task.</param>
-            <param name="action">The action of the starting task.</param>
-            <param name="cancellationToken">Cancellation token to cancel the task.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta(System.Action)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta``1(System.Func{``0})">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta(System.Action,System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSta``1(System.Func{``0},System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta(System.Action)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta``1(System.Func{``0})">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta(System.Action,System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunSingleSta``1(System.Func{``0},System.Threading.CancellationToken)">
-            <summary>
-            Starts the task in a STA thread using <see cref="T:TotalApi.Utils.Tasks.StaTaskScheduler"/>.<see cref="P:TotalApi.Utils.Tasks.StaTaskScheduler.Default"/> scheduler.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Action,System.Boolean)">
-            <summary>
-            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run(System.Action,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunLong(System.Action,System.Boolean)">
-            <summary>
-            Создаёт и запускает задачу, которая будет выполняться долго. (с параметром TaskCreationOptions.LongRunning).
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunLong(System.Action,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу, которая будет выполняться долго. (с параметром TaskCreationOptions.LongRunning).
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Func{``0})">
-            <summary>
-            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.Run``1(System.Func{``0},System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу. Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},System.Func{``0},System.Boolean)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},``0,System.Boolean)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},``0,System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``1(System.Action{``0},System.Func{``0},System.Threading.CancellationToken,System.Boolean,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},``0)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},System.Func{``0})">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},System.Func{``0},System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TaskEx.RunWithContext``2(System.Func{``0,``1},``0,System.Threading.CancellationToken,System.Threading.Tasks.TaskCreationOptions)">
-            <summary>
-            Создаёт и запускает задачу c предварительно созданным контекстом. 
-            Отличие от <c>Task.Factory.StartNew()</c> в том, что используется <see cref="P:System.Threading.Tasks.TaskScheduler.Default"/>.
-            Метод создания контекста вызывается до запуска задачи. Таким образом в него можно передать потокозависимымые данные.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.DefaultValue(System.Type,System.Boolean)">
-            <summary>
-            Creates instance of type default value.
-            </summary>
-            <param name="self"></param>
-            <param name="getForStringAndArraysEmptyValue">For strings returns empty string - NOT null. For arrays returns empty array - NOT null</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsInteger(System.Type,System.Boolean)">
-            <summary>
-            Checks the type is one of integer types (byte, int, long, etc.)
-            </summary>
-            <param name="self"></param>
-            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNumeric(System.Type,System.Boolean)">
-            <summary>
-            Checks the type is one of numeric types (float, double, decimal)
-            <param name="self"></param>
-            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
-            <returns></returns>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNumber(System.Type,System.Boolean)">
-            <summary>
-            Checks the type is one of integer or numeric types (int, byte, float, double, decimal, etc.)
-            <param name="self"></param>
-            <param name="checkNullable">Set this param to true if you want to include nullable types to checking.</param>
-            <returns></returns>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsNullableType(System.Type)">
-            <summary>
-            Checks if specified type Nullable, ex. int?, DateTime?
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetNonNullableType(System.Type)">
-            <summary>
-            Returns generic base type from Nullable: int? -> int, DateTime? -> DateTime
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.CanBeNull(System.Type)">
-            <summary>
-            Checks if specified type could assign null values (all reference types and Nullable types)
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetDescription(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetDescription(System.Reflection.MemberInfo,System.Globalization.CultureInfo)">
-            <summary>
-            Returns value of the enum item returned by enum type converter or LocalizableDescriptionAttribute or DescriptionAttribute of this item.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsChildOf(System.Type,System.Type)">
-            <summary>
-            Implementation of the method <see cref="M:System.Type.IsSubclassOf(System.Type)"/> that we can use to get the derived types of any class (including generic ones). <para></para>
-            Also return <c>true</c> if <paramref name="baseType"/> is an interface and <paramref name="type"/> implements this one.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.IsChildOf``1(System.Type)">
-            <summary>
-            Implementation of the method <see cref="M:System.Type.IsSubclassOf(System.Type)"/> that we can use to get the derived types of any class (including generic ones). <para></para>
-            Also return <c>true</c> if <typeparamref name="TBaseType"/> is an interface and <paramref name="type"/> implements this one.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.TypeExtension.GetPropertyInfo(System.Type,System.String)">
-            <summary>
-            Searches for the public property with the specified path.
-            </summary>
-            
-            <returns>
-            An object representing the public property with the specified path, if found; otherwise, null.
-            </returns>
-            <param name="t">Searching type</param>
-            <param name="path">The string containing the path to the the public property to get in format <c>Prop1.SubProp2.Prop</c>. </param><exception cref="T:System.Reflection.AmbiguousMatchException">More than one property is found with the specified name. See Remarks.</exception><exception cref="T:System.ArgumentNullException"><paramref name="name"/> is null. </exception><filterpriority>2</filterpriority>
         </member>
         <member name="T:TotalApi.Utils.FileEx">
             <summary>
@@ -3590,6 +3769,66 @@
             Implements editable dictionary with supporting IEditableObject interface
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.DisposableObject">
+            <summary>
+            Implementation a disposable object.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.DisposableObject.OnDispose">
+            <summary>
+            Fires when object has been disposed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.#ctor(System.Action)">
+            <summary>
+            Expanded constructor
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.Create``1(System.Func{``0},System.Action{``0})">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.Create(System.Action,System.Action)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.DisposableObject.Disposed">
+            <summary>
+            Indicates whether the resources were disposed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.Dispose">
+            <summary>
+            Disposes resources.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.Finalize">
+            <summary>
+            Finalizator
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.Dispose(System.Boolean)">
+            <summary>
+            Calls for disposing resources.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.DisposeManagedResources">
+            <summary>
+            Calls for disposing managed resources.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.DisposableObject.DisposeUnmanagedResources">
+            <summary>
+            Calls for disposing unmanaged resources.
+            </summary>
+        </member>
         <member name="T:TotalApi.Utils.DynamicDictionary`1">
             <summary>
             Обычный словарь который приводится к типу dynamic к элементам которого можно обращаться как к обычным свойствам.
@@ -4063,12 +4302,27 @@
             Implementation of the application parameters manager.
             </summary>
         </member>
+        <member name="E:TotalApi.Utils.Params.ParametersChanged">
+            <summary>
+            Fires when appParams section was changed and some parameters were added/removed/modified
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.Params.ConnectionStringChanged">
+            <summary>
+            Fires when connectionStrings section was changed and some pconnection string were added/removed/modified
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.Params.Changed">
+            <summary>
+            Fires when app.config was changed after firing all specific events.
+            </summary>
+        </member>
         <member name="P:TotalApi.Utils.Params.UseRegistry">
             <summary>
             Gets or sets whether the params manager uses registry to store/load params.
-            If value is <c>true</c> <see cref="M:TotalApi.Utils.Params.Set``1(System.String,``0)"/> will save the value to the registry and 
+            If value is <c>true</c> <see cref="M:TotalApi.Utils.Params.Set``1(System.String,``0,System.Boolean)"/> will save the value to the registry and 
             <see cref="M:TotalApi.Utils.Params.Get``1(System.String,``0)"/> will read parameter value from the registry rather than app.config.
-            If value is <c>false</c> <see cref="M:TotalApi.Utils.Params.Set``1(System.String,``0)"/> will store value to the memory and <see cref="M:TotalApi.Utils.Params.Get``1(System.String,``0)"/> will read parameter value from the memory.
+            If value is <c>false</c> <see cref="M:TotalApi.Utils.Params.Set``1(System.String,``0,System.Boolean)"/> will store value to the memory and <see cref="M:TotalApi.Utils.Params.Get``1(System.String,``0)"/> will read parameter value from the memory.
             </summary>
         </member>
         <member name="E:TotalApi.Utils.Params.GetParamValue">
@@ -4089,6 +4343,11 @@
         <member name="P:TotalApi.Utils.Params.ProductName">
             <summary>
             Gets the application product name, extracted from entry or executing assembly
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Params.ExeLocation">
+            <summary>
+            Gets the application execution file name, extracted from executing assembly
             </summary>
         </member>
         <member name="P:TotalApi.Utils.Params.Version">
@@ -4115,13 +4374,14 @@
             Gets the value of the connection string
             </summary>
         </member>
-        <member name="M:TotalApi.Utils.Params.Set``1(System.String,``0)">
+        <member name="M:TotalApi.Utils.Params.Set``1(System.String,``0,System.Boolean)">
             <summary>
             Sets user parameter value casted to specified type
             </summary>
             <typeparam name="T">Type of parameter value</typeparam>
             <param name="name">Parameter name</param>
             <param name="value">Parameter value</param>
+            <param name="persistent">If <c>true</c> the value will be persistent stored in registry (if <see cref="P:TotalApi.Utils.Params.UseRegistry"/> is <c>true</c>) or user.config file (not implemented yet).</param>
             <returns></returns>
         </member>
         <member name="T:TotalApi.Utils.Processes.ApplicationTypes">
@@ -4230,6 +4490,337 @@
             <param name="s"></param>
             <param name="separator"></param>
             <returns></returns>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.TcpClientContext">
+            <summary>
+            Impements context of the client connection to TcpServer.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.#ctor(TotalApi.Utils.TcpClientServer.TcpClientServer,System.Net.Sockets.TcpClient)">
+            <summary>
+            Object contructor.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Client">
+            <summary>
+            Gets the <see cref="T:System.Net.Sockets.TcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream">
+            <summary>
+            Gets the <see cref="T:System.Net.Sockets.NetworkStream"/> of the <see cref="T:System.Net.Sockets.TcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Data">
+            <summary>
+            Gets an array of bytes readed from <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.DataSize">
+            <summary>
+            Gets count of bytes readed from <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.LastAccessTime">
+            <summary>
+            Gets or sets the last access time to this context.
+            This value is used for determine whether the connection should be closed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.UpdateAccessTime">
+            <summary>
+            Updates the <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.LastAccessTime"/> with current time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.Close">
+            <summary>
+            Closes the context connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.BufferContext">
+            <summary>
+            Impements the internal class of the buffer context.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.BufferContext.PreBuffer">
+            <summary>
+            Gets or set the pre-buffer.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.BufferContext.Buffer">
+            <summary>
+            Gets or sets the main buffer.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.BufferContext.#ctor(System.Func{System.Byte[]},System.Action{System.Byte[]},System.Byte[])">
+            <summary>
+            Implements the object constructor.
+            </summary>
+            <param name="getBuffer">Delegate to get custom buffer.</param>
+            <param name="setBuffer">Delegate to set custom buffer.</param>
+            <param name="preBuffer">Custom pre-buffer.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.BufferContext.#ctor(System.Byte[])">
+            <summary>
+            Implements the object constructor.
+            </summary>
+            <param name="preBuffer">Custom pre-buffer.</param>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.TcpClientServer">
+            <summary>
+            Implements Tcp client and server with keep alive session and asyncronous reads/writes.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientServer.PreBufferSize">
+            <summary>
+            Gets or sets the buffer to read packet prefix. 
+            If the packet is not too big it can be readed in the pre-buffer and makes reading faster.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientServer.KeepAliveConnectionTime">
+            <summary>
+            Gets or sets the keep alive time period. 
+            If client or server connection is waiting longer then tin value it will be closed.
+            Default value is 1 minute.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnLog">
+            <summary>
+            Gets or sets a delegate to write log messages.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnToBytes">
+            <summary>
+            Gets or sets custom method to serialize object to byte array. 
+            If not set - binary serialization will be used.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnFromBytes">
+            <summary>
+            Gets or sets custom method to deserialize object from byte array. 
+            The second paraameter set the data size.
+            If not set - binary deserialization will be used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.ToBytes``1(``0)">
+            <summary>
+            Serialize a value to byte array.
+            </summary>
+            <typeparam name="T">Value type</typeparam>
+            <param name="value">Value</param>
+            <returns>Byte array passed to network stream.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.FromBytes``1(System.Byte[],System.Int32)">
+            <summary>
+            Deserialize a byte array to value.
+            </summary>
+            <typeparam name="T">Value type</typeparam>
+            <param name="bytes">Source byte array</param>
+            <param name="count">Count of bytes in the array to process.</param>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.AsyncTcpClient">
+            <summary>
+            Implements client for <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Host">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> host.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Port">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> port.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Client">
+            <summary>
+            Establish connection and gets <see cref="T:System.Net.Sockets.TcpClient"/>. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Implementation of the class constructor.
+            </summary>
+            <param name="host"><see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> host.</param>
+            <param name="port"><see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> port.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Disconnect">
+            <summary>
+            Disconnects client. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.ExecuteAsync``2(``1)">
+            <summary>
+            Sends data of the specified type to the server and gets result of the specified type.
+            You can't call the method while result is not received.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <typeparam name="TResult">Result type.</typeparam>
+            <typeparam name="TParameter">Parameter type.</typeparam>
+            <param name="data">Sending data.</param>
+            <returns>Result data.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.ExecuteAsync(System.Object)">
+            <summary>
+            Sends untyped data to the server and gets untyped result.
+            You can't call the method while result is not received.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+            <returns>Result data.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.NotifyAsync``1(``0)">
+            <summary>
+            Sends data to the server without result.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer">
+            <summary>
+            Implements async TCP server with keep alive sessions.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpServer.TcpServer">
+            <summary>
+            Gets the instance of the <see cref="T:System.Net.Sockets.TcpListener"/> assotiated with the current <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/>.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync">
+            <summary>
+            Gets or sets handler of the raw request.
+            The handler has handle readed from <see cref="T:System.Net.Sockets.NetworkStream"/> data
+            using <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Data"/> and write to the <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>
+            result using <see cref="!:TcpServerUtils.WritePacketAsync(System.IO.Stream,byte[])"/>.
+            If this hander is set none of the others handles won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequestAsync">
+            <summary>
+            Gets or sets async handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync"/> is set.
+            If this hander is set <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequest"/> handler won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequest">
+            <summary>
+            Gets or sets handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync"/> or <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequestAsync"/> are set.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Listen(System.Int32,System.String)">
+            <summary>
+            Starts listening the data on the specified port and address.
+            </summary>
+            <param name="port">Tcp server port.</param>
+            <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Stop">
+            <summary>
+            Stops the listening the data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.TcpClientServer.NetworkStreamExtension">
+            <summary>
+            Implements NetworkStream utilities.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadBytesAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async reads data from <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="buffer">Target buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to write data.</param>
+            <param name="count">Count of the bytes to read.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.TcpClientServer.BufferContext,System.Threading.CancellationToken)">
+            <summary>
+            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="context">Buffer context.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.TcpClientServer.BufferContext)">
+            <summary>
+            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="context">Buffer context.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
+            <param name="count">Count of the writting bytes.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
+            <param name="count">Count of the writting bytes.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="count">Count of the writting bytes.</param>
+        </member>
+        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[])">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
         </member>
         <member name="P:TotalApi.Utils.TextExpressions.ExpressionToTextEventArgs.Data">
             <summary>
