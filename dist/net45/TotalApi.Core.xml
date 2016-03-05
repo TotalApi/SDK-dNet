@@ -741,6 +741,11 @@
             Logger used to write log messages to a file.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.FileLogger.ConfigSectionName">
+            <summary>
+            The name of the section with settings in <c>app.config</c> file.
+            </summary>
+        </member>
         <member name="M:TotalApi.Core.Api.FileLogger.DisposeManagedResources">
             <summary>
             Disposes the managed resources by closing all StreamWriter instances.
@@ -843,6 +848,11 @@
               <c>true</c> if append; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Persistent">
+            <summary>
+            Gets or sets a value indicating whether to log file should be saved on restarting application. The option <seealso cref="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Append"/> overrides this setting.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Console">
             <summary>
             Gets or sets a value indicating whether to replicate message to console.
@@ -850,6 +860,26 @@
             <value>
               <c>true</c> if write to console; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDaysStr">
+            <summary>
+            Gets or sets days period when the log file should be auto splitted.
+            </summary>
+            <value>
+            One of the next string values:
+            0 or false - file is not splitted (by default)
+            {N} or true - file is splitted every N days (the old file name is <c>{logfileName}_{priorDate}.{logFileExt}</c>). The clause <c>days</c> can be avoid.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDays">
+            <summary>
+            Gets or sets days period when the log file should be auto splitted.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitSizeMb">
+            <summary>
+            Gets or sets max log file size in Mb after which it should be auto splitted.
+            </summary>
         </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.Files">
             <summary>
@@ -1297,12 +1327,93 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
-        <member name="T:TotalApi.Core.Api.RealtimeTotalApiStatistics">
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader">
+            <summary>
+            Interface for gathering statistics information
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.Priority">
+            <summary>
+            Gets the writer priority.
+            </summary>
+            <value>
+            The priority.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExecutionTime(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the execution time for a method, in milliseconds.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExceptionInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the exception information.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetPerformanceCounterValues(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Get the performance counter values.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetLoadInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+            <summary>
+            Gets the load information, actually number of total method calls per period./>.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticsAnalyzer">
+            <summary>
+            Interface for analyzing statistics information
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter">
+            <summary>
+            Interface for gathering statistics information
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExecutionTime``1(``0,System.Int64)">
+            <summary>
+            Saves execution time for a method, in milliseconds.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="executionTimeMs">Execution time in milliseconds.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExceptionInfo``1(``0,System.Exception)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.IncrementPerformanceCounter``1(``0)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SetPerformanceCounterValue``2(``0,``1)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <typeparam name="T">Type of the statistic source.</typeparam>
+            <typeparam name="TValue">Type of value.</typeparam>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
+            <summary>
+            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="load">Number of method calls per second.</param>
+            <param name="timeMs">Time in milliseconds</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter">
             <summary>
             Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/>
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.RealtimeTotalApiStatistics.TimeWindowWidth">
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
             <summary>
             Gets or sets the width of the time window.
             </summary>
@@ -1310,7 +1421,7 @@
             The width of the time window.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveExecutionTime``1(``0,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExecutionTime``1(``0,System.Int64)">
             <summary>
             Saves execution time for a method, in milliseconds.
             </summary>
@@ -1318,7 +1429,7 @@
             <param name="callerStatistics">Caller statistics.</param>
             <param name="executionTimeMs">Execution time in milliseconds.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveExceptionInfo``1(``0,System.Exception)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExceptionInfo``1(``0,System.Exception)">
             <summary>
             Saves the exception information.
             </summary>
@@ -1326,33 +1437,43 @@
             <param name="callerStatistics">Caller statistics.</param>
             <param name="exception">The exception.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.IncrementPerformanceCounter``1(``0)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.IncrementPerformanceCounter``1(``0)">
             <summary>
             Increments the call counter.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="callerStatistics">The caller statistics.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SetPerformanceCounterValue``1(``0,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SetPerformanceCounterValue``2(``0,``1)">
             <summary>
             Sets the call counter value.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Type of the statistic source.</typeparam>
+            <typeparam name="TValue">Type of value.</typeparam>
             <param name="callerStatistics">The caller statistics.</param>
             <param name="value">Value to set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.RealtimeTotalApiStatistics.SaveLoadInfo``1(``0,System.Int64,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
             <summary>
-            Saves the load information, actually number of total method calls per period set by <see cref="P:TotalApi.Core.Api.RealtimeTotalApiStatistics.TimeWindowWidth" />.
+            Saves the load information, actually number of total method calls per period set period of calculation./>.
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="callerStatistics">Caller statistics.</param>
             <param name="load">Number of method calls per second.</param>
-            <param name="time">Time in milliseconds</param>
+            <param name="timeMs">Time in milliseconds</param>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Id">
+            <summary>
+            Statistics source unique identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ModuleName">
+            <summary>
+            ModuleName name.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.MethodName">
@@ -1365,45 +1486,41 @@
             Executing method name.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ExecutionStartTimeUtc">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Tags">
+            <summary>
+            Gets the tags values.
+            </summary>
+            <value>
+            The tags.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.TimeStampUtc">
             <summary>
             Get the execution start time.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
             </summary>
+            <param name="moduleName">Name of the module.</param>
             <param name="methodName">Name of the method.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
             <param name="operationName">Operation name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
             <summary>
             Prevents a default instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics"/> class from being created.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.DateTime,System.String)">
-            <summary>
-            Creates the statistics source class.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName">Operation name.</param>
-            <returns></returns>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Instance">
-            <summary>
-            The instance
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.DateTime,System.String,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Creates the statistics class.
             </summary>
-            <param name="startDateTime">The start date time.</param>
-            <param name="methodName">Method name.</param>
             <param name="operationName">Operation name.</param>
+            <param name="methodName">Method name.</param>
+            <param name="moduleName">ModuleName name.</param>
+            <param name="startDateTime">The start date time.</param>
             <returns></returns>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.ToString">
@@ -1427,14 +1544,26 @@
             The raised exception.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.String,System.Exception,System.DateTime)">
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Creates the statistics class.
             </summary>
-            <param name="methodName">Name of the method.</param>
             <param name="exception">The raised exception.</param>
-            <param name="startDateTime">The start date time.</param>
+            <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
+            </summary>
+            <param name="exception">Exception</param>
+            <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.ToString">
             <summary>
@@ -1444,61 +1573,10 @@
             A <see cref="T:System.String" /> that represents caller statistics.
             </returns>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.String,System.Exception,System.DateTime,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="exception">Exception</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-            <param name="operationName">Name of the operation.</param>
-        </member>
         <member name="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
             </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._authInfo">
-            <summary>
-            The _auth information
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.AuthInfo">
-            <summary>
-            Gets totalapi principal info.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
-            <summary>
-            Returns current operation context as string.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics._callerIpAddress">
-            <summary>
-            Returns caller ip address.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
-            <summary>
-            Returns caller ip address.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.DateTime,System.String)">
-            <summary>
-            Creates the statistics class.
-            </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTime">The start date time.</param>
-            <param name="operationName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents caller statistics.
-            </summary>
-            <returns>
-            A <see cref="T:System.String" /> that represents caller statistics.
-            </returns>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Instance">
             <summary>
@@ -1508,13 +1586,42 @@
             The instance.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.DateTime,System.String)">
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="operationName"></param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics" /> class.
             </summary>
-            <param name="methodName">Name of the method.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
             <param name="operationName">Name of the operation.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="moduleName">Module name.</param>
+            <param name="startDateTimeUtc">The start date time.</param>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
+            <summary>
+            Returns current operation context as string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
+            <summary>
+            Returns caller ip address.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents caller statistics.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents caller statistics.
+            </returns>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1">
             <summary>
@@ -1609,62 +1716,111 @@
             <param name="count">The calls count.</param>
             <param name="time">The time elapsed.</param>
         </member>
-        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceMeasured">
+        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceMeasured">
             <summary>
             Occurs when performance counter period exceeded.
             </summary>
         </member>
-        <member name="T:TotalApi.Core.Api.TotalApiStatistics">
+        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceCounterValueChanged">
+            <summary>
+            Occurs when performance counter value changed.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.TotalApiStatistics">
+            <summary>
+            Default implementation of the TotalApi statistics interface.
+            </summary>
+            <summary>
+            Default implementation of the TotalApi statistics interface.
+            </summary>
             <summary>
             Default implementation of the TotalApi statistics interface.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.TotalApiStatistics.Instance">
+        <member name="P:TotalApi.Core.Api.Statistics.TotalApiStatistics.Instance">
             <summary>
             Instance of statistics handler. 
             </summary>
         </member>
-        <member name="T:TotalApi.Core.Api.ITotalApiStatistics">
+        <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatistics">
             <summary>
             Interface for gathering statistics information
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExecutionTime``1(``0,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatistics.StatisticWritersHandlers">
             <summary>
-            Saves execution time for a method, in milliseconds.
+            Gets the statistics handlers.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="executionTimeMs">Execution time in milliseconds.</param>
+            <value>
+            The statistics handlers.
+            </value>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveExceptionInfo``1(``0,System.Exception)">
+        <member name="P:TotalApi.Core.Api.Statistics.ITotalApiStatistics.StatisticReadersHandlers">
             <summary>
-            Saves the exception information.
+            Gets the statistics handlers.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="exception">The exception.</param>
+            <value>
+            The statistics handlers.
+            </value>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.IncrementPerformanceCounter``1(``0)">
+        <member name="T:TotalApi.Core.Api.Statistics.IStatisticsSource">
             <summary>
-            Increments the call counter.
+            Interface representing the source object of the statistics data.
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="callerStatistics">The caller statistics.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SetPerformanceCounterValue``1(``0,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Id">
             <summary>
-            Sets the call counter value.
+            Statistics source unique identifier.
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="callerStatistics">The caller statistics.</param>
-            <param name="value">Value to set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.ITotalApiStatistics.SaveLoadInfo``1(``0,System.Int64,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.SubSystemName">
             <summary>
-            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            Statistics source subsystem name.
+            For client application - equal entry assembly name.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="load">Number of method calls per second.</param>
-            <param name="time">Time in milliseconds</param>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.SSID">
+            <summary>
+            Statistics source subsystem SSID.
+            For client application and billing sybsystem - empty string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ComputerName">
+            <summary>
+            Statistics source computer name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ModuleName">
+            <summary>
+            Statistics source main module name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.MethodName">
+            <summary>
+            Statistics source executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.OperationName">
+            <summary>
+            Statistics source operation name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Tags">
+            <summary>
+            Statistics source tags values.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc">
+            <summary>
+            Get the execution start time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.IStatisticsSource.Update(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Nullable{System.DateTime})">
+            <summary>
+            Updates the specified owner.
+            </summary>
+            <param name="source">The event source.</param>
+            <param name="timeStampUtc">Force <see cref="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc"/> to update its value</param>
         </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
@@ -2036,33 +2192,6 @@
             <param name="msg">The message.</param>
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
-        </member>
-        <member name="T:TotalApi.Core.Aspects.IStatisticsSource">
-            <summary>
-            Interface representing the source object of the statistics data.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.MethodName">
-            <summary>
-            Executing method name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.OperationName">
-            <summary>
-            Executing method name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Aspects.IStatisticsSource.ExecutionStartTimeUtc">
-            <summary>
-            Get the execution start time.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Aspects.IStatisticsSource.Update(TotalApi.Core.Aspects.IStatisticsSource,System.Nullable{System.DateTime})">
-            <summary>
-            Updates the specified owner.
-            </summary>
-            <param name="source">The event source.</param>
-            <param name="executionStartTimeUtc">Force <see cref="P:TotalApi.Core.Aspects.IStatisticsSource.ExecutionStartTimeUtc"/> to update its value</param>
         </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>

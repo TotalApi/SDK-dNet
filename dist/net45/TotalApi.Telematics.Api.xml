@@ -218,6 +218,12 @@
             Minimal stop time. Calculated values that are less then this are determined as no stop.
             </summary>
         </member>
+        <member name="M:TotalApi.Telematics.DeviceWriteMonitor.BeginWriteBlock(System.String)">
+            <summary>
+            Отмечает начало записи данных (координат и сенсоров) для данного устройства.
+            Может вызываться 
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.ICoordinateFilter">
             <summary>
             Coordinate filter interface.
@@ -249,7 +255,7 @@
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.Velocity">
             <summary>
-            Gets a double representing the position's velocity of the device in meters per second.
+            Gets a double representing the position's velocity of the device in km/h.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.Direction">
@@ -480,7 +486,7 @@
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.Velocity">
             <summary>
-            Gets a double representing the velocity of the device in meters per second.
+            Gets a double representing the velocity of the device in km/h.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.Direction">
@@ -934,12 +940,12 @@
         </member>
         <member name="F:TotalApi.Telematics.DeviceStates.Connected">
             <summary>
-            Device is connected.
+            Device is connected to server and sending data.
             </summary>
         </member>
         <member name="F:TotalApi.Telematics.DeviceStates.GpsConnected">
             <summary>
-            GPS satellites connected.
+            Device GPS sensor is connected to satellites and getting actual data.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.ICoordinatePoints">
@@ -1208,6 +1214,7 @@
             <summary>
             Asynchronous write of GPS-coordinates for the device <paramref name="deviceId"/>.
             If device not found - does nothing.
+            Returns <c>true</c> if writting was successful.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.ITelematicsDbContext.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
@@ -1241,6 +1248,7 @@
             <summary>
             Asynchronous write of sensor values for the device.
             If device not found - does nothing.
+            Returns <c>true</c> if writting was successful.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.ITelematicsDbContext.GetSensorsLastStatus(System.String)">
@@ -1913,6 +1921,24 @@
         <member name="T:TotalApi.Telematics.Interfaces.ITelematicsInternal">
             <summary>
             Extended telematics module interface - includes methods, unavaliable through external API.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteCoordinatesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Async writes the coordinates data for the particular device. If no device found doing nothing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Async writes sensor data to database.
+            Sensor identifies by the sensor type and its number.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Async writes sensor data to database.
+            Sensor identifies by the sensor type and its address. Values are transmitted by the list of key-value pairs [date, value].
+            If sensor with such port number and address is not registered - transmitted values will be ignored.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.SensorData">
