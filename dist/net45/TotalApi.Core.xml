@@ -741,11 +741,6 @@
             Logger used to write log messages to a file.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.FileLogger.ConfigSectionName">
-            <summary>
-            The name of the section with settings in <c>app.config</c> file.
-            </summary>
-        </member>
         <member name="M:TotalApi.Core.Api.FileLogger.DisposeManagedResources">
             <summary>
             Disposes the managed resources by closing all StreamWriter instances.
@@ -848,11 +843,6 @@
               <c>true</c> if append; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Persistent">
-            <summary>
-            Gets or sets a value indicating whether to log file should be saved on restarting application. The option <seealso cref="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Append"/> overrides this setting.
-            </summary>
-        </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Console">
             <summary>
             Gets or sets a value indicating whether to replicate message to console.
@@ -860,26 +850,6 @@
             <value>
               <c>true</c> if write to console; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDaysStr">
-            <summary>
-            Gets or sets days period when the log file should be auto splitted.
-            </summary>
-            <value>
-            One of the next string values:
-            0 or false - file is not splitted (by default)
-            {N} or true - file is splitted every N days (the old file name is <c>{logfileName}_{priorDate}.{logFileExt}</c>). The clause <c>days</c> can be avoid.
-            </value>
-        </member>
-        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDays">
-            <summary>
-            Gets or sets days period when the log file should be auto splitted.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitSizeMb">
-            <summary>
-            Gets or sets max log file size in Mb after which it should be auto splitted.
-            </summary>
         </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.Files">
             <summary>

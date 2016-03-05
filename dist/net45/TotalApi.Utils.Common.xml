@@ -101,57 +101,6 @@
             Expression visitor which replace parameter of one type to another one.
             </summary>
         </member>
-        <member name="T:TotalApi.Utils.Extensions.JSONExtension">
-            <summary>
-            Implementation JSON convertation utilites. 
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomToJson">
-            <summary>
-            Gets or set the custom implementation for converting to JSON
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomFromJson">
-            <summary>
-            Gets or set the custom implementation for converting from JSON
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomJsonToDictionary">
-            <summary>
-            Gets or set the custom implementation for converting json desealized object to Dictionary
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FormatJSON(System.String)">
-            <summary>
-            Adds indentation and line breaks to output of JavaScriptSerializer
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.JSONExtension.ToJSON``1(``0,System.Boolean)">
-            <summary>
-            Serializes an instance of the class <typeparam name="TClass"/> to the JSON string.
-            </summary>
-            <param name="source">Source instance of object</param>
-            <param name="formatJSON"></param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FromJSON``1(System.String)">
-            <summary>
-            Deserialzes a JSON string to an object of the class of type <typeparamref name="TClass"/>.
-            </summary>
-            <param name="source">Source JSON string</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FromJSON(System.String,System.Type)">
-            <summary>
-            Deserialzes a JSON string to an object of the class of type <paramref name="type"/>.
-            </summary>
-            <param name="source">Source JSON string</param>
-            <param name="type">The type of the result object.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.JSONExtension.JSONClone``1(``0)">
-            <summary>
-            Makes object copy using JSON double converting.
-            </summary>
-            <param name="source">Source object</param>
-        </member>
         <member name="T:TotalApi.Utils.Extensions.StreamExtension">
             <summary>
             Implements extensions for <see cref="T:System.IO.Stream"/> class.
@@ -340,27 +289,6 @@
         <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.GetCache``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
             <summary>
             Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.ToFlatDictionary(System.Object)">
-            <summary>
-            Makes tree-style dictionary flat.
-            [
-               key1: value1,
-               key2: [
-                        subkey1: value2,
-                        subkey2: [
-                            subsubkey1: value3
-                                 ]
-                     ] 
-            ]
-            
-            converts to:
-             [
-               key1: value1,
-               key2.subkey1: value2,
-               key2.subkey2.subsubkey1: value3
-            ]
             </summary>
         </member>
         <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(``0[],System.Func{``0,System.Boolean})">
@@ -3125,90 +3053,6 @@
              </code>
              </summary>
         </member>
-        <member name="T:TotalApi.Utils.SID">
-            <summary>
-            Well-known security identifiers in Windows operating systems.
-            <seealso cref="!:http://support.microsoft.com/kb/243330"/>
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Users">
-            <summary>
-            A built-in group. After the initial installation of the operating system, the only member is the Authenticated Users group. 
-            When a computer joins a domain, the Domain Users group is added to the Users group on the computer.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Guests">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Nobody">
-            <summary>
-            No security principal.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Everyone">
-            <summary>
-            A group that includes all users, even anonymous users and guests. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Local">
-            <summary>
-            A group that includes all users who have logged on locally. 
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.AllServices">
-            <summary>
-            A group that includes all service processes configured on the system. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Network">
-            <summary>
-            A group that includes all users that have logged on through a network connection. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Batch">
-            <summary>
-            A group that includes all users that have logged on through a batch queue facility. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Interactive">
-            <summary>
-            A group that includes all users that have logged on interactively. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Service">
-            <summary>
-            A group that includes all security principals that have logged on as a service. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Anonymous">
-            <summary>
-            A group that includes all users that have logged on anonymously. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.LocalSystem">
-            <summary>
-            A service account that is used by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.Administrators">
-            <summary>
-            A built-in group. After the initial installation of the operating system, the only member of the group is the Administrator account. 
-            When a computer joins a domain, the Domain Admins group is added to the Administrators group. 
-            When a server becomes a domain controller, the Enterprise Admins group also is added to the Administrators group.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.NetworkService">
-            <summary>
-            Network Service
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.SID.LocalService">
-            <summary>
-            Local Service
-            </summary>
-        </member>
         <member name="M:TotalApi.Utils.Spatials.GpxParser.LoadFromFile(System.String)">
             <summary>
             Load the Xml document for parsing
@@ -4458,89 +4302,6 @@
             Implementation of the application parameters manager.
             </summary>
         </member>
-        <member name="T:TotalApi.Utils.Params.ConfigChangedDelegate">
-            <summary>
-            Delegate of the event fired when app.config file has been changed.
-            </summary>
-            <param name="configuration">Reference to a new configuration instance.</param>
-        </member>
-        <member name="T:TotalApi.Utils.Params.ConfigParamsChangedDelegate">
-            <summary>
-            Delegate of the event fired when parameters have been changed.
-            </summary>
-            <param name="changedValues">The list of the changed parameters and their old and new values.</param>
-        </member>
-        <member name="T:TotalApi.Utils.Params.JsonConfig">
-            <summary>
-            Implementation of the untyped JsonConfig entry.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Params.JsonConfig.Name">
-            <summary>
-            Gets the name of config. The app.config has name as empty string.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Params.JsonConfig.Value">
-            <summary>
-            Gets or sets the config value. The value can be either <see cref="T:System.Collections.Generic.Dictionary`2"/> for untyped config or typed otherwise.
-            </summary>
-        </member>
-        <member name="E:TotalApi.Utils.Params.JsonConfig.Changed">
-            <summary>
-            Fires when app.config was changed after firing all specific events.
-            </summary>
-        </member>
-        <member name="E:TotalApi.Utils.Params.JsonConfig.ParametersChanged">
-            <summary>
-            Fires when appParams section was changed and some parameters were added/removed/modified
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Params.JsonConfig.#ctor(System.String,System.Object)">
-            <summary>
-            Constuctor of the JsonConfig class.
-            </summary>
-            <param name="name"></param>
-            <param name="config"></param>
-        </member>
-        <member name="T:TotalApi.Utils.Params.JsonConfig`1">
-            <summary>
-            Implementation of the typed JsonConfig entry.
-            </summary>
-            <typeparam name="TConfig"></typeparam>
-        </member>
-        <member name="P:TotalApi.Utils.Params.JsonConfig`1.Value">
-            <summary>
-            Gets or sets the config value. The value has <typeparamref name="TConfig"/> type.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Params.JsonConfig`1.Config">
-            <summary>
-            Gets or sets the config value. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Params.JsonConfig`1.#ctor(System.String,`0)">
-            <summary>
-            Constuctor of the JsonConfig class.
-            </summary>
-            <param name="name"></param>
-            <param name="config"></param>
-        </member>
-        <member name="F:TotalApi.Utils.Params._registryParams">
-            <summary>
-            Список параметров, прочитанных из реестра
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Params._configParams">
-            <summary>
-            Список параметров, прочитанных из app.config и JSON config
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.Params._jsonConfigs">
-            <summary>
-            Список параметров, прочитанных из дополнительных .json файлов.
-            Файл {app}.json подгружается автоматически. Остальные следует загрузить, используя <see cref="M:TotalApi.Utils.Params.AddJsonConfig(System.String,System.String,System.Type)"/>.
-            </summary>
-        </member>
         <member name="E:TotalApi.Utils.Params.ParametersChanged">
             <summary>
             Fires when appParams section was changed and some parameters were added/removed/modified
@@ -4593,22 +4354,6 @@
             <summary>
             Gets the application version, extracted from entry or executing assembly
             </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Params.AddJsonConfig``1(System.String,System.String)">
-            <summary>
-            Add JSON config file to the parameters.
-            </summary>
-            <param name="fileName">JSON config file path</param>
-            <param name="configName">Config name. If not set - the file name is config name.</param>
-            <typeparam name="TConfig">Config type</typeparam>
-        </member>
-        <member name="M:TotalApi.Utils.Params.AddJsonConfig(System.String,System.String,System.Type)">
-            <summary>
-            Add JSON config file to the parameters.
-            </summary>
-            <param name="fileName">JSON config file path</param>
-            <param name="configType">Config type</param>
-            <param name="configName">Config name. If not set - the file name is config name.</param>
         </member>
         <member name="P:TotalApi.Utils.Params.RegistryStorageRoot">
             <summary>
@@ -5348,17 +5093,6 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:TotalApi.Utils.UiTreeItem" -->
-        <member name="F:TotalApi.Utils.UserHelper.SidAll">
-            <summary>
-            A group that includes all users, even anonymous users and guests. Membership is controlled by the operating system.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.UserHelper.SidUsers">
-            <summary>
-            A built-in group. After the initial installation of the operating system, the only member is the Authenticated Users group. 
-            When a computer joins a domain, the Domain Users group is added to the Users group on the computer.
-            </summary>
-        </member>
         <member name="M:TotalApi.Utils.UserHelper.GetSid(System.String,System.String)">
             <summary>
             Return user SID by user name and user domain

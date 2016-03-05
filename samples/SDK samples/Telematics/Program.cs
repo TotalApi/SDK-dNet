@@ -18,9 +18,10 @@ namespace Telematics
             // Выводим трассировочные сообщения в консоль
             Trace.Listeners.Add(new ColorConsoleTraceListener());
 
-            Console.WriteLine("Running bootstraping. Please, wait a second...");
-            TotalApiBootstrapper.Create();
-            
+           
+                Console.WriteLine("Running bootstraping. Please, wait a second...");
+                TotalApiBootstrapper.Create();
+
             Console.WriteLine("Getting first found device");
             var device = CoreApi.Repository.ExecuteQuery<Device>().First();
             Console.WriteLine("Device found: {0} - {1}\r\n", device.Name, device.Id);
@@ -28,26 +29,31 @@ namespace Telematics
             Console.WriteLine("Subscribing to OnDeviceStatusChanged event, in order to receive statuses changes.\r\nMore info in \"Events\" sample sdk's project");
             CoreApi.EventManager.Subscribe(Subscriber.Instance);
 
-            Console.WriteLine("Writting test coordinate");
-            TelematicsApi.Telematics.WriteCoordinates(DeviceIdentifier.DbId(device.Id), new List<Coordinate>
+
+            while (true)
             {
-                new Coordinate(DateTime.UtcNow, 20, 30, 40, 50, 60)
-            });
+                //Console.WriteLine("Writting test coordinate");
+                TelematicsApi.Telematics.WriteCoordinates(DeviceIdentifier.DbId(device.Id), new List<Coordinate>
+                {
+                    new Coordinate(DateTime.UtcNow, 20, 30, 40, 50, 60)
+                });
 
-            Console.WriteLine("Getting last device status");
-            var status = TelematicsApi.Telematics.GetDeviceLastStatus(device.Id);
+                //Console.WriteLine("Getting last device status");
+                var status = TelematicsApi.Telematics.GetDeviceLastStatus(device.Id);
 
-            Console.WriteLine("Last activity: {0}, Last coordinate: {1}\r\n", status.LastActivityTime, status.LastCoordinate);
-            
-            Console.WriteLine("Trying to get track for device for all time period.\r\nBy default, all filters will be used during processing");
-            var filteredTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id));
+                //if (status != null)
+                    //Console.WriteLine("Last activity: {0}, Last coordinate: {1}\r\n", status.LastActivityTime, status.LastCoordinate);
 
-            Console.WriteLine("Coordinate points count: {0}\r\n", filteredTrack.Points.Count);
+                //Console.WriteLine("Trying to get track for device for all time period.\r\nBy default, all filters will be used during processing");
+                var filteredTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id));
 
-            Console.WriteLine("Trying to get full track for device for all time period, no simplificate filter applied.\r\nPass DbNull.Value in order to exclude filtering at all.");
-            var fullTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id), null, null, DBNull.Value);
+                //Console.WriteLine("Coordinate points count: {0}\r\n", filteredTrack.Points.Count);
 
-            Console.WriteLine("Coordinate points count: {0}", fullTrack.Points.Count);
+                //Console.WriteLine("Trying to get full track for device for all time period, no simplificate filter applied.\r\nPass DbNull.Value in order to exclude filtering at all.");
+                var fullTrack = TelematicsApi.Telematics.ReadCoordinates(DeviceIdentifier.DbId(device.Id), null, null, DBNull.Value);
+
+                //Console.WriteLine("Coordinate points count: {0}", fullTrack.Points.Count);
+            }
             
             Console.ReadKey();
         }
