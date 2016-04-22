@@ -24,7 +24,7 @@ SDK Init settings example:
     <appSettings>
     	<add key="serverProtocol" value="https" />
     	<add key="serverHost" value="svc.totalapi.io:4444" />
-        <add key="ApiKey" value="myApiKey" />
+        <add key="apiKey" value="myApiKey" />
     </appSettings>
 ```
 > All initialization data will be provided after registration.
