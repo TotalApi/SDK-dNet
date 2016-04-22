@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TotalApi.Telematics</name>
+    </assembly>
+    <members>
+        <member name="M:TotalApi.Telematics.Api.Telematics.FindDevice(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Синхронный поиск устройства по его <paramref name="deviceId"/>.
+            Если такое устройство не найдено - возвращает <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.GetDevices(System.Int32)">
+            <summary>
+            Получение списка устройств заданной модели.
+            Если таких устройств не найдено - возвращает пустое перечисление.
+            </summary>
+            <param name="modelCode">Внутренний код модели устройства слежения.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteDeviceData(TotalApi.Telematics.DeviceIdentifier,System.Byte[])">
+            <summary>
+            Cинхронная запись бинарных данных, ассоциированных с данным устройством слежения.
+            Это должен быть небольшой пакет данных в котором можно хранить текущие настройки и состояние устройства.
+            Используется проверка прав пользователя.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteCoordinates(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Запись координат. 
+            Если значение <see cref="P:TotalApi.Telematics.Api.Telematics.WriteCoordinatesQueueSize"/> больше нуля - производится 
+            постановка в очередь записи координат и сразу отдаёт управление.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteCoordinatesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+            <summary>
+            Асинхронная запись координат. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.ReadCoordinates(TotalApi.Telematics.DeviceIdentifier,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
+            <summary>
+            Cинхронное чтение GPS-координат устройства <paramref name="deviceId"/>.
+            </summary>
+            <param name="deviceId">Идентификатор устройства.</param>
+            <param name="from">С какой даты включительно получить координаты (если <c>null</c> - с самого начала)</param>
+            <param name="to">До какой даты включительно получить координаты (если <c>null</c> - до конца)</param>
+            <param name="filters">
+            Набор параметров фильтров, применяемых для обработки данных. 
+            Если в качестве параметров фильтров передано значение <see cref="F:System.DBNull.Value"/> или <c>null</c> фильтры применяться не будут."/>
+            Если нижеперечисленные фильтры не будут переданы - будет использоваться соответствующий фильтр по умолчанию:
+            <list type="bullet">
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/></description></item>
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/></description></item>
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/></description></item>
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters"/></description></item>
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters"/></description></item>
+            </list>
+            </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)">
+            <summary>
+            Синхронное чтение GPS-координат для устройства.
+            Если такое устройство не найдено или координат нет - возвращает пустое перечисление.
+            </summary>
+            <param name="readParams">Параметры чтения координат. Если ни одного фильтра не задано - возвращает все координаты.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.GetDeviceLastStatus(System.String)">
+            <summary>
+            Асинхронное получение текущего состояния устройства слежения.
+            Если такое устройство не найдено - возвращает пустое перечисление.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.GetDeviceLastStatus(TotalApi.Telematics.DeviceIdentifier)">
+            <summary>
+            Возвращает последний известный статус устройства (стоит, на связи, последняя координата, время получения последней координаты)
+            Если такое устройство не найдено - задача вернёт <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.GetDeviceModels">
+            <summary>
+            Получение списка моделей устройств.
+            Если таких устройств не найдено - возвращает пустое перечисление.
+            Список моделей генерируется динамически на основании плагинов-обработчиков данных от устройств.
+            При регистрации плагин сообщает какие модели устройств он обрабатывает.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
+            <summary>
+            Синхронный поиск датчика устройства <paramref name="deviceId"/> по его <paramref name="portId"/> и  <paramref name="address"/>.
+            Если такое устройство не найдено или датчик на этом порту не сконфигурирован - возвращает <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.SensorType,System.Int32)">
+            <summary>
+            Поиск датчика устройства <paramref name="deviceId"/> по его <paramref name="sensorType"/> и <paramref name="number"/>.
+            Если такое устройство не найдено или датчик на этом порту не сконфигурирован - возвращает <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Запись данных сенсоров.
+            Если значение <see cref="P:TotalApi.Telematics.Api.Telematics.WriteSensorValuesQueueSize"/> больше нуля - производится 
+            постановка в очередь записи сенсоров и сразу отдаёт управление.
+            Датчик идентифицируется по типу датчика и его номеру.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Постановка в очередь записи данных сенсоров. Сразу отдаёт управление.
+            Датчик идентифицируется по номеру порта и адресу. Значения передаются в виде списка пар значений [время - значение].
+            Если датчик с таким номером порта и адресом не зарегистрирован - переданные значения будут проигнорированы.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Асинхронная запись данных датчиков. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Api.Telematics.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Асинхронная запись данных датчиков. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.DeviceModelsConfig.ExternalAddress">
+            <summary>
+            Внешний IP-адрес или DNS-имя.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.DeviceModelsConfig.PortsMapping">
+            <summary>
+            Указывает какой внешний порт соответствует внутреннему
+            Формат: {internal_port} : {external_port}
+            Если соспоставление не найдено - будет использоваться внутренний порт без изменения
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.BaseSensorStatusHandler.Period">
+            <summary>
+            Период работы обработчика.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.BaseSensorStatusHandler.TotalApi#Telematics#ISensorStatusMonitorHandler#NextExecutionTime">
+            <summary>
+            Планируемое время следующего вызова этого обработчика. (Для внутреннего использования)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorStatusMonitorHandler.Period">
+            <summary>
+            Период работы обработчика в миллисикундах.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ISensorStatusMonitorHandler.NextExecutionTime">
+            <summary>
+            Планируемое время следующего вызова этого обработчика. (Для внутреннего использования)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.BaseDeviceStatusHandler.Period">
+            <summary>
+            Период работы обработчика.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.BaseDeviceStatusHandler.TotalApi#Telematics#IDeviceStatusMonitorHandler#NextExecutionTime">
+            <summary>
+            Планируемое время следующего вызова этого обработчика. (Для внутреннего использования)
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DeviceStatusMonitor">
+            <summary>
+            Реализация монитора изменения статуса УС. 
+            В будущем можно будет вынести в отдельный модуль и включать в составе отдельного приложения.
+            <remarks>
+            Раз в заданное время (полсекунды по умолчанию) сканирует все устройства и в случае изменения их состояния:
+            (изменение координат, определения отсутствия связи, GPS, длительной остановки и т.д.) 
+            генерирует событие <see cref="T:TotalApi.Telematics.Events.OnDeviceStatusChanged"/>.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.IDeviceStatusMonitorHandler.Period">
+            <summary>
+            Период работы обработчика в миллисикундах.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.IDeviceStatusMonitorHandler.NextExecutionTime">
+            <summary>
+            Планируемое время следующего вызова этого обработчика. (Для внутреннего использования)
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.StopHandler._stopRadius">
+            <summary>
+            Величина радиуса в метрах, нахождение в пределах которого считается остановкой.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Wcf.TelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="sensorData">Array of sensors data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Wcf.TelematicsService.WriteSensorValues(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32,System.Collections.Generic.IDictionary{System.DateTime,System.Object})">
+            <summary>
+            Writes data from the sensors of specified device.
+            The sensors are identified by <paramref name="portId"/> and <paramref name="address"/>.
+            If there is no sensor registered with the <paramref name="portId"/> and <paramref name="address"/> do nothing.
+            </summary>
+            <param name="deviceId">Device identifier.</param>
+            <param name="portId">Number of sensor port.</param>
+            <param name="address">Address of sensors data.</param>
+            <param name="values">DateTime - Value pairs of the sensor data.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Wcf.TelematicsService.GetDeviceIdentifierLastStatus(System.String,System.String)">
+            <summary>
+            Finds device last status by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
+            If the device is not found returns <c>null</c>.
+            </summary>
+            <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Device"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Wcf.TelematicsService.FindSensor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Finds sensor by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>, type and port identifier.
+            If the sensor is not found returns <c>null</c>.
+            </summary>
+            <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <param name="portId">Sensor port number.</param>
+            <param name="address">Sensor address.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Wcf.TelematicsService.FindSensorByType(System.String,System.String,System.String,System.String)">
+            <summary>
+            Finds sensor by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>, type and port identifier.
+            If the sensor is not found returns <c>null</c>.
+            </summary>
+            <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
+            <param name="devId">Identifier value according its <paramref name="type"/>.</param>
+            <param name="sensorType">Sensor type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.SensorType"/>.</param>
+            <param name="number">Sensor number.</param>
+            <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilter.Execute(TotalApi.Telematics.CoordinatePoints,TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters)">
+            <summary>
+            Данный фильтр должен пометить точки трека, которые являются разрывами, установив свойство <see cref="P:TotalApi.Telematics.CoordinatePoint.IsBreak"/> в <c>true</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.Execute(TotalApi.Telematics.CoordinatePoints,TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters)">
+            <summary>
+            //Данный фильтр должен пометить точки трека, которые не попадают в указанный диапазон скорости, установив свойство <see cref="P:TotalApi.Telematics.CoordinatePoint.CanOptimize"/> в <c>false</c>.
+            //Кроме того данный фильтр дописывает дополнительный расчётный параметр - ускорение в каждой точке.
+            
+            Данный фильтр помечает точки превышения дозволенной скорости, а также сглаживает трек по скорости, помечая точки точки для возможного удаления потом SimplificateFilter
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper">
+            <summary>
+            Обертка для передачи в фильтр скорости и даты вместо долготы и широты
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper.#ctor(TotalApi.Telematics.CoordinatePoint,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="p">Оборачиваемая точка</param>
+            <param name="firstDate">Дата первой точки из набора, тики</param>
+        </member>
+        <member name="F:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper.dateSec">
+            <summary>
+            Время, прошедшее от первой координаты, секунды
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilter.Execute(TotalApi.Telematics.CoordinatePoints,TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters)">
+            <summary>
+            Данный фильтр должен пометить точки трека, которые являются остановками, установив свойство <see cref="P:TotalApi.Telematics.CoordinatePoint.IsStop"/> в <c>true</c>.
+            В зависимости от значения <see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters.Action"/> параметра <paramref name="prms"/> точки, являющиеся или не являющиеся остановками
+            могут быть выкинуты из трека.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilter.FindStop(TotalApi.Telematics.Coordinate,TotalApi.Telematics.Coordinate,TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters,System.TimeSpan@,System.Boolean@)">
+            <summary>
+            Пытается определить параметры остановки между точками,
+            если остановки или стоянки не было возвращает null
+            </summary>
+            <param name="current"></param>
+            <param name="next"></param>
+            <param name="prms"></param>
+            <param name="stopDuration">Если была остановка возвращается ее продолжительность, если не было нулевой таймспан</param>
+            <param name="inFirstPoint">True если остановка в current точке, False если в next</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Reference">
+            <summary>
+            Фейковый класс, необходимый для того, чтобы на сборку можно было сослаться по имени публичного класса.
+            Например, для явного подключения сборки в MEF-приложению достаточно перед инициализацией бутстраппера написать
+            <code>
+                AssemblySource.Add&lt;Telematics.Reference&gt;();
+            </code>
+            </summary>
+        </member>
+    </members>
+</doc>
