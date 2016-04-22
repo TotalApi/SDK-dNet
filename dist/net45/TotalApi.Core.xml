@@ -4,11 +4,6 @@
         <name>TotalApi.Core</name>
     </assembly>
     <members>
-        <member name="T:TotalApi.Core.Api.ICustomers">
-            <summary>
-            Interface of a Customer repository item.
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartupTask">
             <summary>
             Interface for automatic modules async task startup.
@@ -31,27 +26,6 @@
             <summary>
             Starts the console listening.
             </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.ConsoleKeyHandlersManager.Init">
-            <summary>
-            Initializes this instance.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler">
-            <summary>
-            Used for handling keyboard keys.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.Init">
-            <summary>
-            Called on the start of the application. Could be used for displaying commands decription in a console.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
-            <summary>
-            Keyboard key press handler.
-            </summary>
-            <param name="key"></param>
         </member>
         <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
             <summary>
@@ -465,7 +439,12 @@
             Base abstract class for any custom loggers.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.BaseLogger.AsyncLogging">
+        <member name="F:TotalApi.Core.Api.BaseLogger.ConfigSectionName">
+            <summary>
+            The name of the section with settings in <c>app.config</c> file.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.AsyncLogging">
             <summary>
             Gets or set whether log writing is asyncronous.
             </summary>
@@ -650,6 +629,36 @@
             but for unit testing, values of testing interfaces should be initialized by correspondent mock oblects.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.SSBilling">
+            <summary>
+            The exception code of billing subsystem.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.SSRepository">
+            <summary>
+            The exception code of repository subsystem.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.EEntityClassIsNotRegistered">
+            <summary>
+            The entity class is not registered.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.ESubSystemNotRegistered">
+            <summary>
+            Subsystem could not be registered because it does not exist.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.ESubSystemDisabled">
+            <summary>
+            Subsystem could not be registered because it is disabled.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.EBillingDatabaseModuleAbsent">
+            <summary>
+            Billing database module is absent. Database context is not available.
+            </summary>
+        </member>
         <member name="F:TotalApi.Core.Api.CoreApi.TelematicsSubSystem">
             <summary>
             Код телематической подсистемы
@@ -712,6 +721,27 @@
         <member name="T:TotalApi.Core.Api.IApplications">
             <summary>
             Interface of a Application repository item.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.IInternalApplications">
+            <summary>
+            Internal application interface
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.IInternalApplications.RemoveApiKey(TotalApi.Billing.Application)">
+            <summary>
+            Executed before application removing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.IInternalApplications.ChangeApiKey(System.String,TotalApi.Billing.Application)">
+            <summary>
+            Executed before application ApiKey changing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.IInternalApplications.ApiRestrictionsChanged(TotalApi.Billing.Application)">
+            <summary>
+            Executed after application restrictions changing.
+            If <paramref name="app"/> is <c>null</c> - application has been removed.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.ITotalApiCoreEvents">
@@ -843,6 +873,11 @@
               <c>true</c> if append; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Persistent">
+            <summary>
+            Gets or sets a value indicating whether to log file should be saved on restarting application. The option <seealso cref="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Append"/> overrides this setting.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.Console">
             <summary>
             Gets or sets a value indicating whether to replicate message to console.
@@ -850,6 +885,26 @@
             <value>
               <c>true</c> if write to console; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDaysStr">
+            <summary>
+            Gets or sets days period when the log file should be auto splitted.
+            </summary>
+            <value>
+            One of the next string values:
+            0 or false - file is not splitted (by default)
+            {N} or true - file is splitted every N days (the old file name is <c>{logfileName}_{priorDate}.{logFileExt}</c>). The clause <c>days</c> can be avoid.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitDays">
+            <summary>
+            Gets or sets days period when the log file should be auto splitted.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.TotalApiLogFileElement.SplitSizeMb">
+            <summary>
+            Gets or sets max log file size in Mb after which it should be auto splitted.
+            </summary>
         </member>
         <member name="P:TotalApi.Core.Api.FileLoggerConfiguration.Files">
             <summary>
@@ -1141,6 +1196,12 @@
             </summary>
             <typeparam name="TEntityObject">The type of the entity object.</typeparam>
         </member>
+        <member name="M:TotalApi.Core.Api.Repository`1.CreateDbContext">
+            <summary>
+            Creates the database context for the repository class.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TotalApi.Core.Api.Repository`1.ExecuteQuery(System.Func{System.Linq.IQueryable{`0},System.Linq.IQueryable{`0}})">
             <summary>
             Executes the query using a query function.
@@ -1297,6 +1358,150 @@
             </summary>
             <param name="id">Deletes object by its identifier.</param>
         </member>
+        <member name="T:TotalApi.Core.Api.Statistics.TimeWindow`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.TimeWindow`1.Timestamp">
+            <summary>
+            The timestamp function
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.TimeWindow`1.WindowDefaultSize">
+            <summary>
+            Gets or sets the size of the window.
+            </summary>
+            <value>
+            The size of the window.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeWindow`1.#ctor(System.Func{System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0}},System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.TimeWindow`1" /> class.
+            </summary>
+            <param name="timestampFunc">The timestamp function.</param>
+            <param name="defaultTimestamp">The default timestamp.</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.PredefinedStatisticsFunctions">
+            <summary>
+            Represents statistics functions
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint">
+            <summary>
+            Class representing the point in a time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint.As``1">
+            <summary>
+            Clones as object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint.CreateDictionary(System.Object,System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint.Create``1(``0,System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="timestamp"></param>
+            <typeparam name="TValue"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint.CreateMany``1(``0,System.DateTime)">
+            <summary>
+            Creates the many points.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="timestamp">The timestamp.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint.CreateMany``1(System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint})">
+            <summary>
+            Creates the many points.
+            </summary>
+            <param name="sequence">The sequence.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1">
+            <summary>
+            Class representing the point in a time.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.UtcDate">
+            <summary>
+            Gets the timestamp.
+            </summary>
+            <value>
+            The timestamp.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.#ctor(`0,System.Nullable{System.DateTime})">
+            <summary>
+            The UTC timestamp
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.Equals(TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0},TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0})">
+            <summary>
+            Equalses the specified x.
+            </summary>
+            <param name="x">The x.</param>
+            <param name="y">The y.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.GetHashCode(TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0})">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <param name="obj">The object.</param>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.Clone">
+            <summary>
+            Clones this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.As``1">
+            <summary>
+            Clones as object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TimeSeriesDataPoint`1.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader">
             <summary>
             Interface for gathering statistics information
@@ -1310,24 +1515,24 @@
             The priority.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExecutionTime(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetObjects``1(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsFunction)">
             <summary>
-            Gets the execution time for a method, in milliseconds.
+            Gets the saved statistic objects by period saved with <see cref="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveObject``1(TotalApi.Core.Api.Statistics.IStatisticsSource,``0,System.String)"/>.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExceptionInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetExceptionInfo(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsFunction)">
             <summary>
-            Gets the exception information.
+            Gets the exceptions count by period stored with <see cref="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExceptionInfo(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Exception,System.String)"/>.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetPerformanceCounterValues(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetMetricValues(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsFunction)">
             <summary>
-            Get the performance counter values.
+            Get the metric values.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetLoadInfo(System.String,TotalApi.Core.Api.Statistics.DateTimeRange,TotalApi.Core.Api.Statistics.StatisticsQueryType)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticReader.GetCounterValue(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.DateTimeRange)">
             <summary>
-            Gets the load information, actually number of total method calls per period./>.
+            Get the counter value.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.ITotalApiStatisticsAnalyzer">
@@ -1340,252 +1545,239 @@
             Interface for gathering statistics information
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExecutionTime``1(``0,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveObject``1(TotalApi.Core.Api.Statistics.IStatisticsSource,``0,System.String)">
             <summary>
-            Saves execution time for a method, in milliseconds.
+            Saves the object.
             </summary>
+            <typeparam name="TValue">Type of value. Can be <see cref="T:System.Collections.Generic.IDictionary`2"/> or object.</typeparam>
             <param name="callerStatistics">Caller statistics.</param>
-            <param name="executionTimeMs">Execution time in milliseconds.</param>
+            <param name="value">Value object. Can be <see cref="T:System.Collections.Generic.IDictionary`2"/> or object.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExceptionInfo``1(``0,System.Exception)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveExceptionInfo(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Exception,System.String)">
             <summary>
             Saves the exception information.
             </summary>
             <param name="callerStatistics">Caller statistics.</param>
             <param name="exception">The exception.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.IncrementPerformanceCounter``1(``0)">
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveMetricValue(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Double,System.String)">
+            <summary>
+            Sets the metric value.
+            </summary>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.IncrementCounter(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Double,System.String)">
             <summary>
             Increments the call counter.
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="callerStatistics">The caller statistics.</param>
+            <param name="incrementValue">The increment value</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SetPerformanceCounterValue``2(``0,``1)">
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.SubSystemName">
             <summary>
-            Sets the call counter value.
+            Statistics source subsystem name.
+            For client application - equal entry assembly name.
             </summary>
-            <typeparam name="T">Type of the statistic source.</typeparam>
-            <typeparam name="TValue">Type of value.</typeparam>
-            <param name="callerStatistics">The caller statistics.</param>
-            <param name="value">Value to set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ITotalApiStatisticWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.SSID">
             <summary>
-            Saves the load information, actually number of total method calls per period set period of calculation./>.
+            Statistics source subsystem SSID.
+            For client application and billing sybsystem - empty string.
             </summary>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="load">Number of method calls per second.</param>
-            <param name="timeMs">Time in milliseconds</param>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.ComputerName">
+            <summary>
+            Statistics source computer name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.ModuleName">
+            <summary>
+            Statistics source main module name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.MethodName">
+            <summary>
+            Statistics source executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.OperationName">
+            <summary>
+            Statistics source operation name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.ApiKey">
+            <summary>
+            Statistics source ApiKey
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.CallerIpAddress">
+            <summary>
+            Statistics source caller ip address.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.MetricValue.ServiceMethodName">
+            <summary>
+            Statistics source caller service method name
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter">
             <summary>
-            Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/>
+            Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter"/>
             </summary>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
             <summary>
-            Gets or sets the width of the time window.
+            Gets or sets the value of time window period in milliseconds.
             </summary>
-            <value>
-            The width of the time window.
-            </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExecutionTime``1(``0,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.GetInitialCounterTotalValue(TotalApi.Core.Api.Statistics.IStatisticsSource,System.String)">
             <summary>
-            Saves execution time for a method, in milliseconds.
+            Gets the initial counter total value.
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="callerStatistics">Caller statistics.</param>
-            <param name="executionTimeMs">Execution time in milliseconds.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExceptionInfo``1(``0,System.Exception)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.StopCounters">
+            <summary>
+            Stops the counters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.StartCounters">
+            <summary>
+            Starts the counters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.InternalSaveExceptionInfo(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Collections.Generic.IList{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Double}},System.Int64,System.String)">
             <summary>
             Saves the exception information.
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="callerStatistics">Caller statistics.</param>
-            <param name="exception">The exception.</param>
+            <param name="values"></param>
+            <param name="timeMs">Time in milliseconds</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.IncrementPerformanceCounter``1(``0)">
-            <summary>
-            Increments the call counter.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="callerStatistics">The caller statistics.</param>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SetPerformanceCounterValue``2(``0,``1)">
-            <summary>
-            Sets the call counter value.
-            </summary>
-            <typeparam name="T">Type of the statistic source.</typeparam>
-            <typeparam name="TValue">Type of value.</typeparam>
-            <param name="callerStatistics">The caller statistics.</param>
-            <param name="value">Value to set.</param>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveLoadInfo``2(``0,``1,System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.InternalSaveMetricValue(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Collections.Generic.IList{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Double}},System.Int64,System.String)">
             <summary>
             Saves the load information, actually number of total method calls per period set period of calculation./>.
             </summary>
             <param name="callerStatistics">Caller statistics.</param>
-            <param name="load">Number of method calls per second.</param>
+            <param name="values"></param>
             <param name="timeMs">Time in milliseconds</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.InternalIncrementCounter(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Collections.Generic.IList{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Double}},System.Int64,System.String)">
+            <summary>
+            Saves the counter total value.
+            </summary>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="values"></param>
+            <param name="timeMs">Time in milliseconds</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.InternalSaveObject(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Collections.Generic.IDictionary{System.String,System.Object}},System.String)">
+            <summary>
+            Saves the object.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="value"></param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveExceptionInfo(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Exception,System.String)">
+            <summary>
+            Saves the exception information.
+            </summary>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="exception">The exception.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.IncrementCounter(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Double,System.String)">
+            <summary>
+            Increments the call counter.
+            </summary>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="incrementValue">Value of the counter.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveMetricValue(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Double,System.String)">
+            <summary>
+            Sets the call counter value.
+            </summary>
+            <param name="callerStatistics">The caller statistics.</param>
+            <param name="value">Value to set.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.SaveObject``1(TotalApi.Core.Api.Statistics.IStatisticsSource,``0,System.String)">
+            <summary>
+            Saves the object.
+            </summary>
+            <typeparam name="TValue">Type of value. Can be <see cref="T:System.Collections.Generic.IDictionary`2"/> or object.</typeparam>
+            <param name="callerStatistics">Caller statistics.</param>
+            <param name="value">Value object. Can be <see cref="T:System.Collections.Generic.IDictionary`2"/> or object.</param>
+            <param name="apiKey">ApiKey value. If not set - current ApiKey will be used if it is set.</param>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatistics">
             <summary>
             Class for representing basic statistics of method call by the remote client.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Id">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ApiKey">
             <summary>
-            Statistics source unique identifier.
+            Statistics source ApiKey
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ModuleName">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.ServiceMethodName">
             <summary>
-            ModuleName name.
+            Returns current operation context as string.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.MethodName">
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.CallerIpAddress">
             <summary>
-            Executing method name.
+            Returns caller ip address.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.OperationName">
-            <summary>
-            Executing method name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.Tags">
-            <summary>
-            Gets the tags values.
-            </summary>
-            <value>
-            The tags.
-            </value>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatistics.TimeStampUtc">
-            <summary>
-            Get the execution start time.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
-            </summary>
-            <param name="moduleName">Name of the module.</param>
-            <param name="methodName">Name of the method.</param>
-            <param name="operationName">Operation name.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
-            <summary>
-            Prevents a default instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics"/> class from being created.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.String,System.String,System.String)">
             <summary>
             Creates the statistics class.
             </summary>
             <param name="operationName">Operation name.</param>
             <param name="methodName">Method name.</param>
             <param name="moduleName">ModuleName name.</param>
-            <param name="startDateTime">The start date time.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.Create(System.Reflection.MethodBase,System.String)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="sourceMethod"></param>
+            <param name="operationName">Operation name.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics" /> class.
+            </summary>
+            <param name="moduleName">Name of the module.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="operationName">Operation name.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:TotalApi.Core.Api.Statistics.ExecutionStatistics"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.CreateFilter(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates filter for the statistics class.
+            </summary>
+            <param name="operationName">Operation name filter.</param>
+            <param name="methodName">Method name filter.</param>
+            <param name="moduleName">ModuleName name filter.</param>
+            <param name="apiKey">ApiKey filter</param>
             <returns></returns>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatistics.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents the execution.
-            </summary>
-            <returns>
-            A <see cref="T:System.String" /> that represents the execution.
-            </returns>
-        </member>
-        <member name="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics">
-            <summary>
-            Class for representing basic statistics of method call by the remote client.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.RaisedException">
-            <summary>
-            Gets the raised exception.
-            </summary>
-            <value>
-            The raised exception.
-            </value>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.Create(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
-            <summary>
-            Creates the statistics class.
-            </summary>
-            <param name="exception">The raised exception.</param>
-            <param name="operationName">Name of the operation.</param>
-            <param name="methodName">Name of the method.</param>
-            <param name="moduleName">Module name.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.#ctor(System.Exception,System.String,System.String,System.String,System.Nullable{System.DateTime})">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics" /> class.
-            </summary>
-            <param name="exception">Exception</param>
-            <param name="operationName">Name of the operation.</param>
-            <param name="methodName">Name of the method.</param>
-            <param name="moduleName">Module name.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.ErrorExecutionStatistics.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents caller statistics.
-            </summary>
-            <returns>
-            A <see cref="T:System.String" /> that represents caller statistics.
-            </returns>
-        </member>
-        <member name="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics">
-            <summary>
-            Class for representing basic statistics of method call by the remote client.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Instance">
-            <summary>
-            Gets the instance.
-            </summary>
-            <value>
-            The instance.
-            </value>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.Create(System.String,System.String,System.String,System.Nullable{System.DateTime})">
-            <summary>
-            Creates the statistics class.
-            </summary>
-            <param name="operationName"></param>
-            <param name="methodName">Name of the method.</param>
-            <param name="moduleName">Module name.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime})">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics" /> class.
-            </summary>
-            <param name="operationName">Name of the operation.</param>
-            <param name="methodName">Name of the method.</param>
-            <param name="moduleName">Module name.</param>
-            <param name="startDateTimeUtc">The start date time.</param>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CurrentOperationContext">
-            <summary>
-            Returns current operation context as string.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.CallerIpAddress">
-            <summary>
-            Returns caller ip address.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RemoteExecutionStatistics.ToString">
             <summary>
             Returns a <see cref="T:System.String" /> that represents caller statistics.
             </summary>
@@ -1597,7 +1789,28 @@
             <summary>
             Performance counter for operations.
             </summary>
-            <typeparam name="T">Statistics object as the target of performance counter.</typeparam>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Window">
+            <summary>
+            Gets the time window.
+            </summary>
+            <value>
+            The time window.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Values">
+            <summary>
+            Gets the timeseries points.
+            </summary>
+            <value>
+            The timeseries points.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.SetInitialCounterTotalValue(System.Double)">
+            <summary>
+            Sets the initial counter total value.
+            </summary>
+            <param name="count">The count.</param>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IsRunning">
             <summary>
@@ -1615,13 +1828,24 @@
             The statistics object.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.#ctor(`0,System.Boolean,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.StatisticFunction">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1"/> class.
+            Gets the statistic function.
+            </summary>
+            <value>
+            The statistic function.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.#ctor(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Func{System.Double},System.Boolean,System.Int64,System.Func{System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0}},System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0}}},System.Func{System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0}},System.TimeSpan})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1" /> class.
             </summary>
             <param name="source">The source.</param>
+            <param name="initialCounterTotalValue">Initial counter total value</param>
             <param name="startImmediate">if set to <c>true</c> starts immediate.</param>
             <param name="timeWindowMs">The time window in ms.</param>
+            <param name="statFunc">The statistic function.</param>
+            <param name="gradient">Timestamp function.</param>
         </member>
         <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.Start">
             <summary>
@@ -1633,12 +1857,17 @@
             Stops thie counter.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IncrementCounter(System.Int32)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IncrementCounter(System.Double)">
             <summary>
             Increments the counter.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.SetRawValue(System.Int64)">
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.IncrementCounter(TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Double})">
+            <summary>
+            Increments the counter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.SetRawValue(TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0})">
             <summary>
             Sets the raw value.
             </summary>
@@ -1654,14 +1883,6 @@
             Arguments for counter timer elapsed.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimestampUtc">
-            <summary>
-            Gets the timestamp.
-            </summary>
-            <value>
-            The timestamp.
-            </value>
-        </member>
         <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TimeElapsedMs">
             <summary>
             Gets the time elapsed in ms.
@@ -1670,20 +1891,28 @@
             The time elapsed in ms.
             </value>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.Count">
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.Values">
             <summary>
-            Gets the calls count.
+            Gets the counter values.
             </summary>
             <value>
-            The calls count.
+            The counter values.
             </value>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.#ctor(System.DateTime,System.Int64,System.Int64)">
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.TotalCount">
+            <summary>
+            Gets the total count.
+            </summary>
+            <value>
+            The total count.
+            </value>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs.#ctor(System.Collections.Generic.IEnumerable{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{`0}},System.Double,System.Int64)">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.PerformanceCounterEventArgs"/> class.
             </summary>
-            <param name="timeStamp">TimestampUtc of the single counter calculation.</param>
-            <param name="count">The calls count.</param>
+            <param name="values">The counter values.</param>
+            <param name="totalCount">Total counter count.</param>
             <param name="time">The time elapsed.</param>
         </member>
         <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceMeasured">
@@ -1691,9 +1920,92 @@
             Occurs when performance counter period exceeded.
             </summary>
         </member>
-        <member name="E:TotalApi.Core.Api.Statistics.RealtimePerformanceCounter`1.OnPerformanceCounterValueChanged">
+        <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatisticsData">
             <summary>
-            Occurs when performance counter value changed.
+            Implements base class for Execution statistics and Execution statistics filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.SubSystemName">
+            <summary>
+            Statistics source subsystem name.
+            For client application - equal entry assembly name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.SSID">
+            <summary>
+            Statistics source subsystem SSID.
+            For client application and billing sybsystem - empty string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.ComputerName">
+            <summary>
+            Statistics source computer name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.ModuleName">
+            <summary>
+            Statistics source main module name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.MethodName">
+            <summary>
+            Statistics source executing method name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.OperationName">
+            <summary>
+            Statistics source operation name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.ApiKey">
+            <summary>
+            Statistics source ApiKey
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.CallerIpAddress">
+            <summary>
+            Statistics source caller ip address.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.ServiceMethodName">
+            <summary>
+            Statistics source caller service method name
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.Tags">
+            <summary>
+            Statistics source tags values.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.UserData">
+            <summary>
+            Any user data. Not written to stat database.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.IsException">
+            <summary>
+            Gets or sets the flag whether the source is error source.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.Clone(System.Action{TotalApi.Core.Api.Statistics.IStatisticsSource})">
+            <summary>
+            Creates the source clone.
+            </summary>
+            <param name="changeAction">Action called with cloned object as a parameter.</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatisticsHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatisticsHelper.Join(System.Collections.Generic.IList{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{TotalApi.Core.Api.Statistics.MetricValue}},System.Boolean)">
+            <summary>
+            Joins list of metric value series in a one metric value according its type.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatisticsHelper.Join(System.Collections.Generic.IList{TotalApi.Core.Api.Statistics.TimeSeriesDataPoint{System.Double}})">
+            <summary>
+            Joins list of counter value series in a one counter value.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.Statistics.TotalApiStatistics">
@@ -1705,6 +2017,11 @@
             </summary>
             <summary>
             Default implementation of the TotalApi statistics interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.TotalApiStatistics.GetCounterValue(TotalApi.Core.Api.Statistics.IStatisticsSource,TotalApi.Core.Api.Statistics.DateTimeRange)">
+            <summary>
+            Get the counter value.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.TotalApiStatistics.Instance">
@@ -1736,11 +2053,6 @@
         <member name="T:TotalApi.Core.Api.Statistics.IStatisticsSource">
             <summary>
             Interface representing the source object of the statistics data.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Id">
-            <summary>
-            Statistics source unique identifier.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.SubSystemName">
@@ -1775,22 +2087,41 @@
             Statistics source operation name.
             </summary>
         </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ApiKey">
+            <summary>
+            Statistics source ApiKey
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.CallerIpAddress">
+            <summary>
+            Statistics source caller ip address.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.ServiceMethodName">
+            <summary>
+            Statistics source caller service method name
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.Tags">
             <summary>
             Statistics source tags values.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc">
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.UserData">
             <summary>
-            Get the execution start time.
+            Any user data. Not written to stat database.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Api.Statistics.IStatisticsSource.Update(TotalApi.Core.Api.Statistics.IStatisticsSource,System.Nullable{System.DateTime})">
+        <member name="P:TotalApi.Core.Api.Statistics.IStatisticsSource.IsException">
             <summary>
-            Updates the specified owner.
+            Gets or sets the flag whether the source is error source.
             </summary>
-            <param name="source">The event source.</param>
-            <param name="timeStampUtc">Force <see cref="P:TotalApi.Core.Api.Statistics.IStatisticsSource.TimeStampUtc"/> to update its value</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.Statistics.IStatisticsSource.Clone(System.Action{TotalApi.Core.Api.Statistics.IStatisticsSource})">
+            <summary>
+            Creates the source clone.
+            </summary>
+            <param name="changeAction">Action called with cloned object as a parameter.</param>
         </member>
         <member name="T:TotalApi.Core.Api.AsyncTaskResult">
             <summary>
@@ -2163,54 +2494,147 @@
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
         </member>
+        <member name="T:TotalApi.Core.Authentication.TotalApiAuthenticationType">
+            <summary>
+            Authentication types.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AuthPropertyName">
+            <summary>
+            Name of the property, in the WCF packet of request header (in uppercase), indicating 
+            authentication type, or indicating the name of property with authentication data in the connection string.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser">
+            <summary>
+            Application key + User login authorization type.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey">
+            <summary>
+            Api key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SSID">
+            <summary>
+            Subsystem key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppKey">
+            <summary>
+            Application key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SessionKey">
+            <summary>
+            Session key authorization.
+            This authorization type could be set for a short time just for initial check. After check - authorization type could change to <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/>.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiIdentity">
             <summary>
-            Authorization identity class.
+            TotalApi authorization identity class extensions.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.ApiKey">
+        <member name="F:TotalApi.Core.Authentication.TotalApiIdentity.AuthIssuer">
             <summary>
-            Gets or sets the API key.
+            Издатель клаймов для <see cref="T:TotalApi.Core.Authentication.TotalApiIdentity"/>.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.AppKey">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.ApiKey(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the application key.
+            Unique secret identifier of the application using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.AppUser">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.AppKey(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the application user.
+            Unique public identifier of the application using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.SSID">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.UserLogin(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the ssid.
+            Login of the user using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.SessionKey">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.UserPassword(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the session key.
+            Password of the user using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.UserPassword">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.UserId(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the user password.
+            Id of the user using the API.
+            Not set on the client side, but must be set on the server side when checking authentication.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.UserId">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.SessionKey(System.Security.Principal.IIdentity)">
             <summary>
-            Gets or sets the user identifier.
+            Unique session identifier using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.AuthenticationType">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.SSID(System.Security.Principal.IIdentity)">
             <summary>
-            Gets the authentication type.
+            Unique secret identifier of the sub system using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiIdentity.IsAuthenticated">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.ClientId(System.Security.Principal.IIdentity)">
             <summary>
-            Gets a value that indicates whether the identity has been authenticated.
+            Unique identifier of the client using the API. Recreated on each start the client.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.Origin(System.Security.Principal.IIdentity)">
+            <summary>
+            Defined on server side. Remote origin address info about connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.ToJson(System.Security.Principal.IIdentity)">
+            <summary>
+            Converts current identity to json.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.FromJson(System.Security.Principal.IIdentity,System.String)">
+            <summary>
+            Deserializes identity from json.
+            </summary>
+            <param name="identity">The claims identity</param>
+            <param name="jsonString">The json string.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Authentication.TotalApiRole">
+            <summary>
+            TotalApi authorization roles
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.SuperApiKeyRole">
+            <summary>
+            Super api-key authorization.
+            Used as a role.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.AppUser">
+            <summary>
+            Application key + User login authorization type.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.ApiKey">
+            <summary>
+            Api key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.SSID">
+            <summary>
+            Subsystem key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.AppKey">
+            <summary>
+            Application key authorization.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.ApiKeyUser">
+            <summary>
+            Authorization using application user key or api key.
+            Used as a role when <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/> used.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Authentication.AuthorizedAttribute">
@@ -2250,58 +2674,14 @@
             A serializable permission object.
             </returns>
         </member>
-        <member name="T:TotalApi.Core.Authentication.TotalApiAuthenticationType">
-            <summary>
-            Authentication types.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AuthPropertyName">
-            <summary>
-            Name of the property, in the WCF packet of request header (in uppercase), indicating 
-            authentication type, or indicating the name of property with authentication data in the connection string.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser">
-            <summary>
-            Application key + User login authorization type.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKeyUser">
-            <summary>
-            Authorization using application user key or api key.
-            Used as a role when <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AuthPropertyName"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/> used.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey">
-            <summary>
-            Api key authorization.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SSID">
-            <summary>
-            Subsystem key authorization.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppKey">
-            <summary>
-            Application key authorization.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SessionKey">
-            <summary>
-            Session key authorization.
-            This authorization type could be set for a short time just for initial check. After check - authorization type could change to <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/>.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.SuperApiKeyRole">
-            <summary>
-            Super api-key authorization.
-            Used as a role.
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiAuth">
             <summary>
             Authentication information that should be transfered during services requests.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Authentication.TotalApiAuth.CurrentClientId">
+            <summary>
+            Gets or sets current client Id. Do not change this value manually.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiAuth.CheckAuth">
@@ -2310,10 +2690,10 @@
             Returns true if authenctication is valid.
             <para></para>
             The hanlder must resolve all properties that it can:<para></para>
-                <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey"/> by <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey"/><para></para>
-                <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.UserId"/> by <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey"/> and <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.UserLogin"/><para></para>
+                <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey(System.Security.Principal.IPrincipal)"/> by <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey(System.Security.Principal.IPrincipal)"/><para></para>
+                <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.UserId(System.Security.Principal.IPrincipal)"/> by <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey(System.Security.Principal.IPrincipal)"/> and <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.UserLogin(System.Security.Principal.IPrincipal)"/><para></para>
             NEVER assign<para></para>
-                <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey"/> by <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey"/>
+                <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey(System.Security.Principal.IPrincipal)"/> by <see cref="M:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey(System.Security.Principal.IPrincipal)"/>
             </summary>
         </member>
         <member name="M:TotalApi.Core.Authentication.TotalApiAuth.ThrowNotAuthorizedException(System.Boolean,System.String)">
@@ -2379,6 +2759,11 @@
             Служит для временной аутентификации. По окончании - восстанавливает предыдущее состояние аутентификации.
             </summary>
         </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiAuth.SetAuth(System.Security.Principal.IPrincipal)">
+            <summary>
+            Служит для временной аутентификации. По окончании - восстанавливает предыдущее состояние аутентификации.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Authentication.TotalApiAuth.ClientId">
             <summary>
             Returns unique client identifier.
@@ -2389,193 +2774,400 @@
             Currently used authentication type.
             </summary>
         </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiAuth.CheckAuthType(System.String[])">
+            <summary>
+            Checks whether the current identification is autorized to the <paramref name="authTypes"/>.
+            </summary>
+            <param name="authTypes">The list of the authorizatin roles.</param>
+        </member>
         <member name="P:TotalApi.Core.Authentication.TotalApiAuth.IsAuthenticated">
             <summary>
             If True - user is authenticated, otherwise - not authenticated.
             </summary>
-        </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiAuth.Set">
-            <summary>
-            Check the <see cref="P:TotalApi.Core.Authentication.TotalApiPrincipal.Current"/> for valid auth and set <see cref="P:System.Threading.Thread.CurrentPrincipal"/>
-            if authentication is valid.
-            </summary>
-            <returns><c>true</c> if authentication is valid. <c>false</c> - otherwise.</returns>
         </member>
         <member name="M:TotalApi.Core.Authentication.TotalApiAuth.Clear">
             <summary>
             Clear all authentification info. <see cref="P:TotalApi.Core.Authentication.TotalApiAuth.ClientId"/> is not cleared.
             </summary>
         </member>
-        <member name="T:TotalApi.Core.Authentication.TotalApiClaimsIdentity">
-            <summary>
-            Authorization claims identity class.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Authentication.TotalApiClaimsIdentity.AuthIssuer">
-            <summary>
-            Издатель клаймов для <see cref="T:TotalApi.Core.Authentication.TotalApiIdentity"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.ApiKey">
-            <summary>
-            Gets or sets the API key.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.AppKey">
-            <summary>
-            Gets or sets the application key.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.AppUser">
-            <summary>
-            Gets or sets the application user.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.SSID">
-            <summary>
-            Gets or sets the ssid.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.SessionKey">
-            <summary>
-            Gets or sets the session key.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.UserPassword">
-            <summary>
-            Gets or sets the user password.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiClaimsIdentity.UserId">
-            <summary>
-            Gets or sets the user identifier.
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.Authentication.TotalApiPrincipal">
             <summary>
-            Authorization principal class.
+            TotalApi authorization principal class extensions.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.IsPrimary">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Clone(System.Security.Principal.IPrincipal,System.String)">
             <summary>
-            Gets or sets a value indicating whether this instance is primary.
-            </summary>
-            <value>
-            <c>true</c> if this instance is primary; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.Current">
-            <summary>
-            Gets the current principal.
+            Create this instance using <paramref name="principal"/>.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Clone">
-            <summary>
-            Clones this instance.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.Identity">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Identity(System.Security.Principal.IPrincipal)">
             <summary>
             Gets the primary claims identity associated with this claims principal.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Create(System.String)">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateFromJson(System.String)">
             <summary>
             Creates the principal using json information.
             </summary>
             <param name="jsonInfo">The json information.</param>
             <returns></returns>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Create(System.String,System.String)">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateWithApiKey(System.String,System.String)">
             <summary>
-            Creates the principal using API key and used identifier.
+            Creates the principal using ApiKey auth.
             </summary>
-            <param name="apiKey">The API key.</param>
-            <param name="userId">The user identifier.</param>
             <returns></returns>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateWithApiKeyUser(System.String,System.String,System.String)">
+            <summary>
+            Creates the principal using ApiKey auth.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateWithAppKey(System.String,System.String)">
+            <summary>
+            Creates the principal using AppKey auth.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateWithSSID(System.String,System.String)">
+            <summary>
+            Creates the principal using SSID auth.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateWithUserPassword(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates the principal using AppKey+Login+Password auth.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.ApiKey(System.Security.Principal.IPrincipal)">
             <summary>
             Unique secret identifier of the application using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.AppKey(System.Security.Principal.IPrincipal)">
             <summary>
             Unique public identifier of the application using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.SessionKey">
-            <summary>
-            Unique session identifier using the API
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.SSID">
-            <summary>
-            Unique secret identifier of the sub system using the API
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.UserLogin">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.UserLogin(System.Security.Principal.IPrincipal)">
             <summary>
             Login of the user using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.UserPassword">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.UserPassword(System.Security.Principal.IPrincipal)">
             <summary>
             Password of the user using the API
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.UserId">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.UserId(System.Security.Principal.IPrincipal)">
             <summary>
             Id of the user using the API.
             Not set on the client side, but must be set on the server side when checking authentication.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.ClientId">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.SessionKey(System.Security.Principal.IPrincipal)">
+            <summary>
+            Unique session identifier using the API
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.SSID(System.Security.Principal.IPrincipal)">
+            <summary>
+            Unique secret identifier of the sub system using the API
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.ClientId(System.Security.Principal.IPrincipal)">
             <summary>
             Unique identifier of the client using the API. Recreated on each start the client.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.Origin">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Origin(System.Security.Principal.IPrincipal)">
             <summary>
             Defined on server side. Remote origin address info about connection.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.ToJson">
-            <summary>
-            Converts current principal to json.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Clear(System.Boolean)">
-            <summary>
-            Clears current principal properties.
-            </summary>
-            <param name="saveClientId">if set to <c>true</c> saves client identifier.</param>
-        </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.FromJson(System.String)">
-            <summary>
-            Deserializes principal from json.
-            </summary>
-            <param name="jsonString">The json string.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.IsInRole(System.String)">
-            <summary>
-            Returns a value that indicates whether the entity (user) represented by this claims principal is in the specified role.
-            </summary>
-            <param name="role">The role for which to check.</param>
-            <returns>
-            true if claims principal is in the specified role; otherwise, false.
-            </returns>
-        </member>
-        <member name="P:TotalApi.Core.Authentication.TotalApiPrincipal.Header">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.Header(System.Security.Principal.IPrincipal)">
             <summary>
             Converts the current instance from/to the web query header.
             Supports three input formats which can be encoded  with Base64 or not encoded:
               1. Raw: ...json data...
               2. Authorization Header: TOTALAPI ...json data...
               3. Query String: [?]auth=...json data...
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.SetHeader(System.Security.Principal.IPrincipal,System.String)">
+            <summary>
+            Converts the current instance from the web query header.
+            Supports three input formats which can be encoded  with Base64 or not encoded:
+              1. Raw: ...json data...
+              2. Authorization Header: TOTALAPI ...json data...
+              3. Query String: [?]auth=...json data...
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.ApiKeyLockLevel">
+            <summary>
+            Enum of the locking ApiKey levels
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.ApiKeyLockLevel.NoLock">
+            <summary>
+            No locking. Everything is ok.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.ApiKeyLockLevel.Warning">
+            <summary>
+            No locking, but and no payments. Just notify customer about it.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.ApiKeyLockLevel.LockData">
+            <summary>
+            Lock receiving data. Hard notification customer about it.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.ApiKeyLockLevel.LockApiKey">
+            <summary>
+            Lock using ApiKey.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.ApiKeyLockLevel.DestroyApiKey">
+            <summary>
+            ApiKey will be destroyed.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.CustomerOrder">
+            <summary>
+            Customer order
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.Id">
+            <summary>
+            Unique identifier
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.ApplicationId">
+            <summary>
+            Gets or sets the application identifier
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.Application">
+            <summary>
+            Gets or set the application object
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.OrderDate">
+            <summary>
+            Gets or sets the date of the next payment
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.PaymentDate">
+            <summary>
+            Gets or sets the payment date
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.Summa">
+            <summary>
+            Gets or sets the payment summa in USD.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.IsPaid">
+            <summary>
+            Gets or sets whether the payment is made.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.CustomerOrder.LockLevel">
+            <summary>
+            Gets or sets the current <see cref="P:TotalApi.Core.Billing.CustomerOrder.Application"/> <see cref="T:TotalApi.Core.Billing.ApiKeyLockLevel"/>.
+            The <see cref="P:TotalApi.Core.Billing.CustomerOrder.Application"/> property must be set.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.IBillingDbContext">
+            <summary>
+            Context interface for billing database.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.Session">
+            <summary>
+            Temporary session descriptor
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.Session.Id">
+            <summary>
+            Temporary session unique identifier
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.Session.ExpiredAt">
+            <summary>
+            Session validity date.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.Session.PrincipalInfo">
+            <summary>
+            Identification data for which the session was created.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.SubSystemExtensions">
+            <summary>
+            Implementation SubSystem extension methods
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUrl``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service contract string url of the subsystem
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUri``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service contract uri of the subsystem
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetService``1(TotalApi.Billing.SubSystem,System.String)">
+            <summary>
+            Gets service of the subsystem
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Billing.SubSystemManager">
+            <summary>
+            Subsystem manager.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsBillingSubSystemDown">
+            <summary>
+            <c>true</c> if billing subsystem is unavaliable.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentSSID">
+            <summary>
+            Subsystem identifier of current subsystem.
+            Equals <c>null</c> if current domain is not registered as the separate subsystem.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.Billing">
+            <summary>
+            Gets the reference to the billing subsystem.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
+            <summary>
+            Current subsystem. Equals <c>null</c> if current domain is not registered as the separate subsystem. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.SubSystem">
+            <summary>
+            Gets the reference to the current subsystem or billing for biiling subsystem.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentClassesIds">
+            <summary>
+            Gets the subsystem's classes ids.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsCurrentSubSystemBilling">
+            <summary>
+            Indicates that current subsystem is billing subsystem.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Billing.SubSystemManager.Cache">
+            <summary>
+            The subsystems cache.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.Register">
+            <summary>
+            Registeres the subsystem.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.CacheSubSystems">
+            <summary>
+            Caches the subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.Create(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates the subsystem.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="ssid">The ssid.</param>
+            <param name="description">The description.</param>
+            <param name="incomingEvents">The incoming events.</param>
+            <param name="outgoingEvents">The outgoing events.</param>
+            <param name="repositoryClasses">The repository classes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.IsSSIDValid(System.String)">
+            <summary>
+            Determines whether ssid is valid.
+            </summary>
+            <param name="ssid">The ssid.</param>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.IsApiKeyValid(System.String)">
+            <summary>
+            Determines whether the API key is valid.
+            </summary>
+            <param name="apiKey">The API key.</param>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.GetApiKeyByAppKey(System.String)">
+            <summary>
+            Gets the API key by application key.
+            </summary>
+            <param name="appKey">The application key.</param>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.FindAuthUser">
+            <summary>
+            Finds the authentication user.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.FindSession(System.String)">
+            <summary>
+            Finds the session.
+            </summary>
+            <param name="sessionKey">The session key.</param>
+        </member>
+        <member name="T:TotalApi.Core.Billing.SessionInfo">
+            <summary>
+            Temporary session parameters.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SessionInfo.SessionKey">
+            <summary>
+            Session identifier value.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SessionInfo.ExpiredIn">
+            <summary>
+            Session lifetime (from the moment being initialized).
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.JsonConfigs.SubSystemJsonConfig">
+            <summary>
+            Дополнительные параметры подсистемы
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.JsonConfigs.SubSystemJsonConfig.IncomingEvents">
+            <summary>
+            Список полных имён событий, разделённых запятой, принимаемых подсистемой.
+            (* - означает все события, минус перед названием события - исключает событие, для запрета всех событий нужно указать просто один минус).
+            </summary>
+            <example>
+                TotalApi.Core.OnPing, TotalApi.Core.OnDataChanged - отправляются только события OnPing и OnDataChanged.
+                *,-TotalApi.Core.OnPing - отправляются все события, кроме OnPing.
+                {пустая строка} - никакие события подсистема не отправляет.
+            </example>
+        </member>
+        <member name="P:TotalApi.Core.JsonConfigs.SubSystemJsonConfig.OutgoingEvents">
+            <summary>
+            Список полных имён событий, разделённых запятой, отправляемых подсистемой.
+            (* - означает все события, минус перед названием события - исключает событие, для запрета всех событий нужно указать просто один минус).
+            </summary>
+            <example>
+                TotalApi.Core.OnPing, TotalApi.Core.OnDataChanged - отправляются только события OnPing и OnDataChanged.
+                *,-TotalApi.Core.OnPing - отправляются все события, кроме OnPing.
+                {пустая строка} - никакие события подсистема не отправляет.
+            </example>
+        </member>
+        <member name="P:TotalApi.Core.JsonConfigs.SubSystemJsonConfig.RequestSubscriptionPeriodMs">
+            <summary>
+            Время в миллисекундах в течении которого живёт подписка если к клиент не обращается за результатами этой подписки.
+            По окончании этого времени - подписка отменяется.
             </summary>
         </member>
         <member name="T:TotalApi.Core.DataModel.Annotations.ApiDocIgnoreAttribute">
@@ -2842,185 +3434,6 @@
             </summary>
             <param name="storageHandlerPeriod">The storage handler period.</param>
         </member>
-        <member name="T:TotalApi.Core.Billing.IBillingDbContext">
-            <summary>
-            Context interface for billing database.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Billing.Session">
-            <summary>
-            Temporary session descriptor
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.Session.Id">
-            <summary>
-            Temporary session unique identifier
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.Session.ExpiredAt">
-            <summary>
-            Session validity date.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.Session.PrincipalInfo">
-            <summary>
-            Identification data for which the session was created.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Billing.SubSystemExtensions">
-            <summary>
-            Implementation SubSystem extension methods
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUrl``1(TotalApi.Billing.SubSystem,System.String)">
-            <summary>
-            Gets service contract string url of the subsystem
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetServiceContractUri``1(TotalApi.Billing.SubSystem,System.String)">
-            <summary>
-            Gets service contract uri of the subsystem
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemExtensions.GetService``1(TotalApi.Billing.SubSystem,System.String)">
-            <summary>
-            Gets service of the subsystem
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Billing.SubSystemManager">
-            <summary>
-            Subsystem manager.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.NoConnection">
-            <summary>
-            Sets up when the subsystem determines disconnection with billing subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.NoConnectionError">
-            <summary>
-            Error message in the case of disconnection with billing subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentSSID">
-            <summary>
-            Subsystem identifier of current subsystem.
-            Equals <c>null</c> if current domain is not registered as the separate subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
-            <summary>
-            Current subsystem. Equals <c>null</c> if current domain is not registered as the separate subsystem. 
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Billing.SubSystemManager.CurrentRestrictions">
-            <summary>
-            List of restrictions of current subsystem. The list will be empty in the case if current domain is not registered as the separate subsystem. 
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentClassesIds">
-            <summary>
-            Gets the subsystem's classes ids.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsCurrentSubSystemBilling">
-            <summary>
-            Indicates that current subsystem is billing subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsBillingSubSystemDown">
-            <summary>
-            <c>true</c> if billing subsystem is unavaliable.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Billing.SubSystemManager.Cache">
-            <summary>
-            The subsystems cache.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.GetSubsystemConfig(System.String,System.Boolean)">
-            <summary>
-            Searches for file in modules folder and, optionally, in subfolders.
-            If more than one file found - returns the first one.
-            </summary>
-            <param name="fileName">Name of the file or mask to search without path.</param>
-            <param name="isRecursive">Search in subfolders.</param>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.LoadConfig``1(System.String,System.Boolean)">
-            <summary>
-            Searches and loads json file in modules folders and, optionally, in subfolders.
-            If more than one file found - returns the first one.
-            </summary>
-            <param name="fileName">Name of the file or mask to search without path. If no name specified - will use the fileName as the name of the class with .json extension.</param>
-            <param name="isRecursive">Search in subfolders.</param>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.Register">
-            <summary>
-            Registeres the subsystem.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.CacheSubSystems">
-            <summary>
-            Caches the subsystem.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.Create(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Creates the subsystem.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="ssid">The ssid.</param>
-            <param name="description">The description.</param>
-            <param name="incomingEvents">The incoming events.</param>
-            <param name="outgoingEvents">The outgoing events.</param>
-            <param name="repositoryClasses">The repository classes.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.IsSSIDValid(System.String)">
-            <summary>
-            Determines whether ssid is valid.
-            </summary>
-            <param name="ssid">The ssid.</param>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.IsApiKeyValid(System.String)">
-            <summary>
-            Determines whether the API key is valid.
-            </summary>
-            <param name="apiKey">The API key.</param>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.GetApiKeyByAppKey(System.String)">
-            <summary>
-            Gets the API key by application key.
-            </summary>
-            <param name="appKey">The application key.</param>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.FindAuthUser">
-            <summary>
-            Finds the authentication user.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.FindSession(System.String)">
-            <summary>
-            Finds the session.
-            </summary>
-            <param name="sessionKey">The session key.</param>
-        </member>
-        <member name="T:TotalApi.Core.Billing.SessionInfo">
-            <summary>
-            Temporary session parameters.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SessionInfo.SessionKey">
-            <summary>
-            Session identifier value.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SessionInfo.ExpiredIn">
-            <summary>
-            Session lifetime (from the moment being initialized).
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.ClassDescriptionAttribute">
             <summary>
             Any entity accessable via RepositoryApi module can be marked with this attribute to extend its registration information.
@@ -3108,12 +3521,12 @@
             <param name="id">The identifier.</param>
             <returns></returns>
         </member>
-        <member name="T:TotalApi.Core.Events.OnSubSytemCacheChanged">
+        <member name="T:TotalApi.Core.Events.OnSubSystemCacheChanged">
             <summary>
             Event, fires when subsystem cache is changed. This event is not fired out from the subsystem.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Events.OnSubSytemCacheChanged.Post">
+        <member name="M:TotalApi.Core.Events.OnSubSystemCacheChanged.Post">
             <summary>
             Posts the event.
             </summary>
@@ -3169,9 +3582,19 @@
             Gets the instance.
             </summary>
         </member>
+        <member name="M:TotalApi.Core.Events.EventManagerBase.GetEventManagerServices(System.String,System.Boolean,System.String)">
+            <summary>
+            Возвращает множество кортежей вида: (SubSystem, ServiceContract, ApiKey)
+            </summary>
+        </member>
         <member name="M:TotalApi.Core.Events.EventManagerBase.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Events.EventManagerBase"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.EventManagerBase.RecreateSubscriptionService">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:TotalApi.Core.Events.EventManagerBase.IsSuspended">
@@ -3179,14 +3602,22 @@
             Gets or sets a value indicating whether the events checking is suspended.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.ExecuteAsync(TotalApi.Billing.SubSystem,System.Action,System.Action)">
+        <member name="M:TotalApi.Core.Events.EventManagerBase.ProcessUnavailibleSubsystem(TotalApi.Billing.SubSystem,System.Exception,System.String)">
+            <summary>
+            Проверяет возобновление доступности подсистем в случае ошибки и восстанавливает связь.
+            </summary>
+            <param name="sourceSubSystem">Подсистема или <c>null</c> для подсистемы биллинга.</param>
+            <param name="e">Исключение, вызвавшее метод.</param>
+            <param name="apiKey">ApiKey</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.EventManagerBase.ExecuteAsync(TotalApi.Billing.SubSystem,System.Action,System.String,System.Action)">
             <summary>
             Выполняет асинхронно переданный запрос к подсистеме.
             Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
             Если при выполнении запроса произошла ошибка - будет сделана попытка восстановить соединение через определённое время.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.ReadEventsAsync(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService},System.Action{System.Collections.Generic.IEnumerable{TotalApi.Utils.EventObjectContract}})">
+        <member name="M:TotalApi.Core.Events.EventManagerBase.ReadEventsAsync(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService,System.String},System.Action{System.Collections.Generic.IEnumerable{TotalApi.Utils.EventObjectContract}})">
             <summary>
             Выполняет асинхронно переданный запрос к подсистеме. (Используется только для чтения сообщений).
             Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
@@ -3207,12 +3638,11 @@
             </summary>
             <param name="eventObjectContract"></param>
         </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.InternalPublish(System.Object)">
+        <member name="M:TotalApi.Core.Events.EventManagerBase.InternalPublish(System.Object,System.Security.Principal.IPrincipal)">
             <summary>
             Расширение стандартной публикуции событий.
             Вместе с публикацией события во внутреннюю очередь - отправляем событие вовне.
             </summary>
-            <param name="eventObject"></param>
         </member>
         <member name="T:TotalApi.Core.Events.IInternalEvent`1">
             <summary>
@@ -3465,6 +3895,11 @@
             <param name="id">The identifier.</param>
             <returns></returns>
         </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.GetHash">
+            <summary>
+            Gets event hash to determinate that the events are equal.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Events.OnProgress">
             <summary>
             Event, fires when progress of operation changes.
@@ -3506,7 +3941,7 @@
             Event, fires by billing subsystem to all subscribers, indicating about new subsystem registration.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Events.OnSubSytemRegistered.SSID">
+        <member name="P:TotalApi.Core.Events.OnSubSytemRegistered.SubSystemId">
             <summary>
             Gets or sets the subsystem identifier.
             </summary>
@@ -3515,13 +3950,13 @@
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnSubSytemRegistered"/> class.
             </summary>
-            <param name="ssid">The ssid.</param>
+            <param name="subSystemId">The subsystem identifier.</param>
         </member>
         <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.Post(System.String)">
             <summary>
             Publishes the event.
             </summary>
-            <param name="ssid">The ssid.</param>
+            <param name="subSystemId">The subsystem identifier.</param>
         </member>
         <member name="T:TotalApi.Core.SimpleJsonContractResolver">
             <summary>
@@ -4506,20 +4941,66 @@
             Serves as the base class for system TotalApi exceptions.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Exceptions.TotalApiException.SubSystemNotRegistered">
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.EUnspecified">
             <summary>
-            Subsystem could not be registered because it does not exist.
+            The value of the unspecified exception code.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Exceptions.TotalApiException.SubSystemDisabled">
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.ErrorCode(System.UInt16,System.Byte,System.Boolean)">
             <summary>
-            Subsystem could not be registered because it is disabled.
+            Creates the full error code combining it from <paramref name="subSystemCode"/>, <paramref name="errorCode"/> and <paramref name="isCritical"/> flag.
+            All error codes are negative.
+            <remarks>
+            The TotalApi result codes is integer and has the next format:
+            +----+----+----+----+
+            |EW00|SSCD|ErrorCode|
+            +----+----+----+----+
+            
+            EW:        11 - Critical Error
+                       10 - Error
+                       01 - Warning
+                       00 - Result
+            
+            SSCD:      Subsystem code (byte) [1 byte]
+            
+            ErrorCode: Error/Warning/Result code (ushort) [2 bytes]
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.WarningCode(System.UInt16,System.Byte)">
+            <summary>
+            Creates the full warning code combining it from <paramref name="subSystemCode"/> and <paramref name="warningCode"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.ResultCode(System.UInt16,System.Byte)">
+            <summary>
+            Creates the full result code combining it from <paramref name="subSystemCode"/> and <paramref name="resultCode"/>.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical">
             <summary>
-            Gets or set the critical flag of the exception.
+            Gets the critical error flag of the exception.
             Application must terminate its work if catch an exception with the <see cref="P:TotalApi.Core.Exceptions.TotalApiException.IsCritical"/> flag set.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsError">
+            <summary>
+            Gets the error flag of the exception.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiException.IsWarning">
+            <summary>
+            Gets the warning flag of the exception.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiException.SubSystemCode">
+            <summary>
+            Gets the subsystem code of the exception.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Exceptions.TotalApiException.Code">
+            <summary>
+            Gets the code of the exception.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor">
@@ -4527,22 +5008,20 @@
             Initializes a new instance of the <see cref="T:System.TotalApiException"/> class.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.Int32,System.Boolean)">
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error code.
             <param name="errorCode">The code that describes the error. </param>
-            <param name="isCritical">Defines whether the exception is critical./</param>
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Nullable{System.Int32},System.Boolean)">
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Nullable{System.Int32})">
             <summary>
             Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error message and code.
             </summary>
             <param name="message">The message that describes the error. </param>
             <param name="errorCode">The code that describes the error. </param>
-            <param name="isCritical">Defines whether the exception is critical./</param>
         </member>
-        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Exception,System.Nullable{System.Int32},System.Boolean)">
+        <member name="M:TotalApi.Core.Exceptions.TotalApiException.#ctor(System.String,System.Exception,System.Nullable{System.Int32})">
             <summary>
             Initializes a new instance of the <see cref="T:System.TotalApiException"/> class with a specified error message, code and a reference to the inner exception that is the cause of this exception.
             </summary>
@@ -4550,7 +5029,6 @@
             <param name="innerException">The exception that is the cause of the current exception. If the 
             <paramref name="innerException"/> parameter is not a null reference (Nothing in Visual Basic), the current exception is raised in a catch block that handles the inner exception. </param>
             <param name="errorCode">The code that describes the error. </param>
-            <param name="isCritical">Defines whether the exception is critical./</param>
         </member>
         <member name="T:TotalApi.Core.Exceptions.TotalApiFault">
             <summary>
@@ -5674,6 +6152,11 @@
             Gets the instance.
             </summary>
         </member>
+        <member name="T:TotalApi.Billing.ApiRestrictionInfo">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:TotalApi.Billing.Customer">
             <summary>
             Api user.
@@ -5762,81 +6245,40 @@
             </summary>
             <returns>Array of <see cref="T:TotalApi.Billing.SubSystem"/></returns>
         </member>
+        <member name="P:TotalApi.Billing.Application.RestrictionsJson">
+            <summary>
+            Do not use this field to set restrictions of the subsytem. Use <see cref="P:TotalApi.Billing.Application.Restrictions"/> instead.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.Application.Restrictions">
+            <summary>
+            Arbitary dictionary that represents subsystem restrictions.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Billing.Application.ApiLockLevelKey">
+            <summary>
+            Application lock level key.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.Application.ApiKeyLockLevel">
+            <summary>
+            Gets or sets the current ApiKey lock level.
+            </summary>
+        </member>
         <member name="P:TotalApi.Billing.Application.CustomerId">
             <summary>
             Gets or sets the customer identifier who is an owner of the application.
             </summary>
-            <returns>Array of <see cref="T:TotalApi.Billing.SubSystem"/></returns>
         </member>
         <member name="P:TotalApi.Billing.Application.Customer">
             <summary>
-            Array of subsystems connected to this application.
-            </summary>
-            <returns>Array of <see cref="T:TotalApi.Billing.SubSystem"/></returns>
-        </member>
-        <member name="T:TotalApi.Billing.SubSystemConfig">
-            <summary>
-            Subsystem configuration.
+            Gets or sets the customer connected to this application.
             </summary>
         </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.SSID">
+        <member name="P:TotalApi.Billing.Application.CustomerOrders">
             <summary>
-            Gets or sets the subsystems identifier.
+            Gets or sets the customer orders connected to this application.
             </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.ApiKeys">
-            <summary>
-            Gets or sets the API keys.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.Description">
-            <summary>
-            Gets or sets the description.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.Restrictions">
-            <summary>
-            Gets or sets the restrictions.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.IncomingEvents">
-            <summary>
-            Gets or sets the incoming events.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.OutgoingEvents">
-            <summary>
-            Gets or sets the outgoing events.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.RepositoryClasses">
-            <summary>
-            Gets or sets the repository classes.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.ServiceContracts">
-            <summary>
-            Gets or sets the service contracts.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Billing.SubSystemConfig.IsHidden">
-            <summary>
-            Gets or sets a value indicating whether this subsystem is hidden.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Billing.SubSystemConfig.FromJsonFile(System.String)">
-            <summary>
-            Reads the config from json file.
-            </summary>
-            <param name="jsonFileName">Name of the json file.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Billing.SubSystemConfig.FromJsonString(System.String)">
-            <summary>
-            Reads the config from json string.
-            </summary>
-            <param name="json">The json string.</param>
-            <returns></returns>
         </member>
         <member name="T:TotalApi.Billing.SubSystem">
             <summary>
@@ -5979,6 +6421,11 @@
             </remarks> 
             </summary>
         </member>
+        <member name="P:TotalApi.Billing.SubSystem.IsBilling">
+            <summary>
+            Gets the flag that the subsystem is billing.
+            </summary>
+        </member>
         <member name="M:TotalApi.Billing.SubSystem.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Billing.SubSystem"/> class.
@@ -5988,6 +6435,84 @@
             <summary>
             Clones this instance.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystem.IsIncomingEventAllowed(System.String)">
+            <summary>
+            Returns <c>true</c> if the event allowed as an incoming event.
+            </summary>
+            <param name="eventName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystem.IsOutgoingEventAllowed(System.String)">
+            <summary>
+            Returns <c>true</c> if the event allowed as an outgoing event.
+            </summary>
+            <param name="eventName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Billing.SubSystemConfigParams">
+            <summary>
+            Subsystem configuration.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.SSID">
+            <summary>
+            Gets or sets the subsystems identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.ApiKeys">
+            <summary>
+            Gets or sets the API keys.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.Restrictions">
+            <summary>
+            Gets or sets the restrictions.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.IncomingEvents">
+            <summary>
+            Gets or sets the incoming events.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.OutgoingEvents">
+            <summary>
+            Gets or sets the outgoing events.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.RepositoryClasses">
+            <summary>
+            Gets or sets the repository classes.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.ServiceContracts">
+            <summary>
+            Gets or sets the service contracts.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Billing.SubSystemConfigParams.IsHidden">
+            <summary>
+            Gets or sets a value indicating whether this subsystem is hidden.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystemConfigParams.FromJsonFile(System.String)">
+            <summary>
+            Reads the config from json file.
+            </summary>
+            <param name="jsonFileName">Name of the json file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystemConfigParams.FromJsonString(System.String)">
+            <summary>
+            Reads the config from json string.
+            </summary>
+            <param name="json">The json string.</param>
             <returns></returns>
         </member>
         <member name="T:TotalApi.Billing.ApiUser">

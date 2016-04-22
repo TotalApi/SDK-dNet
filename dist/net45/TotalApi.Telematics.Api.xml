@@ -269,25 +269,25 @@
         <member name="P:TotalApi.Telematics.Coordinate.PDOP">
             <summary>
             Position Dilution of Precision (measure of accuracy in 3-D position), also called spherical DOP.
-            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            See http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.HDOP">
             <summary>
             Horizontal Dilution of Precision (measure of accuracy in 2-D position, for example Latitude and Longitude).
-            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            See http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.VDOP">
             <summary>
             Vertical Dilution of Precision (measure of accuracy in 1-D position, Height).
-            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            See http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.TDOP">
             <summary>
             Time Dilution of Precision (measure of accuracy in Time).
-            <seealso cref="!:http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm"/>
+            See http://nptel.ac.in/courses/105104100/lectureB_11/B_11_3GDOP.htm
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.SatInUse">
@@ -965,7 +965,7 @@
         </member>
         <member name="T:TotalApi.Telematics.SensorStatus">
             <summary>
-            Device status (not moving, online, last coordinate, last coordinate date). 
+            Sensor status. 
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.SensorStatus.Id">
@@ -1323,6 +1323,12 @@
         <member name="T:TotalApi.Telematics.ReadDeviceDataParams">
             <summary>
             Base class for retrieving the data from the device
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.ReadDeviceDataParams.Count">
+            <summary>
+            Max count of the data points in request. The last points (ordered by date) will be returned.
+            If this parameter is set no filters will be processed and <see cref="P:TotalApi.Telematics.ReadDeviceDataParams.IncludeOverPoints"/> parameter is ignored.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.ReadDeviceDataParams.From">
@@ -1733,6 +1739,11 @@
             Posts the event.
             </summary>
         </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStatusChanged.GetHash">
+            <summary>
+            Gets event hash to determinate that the events are equal.
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.Events.OnDeviceStatusChanged">
             <summary>
             Notification about a device status changing.
@@ -1751,6 +1762,11 @@
         <member name="M:TotalApi.Telematics.Events.OnDeviceStatusChanged.Post(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
             <summary>
             Posts the event.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnDeviceStatusChanged.GetHash">
+            <summary>
+            Gets event hash to determinate that the events are equal.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.Interfaces.ICoordinateFilterManager">

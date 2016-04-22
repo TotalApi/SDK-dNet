@@ -19,6 +19,27 @@
             Object properties.
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.DebugConsoleKeyHandler">
+            <summary>
+            Handler for keyboard keys.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.IConsoleKeyHandler">
+            <summary>
+            Used for handling keyboard keys.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.IConsoleKeyHandler.Init">
+            <summary>
+            Called on the start of the application. Could be used for displaying commands decription in a console.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.IConsoleKeyHandler.HandleConsoleKey(System.ConsoleKey)">
+            <summary>
+            Keyboard key press handler.
+            </summary>
+            <param name="key"></param>
+        </member>
         <member name="T:TotalApi.Utils.CompiledActivator">
             <summary>
             Contains optimized methods to create types of objects locally.
@@ -33,6 +54,26 @@
             A reference to the newly created object.
             </returns>
             <typeparam name="T">The type to create.</typeparam>
+        </member>
+        <member name="T:TotalApi.Utils.SystemConsoleKeyHandlersManager">
+            <summary>
+            Handler of keyboard keys for console applications.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.SystemConsoleKeyHandlersManager.ConsoleKeyHandlers">
+            <summary>
+            The list of the console key handlers
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.SystemConsoleKeyHandlersManager.Reinit">
+            <summary>
+            Reninitialize all handlers.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.SystemConsoleKeyHandlersManager.StartListeningConsole(System.Collections.Generic.IEnumerable{TotalApi.Utils.IConsoleKeyHandler})">
+            <summary>
+            Starts the console listening.
+            </summary>
         </member>
         <member name="T:TotalApi.Utils.CpuUsage">
             <summary>
@@ -100,6 +141,57 @@
             <summary>
             Expression visitor which replace parameter of one type to another one.
             </summary>
+        </member>
+        <member name="T:TotalApi.Utils.Extensions.JSONExtension">
+            <summary>
+            Implementation JSON convertation utilites. 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomToJson">
+            <summary>
+            Gets or set the custom implementation for converting to JSON
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomFromJson">
+            <summary>
+            Gets or set the custom implementation for converting from JSON
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Extensions.JSONExtension.CustomJsonToDictionary">
+            <summary>
+            Gets or set the custom implementation for converting json desealized object to Dictionary
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FormatJSON(System.String)">
+            <summary>
+            Adds indentation and line breaks to output of JavaScriptSerializer
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.JSONExtension.ToJSON``1(``0,System.Boolean)">
+            <summary>
+            Serializes an instance of the class <typeparam name="TClass"/> to the JSON string.
+            </summary>
+            <param name="source">Source instance of object</param>
+            <param name="formatJSON"></param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FromJSON``1(System.String)">
+            <summary>
+            Deserialzes a JSON string to an object of the class of type <typeparamref name="TClass"/>.
+            </summary>
+            <param name="source">Source JSON string</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.JSONExtension.FromJSON(System.String,System.Type)">
+            <summary>
+            Deserialzes a JSON string to an object of the class of type <paramref name="type"/>.
+            </summary>
+            <param name="source">Source JSON string</param>
+            <param name="type">The type of the result object.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.JSONExtension.JSONClone``1(``0)">
+            <summary>
+            Makes object copy using JSON double converting.
+            </summary>
+            <param name="source">Source object</param>
         </member>
         <member name="T:TotalApi.Utils.Extensions.StreamExtension">
             <summary>
@@ -291,6 +383,27 @@
             Gets value from cache dictionary. If key not found in dictionary - its value will be created and put into one.
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.Extensions.DictionaryExtension.ToFlatDictionary(System.Object)">
+            <summary>
+            Makes tree-style dictionary flat.
+            [
+               key1: value1,
+               key2: [
+                        subkey1: value2,
+                        subkey2: [
+                            subsubkey1: value3
+                                 ]
+                     ] 
+            ]
+            
+            converts to:
+             [
+               key1: value1,
+               key2.subkey1: value2,
+               key2.subkey2.subsubkey1: value3
+            ]
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.Extensions.EnumerableExtension.Delete``1(``0[],System.Func{``0,System.Boolean})">
             <summary>
             Removing array items by condition 
@@ -468,13 +581,15 @@
         </member>
         <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ExpandPath(System.String,System.String)">
             <summary>
-            Expand relative path to full path from specified base path.<para></para>
-            <c>%AppDir%</c> will be expanded from Apllication Exe Directory <para>
-            <c>%MyDocuments%</c> will be expanded from User Documents Folder (Environment.SpecialFolder.MyDocuments) </para>
-            <c>%AppData%</c> will be expanded from User application roaming data (Environment.SpecialFolder.ApplicationData - %UserProfile%\AppData\Roaming for Vista/Win7) <para>
-            <c>%CommonAppData%</c> will be expanded from all users application roaming data (Environment.SpecialFolder.CommonApplicationData) </para>
-            <c>%Temp%</c> will be expanded from User temporary folder <para> </para>
-            <c>%AppTemp%</c> will be expanded from Application temporary folder <see cref="P:TotalApi.Utils.Extensions.TempFiles.DefaultTempDir"/>.<para> </para>
+            Expand relative path to full path with specified base path.<para></para>
+            <c>%AppDir%</c> will be expanded with Apllication Exe Directory <para>
+            <c>%MyDocuments%</c> will be expanded with User Documents Folder (Environment.SpecialFolder.MyDocuments) </para>
+            <c>%AppData%</c> will be expanded with User application roaming data (Environment.SpecialFolder.ApplicationData - %UserProfile%\AppData\Roaming for Vista/Win7) <para>
+            <c>%CommonAppData%</c> will be expanded with all users application roaming data (Environment.SpecialFolder.CommonApplicationData) </para>
+            <c>%ProgramData%</c> will be expanded with all users application roaming data (Environment.SpecialFolder.CommonApplicationData) <para>
+            <c>%Desktop%</c> will be expanded with user desktop folder (Environment.SpecialFolder.DesktopDirectory) </para>
+            <c>%Temp%</c> will be expanded with User temporary folder <para> </para>
+            <c>%AppTemp%</c> will be expanded with Application temporary folder <see cref="P:TotalApi.Utils.Extensions.TempFiles.DefaultTempDir"/>.<para> </para>
             </summary>
         </member>
         <member name="F:TotalApi.Utils.Extensions.FileSystemExtension.GetCustomVariableValue">
@@ -2458,7 +2573,7 @@
             Implements service for SMTP mailing
             </summary>
         </member>
-        <member name="M:TotalApi.Utils.MailService.SendMailAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.String)">
+        <member name="M:TotalApi.Utils.MailService.SendMailAsync(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
             Makes sending an email via SMTP server.
             </summary>
@@ -2466,8 +2581,27 @@
             <param name="mailto"></param>
             <param name="subject"></param>
             <param name="message"></param>
-            <param name="attachFile"></param>
+            <param name="attachFiles"></param>
+            <param name="isBodyHtml"></param>
             <returns></returns>
+        </member>
+        <member name="T:TotalApi.Utils.ConfigParams`1">
+            <summary>
+            Base class for parameters json configs.
+            Auto load data from config file named in <see cref="T:System.ComponentModel.DescriptionAttribute"/> of the class 
+            or {class name}.json if the attribute is absent.
+            </summary>
+            <typeparam name="TJsonConfig"></typeparam>
+        </member>
+        <member name="P:TotalApi.Utils.ConfigParams`1.JsonConfig">
+            <summary>
+            Gets the instance of the configuration wrapper.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ConfigParams`1.Config">
+            <summary>
+            Gets the instance of the class config.
+            </summary>
         </member>
         <member name="T:TotalApi.Utils.SystemPerformanceCounter">
             <summary>
@@ -2971,7 +3105,7 @@
             Фабрика для создания задачи. Делаем, чтобы все события вызывались последовательно в одном потоке, но асинхронно относительно внешнего вызова
             </summary>
         </member>
-        <member name="M:TotalApi.Utils.EventManager.InternalPublish(System.Object)">
+        <member name="M:TotalApi.Utils.EventManager.InternalPublish(System.Object,System.Security.Principal.IPrincipal)">
             <summary>
             Непосредственная доставка события подписчикам.
             Вызывается <see cref="F:TotalApi.Utils.EventManager._eventRunner"/> после "накопительной задержки".
@@ -2985,7 +3119,7 @@
             <summary>
             Публикует событие с задержкой, для "схлопывания" одинаковых событий, пришедших 
             одно за другим. 
-            В конце, после обработки накопления будет вызван метод <see cref="M:TotalApi.Utils.EventManager.InternalPublish(System.Object)"/>,
+            В конце, после обработки накопления будет вызван метод <see cref="M:TotalApi.Utils.EventManager.InternalPublish(System.Object,System.Security.Principal.IPrincipal)"/>,
             который и выполнит непосредственное уведомление подписчиков.
             </summary>
         </member>
@@ -3014,9 +3148,45 @@
             Instance of the event.
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.EventRunner">
+            <summary>
+            Implementation of the delayed execution of the event.
+            If the same event fires many time during a period - it will be raised once after the period.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.EventRunner.#ctor">
+            <summary>
+            Default constructor. 
+            The Delay period is 100 ms.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.EventRunner.#ctor(System.TimeSpan)">
+            <summary>
+            Class constructror.
+            </summary>
+            <param name="delay">Period for delay.</param>
+        </member>
+        <member name="M:TotalApi.Utils.EventRunner.Start``1(``0,System.Action{``0})">
+            <summary>
+            Set event raising to the queue.
+            </summary>
+            <typeparam name="TContext">Event type.</typeparam>
+            <param name="context">Event object.</param>
+            <param name="publishAction">Event action.</param>
+        </member>
         <member name="M:TotalApi.Utils.EventRunner.GetHash(System.Object)">
             <summary>
             Этот метод генерирует хэшкод-строку на основании типа объекта и значений его публичных свойств.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.IEventHash">
+            <summary>
+            Get event hash.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.IEventHash.GetHash">
+            <summary>
+            Gets event hash to determinate that the events are equal.
             </summary>
         </member>
         <member name="T:TotalApi.Utils.FileEx">
@@ -3052,6 +3222,90 @@
                  }
              </code>
              </summary>
+        </member>
+        <member name="T:TotalApi.Utils.SID">
+            <summary>
+            Well-known security identifiers in Windows operating systems.
+            See http://support.microsoft.com/kb/243330
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Users">
+            <summary>
+            A built-in group. After the initial installation of the operating system, the only member is the Authenticated Users group. 
+            When a computer joins a domain, the Domain Users group is added to the Users group on the computer.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Guests">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Nobody">
+            <summary>
+            No security principal.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Everyone">
+            <summary>
+            A group that includes all users, even anonymous users and guests. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Local">
+            <summary>
+            A group that includes all users who have logged on locally. 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.AllServices">
+            <summary>
+            A group that includes all service processes configured on the system. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Network">
+            <summary>
+            A group that includes all users that have logged on through a network connection. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Batch">
+            <summary>
+            A group that includes all users that have logged on through a batch queue facility. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Interactive">
+            <summary>
+            A group that includes all users that have logged on interactively. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Service">
+            <summary>
+            A group that includes all security principals that have logged on as a service. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Anonymous">
+            <summary>
+            A group that includes all users that have logged on anonymously. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.LocalSystem">
+            <summary>
+            A service account that is used by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.Administrators">
+            <summary>
+            A built-in group. After the initial installation of the operating system, the only member of the group is the Administrator account. 
+            When a computer joins a domain, the Domain Admins group is added to the Administrators group. 
+            When a server becomes a domain controller, the Enterprise Admins group also is added to the Administrators group.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.NetworkService">
+            <summary>
+            Network Service
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.SID.LocalService">
+            <summary>
+            Local Service
+            </summary>
         </member>
         <member name="M:TotalApi.Utils.Spatials.GpxParser.LoadFromFile(System.String)">
             <summary>
@@ -3679,6 +3933,11 @@
             The extension allows execute tasks continuation with the source thread cultures.
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.Tasks.TaskHelpers.FromError(System.Exception)">
+            <summary>
+            Creates task from exception.
+            </summary>
+        </member>
         <member name="T:TotalApi.Utils.Tasks.TaskSchedulerEx">
             <summary>
             Implementation of the task scheduler with specified <c>ConcurrencyLevel</c> and <c>QueueLevel</c> and an ability to cancel active and queued tasks.
@@ -3900,14 +4159,14 @@
             Current logon user name
             </summary>
         </member>
-        <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.ErrorAnalizer">
-            <summary>
-            Additional error analizer 
-            </summary>
-        </member>
         <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.Solution">
             <summary>
             The solution will replace exception information
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.FullMessage">
+            <summary>
+            The full exception message.
             </summary>
         </member>
         <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.SupportInfo">
@@ -3915,9 +4174,99 @@
             Additional exception information, whitch will be added to error text
             </summary>
         </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.InnerExceptionSeparator">
+            <summary>
+            Delimeter string between main and inner exceptions
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.ErrorAnalizer">
+            <summary>
+            Additional error analizer 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.DefaultAppId">
+            <summary>
+            Default current application Id (sets on calling Init() method)
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.DefaultAppName">
+            <summary>
+            Default current application name (sets on calling Init() method)
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.DefaultUserName">
+            <summary>
+            Default current logon user name
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.HandleException(System.Exception)">
+            <summary>
+            Handles unhandled exception.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessage(System.String)">
+            <summary>
+            Gets analized exception message.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessage(System.Exception)">
+            <summary>
+            Gets analized exception message.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.EnumExceptions(System.Exception)">
+            <summary>
+            Gets all inner exception as an enumeration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessage(System.String,System.Exception,System.String)">
+            <summary>
+            Gets analized exception message.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessageEx(System.String,System.Exception,System.String)">
+            <summary>
+            Gets analized exception message.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.Error(System.Exception)">
+            <summary>
+            Default handling an exception
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.Error(System.Exception,System.String)">
+            <summary>
+            Default handling an exception
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.Error(System.Exception,System.String,System.String)">
+            <summary>
+            Default handling an exception
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.FullMessage(System.Exception)">
             <summary>
             Returns all messages of the exception include all nested detail exceptions
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.SvcError``1(System.Exception,System.String,System.ServiceModel.ClientBase{``0})">
+            <summary>
+            Default handling an service exception
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.IsAbort(System.Exception)">
+            <summary>
+            Gets whether an exception is abort action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.Messages.Error(System.String)">
+            <summary>
+            Default show an error
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.Messages.Error(System.String,System.String)">
+            <summary>
+            Default show an error
             </summary>
         </member>
         <member name="M:TotalApi.Utils.ErrorManager.Messages.AskDelete(System.String)">
@@ -3928,6 +4277,31 @@
         <member name="M:TotalApi.Utils.ErrorManager.Messages.AskDelete(System.String,System.Boolean)">
             <summary>
             Returns <c>true</c> if the answer is YES, <c>false</c> if the answer is NO and null if the answer is CANCEL.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.Messages.Abort(System.Exception,System.String)">
+            <summary>
+            Raises abort exception. 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Error">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Warning">
+            <summary>
+            Warning message
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Info">
+            <summary>
+            Info message
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageBoxIcon.Error">
+            <summary>
+            Error icon
             </summary>
         </member>
         <member name="T:TotalApi.Utils.FileStreamCreator">
@@ -4032,6 +4406,21 @@
             <summary>
             If true - expression will be different char literals (in '' quotes and string literals in "" quotes.
             If false - all literals in '' and "" quotes will be string literals.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.Linq.Dynamic.ParseException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Linq.Dynamic.ParseException.#ctor(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Linq.Dynamic.ParseException.#ctor(System.Exception,System.Int32)">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:TotalApi.Utils.ObservableCollectionEx`1">
@@ -4302,6 +4691,98 @@
             Implementation of the application parameters manager.
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.Params.ConfigChangedDelegate">
+            <summary>
+            Delegate of the event fired when app.config file has been changed.
+            </summary>
+            <param name="configuration">Reference to a new configuration instance.</param>
+        </member>
+        <member name="T:TotalApi.Utils.Params.ConfigParamsChangedDelegate">
+            <summary>
+            Delegate of the event fired when parameters have been changed.
+            </summary>
+            <param name="changedValues">The list of the changed parameters and their old and new values.</param>
+        </member>
+        <member name="T:TotalApi.Utils.Params.JsonConfig">
+            <summary>
+            Implementation of the untyped JsonConfig entry.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig.Name">
+            <summary>
+            Gets the name of config. The app.config has name as empty string.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig.Value">
+            <summary>
+            Gets or sets the config value. The value can be either <see cref="T:System.Collections.Generic.Dictionary`2"/> for untyped config or typed otherwise.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.Params.JsonConfig.Changed">
+            <summary>
+            Fires when app.config was changed after firing all specific events.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Utils.Params.JsonConfig.ParametersChanged">
+            <summary>
+            Fires when appParams section was changed and some parameters were added/removed/modified
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Params.JsonConfig.#ctor(System.String,System.Object)">
+            <summary>
+            Constuctor of the JsonConfig class.
+            </summary>
+            <param name="name"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:TotalApi.Utils.Params.JsonConfig`1">
+            <summary>
+            Implementation of the typed JsonConfig entry.
+            </summary>
+            <typeparam name="TConfig"></typeparam>
+        </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig`1.Value">
+            <summary>
+            Gets or sets the config value. The value has <typeparamref name="TConfig"/> type.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig`1.Config">
+            <summary>
+            Gets or sets the config value. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Params.JsonConfig`1.#ctor(System.String,`0)">
+            <summary>
+            Constructor of the JsonConfig class.
+            </summary>
+            <param name="name"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:TotalApi.Utils.Params.JsonConfig`1.ProcessValues(System.Action{`0},System.String[])">
+            <summary>
+            Calls the <paramref name="action"/> immediately and when any parameter 
+            enumerated in <paramref name="paramNames"/> has been changed.
+            </summary>
+            <param name="action">Routine action.</param>
+            <param name="paramNames">The list of parameter names when <paramref name="action"/> should be executed. You can not set it or use * for all parameters or use - before parameter name for exclude it.</param>
+            <returns></returns>
+        </member>
+        <member name="F:TotalApi.Utils.Params._registryParams">
+            <summary>
+            Список параметров, прочитанных из реестра
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Params._configParams">
+            <summary>
+            Список параметров, прочитанных из app.config и JSON config
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.Params._jsonConfigs">
+            <summary>
+            Список параметров, прочитанных из дополнительных .json файлов.
+            Файл {app}.json подгружается автоматически. Остальные следует загрузить, используя <see cref="M:TotalApi.Utils.Params.AddJsonConfig(System.String,System.String,System.Type)"/>.
+            </summary>
+        </member>
         <member name="E:TotalApi.Utils.Params.ParametersChanged">
             <summary>
             Fires when appParams section was changed and some parameters were added/removed/modified
@@ -4355,6 +4836,22 @@
             Gets the application version, extracted from entry or executing assembly
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.Params.AddJsonConfig``1(System.String,System.String)">
+            <summary>
+            Add JSON config file to the parameters.
+            </summary>
+            <param name="fileName">JSON config file path</param>
+            <param name="configName">Config name. If not set - the file name is config name.</param>
+            <typeparam name="TConfig">Config type</typeparam>
+        </member>
+        <member name="M:TotalApi.Utils.Params.AddJsonConfig(System.String,System.String,System.Type)">
+            <summary>
+            Add JSON config file to the parameters.
+            </summary>
+            <param name="fileName">JSON config file path</param>
+            <param name="configType">Config type</param>
+            <param name="configName">Config name. If not set - the file name is config name.</param>
+        </member>
         <member name="P:TotalApi.Utils.Params.RegistryStorageRoot">
             <summary>
             Gets or sets registry key for default saving user parameters
@@ -4383,6 +4880,12 @@
             <param name="value">Parameter value</param>
             <param name="persistent">If <c>true</c> the value will be persistent stored in registry (if <see cref="P:TotalApi.Utils.Params.UseRegistry"/> is <c>true</c>) or user.config file (not implemented yet).</param>
             <returns></returns>
+        </member>
+        <member name="F:TotalApi.Utils.Processes.EntryAssembly">
+            <summary>
+            Gets or sets an application entry assembly.
+            For Web application must be set manually.
+            </summary>
         </member>
         <member name="T:TotalApi.Utils.Processes.ApplicationTypes">
             <summary>
@@ -4625,7 +5128,7 @@
         </member>
         <member name="T:TotalApi.Utils.TcpClientServer.AsyncTcpClient">
             <summary>
-            Implements client for <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/>.
+            Implements client for <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpClient"/>.
             </summary>
         </member>
         <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Host">
@@ -4723,12 +5226,13 @@
             This handler is ignored if <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync"/> or <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequestAsync"/> are set.
             </summary>
         </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Listen(System.Int32,System.String)">
+        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Listen(System.Int32,System.String,System.Int32)">
             <summary>
             Starts listening the data on the specified port and address.
             </summary>
             <param name="port">Tcp server port.</param>
             <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
+            <param name="concurrencyLevel">Количество потоков, одновременно обрабатывающих запросы. Если обработчик HandleRequestAsync реально асинхронный - рекомендуется установить в единицую.</param>
         </member>
         <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Stop">
             <summary>
@@ -4869,6 +5373,16 @@
         <member name="P:TotalApi.Utils.TextExpressions.TextExpression`1.Value">
             <summary>
             Gets value of the expression. Equal calling method Calculate()
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.TextExpressions.TextExpressionParseExceptionEventArgs.Exception">
+            <summary>
+            A parsed exception
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.TextExpressions.TextExpressionParseExceptionEventArgs.#ctor(TotalApi.Utils.Linq.Dynamic.ParseException,System.Boolean)">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:TotalApi.Utils.TextExpressions.TextExpressionUntyped.UserData">
@@ -5093,6 +5607,17 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:TotalApi.Utils.UiTreeItem" -->
+        <member name="F:TotalApi.Utils.UserHelper.SidAll">
+            <summary>
+            A group that includes all users, even anonymous users and guests. Membership is controlled by the operating system.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.UserHelper.SidUsers">
+            <summary>
+            A built-in group. After the initial installation of the operating system, the only member is the Authenticated Users group. 
+            When a computer joins a domain, the Domain Users group is added to the Users group on the computer.
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.UserHelper.GetSid(System.String,System.String)">
             <summary>
             Return user SID by user name and user domain
