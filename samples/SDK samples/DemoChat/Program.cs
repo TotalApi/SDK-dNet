@@ -35,7 +35,7 @@ namespace DemoChat
                         {
                             // User is not registered - auto register it and sign in
                             // AppKey-authority is used in this call
-                            CoreApi.ApiUsers.Save(new ApiUser {Login = userLogin, Password = userPassword}, true);
+                            CoreApi.ApiUsers.Save(new ApiUser { Login = userLogin, Password = userPassword }, true);
                         }
                         // Set AppUser auth information
                         TotalApiAuth.SetUserPassword(userLogin, userPassword);
@@ -45,7 +45,7 @@ namespace DemoChat
                         // If auth is invalid exception will be thrown
                         isExists = CoreApi.ApiUsers.IsExists(userLogin);
 
-                        TotalApiEventManagerBase.Instance.UpdateApplicationSubscriptions(true);
+//                        TotalApiEventManagerBase.Instance.UpdateApplicationSubscriptions(true);
 
                         // Initialize subscriber.
                         // If auth is invalid - exception will NOT be thrown

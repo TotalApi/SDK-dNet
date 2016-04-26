@@ -12,8 +12,9 @@ Demo Chat
 
 Настройка `app.config`
 ----------------------
-Укажем протокол и адрес подключения к серверу **TotalApi**. Параметры подключения могут отличаться от приведенных в примере.
-После [регистрации](http://billing.totalapi.io) своего приложения вы получите пару ключей `ApiKey` и `AppKey`, а также адрес подключения к серверу **TotalApi**. 
+Укажем протокол и адрес подключения к серверу **TotalApi**.  
+После [регистрации](http://billing.totalapi.io/#/login/free) своего приложения вы получите пару ключей `ApiKey` и `AppKey`, а также адрес подключения к серверу **TotalApi**.
+Параметры подключения **должны** отличаться от приведенных в примере. Вы должны подставить значения, которые вы получите после регистрации своего приложения.
 ```xml
     <appSettings>
         <add key="serverProtocol" value="http" />
@@ -59,7 +60,7 @@ TotalApiBootstrapper.Create();
         public ChatEventObject(string message)
         {
             Message = message;
-            UserName = TotalApiAuth.UserLogin;
+            UserName = Thread.CurrentPrincipal.UserLogin();
         }
     }
 ``` 
@@ -88,10 +89,10 @@ TotalApiBootstrapper.Create();
 
         public void HandleEvent(ChatEventObject e)
         {
-            if (e.UserName == TotalApiAuth.UserLogin)
+            if (e.UserName == Thread.CurrentPrincipal.UserLogin())
                 ColorConsole.Do(ConsoleColor.Yellow, () =>
                 {
-                    Console.WriteLine($"\n                                               {e.EventTime} - Me > {e.Message}");
+                    Console.WriteLine($"\n    {e.EventTime} - Me > {e.Message}");
                 });
             else
                 ColorConsole.Do(ConsoleColor.Green, () =>
@@ -138,10 +139,11 @@ CoreApi.EventManager.Subscribe(Subscriber.Instance);
                     CoreApi.ApiUsers.Save(new ApiUser { Login = userLogin, Password = userPassword }, true);
                 }
                 // Set AppUser auth information
-                TotalApiAuth.UserLogin = userLogin;
-                TotalApiAuth.UserPassword = userPassword;
+                TotalApiAuth.SetUserPassword(userLogin, userPassword);
+                
                 // Check whether auth information is valid
                 // AppUser-authority is used in this call
+                // If auth is invalid exception will be thrown
                 isExists = CoreApi.ApiUsers.IsExists(userLogin);
                 // If auth is valid - initialize subscriber, otherwise exception will be thrown
                 CoreApi.EventManager.Subscribe(Subscriber.Instance);
@@ -149,8 +151,7 @@ CoreApi.EventManager.Subscribe(Subscriber.Instance);
             catch (Exception e)
             {
                 // Clear AppUser auth information
-                TotalApiAuth.UserLogin = null;
-                TotalApiAuth.UserPassword = null;
+                TotalApiAuth.SetUserPassword(null, null);
                 isExists = false;
                 // Display error text
                 ColorConsole.Do(ConsoleColor.Red, () => Console.WriteLine(e.FullMessage()));
@@ -162,11 +163,13 @@ CoreApi.EventManager.Subscribe(Subscriber.Instance);
 Небольшое пояснение к данному коду. В самом начале после запроса пароля клиент использует [AppKey-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi). Она позволяет вызывать всего два метода TotalApi: `CoreApi.ApiUsers.IsExists(userLogin)` для проверки, есть ли такой пользователь или нет и `CoreApi.ApiUsers.Save(user)` для создания/регистрации нового пользователя.
 Если пользователь существует - настраиваем [AppUser-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi)
 ```C#
-    TotalApiAuth.UserLogin = userLogin;
-    TotalApiAuth.UserPassword = userPassword;
+    TotalApiAuth.SetUserPassword(userLogin, userPassword);
 ```
 после чего последующий код клиента будет использовать [AppUser-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi) если переданный пароль верный. В противном случае будет выброшено исключение `Not authorized`.
-В случае исключения необходимо обязательно очистить значение `TotalApiAuth.UserLogin` чтобы переключиться обратно на [AppKey-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi).
+В случае исключения необходимо переключиться обратно на [AppKey-авторизацию](https://github.com/TotalApi/SDK-dNet/blob/master/documentation/auth.md#authentication-types-of-totalapi).
+```C#
+    TotalApiAuth.SetUserPassword(null, null);
+```
 
 Заключение
 ----------
