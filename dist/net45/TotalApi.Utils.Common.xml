@@ -4159,6 +4159,11 @@
             Current logon user name
             </summary>
         </member>
+        <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.IsAbort">
+            <summary>
+            The exception is EAbort
+            </summary>
+        </member>
         <member name="F:TotalApi.Utils.ErrorManager.ErrorAnalizerParams.Solution">
             <summary>
             The solution will replace exception information

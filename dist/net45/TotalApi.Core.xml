@@ -2621,6 +2621,11 @@
             Api key authorization.
             </summary>
         </member>
+        <member name="F:TotalApi.Core.Authentication.TotalApiRole.MultiApiKey">
+            <summary>
+            MultiApi key authorization.
+            </summary>
+        </member>
         <member name="F:TotalApi.Core.Authentication.TotalApiRole.SSID">
             <summary>
             Subsystem key authorization.
@@ -2635,6 +2640,11 @@
             <summary>
             Authorization using application user key or api key.
             Used as a role when <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.ApiKey"/> or <see cref="F:TotalApi.Core.Authentication.TotalApiAuthenticationType.AppUser"/> used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Authentication.TotalApiRole.GetAuthTypeRole(System.String)">
+            <summary>
+            Get the <see cref="T:TotalApi.Core.Authentication.TotalApiRole"/> by <see cref="T:TotalApi.Core.Authentication.TotalApiAuthenticationType"/>.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Authentication.AuthorizedAttribute">
@@ -2783,6 +2793,11 @@
         <member name="P:TotalApi.Core.Authentication.TotalApiAuth.IsAuthenticated">
             <summary>
             If True - user is authenticated, otherwise - not authenticated.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Authentication.TotalApiAuth.AsText">
+            <summary>
+            Friendly info about current authentication.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Authentication.TotalApiAuth.Clear">
@@ -3029,15 +3044,38 @@
             Subsystem manager.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsBillingSubSystemDown">
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.Create(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            <c>true</c> if billing subsystem is unavaliable.
+            Creates the subsystem.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="ssid">The ssid.</param>
+            <param name="description">The description.</param>
+            <param name="incomingEvents">The incoming events.</param>
+            <param name="outgoingEvents">The outgoing events.</param>
+            <param name="repositoryClasses">The repository classes.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsBilling">
+            <summary>
+            Indicates that current domain is billing subsystem.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsApplication">
+            <summary>
+            Indicates that current domain is an application.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsSubSystem">
+            <summary>
+            Indicates that current domain is a subsystem and the subsystem is connected to billing. 
             </summary>
         </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentSSID">
             <summary>
             Subsystem identifier of current subsystem.
             Equals <c>null</c> if current domain is not registered as the separate subsystem.
+            It is true for applications and billing subsystem.
             </summary>
         </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.Billing">
@@ -3047,22 +3085,12 @@
         </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
             <summary>
-            Current subsystem. Equals <c>null</c> if current domain is not registered as the separate subsystem. 
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.SubSystem">
-            <summary>
-            Gets the reference to the current subsystem or billing for biiling subsystem.
+            Current subsystem. Equals <c>null</c> if current domain is an application. 
             </summary>
         </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentClassesIds">
             <summary>
             Gets the subsystem's classes ids.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.IsCurrentSubSystemBilling">
-            <summary>
-            Indicates that current subsystem is billing subsystem.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Billing.SubSystemManager.Cache">
@@ -3081,18 +3109,6 @@
             Caches the subsystem.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Billing.SubSystemManager.Create(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Creates the subsystem.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="ssid">The ssid.</param>
-            <param name="description">The description.</param>
-            <param name="incomingEvents">The incoming events.</param>
-            <param name="outgoingEvents">The outgoing events.</param>
-            <param name="repositoryClasses">The repository classes.</param>
-            <returns></returns>
-        </member>
         <member name="M:TotalApi.Core.Billing.SubSystemManager.IsSSIDValid(System.String)">
             <summary>
             Determines whether ssid is valid.
@@ -3104,6 +3120,14 @@
             Determines whether the API key is valid.
             </summary>
             <param name="apiKey">The API key.</param>
+        </member>
+        <member name="M:TotalApi.Core.Billing.SubSystemManager.GetMultiApiKeys(System.String)">
+            <summary>
+            Gets the valid ApiKeys from the MultiAPI key.
+            If <paramref name="apiKeys"/>apiKeys is not MultiApiKey - returns <c>null</c>.
+            If no valid ApiKeys contains - returns an empty array.
+            </summary>
+            <param name="apiKeys">The MultiAPI key.</param>
         </member>
         <member name="M:TotalApi.Core.Billing.SubSystemManager.GetApiKeyByAppKey(System.String)">
             <summary>
@@ -3136,6 +3160,474 @@
             <summary>
             Session lifetime (from the moment being initialized).
             </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.TotalApiEventManagerBase">
+            <summary>
+            Events manager base class. 
+            (Application implementation)
+            </summary>
+            <summary>
+            Events manager base class.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Events.TotalApiEventManagerBase.DefaultGetEventsPeriod">
+            <summary>
+            Default value. Period of checking for new events.
+            MinValue or MaxValue - turns off checking (use only for debugging purposes).
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Events.TotalApiEventManagerBase.GetEventsPeriod">
+            <summary>
+            Period of checking for new events.
+            MinValue or MaxValue - turns off checking (use only for debugging purposes).
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.UpdateApplicationSubscriptions(System.Boolean)">
+            <summary>
+            Обновляет подписки приложения на сообщения.
+            Если передан параметр <paramref name="recreateThread"/> поток чтения сообщений будет пересоздан.
+            (Это иммет смысл при изменении аутентификации приложения).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.TotalApiEventManagerBase.IsSuspended">
+            <summary>
+            Gets or sets a value indicating whether the events checking is suspended.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.ReadApplicationEventsAsync(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService,System.String},System.Action{System.Collections.Generic.IEnumerable{TotalApi.Utils.EventObjectContract}})">
+            <summary>
+            Выполняет асинхронно чтение сообщений для приложения из подсистемы. (Только для приложений).
+            Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
+            Пока этот запрос не будет выполнен повторный запрос к этой подсистеме выполняться не будет - будет проигнорирован. 
+            Однако подобные запросы к другим подсистемам будут выполняться.
+            Если при выполнении запроса произошла ошибка - будет сделана попытка восстановить соединение через определённое время.
+            </summary>
+            <param name="service">Ссылка на сервис, от которого мы получает список сообщений.</param>
+            <param name="action">Действие, выполняемое после получения результата.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.ApplicationReadEventsHandler(System.Threading.CancellationToken)">
+            <summary>
+            Периодически вызывается в потоке задачи запущенной методом <see cref="M:TotalApi.Core.Events.TotalApiEventManagerBase.InitApplicationReadEvents(System.Boolean)"/>
+            для получения сообщений посланных текущему приложению. (Применимо только для приложений).
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.SubscribeApplication(System.String)">
+            <summary>
+            Подписывает приложение на событие и запускает цикл получения событий от подсистем если он ещё не запущен.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.UnsubscribeApplication(System.String)">
+            <summary>
+            Отписывает приложение от получения события.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.TotalApiEventManagerBase.Instance">
+            <summary>
+            Gets the instance.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.TotalApiEventManagerBase"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.GetEventManagerServices(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Возвращает множество кортежей вида: (SubSystem, ServiceContract, ApiKey)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.DoRecreateSubscriptionService(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService,System.String})">
+            <summary>
+            Переподписывает приложение или подсистему на события.
+            Для приложения - перестартовывает цикл опроса событий.
+            </summary>
+            <param name="eventManagerOutgoingService"></param>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.ProcessUnavailableSubsystem(TotalApi.Billing.SubSystem,System.Exception,System.String)">
+            <summary>
+            Проверяет возобновление доступности подсистем в случае ошибки и восстанавливает связь.
+            </summary>
+            <param name="sourceSubSystem">Подсистема или <c>null</c> для подсистемы биллинга.</param>
+            <param name="e">Исключение, вызвавшее метод.</param>
+            <param name="apiKey">ApiKey</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.ExecuteAsync(TotalApi.Billing.SubSystem,System.Action{TotalApi.Billing.SubSystem},System.String,System.Action{TotalApi.Billing.SubSystem})">
+            <summary>
+            Выполняет асинхронно переданный запрос к подсистеме.
+            Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
+            Если при выполнении запроса произошла ошибка - будет сделана попытка восстановить соединение через определённое время.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.OnSubscriptionsChanged(System.Boolean)">
+            <summary>
+            Это событие вызывается, когда сборщик мусора уничтожает объект подписчик на который нет больше ссылок.
+            Необходимо пройтись по списку подписанных событий и отписаться от тех, для которых не осталось обработчиков. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.PublishToInternalQueue(TotalApi.Utils.EventObjectContract)">
+            <summary>
+            Публикует события только во внутреннюю очередь.
+            </summary>
+            <param name="eventObjectContract"></param>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.InternalPublish(System.Object,System.Security.Principal.IPrincipal)">
+            <summary>
+            Расширение стандартной публикуции событий.
+            Вместе с публикацией события во внутреннюю очередь - отправляем событие вовне.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnSubSystemCacheChanged">
+            <summary>
+            Event, fires when subsystem cache is changed. This event is not fired out from the subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnSubSystemCacheChanged.Post">
+            <summary>
+            Posts the event.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.TotalApiEventObject">
+            <summary>
+            Base events class, which includes (optionally) information about access rights.
+            If <see cref="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey"/> is not set - event will not be avaliable to subscribers,
+            otherwise if <see cref="P:TotalApi.Core.Events.TotalApiEventObject.UserId"/> is not set - event will be avaliable to all subscribers, authorized by <see cref="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey"/>,
+            if <see cref="P:TotalApi.Core.Events.TotalApiEventObject.UserId"/> is set - additionally, only for subscribers with correspondent <c>UserKey</c> authorization.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey">
+            <summary>
+            Gets or sets the API key.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.TotalApiEventObject.UserId">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.TotalApiEventObject"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.TotalApiEventObject.Sanity">
+            <summary>
+            Sanities this event.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Core.Events.IInternalEvent`1">
+            <summary>
+            Interface indicates that subscriber subscribes only to events of internal queue.
+            If all event subsribers will implement this interface, subsystem will not catch the events of this type from distributed subsystems.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.IInternalEvent">
+            <summary>
+            Interface indicates that subscriber subscribes only to  events of internal queue.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.InternalEventObject">
+            <summary>
+            Events, derived from this class would not be distributed to external subsystems and application.
+            They will circulate only within a particular subsystem.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnAsyncTaskEvent">
+            <summary>
+            Event fired by asynchronous task.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnAsyncTaskEvent.TaskId">
+            <summary>
+            Gets the task identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnAsyncTaskEvent.Task">
+            <summary>
+            Gets the asynchronous task.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnAsyncTaskEvent.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskEvent"/> class.
+            </summary>
+            <param name="taskId">The task identifier.</param>
+            <param name="task">Asynchronous task instance.</param>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnAsyncTaskFinished">
+            <summary>
+            Event, that indicates the finish of asynchronous task execution.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnAsyncTaskFinished.Status">
+            <summary>
+            Gets the asynchronous task status.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnAsyncTaskFinished.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject,TotalApi.Core.Api.AsyncTaskStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskFinished"/> class.
+            </summary>
+            <param name="taskId">The task identifier.</param>
+            <param name="task">Asynchronous task instance.</param>
+            <param name="status">Asynchronous task status.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnAsyncTaskFinished.Post(System.String,TotalApi.Core.Api.AsyncTaskObject,TotalApi.Core.Api.AsyncTaskStatus)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <param name="taskId">The task identifier.</param>
+            <param name="task">Asynchronous task instance.</param>
+            <param name="status">Asynchronous task status.</param>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnAsyncTaskStarted">
+            <summary>
+            Event, that indicates the start of asynchronous task execution.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnAsyncTaskStarted.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskStarted"/> class.
+            </summary>
+            <param name="taskId">The task identifier.</param>
+            <param name="task">Asynchronous task instance.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnAsyncTaskStarted.Post(System.String,TotalApi.Core.Api.AsyncTaskObject)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <param name="taskId">The task identifier.</param>
+            <param name="task">Asynchronous task task.</param>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnBillingStarted">
+            <summary>
+            Event, fired by billing subsystem to all subscribers, indicating the start of the subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnBillingStarted.Post">
+            <summary>
+            Publishes the event.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnDataChanged">
+            <summary>
+            Event, fires when entity object has been changed after CRUD operation.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnDataChanged.Action">
+            <summary>
+            CRUD actions.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Create">
+            <summary>
+            Object creation.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Update">
+            <summary>
+            Object update.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Delete">
+            <summary>
+            Object delete.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnDataChanged.TypeId">
+            <summary>
+            Gets or sets the type identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnDataChanged.ObjectId">
+            <summary>
+            Gets or sets the object identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnDataChanged.ActionType">
+            <summary>
+            Gets or sets the type of the action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.ITotalApiEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Creates the data changed event.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.IEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Creates the data changed event.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Is(System.Type)">
+            <summary>
+            Determines whether current objects type is the specified type.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Is``1">
+            <summary>
+            Determines whether current objects type is the specified type.
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Create``1(System.String,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Creates the data changed event.
+            </summary>
+            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
+            <param name="id">Object identifier.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(System.Type,System.String,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Creates the specified entity type.
+            </summary>
+            <param name="entityType">Type of the entity.</param>
+            <param name="id">The identifier.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish(TotalApi.Core.IEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish``1(System.String,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
+            <param name="id">The identifier.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish(System.Type,System.String,TotalApi.Core.Events.OnDataChanged.Action)">
+            <summary>
+            Publishes the specified entity type.
+            </summary>
+            <param name="entityType">Type of the entity.</param>
+            <param name="id">The identifier.</param>
+            <param name="actionType">Type of the action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnCreated(TotalApi.Core.IEntityObjectId)">
+            <summary>
+            Called when object created.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnUpdated(TotalApi.Core.IEntityObjectId)">
+            <summary>
+            Called when object updated.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnDeleted(TotalApi.Core.IEntityObjectId)">
+            <summary>
+            Called when object deleted.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnCreated``1(System.String)">
+            <summary>
+            Called when object created.
+            </summary>
+            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnUpdated``1(System.String)">
+            <summary>
+            Called when object updated.
+            </summary>
+            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.OnDeleted``1(System.String)">
+            <summary>
+            Called when object deleted.
+            </summary>
+            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnDataChanged.GetHash">
+            <summary>
+            Gets event hash to determinate that the events are equal.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnProgress">
+            <summary>
+            Event, fires when progress of operation changes.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnProgress.InstanceId">
+            <summary>
+            Gets the identifier of event's initiator instance.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnProgress.Progress">
+            <summary>
+            Gets the progress value.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnProgress.StatusText">
+            <summary>
+            Gets the status text.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnProgress.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnProgress"/> class.
+            </summary>
+            <param name="instanceId">The instance identifier.</param>
+            <param name="progress">The progress.</param>
+            <param name="statusText">The status text.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnProgress.Post(System.String,System.Int32,System.String)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <param name="instanceId">The instance identifier.</param>
+            <param name="progress">The progress.</param>
+            <param name="statusText">The status text.</param>
+        </member>
+        <member name="T:TotalApi.Core.Events.OnSubSytemRegistered">
+            <summary>
+            Event, fires by billing subsystem to all subscribers, indicating about new subsystem registration.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Events.OnSubSytemRegistered.SubSystemId">
+            <summary>
+            Gets or sets the subsystem identifier.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnSubSytemRegistered"/> class.
+            </summary>
+            <param name="subSystemId">The subsystem identifier.</param>
+        </member>
+        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.Post(System.String)">
+            <summary>
+            Publishes the event.
+            </summary>
+            <param name="subSystemId">The subsystem identifier.</param>
         </member>
         <member name="T:TotalApi.Core.JsonConfigs.SubSystemJsonConfig">
             <summary>
@@ -3520,443 +4012,6 @@
             </summary>
             <param name="id">The identifier.</param>
             <returns></returns>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnSubSystemCacheChanged">
-            <summary>
-            Event, fires when subsystem cache is changed. This event is not fired out from the subsystem.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnSubSystemCacheChanged.Post">
-            <summary>
-            Posts the event.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.TotalApiEventObject">
-            <summary>
-            Base events class, which includes (optionally) information about access rights.
-            If <see cref="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey"/> is not set - event will not be avaliable to subscribers,
-            otherwise if <see cref="P:TotalApi.Core.Events.TotalApiEventObject.UserId"/> is not set - event will be avaliable to all subscribers, authorized by <see cref="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey"/>,
-            if <see cref="P:TotalApi.Core.Events.TotalApiEventObject.UserId"/> is set - additionally, only for subscribers with correspondent <c>UserKey</c> authorization.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.TotalApiEventObject.ApiKey">
-            <summary>
-            Gets or sets the API key.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.TotalApiEventObject.UserId">
-            <summary>
-            Gets or sets the user identifier.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.TotalApiEventObject.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.TotalApiEventObject"/> class.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.TotalApiEventObject.Sanity">
-            <summary>
-            Sanities this event.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:TotalApi.Core.Events.EventManagerBase">
-            <summary>
-            Events manager base class.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Events.EventManagerBase.DefaultGetEventsPeriod">
-            <summary>
-            Default value. Period of checking for new events.
-            MinValue or MaxValue - turns off checking (use only for debugging purposes).
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Events.EventManagerBase.GetEventsPeriod">
-            <summary>
-            Period of checking for new events.
-            MinValue or MaxValue - turns off checking (use only for debugging purposes).
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.EventManagerBase.Instance">
-            <summary>
-            Gets the instance.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.GetEventManagerServices(System.String,System.Boolean,System.String)">
-            <summary>
-            Возвращает множество кортежей вида: (SubSystem, ServiceContract, ApiKey)
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.EventManagerBase"/> class.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.RecreateSubscriptionService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.EventManagerBase.IsSuspended">
-            <summary>
-            Gets or sets a value indicating whether the events checking is suspended.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.ProcessUnavailibleSubsystem(TotalApi.Billing.SubSystem,System.Exception,System.String)">
-            <summary>
-            Проверяет возобновление доступности подсистем в случае ошибки и восстанавливает связь.
-            </summary>
-            <param name="sourceSubSystem">Подсистема или <c>null</c> для подсистемы биллинга.</param>
-            <param name="e">Исключение, вызвавшее метод.</param>
-            <param name="apiKey">ApiKey</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.ExecuteAsync(TotalApi.Billing.SubSystem,System.Action,System.String,System.Action)">
-            <summary>
-            Выполняет асинхронно переданный запрос к подсистеме.
-            Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
-            Если при выполнении запроса произошла ошибка - будет сделана попытка восстановить соединение через определённое время.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.ReadEventsAsync(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService,System.String},System.Action{System.Collections.Generic.IEnumerable{TotalApi.Utils.EventObjectContract}})">
-            <summary>
-            Выполняет асинхронно переданный запрос к подсистеме. (Используется только для чтения сообщений).
-            Если подсистема недоступна запрос выполняться не будет - будет проигнорирован.  
-            Пока этот запрос не будет выполнен повторный запрос к этой подсистеме выполняться не будет - будет проигнорирован. 
-            Однако подобные запросы к другим подсистемам будут выполняться.
-            Если при выполнении запроса произошла ошибка - будет сделана попытка восстановить соединение через определённое время.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.OnSubscriptionsChanged(System.Boolean)">
-            <summary>
-            Это событие вызывается, когда сборщик мусора уничтожает объект подписчик на который нет больше ссылок.
-            Необходимо пройтись по списку подписанных событий и отписаться от тех, для которых не осталось обработчиков. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.PublishToInternalQueue(TotalApi.Utils.EventObjectContract)">
-            <summary>
-            Публикует события только во внутреннюю очередь.
-            </summary>
-            <param name="eventObjectContract"></param>
-        </member>
-        <member name="M:TotalApi.Core.Events.EventManagerBase.InternalPublish(System.Object,System.Security.Principal.IPrincipal)">
-            <summary>
-            Расширение стандартной публикуции событий.
-            Вместе с публикацией события во внутреннюю очередь - отправляем событие вовне.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.IInternalEvent`1">
-            <summary>
-            Interface indicates that subscriber subscribes only to events of internal queue.
-            If all event subsribers will implement this interface, subsystem will not catch the events of this type from distributed subsystems.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.IInternalEvent">
-            <summary>
-            Interface indicates that subscriber subscribes only to  events of internal queue.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.InternalEventObject">
-            <summary>
-            Events, derived from this  class would not be distributed to external subsystems.
-            They will circulate only within a particular subsystem.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnAsyncTaskEvent">
-            <summary>
-            Event fired by asynchronous task.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnAsyncTaskEvent.TaskId">
-            <summary>
-            Gets the task identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnAsyncTaskEvent.Task">
-            <summary>
-            Gets the asynchronous task.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnAsyncTaskEvent.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskEvent"/> class.
-            </summary>
-            <param name="taskId">The task identifier.</param>
-            <param name="task">Asynchronous task instance.</param>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnAsyncTaskFinished">
-            <summary>
-            Event, that indicates the finish of asynchronous task execution.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnAsyncTaskFinished.Status">
-            <summary>
-            Gets the asynchronous task status.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnAsyncTaskFinished.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject,TotalApi.Core.Api.AsyncTaskStatus)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskFinished"/> class.
-            </summary>
-            <param name="taskId">The task identifier.</param>
-            <param name="task">Asynchronous task instance.</param>
-            <param name="status">Asynchronous task status.</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnAsyncTaskFinished.Post(System.String,TotalApi.Core.Api.AsyncTaskObject,TotalApi.Core.Api.AsyncTaskStatus)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <param name="taskId">The task identifier.</param>
-            <param name="task">Asynchronous task instance.</param>
-            <param name="status">Asynchronous task status.</param>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnAsyncTaskStarted">
-            <summary>
-            Event, that indicates the start of asynchronous task execution.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnAsyncTaskStarted.#ctor(System.String,TotalApi.Core.Api.AsyncTaskObject)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnAsyncTaskStarted"/> class.
-            </summary>
-            <param name="taskId">The task identifier.</param>
-            <param name="task">Asynchronous task instance.</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnAsyncTaskStarted.Post(System.String,TotalApi.Core.Api.AsyncTaskObject)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <param name="taskId">The task identifier.</param>
-            <param name="task">Asynchronous task task.</param>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnBillingStarted">
-            <summary>
-            Event, fired by billing subsystem to all subscribers, indicating the start of the subsystem.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnBillingStarted.Post">
-            <summary>
-            Publishes the event.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnDataChanged">
-            <summary>
-            Event, fires when entity object has been changed after CRUD operation.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnDataChanged.Action">
-            <summary>
-            CRUD actions.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Create">
-            <summary>
-            Object creation.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Update">
-            <summary>
-            Object update.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Events.OnDataChanged.Action.Delete">
-            <summary>
-            Object delete.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnDataChanged.TypeId">
-            <summary>
-            Gets or sets the type identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnDataChanged.ObjectId">
-            <summary>
-            Gets or sets the object identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnDataChanged.ActionType">
-            <summary>
-            Gets or sets the type of the action.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.ITotalApiEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Creates the data changed event.
-            </summary>
-            <param name="entity">The entity.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(TotalApi.Core.IEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Creates the data changed event.
-            </summary>
-            <param name="entity">The entity.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Is(System.Type)">
-            <summary>
-            Determines whether current objects type is the specified type.
-            </summary>
-            <param name="type">The type.</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Is``1">
-            <summary>
-            Determines whether current objects type is the specified type.
-            </summary>
-            <typeparam name="T">Object type</typeparam>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Create``1(System.String,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Creates the data changed event.
-            </summary>
-            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
-            <param name="id">Object identifier.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Create(System.Type,System.String,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Creates the specified entity type.
-            </summary>
-            <param name="entityType">Type of the entity.</param>
-            <param name="id">The identifier.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish(TotalApi.Core.IEntityObjectId,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <param name="entity">The entity.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish``1(System.String,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
-            <param name="id">The identifier.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.Publish(System.Type,System.String,TotalApi.Core.Events.OnDataChanged.Action)">
-            <summary>
-            Publishes the specified entity type.
-            </summary>
-            <param name="entityType">Type of the entity.</param>
-            <param name="id">The identifier.</param>
-            <param name="actionType">Type of the action.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnCreated(TotalApi.Core.IEntityObjectId)">
-            <summary>
-            Called when object created.
-            </summary>
-            <param name="entity">The entity.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnUpdated(TotalApi.Core.IEntityObjectId)">
-            <summary>
-            Called when object updated.
-            </summary>
-            <param name="entity">The entity.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnDeleted(TotalApi.Core.IEntityObjectId)">
-            <summary>
-            Called when object deleted.
-            </summary>
-            <param name="entity">The entity.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnCreated``1(System.String)">
-            <summary>
-            Called when object created.
-            </summary>
-            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
-            <param name="id">The identifier.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnUpdated``1(System.String)">
-            <summary>
-            Called when object updated.
-            </summary>
-            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
-            <param name="id">The identifier.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.OnDeleted``1(System.String)">
-            <summary>
-            Called when object deleted.
-            </summary>
-            <typeparam name="TEntityObjectId">The type of the entity object identifier.</typeparam>
-            <param name="id">The identifier.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnDataChanged.GetHash">
-            <summary>
-            Gets event hash to determinate that the events are equal.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnProgress">
-            <summary>
-            Event, fires when progress of operation changes.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnProgress.InstanceId">
-            <summary>
-            Gets the identifier of event's initiator instance.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnProgress.Progress">
-            <summary>
-            Gets the progress value.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnProgress.StatusText">
-            <summary>
-            Gets the status text.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnProgress.#ctor(System.String,System.Int32,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnProgress"/> class.
-            </summary>
-            <param name="instanceId">The instance identifier.</param>
-            <param name="progress">The progress.</param>
-            <param name="statusText">The status text.</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnProgress.Post(System.String,System.Int32,System.String)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <param name="instanceId">The instance identifier.</param>
-            <param name="progress">The progress.</param>
-            <param name="statusText">The status text.</param>
-        </member>
-        <member name="T:TotalApi.Core.Events.OnSubSytemRegistered">
-            <summary>
-            Event, fires by billing subsystem to all subscribers, indicating about new subsystem registration.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Events.OnSubSytemRegistered.SubSystemId">
-            <summary>
-            Gets or sets the subsystem identifier.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnSubSytemRegistered"/> class.
-            </summary>
-            <param name="subSystemId">The subsystem identifier.</param>
-        </member>
-        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.Post(System.String)">
-            <summary>
-            Publishes the event.
-            </summary>
-            <param name="subSystemId">The subsystem identifier.</param>
         </member>
         <member name="T:TotalApi.Core.SimpleJsonContractResolver">
             <summary>
@@ -4944,6 +4999,11 @@
         <member name="F:TotalApi.Core.Exceptions.TotalApiException.EUnspecified">
             <summary>
             The value of the unspecified exception code.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.ENotAuthorized">
+            <summary>
+            The value of the not authorized exception code.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Exceptions.TotalApiException.ErrorCode(System.UInt16,System.Byte,System.Boolean)">
@@ -6426,6 +6486,11 @@
             Gets the flag that the subsystem is billing.
             </summary>
         </member>
+        <member name="P:TotalApi.Billing.SubSystem.IsCurrent">
+            <summary>
+            Gets the flag that the subsystem is current subsystem.
+            </summary>
+        </member>
         <member name="M:TotalApi.Billing.SubSystem.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Billing.SubSystem"/> class.
@@ -6436,6 +6501,16 @@
             Clones this instance.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystem.CopyFrom(TotalApi.Billing.SubSystem)">
+            <summary>
+            Copy subsystem info from the <paramref name="source"/> subsystem.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Billing.SubSystem.CopyTo(TotalApi.Billing.SubSystem)">
+            <summary>
+            Copy subsystem info to the <paramref name="target"/> subsystem.
+            </summary>
         </member>
         <member name="M:TotalApi.Billing.SubSystem.IsIncomingEventAllowed(System.String)">
             <summary>

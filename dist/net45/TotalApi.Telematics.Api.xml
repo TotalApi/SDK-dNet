@@ -1408,7 +1408,7 @@
             Using this constructor you must set either directrly set <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorId"/> or set <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.DeviceId"/>, <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorType"/> and <see cref="P:TotalApi.Telematics.ReadSensorValuesParams.SensorNumber"/> to identify the sensor.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.ReadSensorValuesParams.#ctor(TotalApi.Telematics.Sensor,System.DateTime,System.DateTime,System.Object[])">
+        <member name="M:TotalApi.Telematics.ReadSensorValuesParams.#ctor(TotalApi.Telematics.Sensor,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Object[])">
             <summary>
             Creates the parameters by source sensor.
             </summary>

@@ -1,4 +1,5 @@
-﻿using TotalApi.Core.Authentication;
+﻿using System.Threading;
+using TotalApi.Core.Authentication;
 using TotalApi.Core.Events;
 
 namespace DemoChat
@@ -12,7 +13,7 @@ namespace DemoChat
         public ChatEventObject(string message)
         {
             Message = message;
-            UserName = TotalApiAuth.UserLogin;
+            UserName = Thread.CurrentPrincipal.UserLogin();
         }
     }
 }

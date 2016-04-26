@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ServiceModel;
 using TotalApi.Billing;
 using TotalApi.Core;
 using TotalApi.Core.Api;
 using TotalApi.Core.Authentication;
+using TotalApi.Core.Events;
+using TotalApi.Core.Exceptions;
 using TotalApi.Utils.Console;
 using TotalApi.Utils.ErrorManager;
 
@@ -12,57 +15,69 @@ namespace DemoChat
     {
         static void Main(string[] args)
         {
-            // Initialization client SDK
-            TotalApiBootstrapper.Create();
-
-            var isExists = false;
-            while (!isExists)
+            try
             {
-                Console.Write("Login: ");
-                var userLogin = Console.ReadLine();
-                Console.Write("Password: ");
-                var userPassword = Console.ReadLine();
-                try
+                // Initialization client SDK
+                TotalApiBootstrapper.Create();
+
+                var isExists = false;
+                while (!isExists)
                 {
-                    // AppKey-authority is used in this call
-                    isExists = CoreApi.ApiUsers.IsExists(userLogin);
-                    if (!isExists)
+                    Console.Write("Login: ");
+                    var userLogin = Console.ReadLine();
+                    Console.Write("Password: ");
+                    var userPassword = Console.ReadLine();
+                    try
                     {
-                        // User is not registered - auto register it and sign in
                         // AppKey-authority is used in this call
-                        CoreApi.ApiUsers.Save(new ApiUser { Login = userLogin, Password = userPassword }, true);
+                        isExists = CoreApi.ApiUsers.IsExists(userLogin);
+                        if (!isExists)
+                        {
+                            // User is not registered - auto register it and sign in
+                            // AppKey-authority is used in this call
+                            CoreApi.ApiUsers.Save(new ApiUser {Login = userLogin, Password = userPassword}, true);
+                        }
+                        // Set AppUser auth information
+                        TotalApiAuth.SetUserPassword(userLogin, userPassword);
+
+                        // Check whether auth information is valid
+                        // AppUser-authority is used in this call
+                        // If auth is invalid exception will be thrown
+                        isExists = CoreApi.ApiUsers.IsExists(userLogin);
+
+                        TotalApiEventManagerBase.Instance.UpdateApplicationSubscriptions(true);
+
+                        // Initialize subscriber.
+                        // If auth is invalid - exception will NOT be thrown
+                        CoreApi.EventManager.Subscribe(Subscriber.Instance);
                     }
-                    // Set AppUser auth information
-                    TotalApiAuth.UserLogin = userLogin;
-                    TotalApiAuth.UserPassword = userPassword;
-                    // Check whether auth information is valid
-                    // AppUser-authority is used in this call
-                    isExists = CoreApi.ApiUsers.IsExists(userLogin);
-                    // If auth is valid - initialize subscriber, otherwise exception will be thrown
-                    CoreApi.EventManager.Subscribe(Subscriber.Instance);
+                    catch (Exception e)
+                    {
+                        // Clear AppUser auth information
+                        TotalApiAuth.SetUserPassword(null, null);
+                        isExists = false;
+                        // Display error text
+                        ColorConsole.Do(ConsoleColor.Red, () => Console.WriteLine(e.FullMessage()));
+                    }
                 }
-                catch (Exception e)
+
+                Console.Clear();
+                Console.WriteLine($"Hello: {TotalApiAuth.UserLogin}");
+                Console.WriteLine("--------------------------------");
+
+                Console.Write("> ");
+
+                while (true)
                 {
-                    // Clear AppUser auth information
-                    TotalApiAuth.UserLogin = null;
-                    isExists = false;
-                    // Display error text
-                    ColorConsole.Do(ConsoleColor.Red, () => Console.WriteLine(e.FullMessage()));
+                    var inputString = Console.ReadLine();
+                    CoreApi.EventManager.Publish(new ChatEventObject(inputString));
                 }
+                // ReSharper disable once FunctionNeverReturns
             }
-
-            Console.Clear();
-            Console.WriteLine($"Hello: {TotalApiAuth.UserLogin}");
-            Console.WriteLine("--------------------------------");
-
-            Console.Write("> ");
-
-            while (true)
+            catch (Exception e)
             {
-                var inputString = Console.ReadLine();
-                CoreApi.EventManager.Publish(new ChatEventObject(inputString));
+                ColorConsole.Do(ConsoleColor.Red, ()=> Console.WriteLine(e.FullMessage()));
             }
-            // ReSharper disable once FunctionNeverReturns
         }
     }
 }

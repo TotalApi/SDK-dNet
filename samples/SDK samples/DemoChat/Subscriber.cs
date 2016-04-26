@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using TotalApi.Core.Authentication;
 using TotalApi.Utils;
 using TotalApi.Utils.Console;
@@ -11,7 +12,7 @@ namespace DemoChat
 
         public void HandleEvent(ChatEventObject e)
         {
-            if (e.UserName == TotalApiAuth.UserLogin)
+            if (e.UserName == Thread.CurrentPrincipal.UserLogin())
                 ColorConsole.Do(ConsoleColor.Yellow, () =>
                 {
                     Console.WriteLine($"\n                                               {e.EventTime} - Me > {e.Message}");
