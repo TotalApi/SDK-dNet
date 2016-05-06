@@ -5,7 +5,7 @@ using TotalApi.SampleModule.Api.ServiceContracts;
 
 namespace TotalApi.SampleModule
 {
-    [Authorized(Role = TotalApiAuthenticationType.ApiKeyUser)]
+    [Authorized(Role = TotalApiRole.ApiKeyUser)]
     class SampleModuleService: TotalApiServiceBase, ISampleService
     {
         public string DoSomeStuff(string message)

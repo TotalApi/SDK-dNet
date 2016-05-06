@@ -53,11 +53,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Linq2Rest, Version=4.1.0.0, Culture=neutral, PublicKeyToken=73a6c4cf8c87a30e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Linq2Rest.4.1.0.0\lib\Net451\Linq2Rest.dll</HintPath>
+      <HintPath>packages\Linq2Rest.4.1.0.0\lib\Net451\Linq2Rest.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -74,25 +74,25 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="TotalApi.Billing.Client">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Billing.Client.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Billing.Client.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Core">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Core.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Core.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.EventManager.Client">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.EventManager.Client.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.EventManager.Client.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Telematics.Api">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Telematics.Api.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Telematics.Api.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.Common">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.Common.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.Common.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.IoC">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.IoC.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.IoC.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.Wcf">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.Wcf.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.Wcf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
