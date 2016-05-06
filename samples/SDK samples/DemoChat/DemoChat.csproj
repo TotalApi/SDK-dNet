@@ -59,33 +59,33 @@
     <Reference Include="System.Xml" />
     <Reference Include="TotalApi.Billing.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Billing.Client.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Billing.Client.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Core.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Core.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.EventManager.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.EventManager.Client.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.EventManager.Client.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Telematics.Api">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Telematics.Api.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Telematics.Api.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Telematics.Client">
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Telematics.Client.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Telematics.Client.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.Common.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.Common.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.IoC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.IoC.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.IoC.dll</HintPath>
     </Reference>
     <Reference Include="TotalApi.Utils.Wcf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\SDK\1.0.0.0\TotalApi.Utils.Wcf.dll</HintPath>
+      <HintPath>..\..\..\dist\NET45\TotalApi.Utils.Wcf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
