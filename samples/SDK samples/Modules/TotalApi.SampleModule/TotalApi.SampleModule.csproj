@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Linq2Rest, Version=4.1.0.0, Culture=neutral, PublicKeyToken=73a6c4cf8c87a30e, processorArchitecture=MSIL">
-      <HintPath>packages\Linq2Rest.4.1.0.0\lib\Net451\Linq2Rest.dll</HintPath>
+      <HintPath>..\packages\Linq2Rest.4.1.0.0\lib\Net451\Linq2Rest.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,13 +76,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TotalApi.SampleModule.Api\TotalApi.SampleModule.Api.csproj">
       <Project>{70b17ace-51fc-41d4-9fb9-430d80616160}</Project>
       <Name>TotalApi.SampleModule.Api</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
