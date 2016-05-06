@@ -47,6 +47,14 @@
             Filter description.
             </summary>
         </member>
+        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
+            <summary>
+            Type, distributing the parameters class of current filter.
+            This type should have public constructor without parameters and be serializeable.
+            Even if there is no parameters - it should return the type of an empty class.
+            Types of parameters should be unique across different filters.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.DependsOn">
             <summary>
             List of filters, which should be executed before current filter.
@@ -57,14 +65,6 @@
             <summary>
             If <c>true</c>, the filter will be added at the end of filters pipeline.
             Filters, dependent from this filter will be certainly added after this filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
-            <summary>
-            Type, distributing the parameters class of current filter.
-            This type should have public constructor without parameters and be serializeable.
-            Even if there is no parameters - it should return the type of an empty class.
-            Types of parameters should be unique across different filters.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Execute(System.Object,System.Object)">
@@ -458,25 +458,21 @@
             <summary>
             Gets or sets logged message creation date.
             </summary>
-            <value>
-            Created date.
-            </value>
         </member>
         <member name="P:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.Source">
             <summary>
             Gets the source of logger message .
             </summary>
-            <value>
-            The source object.
-            </value>
         </member>
         <member name="P:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.Exception">
             <summary>
             Gets the exception related to log message.
             </summary>
-            <value>
-            The exception.
-            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.CategoryName">
+            <summary>
+            Gets the log category name.
+            </summary>
         </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.Create(System.Object,System.Exception)">
             <summary>
@@ -486,6 +482,33 @@
             <param name="exception">The log message exception.</param>
             <returns></returns>
         </member>
+        <member name="T:TotalApi.Core.Api.BaseLogger.ILogInstance">
+            <summary>
+            Object passed to logging methods as an source instance can implement this interface to extend logging information.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.ILogInstance.CategoryName">
+            <summary>
+            Gets the name of the log category.
+            The logging parameters can setup each log category separately.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.BaseLogger"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.GetCategoryName(System.Object)">
+            <summary>
+            Gets the category name of the source instance.
+            Returns null if no category is specified.
+            </summary>
+        </member>
+        <member name="E:TotalApi.Core.Api.BaseLogger.OnLog">
+            <summary>
+            Occurs when log message logged.
+            </summary>
+        </member>
         <member name="P:TotalApi.Core.Api.BaseLogger.LogQueue">
             <summary>
             Gets the log queue.
@@ -493,16 +516,6 @@
             <value>
             The log queue.
             </value>
-        </member>
-        <member name="E:TotalApi.Core.Api.BaseLogger.OnLog">
-            <summary>
-            Occurs when log message logged.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.BaseLogger.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Api.BaseLogger"/> class.
-            </summary>
         </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.Info(System.String,System.Object[])">
             <summary>
@@ -810,6 +823,71 @@
             <param name="msg">The message.</param>
             <param name="type">Log message type.</param>
             <param name="logInfo">Log message information.</param>
+        </member>
+        <member name="T:TotalApi.Core.Api.FileLoggerConfig">
+            <summary>
+            File logger configuration parameters.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile">
+            <summary>
+            Logger file element configuration.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.File">
+            <summary>
+            Gets or sets the file.
+            </summary>
+            <value>
+            The file.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.Level">
+            <summary>
+            Gets or sets the level.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.Append">
+            <summary>
+            Gets or sets a value indicating whether to append or rewrite logger file.
+            </summary>
+            <value>
+              <c>true</c> if append; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.Persistent">
+            <summary>
+            Gets or sets a value indicating whether to log file should be saved on restarting application. The option <seealso cref="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.Append"/> overrides this setting.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.Console">
+            <summary>
+            Gets or sets a value indicating whether to replicate message to console.
+            </summary>
+            <value>
+              <c>true</c> if write to console; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.SplitDays">
+            <summary>
+            Gets or sets days period when the log file should be auto splitted.
+            </summary>
+            <value>
+            One of the next values:
+            0 - file is not splitted (by default)
+            {N} - file is splitted every N days (the old file name is <c>{logfileName}_{priorDate}.{logFileExt}</c>).
+            </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.FileLoggerConfig.TotalApiLogFile.SplitSizeMb">
+            <summary>
+            Gets or sets max log file size in Mb after which it should be auto splitted.
+            <value>
+            One of the next values:
+            null - file id splitted by default (100 MB)
+            0    - file is not splitted
+            {N}  - file is splitted after N MB (the old file name is <c>{logfileName}_{priorDate}.{logFileExt}</c>).
+            </value>
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Api.FileLoggerConfiguration">
             <summary>
@@ -3044,6 +3122,21 @@
             Subsystem manager.
             </summary>
         </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.Billing">
+            <summary>
+            Gets the reference to the billing subsystem.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
+            <summary>
+            Current subsystem. Equals <c>null</c> if current domain is an application. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Billing.SubSystemManager.Cache">
+            <summary>
+            The subsystems cache.
+            </summary>
+        </member>
         <member name="M:TotalApi.Core.Billing.SubSystemManager.Create(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Creates the subsystem.
@@ -3078,24 +3171,9 @@
             It is true for applications and billing subsystem.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.Billing">
-            <summary>
-            Gets the reference to the billing subsystem.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Billing.SubSystemManager.Current">
-            <summary>
-            Current subsystem. Equals <c>null</c> if current domain is an application. 
-            </summary>
-        </member>
         <member name="P:TotalApi.Core.Billing.SubSystemManager.CurrentClassesIds">
             <summary>
             Gets the subsystem's classes ids.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.Billing.SubSystemManager.Cache">
-            <summary>
-            The subsystems cache.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Billing.SubSystemManager.Register">
@@ -4994,6 +5072,11 @@
         <member name="T:TotalApi.Core.Exceptions.TotalApiException">
             <summary>
             Serves as the base class for system TotalApi exceptions.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Exceptions.TotalApiException.ECriticalError">
+            <summary>
+            The value of the unspecified critical exception code.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Exceptions.TotalApiException.EUnspecified">

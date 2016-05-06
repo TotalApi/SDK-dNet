@@ -2873,8 +2873,18 @@
             Служит для пометки свойства класса которое требует сериализации.
             Простое дублирование соответствующего атрибута из сборки Newton Json.Net,
             чтобы не подключать сборку. 
-            Требует использование JsonContractResolverEx для корректной работы.
+            Требует использование JsonPropertyContractResolver для корректной работы.
             </summary>
+        </member>
+        <member name="P:TotalApi.Utils.DataAnnotations.JsonPropertyAttribute.PropertyName">
+            <summary>
+            Gets or sets the name of the property.
+            
+            </summary>
+            
+            <value>
+            The name of the property.
+            </value>
         </member>
         <member name="M:TotalApi.Utils.DataStorage.CustomDataStorage.GetValue(System.String,System.Object)">
             <summary>
@@ -3373,6 +3383,14 @@
             <param name="relativeResourceName">Resource name in the format <c>Folder</c>.<c>SubFolder</c>.<c>ItemName</c></param>
             <returns>string containing line delimited waypoints from the
             file (for test)</returns>
+        </member>
+        <member name="M:TotalApi.Utils.Spatials.GpxParser.SaveGpxTracksToFile(System.String,System.Collections.Generic.IEnumerable{TotalApi.Utils.Spatials.ICoordinate},System.String)">
+            <summary>
+            Saves the list of coordinates to the GPX-file.
+            </summary>
+            <param name="sFile">File name</param>
+            <param name="coordinates">Coordinates</param>
+            <param name="version">GPX-version</param>
         </member>
         <member name="M:TotalApi.Utils.Spatials.GeoUtils.CalculateAngle(System.Double,System.Double,System.Double,System.Double)">
             <summary>

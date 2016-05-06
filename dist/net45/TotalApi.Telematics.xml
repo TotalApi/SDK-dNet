@@ -48,7 +48,7 @@
             Если в качестве параметров фильтров передано значение <see cref="F:System.DBNull.Value"/> или <c>null</c> фильтры применяться не будут."/>
             Если нижеперечисленные фильтры не будут переданы - будет использоваться соответствующий фильтр по умолчанию:
             <list type="bullet">
-            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificateFilterParameters"/></description></item>
+            <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters"/></description></item>
             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksFilterParameters"/></description></item>
             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsFilterParameters"/></description></item>
             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterParameters"/></description></item>
@@ -132,6 +132,853 @@
             Если соспоставление не найдено - будет использоваться внутренний порт без изменения
             </summary>
         </member>
+        <member name="T:TotalApi.Telematics.Common.Math.Helpers.Matrix">
+            <summary>
+            Matrix math class, simple very basic.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Helpers.Matrix.m_c">
+            <summary>
+            Columns
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Helpers.Matrix.m_r">
+            <summary>
+            Rows.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor with dimensions.
+            </summary>
+            <param name="cols"></param>
+            <param name="rows"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.#ctor(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Set(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Set this matric to m.
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Matrix.Columns">
+            <summary>
+            Columns.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Matrix.Rows">
+            <summary>
+            Rows
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Resize(System.Int32,System.Int32)">
+            <summary>
+            Resize.
+            </summary>
+            <param name="cols"></param>
+            <param name="rows"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Clone">
+            <summary>
+            Clone this matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Get(System.Int32,System.Int32)">
+            <summary>
+            Get a value.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Trace(System.Int32)">
+            <summary>
+            Return the trace, same as Get(index, index);
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Set(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Set a value.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Matrix.Data">
+            <summary>
+            The raw data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Multiply(System.Double)">
+            <summary>
+            In place scalar multiplication.
+            this *= scalar.
+            </summary>
+            <param name="scalar"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Multiply(TotalApi.Telematics.Common.Math.Helpers.Matrix,System.Double)">
+            <summary>
+            Scalar multiplication.
+            result = Multiply(matrix, scalar);
+            </summary>
+            <param name="scalar"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Multiply(TotalApi.Telematics.Common.Math.Helpers.Matrix,TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Multiply two matrixes.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Multiply(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Multiply in place this * b.
+            </summary>
+            <param name="b"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.MultiplyABAT(TotalApi.Telematics.Common.Math.Helpers.Matrix,TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Result = a*b*a^T.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Add(TotalApi.Telematics.Common.Math.Helpers.Matrix,System.Double)">
+            <summary>
+            Add scalar.
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Add(System.Double)">
+            <summary>
+            Add scalar in place
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Add(TotalApi.Telematics.Common.Math.Helpers.Matrix,TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Add matrix.
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Add(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Add matrix in place
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Subtract(TotalApi.Telematics.Common.Math.Helpers.Matrix,System.Double)">
+            <summary>
+            Add scalar.
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Subtract(System.Double)">
+            <summary>
+            Add scalar in place
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Subtract(TotalApi.Telematics.Common.Math.Helpers.Matrix,TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Add matrix.
+            </summary>
+            <param name="a"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Subtract(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Add matrix in place
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Transpose(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Transpose matrix m.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Transpose">
+            <summary>
+            Transpose this matrix in place.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.IsIdentity">
+            <summary>
+            Test if this is an identity matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.SetIdentity">
+            <summary>
+            Test if this is an identity matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Zero">
+            <summary>
+            Zero.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Matrix.Determinant">
+            <summary>
+            Determinant.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Matrix.Invert(TotalApi.Telematics.Common.Math.Helpers.Matrix)">
+            <summary>
+            Invert.
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.PiecewiseLinearFunction.LeftLimit">
+            <summary>
+            The leftmost x value of the membership function, given by the first (X,Y) coordinate.
+            
+            </summary>
+            <exception cref="T:System.NullReferenceException">Points of the membership function are not initialized.</exception>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.PiecewiseLinearFunction.RightLimit">
+            <summary>
+            The rightmost x value of the membership function, given by the last (X,Y) coordinate.
+            
+            </summary>
+            <exception cref="T:System.NullReferenceException">Points of the membership function are not initialized.</exception>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PiecewiseLinearFunction.GetMembership(System.Double)">
+            <summary>
+            Calculate membership of a given value to the piecewise function.
+            
+            </summary>
+            <param name="x">Value which membership will to be calculated.</param>
+            <returns>
+            Degree of membership [0..1] of the value to the fuzzy set.
+            </returns>
+            <exception cref="T:System.NullReferenceException">Points of the membership function are not initialized.</exception>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.Count">
+            <summary> Gets the number of items in the priority queue. </summary>
+            <value> The number of items in the priority queue. </value>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.Add(`0)">
+            <summary> Adds an item to the priority queue, inserting it with respect to its priority. </summary>
+            <param name="item"> The item to add. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary> Adds a range of items to the priority queue, inserting them with respect to their priority. </summary>
+            <param name="itemsToAdd"> An IEnumerable&lt;T&gt; of items to add to the priority queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.Clear">
+            <summary> Clears all the items from the priority queue. </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.Clear(System.Int32)">
+            <summary> Clears all the items starting at the specified start index. </summary>
+            <param name="startIndex"> The start index. </param>
+            <returns> The number of items that were removed from the priority queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.Clear(System.Int32,System.Int32)">
+            <summary> Clears the number of items specified by count from the priority queue starting at specified start index. </summary>
+            <param name="startIndex"> The start index. </param>
+            <param name="count">      Number of items to remove. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.ClearWhere(System.Func{`0,System.Boolean})">
+            <summary> Clears all the items that satisfy the specified predicate function. </summary>
+            <param name="predicateFunction"> The predicate function to use in determining which items should be removed. </param>
+            <returns> The number of items that were removed from the priority queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PopFront">
+            <summary> Pops an item from the front of the queue. </summary>
+            <returns> An item from the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PopBack">
+            <summary> Pops an item from the back of the queue. </summary>
+            <returns> An item from the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PeekFront">
+            <summary> Peeks at the item at the front of the queue, but does not remove it from the queue. </summary>
+            <returns> The item that is at the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PeekBack">
+            <summary> Peek at the item at the back of the queue, but does not remove it from the queue. </summary>
+            <returns> The item that is at the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PopFront(System.Int32)">
+            <summary> Pops the specified number of items from the front of the queue. </summary>
+            <param name="numberToPop"> Number of items to pop from the front of the queue. </param>
+            <returns> The items that were popped from the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.PopBack(System.Int32)">
+            <summary> Pops the specified number of items from the back of the queue. </summary>
+            <param name="numberToPop"> Number of items to pop from the back of the queue. </param>
+            <returns> The items that were popped from the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.IPriorityQueue`1.IsEmpty">
+            <summary> Queries if the priority queue is empty. </summary>
+            <returns> true if the priority queue is empty, false if not. </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1">
+            <summary> A generic priority queue implementation. </summary>
+            <seealso> cref="T:System.Collections.Generic.IEnumerable{T}". </seealso>
+            <seealso> cref="T:Utilities.Interfaces.IPriorityQueue{T}". </seealso>
+            <typeparam name="T"> Generic type parameter, where T 
+                                 must implement the IComparable interface. </typeparam>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.OrderingConvention">
+            <summary> Gets the convention this priority queue uses to sort and Insert _items. </summary>
+            <value> The ordering convention. </value>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Count">
+            <summary> Gets the number of _items that are in the priority queue. </summary>
+            <value> The number of _items in the priority queue. </value>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.#ctor(System.Collections.Generic.IComparer{`0},TotalApi.Telematics.Common.Math.Helpers.PriorityConvention)">
+            <summary> Initializes a new instance of the PriorityQueue class. </summary>
+            <exception cref="T:System.ArgumentException"> Thrown when the convention is specified 
+                                                 as PriorityConvention.None. </exception>
+            <param name="convention">
+                (Optional) the convention to use when sorting and inserting _items (this cannot be changed
+                after the priority queue is created).
+            </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.#ctor(System.Collections.Generic.IEnumerable{`0},TotalApi.Telematics.Common.Math.Helpers.PriorityConvention)">
+            <summary> Initializes a new instance of the PriorityQueue class. </summary>
+            <exception cref="T:System.ArgumentException"> Thrown when the convention is specified
+                                                  as PriorityConvention.None. </exception>
+            <param name="priorityItems"> The _items to initialize the priority queue with. </param>
+            <param name="convention">
+                (Optional) the convention to use when sorting and inserting _items (this cannot be changed
+                after the priority queue is created).
+            </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.GetEnumerator">
+            <summary> Gets the enumerator for the priority queue. </summary>
+            <returns> The enumerator for the priority queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Add(`0)">
+            <summary> Adds an item to the priority queue. </summary>
+            <param name="item"> The item to add. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+                Adds the _items to the priority queue.  This method checks if the enumerable is null 
+                and only iterates of the _items once.
+            </summary>
+            <param name="itemsToAdd"> An IEnumerable&lt;T&gt; of _items to add to the priority queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Clear">
+            <summary> Clears all the _items from the priority queue. </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Clear(System.Int32)">
+            <summary> Clears all the _items starting at the specified start index. </summary>
+            <param name="startIndex"> The start index. </param>
+            <returns> The number of _items that were removed from the priority queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Clear(System.Int32,System.Int32)">
+            <summary> Clears the number of _items specified by count 
+                      from the priority queue starting at specified start index. </summary>
+            <param name="startIndex"> The start index. </param>
+            <param name="count">      Number of _items to remove. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.ClearWhere(System.Func{`0,System.Boolean})">
+            <summary> Clears all the _items that satisfy the specified predicate function. </summary>
+            <param name="predicateFunction"> The predicate function to use in determining 
+                                             which _items should be removed. </param>
+            <returns> The number of _items that were removed from the priority queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PopFront">
+            <summary> Pops an item from the front of the queue. </summary>
+            <exception cref="T:System.InvalidOperationException"> Thrown when no _items exist 
+                                                         in the priority queue. </exception>
+            <returns> An item from the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PopBack">
+            <summary> Pops an item from the back of the queue. </summary>
+            <exception cref="T:System.InvalidOperationException"> Thrown when no _items exist
+                                                         in the priority queue. </exception>
+            <returns> An item from the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PeekFront">
+            <summary> Peeks at the item at the front queue without removing the item. </summary>
+            <exception cref="T:System.InvalidOperationException"> Thrown when no _items exist 
+                                                         in the priority queue. </exception>
+            <returns> The item at the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PeekBack">
+            <summary> Peeks at the item at the back of the queue without removing the item. </summary>
+            <exception cref="T:System.InvalidOperationException"> Thrown when no _items exist 
+                                                         in the priority queue. </exception>
+            <returns> The item at the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PopFront(System.Int32)">
+            <summary> Pops the specified number of _items from the front of the queue. </summary>
+            <exception cref="T:System.ArgumentException">
+                Thrown when the number of _items to pop exceeds the number of _items in the priority
+                queue.
+            </exception>
+            <param name="numberToPop"> Number of _items to pop from the front of the queue. </param>
+            <returns> The _items from the front of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.PopBack(System.Int32)">
+            <summary> Pops the specified number of _items from the back of the queue. </summary>
+            <exception cref="T:System.ArgumentException">
+                Thrown when the number of _items to pop exceeds the number of _items in the priority
+                queue.
+            </exception>
+            <param name="numberToPop"> Number of _items to pop from the back of the queue. </param>
+            <returns> The _items from the back of the queue. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.IsEmpty">
+            <summary> Queries if the priority queue is empty. </summary>
+            <returns> true if the priority queue empty, false if not. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.Insert(`0)">
+            <summary> Inserts the given item into the queue. </summary>
+            <param name="item"> The item to Insert into the queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.InsertAscending(`0)">
+            <summary>
+                Inserts the specified item into the priority queue 
+                (using the PriorityConvention.HighestPriorityInFront convention).
+            </summary>
+            <param name="item"> The item to Insert into the queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.InsertDescending(`0)">
+            <summary>
+                Inserts the specified item into the priority queue 
+                (using the PriorityConvention.LowestPriorityInFront convention).
+            </summary>
+            <param name="item"> The item to Insert into the queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.FindIndexAndInsertItemAscending(`0)">
+            <summary>
+                Searches for the index where the given item should be place in the queue and, 
+                subsequently, inserts the item at the specified index.
+            </summary>
+            <param name="item"> The item to Insert into the queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.FindIndexAndInsertItemDescending(`0)">
+            <summary>
+                Searches for the index where the given item should be place in the queue and, 
+                subsequently, inserts the item at the specified index.
+            </summary>
+            <param name="item"> The item to Insert into the queue. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.FindIndexAndInsertItem(`0,System.Int32,TotalApi.Telematics.Common.Math.Helpers.PriorityConvention)">
+            <summary>
+                Searches for the index where the given item should be place in the queue and,
+                subsequently, inserts the item at the specified index.
+            </summary>
+            <remarks>
+                This method will be called when the specified item equals 
+                another item (can be more than one) within the queue.
+            </remarks>
+            <param name="item">               The item to Insert into the queue. </param>
+            <param name="currentIndex">       The index in which to start at. </param>
+            <param name="priorityConvention"> The priority convention to use when finding the index. </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.AreEndConditionsMet(`0,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+                Determines if the current lower bound, upper bound, and median index are 
+                at the end conditions, if not, the current median index is updated 
+                using the lower and upper bound indices.
+            </summary>
+            <remarks>
+                The end conditions are:  
+                                        1)  Is the upper bound index 0?    
+                                        2)  Is the lower bound index the last index in the queue?    
+                                        3)  Is the new median index (calculated using lower and 
+                                            upper bound indices) the same as the current median index?
+            </remarks>
+            <param name="item">               The item to Insert if the end conditions are met. </param>
+            <param name="lowerBoundIndex">    Zero-based index of the lower bound. </param>
+            <param name="upperBoundIndex">    Zero-based index of the upper bound. </param>
+            <param name="currentMedianIndex"> [in,out] The current median index. </param>
+            <returns> true if end conditions met, false if not. </returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.PriorityQueue`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary> Gets the enumerator for the priority queue. </summary>
+            <returns> The enumerator for the priority queue. </returns>
+        </member>
+        <member name="T:TotalApi.Telematics.Common.Math.Helpers.Random">
+            <summary>
+            Create a random sequence based on a Seed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.#ctor(System.Int64)">
+            <summary>
+            Construct and set seed.
+            </summary>
+            <param name="seed"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.#ctor(System.Int64,System.Boolean)">
+            <summary>
+            Construct and set seed.
+            </summary>
+            <param name="seed"></param>
+            <param name="randomNextSeed"></param>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.Seed">
+            <summary>
+            Controls what will the next value be.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.RandomNextSeed">
+            <summary>
+            After each number randomize the seed, makes each starting
+            seed point the Start of a unique sequence if true, else
+            the values are just a very long sequence when random 
+            bytes are used. Setting to false is faster.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextChar">
+            <summary>
+            Next character.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextByte">
+            <summary>
+            Next byte.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextShort">
+            <summary>
+            Next short.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextUShort">
+            <summary>
+            Next short.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextInt">
+            <summary>
+            Next int.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextLong">
+            <summary>
+            Next long.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextFloat">
+            <summary>
+            Next float.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Helpers.Random.NextDouble">
+            <summary>
+            
+            Next double, between 0 and 1.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextFlat_Byte(System.Byte,System.Byte)">
+            <summary>
+            Next flat evenly distributed value between min and max.
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextFlat_Int(System.Int32,System.Int32)">
+            <summary>
+            Next flat evenly distributed value between min and max.
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextFlat_Float(System.Single,System.Single)">
+            <summary>
+            Next flat evenly distributed value between min and max.
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextFlat_Double(System.Double,System.Double)">
+            <summary>
+            Next flat evenly distributed value between min and max.
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextGuass_Byte(System.Byte,System.Byte)">
+            <summary>
+            Next guassian like value +/- 3 sigma about average.
+            </summary>
+            <param name="ave"></param>
+            <param name="sigma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextGuass_Int(System.Int32,System.Int32)">
+            <summary>
+            Next guassian like value +/- 3 sigma about average.
+            </summary>
+            <param name="ave"></param>
+            <param name="sigma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextGuass_Float(System.Single,System.Single)">
+            <summary>
+            Next guassian like value +/- 3 sigma about average.
+            </summary>
+            <param name="ave"></param>
+            <param name="sigma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.NextGuass_Double(System.Double,System.Double)">
+            <summary>
+            Next guassian like value +/- 3 sigma about average.
+            </summary>
+            <param name="ave"></param>
+            <param name="sigma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.ComputeRandom">
+            <summary>
+            Compute a random ushort.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Helpers.Random.compute_NoSeedChange">
+            <summary>
+            Just compute the random ushort, don't change seed.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.Common.Math.Kalman">
+            <summary>
+            Kalman filter.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Kalman.m_x">
+            <summary>
+            State.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Kalman.m_p">
+            <summary>
+            Covariance.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Kalman.m_q">
+            <summary>
+            Minimal covariance.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.Common.Math.Kalman.m_r">
+            <summary>
+            Minimal innovative covariance, keeps filter from locking in to a solution.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Kalman.Value">
+            <summary>
+            The last updated value, can also be set if filter gets
+            sudden absolute measurement data for the latest update.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Kalman.Velocity">
+            <summary>
+            How fast the value is changing.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Common.Math.Kalman.LastGain">
+            <summary>
+            The last kalman gain used, useful for debug.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Kalman.Variance">
+            <summary>
+            Last updated positional variance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Kalman.Predicition(System.Double)">
+            <summary>
+            Predict the value forward from last measurement time by dt.
+            X = F*X + H*U        
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Kalman.Variance(System.Double)">
+            <summary>
+            Get the estimated covariance of position predicted 
+            forward from last measurement time by dt.
+            P = F*X*F^T + Q.
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Kalman.Reset(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Reset the filter.
+            </summary>
+            <param name="qx">Measurement to position state minimal variance.</param>
+            <param name="qv">Measurement to velocity state minimal variance.</param>
+            <param name="r">Measurement covariance (sets minimal gain).</param>
+            <param name="pd">Initial variance.</param>
+            <param name="ix">Initial position.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Kalman.Update(System.Double,System.Double)">
+            <summary>
+            Update the state by measurement m at dt time from last measurement.
+            </summary>
+            <param name="m"></param>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Levenshtein.CalculateDistanceEfficient(System.String,System.String)">
+            *****************************
+             Compute Levenshtein distance 
+             Memory efficient version
+            *****************************
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Levenshtein.Minimum(System.Int32,System.Int32,System.Int32)">
+            *****************************
+             Compute the min
+            *****************************
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.Levenshtein.CalculateDistance(System.String,System.String)">
+            *****************************
+             Compute Levenshtein distance         
+            *****************************
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Savitsky-Golay filter from 1D polynomial. Can be used to smooth any x-y data where x is evenly spaced
+            </summary>
+            <param name="OrderOfPolynomial"> N of polynomial to be used.</param>
+            <param name="NumberOfPoints"> Size of the filter (must be an odd number and be >= N + 1) </param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.#ctor(System.Double,System.Double)">
+            <summary>
+            Constructs a Savitsky-Golay filter from a frequency, for use with evenly spaced time data
+            </summary>
+            <param name="FrequencyInHz"> Frequency (in Hz) used to define the Savitsky-Golay filter</param>
+            <param name="TimeStep"> Increment (in ms) between evenly-spaced time data</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.GetExtendedPoints(System.Double[],System.Double[],System.Int32)">
+            <summary>
+            Extends a set of (x,y) points beyond the minimum and maximum x-value by a given margin. Y-values are taken from their mirror images across the end points.
+            </summary>
+            <param name="xin">Independent variable</param>
+            <param name="yin">Dependent variable</param>
+            <param name="Points">Number of mirror-image points to add on either end</param>
+            <returns>A 2D array of { extended x values, extended y values }</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.GetStepSize(System.Double[])">
+            <summary>
+            Estimates the stepsize for a set of input values by calculating the increment between each consecutive pair and finding the median.
+            Useful for getting the stepsize from evenly (or near-evenly) spaced data.
+            </summary>
+            <param name="vals">An array of input values</param>
+            <returns>The estimated (median) stepsize</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.GetSmoothedPoints(System.Double[],System.Double[],System.Int32)">
+            <summary>
+            Returns the result of a Savitsky-Golay filter acting on data with 1 evenly-spaced independent variable and 1 noisy dependent variable.
+            This function calls GetExtendedPoints to allow end points to be smoothed, but removes the extra points after smoothing.
+            </summary>
+            <param name="xvals">Array of doubles representing the values of the evenly-spaced independent variable</param>
+            <param name="yvals">Array of doubles representing the values of the noisy dependent variable</param>
+            <param name="nPasses">An integer representing the number of times to pass the filter through the data before returning the result</param>
+            <returns>A 2D array of the same dimensions as the inputs { smoothed x-values , smoothed y-values }</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.factorial(System.Int32)">
+            <summary>
+            Computes the factorial of a number
+            (Old, unused by any function in SG_Filter_1D)
+            </summary>
+            <param name="n">An input integer n</param>
+            <returns>The factorial n!</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.ResampleToTimeDomain(System.Double[],System.Double[],System.Double)">
+            <summary>
+            Resamples time-depth data and recalculates velocities to make the data evenly spaced in the time domain
+            </summary>
+            <param name="times">Set of time values</param>
+            <param name="depths">Set of depth values</param>
+            <param name="timestep">User-requested spacing for evenly-spaced time values</param>
+            <returns>A list of 3 arrays in this order: (times, depths, velocities)</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.ResampleToDepthDomain(System.Double[],System.Double[],System.Double)">
+            <summary>
+            Resamples time-depth data and recalculates velocities to make the data evenly spaced in the depth domain
+            </summary>
+            <param name="times">Set of time values</param>
+            <param name="depths">Set of depth values</param>
+            <param name="depthstep">User-requested spacing for evenly-spaced depth values</param>
+            <returns>A list of 3 arrays in this order: (times, depths, velocities)</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.ResampleToNewDomain(System.Double[],System.Double[],System.Double,System.Int32)">
+            <summary>
+            Resamples time-depth data into either the time domain (mode = 0) or the depth domain (mode = 1) and calculates corresponding velocities
+            Designed to be called by either ResampleToTimeDomain or ResampleToDepthDomain ONLY
+            </summary>
+            <param name="times">Set of time values</param>
+            <param name="depths">Set of depth values</param>
+            <param name="stepsize">Desired spacing for evenly-spaced sample</param>
+            <param name="mode">To resample to time domain, mode = 0. To resample to the depth domain, mode = 1.</param>
+            <returns>A list of 3 arrays in this order: (times, depths, velocities)</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SavitzkyGolay.ResampleData(System.Double[],System.Double[],System.Double)">
+            <summary>
+            Resamples sets of A and B values so that A is evenly spaced by a user-defined increment
+            </summary>
+            <param name="valsA">The data to be evenly spaced</param>
+            <param name="valsB">The dependent data to be resampled according to the new A</param>
+            <param name="stepsizeA">User-defined step size for the new A values</param>
+            <returns>A 2D array {evenly-spaced A values , corresponding B values }</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SAX.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor that takes in word size and alphabet size
+            </summary>
+            <param name="wordSize">Word size for representative string of dataset</param>
+            <param name="alphabetSize">Minimum is 3, maximum is 12</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Common.Math.SAX.ConvertToPAA(System.Collections.Generic.List{System.Double})">
+            <summary>
+            Convert a normalized value of doubles to Piecewise Aggregate Approximation.
+            </summary>
+            <param name="normalizedList">The normalized list.</param>
+            <returns></returns>
+        </member>
         <member name="P:TotalApi.Telematics.BaseSensorStatusHandler.Period">
             <summary>
             Период работы обработчика.
@@ -186,6 +1033,150 @@
         <member name="F:TotalApi.Telematics.StopHandler._stopRadius">
             <summary>
             Величина радиуса в метрах, нахождение в пределах которого считается остановкой.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.CoordinatesProcessingPostFilter`1.TotalApi#Telematics#TotalApiFilters#Coordinates#Api#ICoordinatesProcessingPostFilter#PostProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.CoordinatesProcessingPreFilter`1.IsNotifier">
+            <summary>
+            Gets the flag that filter is notifier and doesn’t continue pipeline stream.
+            The filter returning true never calls OnPreProcessed action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.CoordinatesProcessingPreFilter`1.TotalApi#Telematics#TotalApiFilters#Coordinates#Api#ICoordinatesProcessingPreFilter#PreProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.CoordinatesProcessingPreFilter`1.TotalApi#Telematics#TotalApiFilters#Coordinates#Api#ICoordinatesProcessingPreFilter#OnPreProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.CoordinatesProcessingPreFilter`1.OnProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPostFilter">
+            <summary>
+            Coordinates processing post-filter interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPostFilter.PostProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="T:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPreFilter">
+            <summary>
+            Coordinates processing pre-filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPreFilter.IsNotifier">
+            <summary>
+            Gets the flag that filter is notifier and doesn’t continue pipeline stream.
+            The filter returning true never calls OnPreProcessed action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPreFilter.PreProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Coordinates.Api.ICoordinatesProcessingPreFilter.OnPreProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Sensors.Api.SensorDataProcessingPostFilter`1.TotalApi#Telematics#TotalApiFilters#Sensors#Api#ISensorDataProcessingPostFilter#PostProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="T:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPostFilter">
+            <summary>
+            Sensor data processing post-filter interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPostFilter.PostProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="T:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPreFilter">
+            <summary>
+            Sensor data processing pre-filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPreFilter.IsNotifier">
+            <summary>
+            Gets the flag that filter is notifier and doesn’t continue pipeline stream.
+            The filter returning true never calls OnPreProcessed action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPreFilter.PreProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.Api.ISensorDataProcessingPreFilter.OnPreProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.Api.SensorDataProcessingPreFilter`1.IsNotifier">
+            <summary>
+            Gets the flag that filter is notifier and doesn’t continue pipeline stream.
+            The filter returning true never calls OnPreProcessed action.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.TotalApiFilters.Sensors.Api.SensorDataProcessingPreFilter`1.TotalApi#Telematics#TotalApiFilters#Sensors#Api#ISensorDataProcessingPreFilter#PreProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.Api.SensorDataProcessingPreFilter`1.TotalApi#Telematics#TotalApiFilters#Sensors#Api#ISensorDataProcessingPreFilter#OnPreProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.Api.SensorDataProcessingPreFilter`1.OnProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.SensorDataSimplificatePostFilterParameters.Tolerance">
+            <summary>
+            Tolerance value.
+            If less than 0 - filter would not be applied.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TotalApiFilters.Sensors.SensorDataSimplificatePreFilterParameters.KeyPeriod">
+            <summary>
+            If the last recorded date earlier than this value (relative to current date), then the new value will be recorded, even if it exceeds the threshold.
+            Used to indicate that device works and sends coordinates, even the same.
+            <see cref="F:System.TimeSpan.Zero"/> means that the parameter will be ignored.
+            Default value is 1 minute.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.Wcf.TelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
@@ -243,6 +1234,32 @@
             Данный фильтр должен пометить точки трека, которые являются разрывами, установив свойство <see cref="P:TotalApi.Telematics.CoordinatePoint.IsBreak"/> в <c>true</c>.
             </summary>
         </member>
+        <member name="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.DPSimplification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.DPSimplification.#ctor(System.Collections.Generic.IList{TotalApi.Telematics.ICoordinatePoint})">
+            <summary>
+            
+            </summary>
+            <param name="vec"></param>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.DPSimplification.GetDouglasPeuckerSimplified(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="tol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.DPSimplification.GetDouglasPeuckerSimplified(System.Collections.Generic.List{TotalApi.Telematics.ICoordinatePoint},System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="vec"></param>
+            <param name="tol"></param>
+            <returns></returns>
+        </member>
         <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.Execute(TotalApi.Telematics.CoordinatePoints,TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterParameters)">
             <summary>
             //Данный фильтр должен пометить точки трека, которые не попадают в указанный диапазон скорости, установив свойство <see cref="P:TotalApi.Telematics.CoordinatePoint.CanOptimize"/> в <c>false</c>.
@@ -256,14 +1273,14 @@
             Обертка для передачи в фильтр скорости и даты вместо долготы и широты
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper.#ctor(TotalApi.Telematics.CoordinatePoint,System.DateTime)">
+        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper.#ctor(TotalApi.Telematics.ICoordinatePoint,System.DateTime)">
             <summary>
             
             </summary>
             <param name="p">Оборачиваемая точка</param>
             <param name="firstDate">Дата первой точки из набора, тики</param>
         </member>
-        <member name="F:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper.dateSec">
+        <member name="F:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilter.SpeedDateToCoordsWrapper._dateSec">
             <summary>
             Время, прошедшее от первой координаты, секунды
             </summary>
