@@ -18,10 +18,6 @@ namespace WebApp
         {
             ErrorLog.Init();
 
-            // Configure Bootstrapper
-            TotalApiPrincipal.IsPrimary = false;
-
-
             // Инициализируем MEF.
             TotalApiBootstrapper.Create(".");
 

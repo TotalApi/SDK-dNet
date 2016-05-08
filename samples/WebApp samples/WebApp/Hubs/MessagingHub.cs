@@ -74,8 +74,8 @@ namespace WebApp.Hubs
 
         public void HandleEvent(OnSubSytemRegistered e)
         {
-            Trace.WriteLine("ev -> OnSubSytemRegistered: {0}".Fmt(e.SSID));
-            GlobalContext.Clients.All.OnSubSytemRegistered(e.SSID);
+            Trace.WriteLine("ev -> OnSubSytemRegistered: {0}".Fmt(e.SubSystemId));
+            GlobalContext.Clients.All.OnSubSytemRegistered(e.SubSystemId);
         }
 
         public void HandleEvent(OnBillingStarted e)
