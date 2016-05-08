@@ -13,6 +13,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalApi.SampleModule.TestC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotalApi.SampleModule.TestSubSystem", "TotalApi.SampleModule.TestSubSystem\TotalApi.SampleModule.TestSubSystem.csproj", "{B8967A77-755A-499E-9F1F-7B94C8C2AC43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{5749A958-D4D1-47C5-B9AD-0C0BB690A6D2}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\dist\NET45\TotalApi.AsyncTasks.Client.dll = ..\..\..\dist\NET45\TotalApi.AsyncTasks.Client.dll
+		..\..\..\dist\NET45\TotalApi.Billing.Client.dll = ..\..\..\dist\NET45\TotalApi.Billing.Client.dll
+		..\..\..\dist\NET45\TotalApi.Core.dll = ..\..\..\dist\NET45\TotalApi.Core.dll
+		..\..\..\dist\NET45\TotalApi.Core.xml = ..\..\..\dist\NET45\TotalApi.Core.xml
+		..\..\..\dist\NET45\TotalApi.DataAccess.dll = ..\..\..\dist\NET45\TotalApi.DataAccess.dll
+		..\..\..\dist\NET45\TotalApi.EventManager.Client.dll = ..\..\..\dist\NET45\TotalApi.EventManager.Client.dll
+		..\..\..\dist\NET45\TotalApi.Telematics.Api.dll = ..\..\..\dist\NET45\TotalApi.Telematics.Api.dll
+		..\..\..\dist\NET45\TotalApi.Telematics.Api.xml = ..\..\..\dist\NET45\TotalApi.Telematics.Api.xml
+		..\..\..\dist\NET45\TotalApi.Telematics.Client.dll = ..\..\..\dist\NET45\TotalApi.Telematics.Client.dll
+		..\..\..\dist\NET45\TotalApi.Utils.Common.dll = ..\..\..\dist\NET45\TotalApi.Utils.Common.dll
+		..\..\..\dist\NET45\TotalApi.Utils.Common.xml = ..\..\..\dist\NET45\TotalApi.Utils.Common.xml
+		..\..\..\dist\NET45\TotalApi.Utils.EF.dll = ..\..\..\dist\NET45\TotalApi.Utils.EF.dll
+		..\..\..\dist\NET45\TotalApi.Utils.IoC.dll = ..\..\..\dist\NET45\TotalApi.Utils.IoC.dll
+		..\..\..\dist\NET45\TotalApi.Utils.Mvc.dll = ..\..\..\dist\NET45\TotalApi.Utils.Mvc.dll
+		..\..\..\dist\NET45\TotalApi.Utils.Wcf.dll = ..\..\..\dist\NET45\TotalApi.Utils.Wcf.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
