@@ -5,6 +5,7 @@ using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using TotalApi.Telematics;
 using TotalApi.Telematics.CoordinateFilters;
+using TotalApi.Telematics.CoordinateFilters.StopsFilter;
 using TotalApi.Telematics.ServiceContracts;
 using TotalApi.Utils.Extensions;
 using WebApp.Api;
@@ -35,9 +36,8 @@ namespace WebApp.TotalApi
         [HttpPost, Route("")]
         public void WriteCoordinates(JObject prms)
         {
-            // Так как WebApi не позволяет создавать контроллеры с несколькими параметрами, передаваемыми в теле запроса
-            // приходится идти на такое извращение.
-            // Подробнее: 
+            // Because of WebApi doesn't allow to create controllers with several parameters in query body have to do this nasty
+            // More details: 
             //     http://stackoverflow.com/questions/14407458/webapi-multiple-put-post-parameters
             //     http://weblog.west-wind.com/posts/2012/May/08/Passing-multiple-POST-parameters-to-Web-API-Controller-Methods
             ((ITelematicsService)this).WriteCoordinates(prms["deviceId"].ToObject<DeviceIdentifier>(), prms["coordinates"].ToObject<Coordinate[]>());
@@ -47,6 +47,7 @@ namespace WebApp.TotalApi
         public CoordinatePoints ReadCoordinates(ReadCoordinatesParams readParams)
         {
             readParams.Filters = DefaultFilterParameters.Create(readParams.Filters);
+            //readParams.Filters = new[] {new StopsPostFilterParameters() {FilterAction = StopsPostFilterParameters.Action.Default, MinSpeed = 10, MinStopDuration = TimeSpan.FromSeconds(10)} };
             return TelematicsApi.Telematics.ReadCoordinates(readParams);
         }
 

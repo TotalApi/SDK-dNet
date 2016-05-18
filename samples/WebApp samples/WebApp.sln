@@ -5,6 +5,18 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{4EE59A5F-A9F2-4FCD-AA38-5BE46CC28734}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{AB289EBA-E05A-4CCB-8155-A4D49B923841}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\dist\NET45\TotalApi.Billing.Client.dll = ..\..\dist\NET45\TotalApi.Billing.Client.dll
+		..\..\dist\NET45\TotalApi.Core.dll = ..\..\dist\NET45\TotalApi.Core.dll
+		..\..\dist\NET45\TotalApi.Telematics.Api.dll = ..\..\dist\NET45\TotalApi.Telematics.Api.dll
+		..\..\dist\NET45\TotalApi.Telematics.Client.dll = ..\..\dist\NET45\TotalApi.Telematics.Client.dll
+		..\..\dist\NET45\TotalApi.Utils.Common.dll = ..\..\dist\NET45\TotalApi.Utils.Common.dll
+		..\..\dist\NET45\TotalApi.Utils.IoC.dll = ..\..\dist\NET45\TotalApi.Utils.IoC.dll
+		..\..\dist\NET45\TotalApi.Utils.Mvc.dll = ..\..\dist\NET45\TotalApi.Utils.Mvc.dll
+		..\..\dist\NET45\TotalApi.Utils.Wcf.dll = ..\..\dist\NET45\TotalApi.Utils.Wcf.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

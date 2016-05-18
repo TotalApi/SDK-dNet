@@ -61,10 +61,10 @@ namespace WebApp.TotalApi
 
         [System.Web.Http.HttpGet, System.Web.Http.Route("")]
         public object[] All(string typeId)
-        {   
-            // Участок кода ниже - эквивалентен вызову 
+        {
+            // The code below is equal to the next call 
             //    return CoreApi.Repository.ExecuteQuery<{Type}>();
-            // OData параметры переданные в строке запроса будут проброшены дальше в вызов сервиса и применятся на серверной стороне
+            // OData parameters in the query will be passed futher to the service and will be applied on the server side
             var entityType = GetEntityType(typeId);
             var mi = CoreApi.Repository.GetType().GetMethod("ExecuteQuery");
             var typedMi = mi.MakeGenericMethod(entityType);
@@ -73,8 +73,8 @@ namespace WebApp.TotalApi
 
         [System.Web.Http.HttpGet, System.Web.Http.Route("{id}")]
         public object Find(string typeId, string id)
-        {   
-            // Участок кода ниже - эквивалентен вызову 
+        {
+            // The code below is equal to the next call 
             //    return CoreApi.Repository.Find<{Type}>(id);
             var entityType = GetEntityType(typeId);
             var mi = CoreApi.Repository.GetType().GetMethod("Find");
@@ -97,7 +97,7 @@ namespace WebApp.TotalApi
         [System.Web.Http.HttpDelete, System.Web.Http.Route("{id}")]
         public bool Delete(string typeId, string id)
         {
-            // Участок кода ниже - эквивалентен вызову 
+            // The code below is equal to the next call 
             //    return CoreApi.Repository.Delete<{Type}>(id);
             var entityType = GetEntityType(typeId);
             var mi = CoreApi.Repository.GetType().GetMethod("Delete");

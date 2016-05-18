@@ -32,13 +32,13 @@ namespace WebApp.TotalApi
         [HttpPost, Route("")]
         public virtual TEntityObjectId Create([FromBody]TEntityObjectId entity)
         {
-            return (TEntityObjectId)CoreApi.Repository.Save(entity, true);
+            return CoreApi.Repository.Save(entity, true);
         }
 
         [HttpPut, Route("")]
         public virtual TEntityObjectId Update([FromBody]TEntityObjectId entity)
         {
-            return (TEntityObjectId)CoreApi.Repository.Save(entity, false);
+            return CoreApi.Repository.Save(entity, false);
         }
 
         [HttpDelete, Route("{id}")]
