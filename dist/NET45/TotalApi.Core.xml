@@ -27,39 +27,6 @@
             Starts the console listening.
             </summary>
         </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.IDataProcessingFilter">
-            <summary>
-            Base data filter interface.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Id">
-            <summary>
-            Filter identifier.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Name">
-            <summary>
-            Filter name.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Description">
-            <summary>
-            Filter description.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.FilterParametersType">
-            <summary>
-            Type, distributing the parameters class of current filter.
-            This type should have public constructor without parameters and be serializeable.
-            Even if there is no parameters - it should return the type of an empty class.
-            Types of parameters should be unique across different filters.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Core.Api.ControlApi.IDataProcessingFilter.Clone">
-            <summary>
-            Clones current instance of the filter.
-            </summary>
-        </member>
         <member name="T:TotalApi.Core.Api.ControlApi.IModuleStartup">
             <summary>
             Interface for automatic modules startup.
@@ -91,16 +58,6 @@
         <member name="F:TotalApi.Core.Api.ControlApi.InitOrders.Database">
             <summary>
             The Database module order value.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ISensorDataFilter">
-            <summary>
-            Все фильтры для данных датчиков должны реализовывать и экспортировать этот интерфейс.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Core.Api.ControlApi.ICoordinateFilter">
-            <summary>
-            Coordinate filter interface.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.ControlApi.IModuleInitializer">
@@ -638,11 +595,6 @@
             The exception code of repository subsystem.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.CoreApi.EEntityClassIsNotRegistered">
-            <summary>
-            The entity class is not registered.
-            </summary>
-        </member>
         <member name="F:TotalApi.Core.Api.CoreApi.ESubSystemNotRegistered">
             <summary>
             Subsystem could not be registered because it does not exist.
@@ -656,6 +608,16 @@
         <member name="F:TotalApi.Core.Api.CoreApi.EBillingDatabaseModuleAbsent">
             <summary>
             Billing database module is absent. Database context is not available.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.EEntityClassIsNotRegistered">
+            <summary>
+            The entity class is not registered.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.CoreApi.EApiKeyIsNotSet">
+            <summary>
+            The ApiKey of the entity class is not set.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Api.CoreApi.TelematicsSubSystem">
@@ -4723,21 +4685,6 @@
             <param name="entity">The entity.</param>
             <param name="isNew">Identifies if the entity is new.</param>
             <returns></returns>
-        </member>
-        <member name="T:TotalApi.Core.ICoordinatePoints">
-            <summary>
-            Interface representing coordinate point
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.ICoordinatePoints.UserData">
-            <summary>
-            Custom user data. Do not transfered over the network.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Core.ICoordinatePoints.Points">
-            <summary>
-            The list of coordinate points.
-            </summary>
         </member>
         <member name="T:TotalApi.Core.IDbContext">
             <summary>

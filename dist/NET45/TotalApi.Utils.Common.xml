@@ -4197,6 +4197,11 @@
             Additional exception information, whitch will be added to error text
             </summary>
         </member>
+        <member name="T:TotalApi.Utils.ErrorManager.ErrorLog">
+            <summary>
+            Error logger and analizer implementation
+            </summary>
+        </member>
         <member name="F:TotalApi.Utils.ErrorManager.ErrorLog.InnerExceptionSeparator">
             <summary>
             Delimeter string between main and inner exceptions
@@ -4227,6 +4232,11 @@
             Handles unhandled exception.
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.ApplicationThreadException(System.Object,System.Threading.ThreadExceptionEventArgs)">
+            <summary>
+            Application unhandled thread default handler.
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessage(System.String)">
             <summary>
             Gets analized exception message.
@@ -4247,10 +4257,34 @@
             Gets analized exception message.
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessageEx(System.Exception)">
+            <summary>
+            Expanded exception analizer.
+            </summary>
+            <param name="e">Source exception</param>
+        </member>
         <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.AnalizeErrorMessageEx(System.String,System.Exception,System.String)">
             <summary>
-            Gets analized exception message.
+            Gets analized exception info.
             </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.InitParams(System.Threading.ParameterizedThreadStart,System.Int32,System.String,System.String)">
+            <summary>
+            Error log parameters initializer
+            </summary>
+            <param name="errorAnalizer">Custom error analizer.</param>
+            <param name="appId">Internal company application Id.</param>
+            <param name="appName">Internal company application name.</param>
+            <param name="userName">Current application user name.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ErrorManager.ErrorLog.Init(System.Threading.ParameterizedThreadStart,System.Int32,System.String,System.String)">
+            <summary>
+            Error log initializer
+            </summary>
+            <param name="errorAnalizer">Custom error analizer.</param>
+            <param name="appId">Internal company application Id.</param>
+            <param name="appName">Internal company application name.</param>
+            <param name="userName">Current application user name.</param>
         </member>
         <member name="M:TotalApi.Utils.ErrorManager.ExceptionExtension.Error(System.Exception)">
             <summary>

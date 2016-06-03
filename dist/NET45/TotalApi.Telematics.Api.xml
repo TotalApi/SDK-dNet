@@ -4,37 +4,43 @@
         <name>TotalApi.Telematics.Api</name>
     </assembly>
     <members>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters">
             <summary>
             Parameters of breaks filter.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters.MinDistance">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters.MinDistance">
             <summary>
             Minimum distance in km between coordinate points for detecting track break.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters.MaxDistance">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters.MaxDistance">
             <summary>
             Maximum distance in km between coordinate points for detecting track break.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters.AvgSpeed">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters.AvgSpeed">
             <summary>
             Average speed in km/h.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters.#ctor">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters"/> class.
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters"/> class.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.DefaultFilterParameters">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.NoCoordinatesFilter.NoCoordinatesPreFilterParameters.Period">
+            <summary>
+            Gets or sets the time period.
+            If during the period nor coodrinates were received - the filter set the <see cref="F:TotalApi.Telematics.DeviceStates.NoCoordinates"/>
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.DefaultFilterParameters">
             <summary>
             Factory of the default coordinate filters
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.DefaultFilterParameters.Create(System.Collections.Generic.IEnumerable{System.Object})">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.DefaultFilterParameters.Create(System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
             Creates abd adds default filters list to an source filters.
             If the source filter list contains the only element equals <c>null</c> or <see cref="F:System.DBNull.Value"/> 
@@ -43,134 +49,151 @@
             <param name="filters">Source filter list.</param>
             <returns></returns>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters">
-            <summary>
-            Parameters of simplification pre-filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters.KeyPeriod">
-            <summary>
-            If the last recorded date earlier than this value (relative to current date), then the new value will be recorded, even if it exceeds the threshold.
-            Used to indicate that device works and sends coordinates, even the same.
-            <see cref="F:System.TimeSpan.Zero"/> means that the parameter will be ignored.
-            Default value is 1 minute.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters"/> class.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters.#ctor(System.Double,System.Nullable{System.TimeSpan})">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePreFilterParameters"/> class.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters">
-            <summary>
-            Parameters of simplification post-filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters.Tolerance">
-            <summary>
-            Smoothing coefficient (0-1).
-            If less or equal 0 - filter would not be applied.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters"/> class.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters.#ctor(System.Double)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters"/> class.
-            </summary>
-            <param name="tolerance">The tolerance.</param>
-        </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPreFilterParameters">
             <summary>
             Parameters of rose point filter.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters.Radius">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPreFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPreFilterParameters"/> class with default parameters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPreFilterParameters.#ctor(System.Double,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPreFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters">
+            <summary>
+            Parameters of rose point filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters.Radius">
             <summary>
             Radius in metres in which multiple coordinate points would be detected as one.
             If less or equal 0 - filter would not be applied.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters.MinPointsCount">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters.MinPointsCount">
             <summary>
             Minimal coordinate points count which could be interpreted as congestion.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters.#ctor">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters"/> class with default parameters.
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters"/> class with default parameters.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters.#ctor(System.Double,System.Int32)">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters.#ctor(System.Double,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters"/> class.
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters"/> class.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePreFilterParameters">
+            <summary>
+            Parameters of simplification pre-filter.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePreFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePreFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePreFilterParameters.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePreFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters">
+            <summary>
+            Parameters of simplification post-filter.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters.Tolerance">
+            <summary>
+            Smoothing coefficient (0-1).
+            If less or equal 0 - filter would not be applied.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters"/> class.
+            </summary>
+            <param name="tolerance">The tolerance.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ICoordinatesProcessingPostFilter">
+            <summary>
+            Coordinates processing post-filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ICoordinatesProcessingPreFilter">
+            <summary>
+            Coordinates processing pre-filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedFilterHelper">
             <summary>
             Speed filter helped needed for expanding track point information according to filter execution result.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension">
             <summary>
             Extends coordinate point data.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension.SpeedExceededFlag">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedFilterHelper.SpeedFilterCoordinatePointExtension.SpeedExceededFlag">
             <summary>
             Sets to <c>true</c> when overspeed.
             As soon as the speed normilezes, the value sets to <c>false</c>.
             At intermediate points between the beginning and the end of the overspeed - absent.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedFilterHelper.SpeedFilter(TotalApi.Telematics.ICoordinatePoint)">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedFilterHelper.SpeedFilter(TotalApi.Telematics.ICoordinatePoint)">
             <summary>
             Spped filter. Detecting overspeed.
             </summary>
             <param name="coordinatePoint">The coordinate point.</param>
             <returns></returns>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters">
             <summary>
             Parameters for speed filter.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters.MaxSpeed">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters.MaxSpeed">
             <summary>
             Maximum allowed speed in km/h.
             Speed that is greater than this value would be interpreted as over speed.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters.Tolerance">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters.Tolerance">
             <summary>
             Smotthing coefficient (1 - 100).
             Bigger value - less precise computation would be applied.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters.#ctor">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters"/> class.
+            Initializes a new instance of the <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters"/> class.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper">
             <summary>
             Helper class for stop filter.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension">
             <summary>
             Extends coordinate point data.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopBeginDate">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopBeginDate">
             <summary>
             Gets or sets the stop begin date.
             </summary>
@@ -178,7 +201,7 @@
             The stop begin date.
             </value>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopEndDate">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopEndDate">
             <summary>
             Gets or sets the stop end date.
             </summary>
@@ -186,7 +209,7 @@
             The stop end date.
             </value>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopDuration">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper.StopsFilterCoordinatePointExtension.StopDuration">
             <summary>
             Gets or sets the duration of the stop.
             </summary>
@@ -194,51 +217,456 @@
             The duration of the stop.
             </value>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsFilterHelper.StopsFilter(TotalApi.Telematics.ICoordinatePoint)">
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsFilterHelper.StopsFilter(TotalApi.Telematics.ICoordinatePoint)">
             <summary>
             Stopses the filter.
             </summary>
             <param name="coordinatePoint">The coordinate point.</param>
             <returns></returns>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters">
             <summary>
             Parameters for stop filter.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.Action">
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.Action">
             <summary>
             Filter actions
             </summary>
         </member>
-        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.Action.Default">
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.Action.Default">
             <summary>
             Do not delete points from track - just put a sign of stop.
             </summary>
         </member>
-        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.Action.RemoveNonStops">
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.Action.RemoveNonStops">
             <summary>
             Just keep stop points - the rest points will be deleted.
             </summary>
         </member>
-        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.Action.RemoveStops">
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.Action.RemoveStops">
             <summary>
             Delete stop points.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.FilterAction">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.FilterAction">
             <summary>
             Actions for a filter over the track.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.MinSpeed">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.MinSpeed">
             <summary>
             Minimal speed in km/h to determine the stop.
             </summary>
         </member>
-        <member name="F:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters.MinStopDuration">
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters.MinStopDuration">
             <summary>
             Minimal stop time. Calculated values that are less then this are determined as no stop.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineNode">
+            <summary>
+            Implementation of the filter pipeline node.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineNode.FilterParameters">
+            <summary>
+            Gets or sets the pipeline filter parameters. 
+            The type of the parameters defines the filter type.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineNode.NextNode">
+            <summary>
+            Gets or sets the next node of the pipeline.
+            If the value is equals to zero - it is the last node.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineNode.SplitNodes">
+            <summary>
+            Gets or sets the next node of the pipeline.
+            If the value is equals to zero - it is the last node.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings">
+            <summary>
+            Settings for filter pipeline.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.Id">
+            <summary>
+            Gets or sets an unique identifier of the pipeline settings.
+            This value is set automatically.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.Name">
+            <summary>
+            Gets or sets a short name of the pipeline settings.
+            This value is set by user.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.Description">
+            <summary>
+            Gets or sets a description of the pipeline settings.
+            This value is set by user.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.StartNode">
+            <summary>
+            Gets or sets a start pipeline item.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.CreateFromFilterParameters(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Creates the instance of the pipeline settings from the raw array of the filter parameters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.CreateFromFilterParameters(System.Object[])">
+            <summary>
+            Creates the instance of the pipeline settings from the raw array of the filter parameters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings.ToList">
+            <summary>
+            Returns the pipeline settings as a raw list of the filter parameters.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.IDataProcessingFilter">
+            <summary>
+            Base data filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingFilter.Id">
+            <summary>
+            Filter identifier.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingFilter.Name">
+            <summary>
+            Filter name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingFilter.Description">
+            <summary>
+            Filter description.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingFilter.FilterParametersType">
+            <summary>
+            Type, distributing the parameters class of current filter.
+            This type should have public constructor without parameters and be serializeable.
+            Even if there is no parameters - it should return the type of an empty class.
+            Types of parameters should be unique across different filters.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.IDataProcessingFilter.Clone">
+            <summary>
+            Clones current instance of the filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.IDataProcessingPostFilter">
+            <summary>
+            Base data processing post-filter interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.IDataProcessingPostFilter.PostProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.IDataProcessingPreFilter">
+            <summary>
+            Base data processing post-filter interface.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.IDataProcessingPreFilter.PreProcess(TotalApi.Telematics.ISeriesDataPoints,System.Object)">
+            <summary>
+            Starts processing of passing series of data.
+            </summary>
+            <param name="series">Series of data with metadata</param>
+            <param name="prms">Filter parameters</param>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingPreFilter.OnPreProcessed">
+            <summary>
+            Calls when processing is finished and result data can be sent onward.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.IDataProcessingPreFilter.OnLastStateChanged">
+            <summary>
+            Calls when the last state of the processing source is changed.
+            The first parameter is the sourceId, the second one is the last state value.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.AnomalyDetection.AnomalyDetectionHelper">
+            <summary>
+            Helper class for sensor filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.AnomalyDetection.AnomalyDetectionHelper.AnomalyDetectionPointExtension">
+            <summary>
+            Extends sensor point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.AnomalyDetection.AnomalyDetectionHelper.AnomalyDetectionPointExtension.AnomalyScore">
+            <summary>
+            Filter for overseas
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.AnomalyDetection.AnomalyDetectionHelper.AnomalyDetectionFilter(TotalApi.Telematics.SensorValuePoint)">
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksHelper">
+            <summary>
+            Helper class for sensor filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksHelper.SensorDataBreaksPointExtension">
+            <summary>
+            Extends sensor point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksHelper.SensorDataBreaksPointExtension.IsOverBreak">
+            <summary>
+            Filter for overseas
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksHelper.BreaksFilter(TotalApi.Telematics.SensorValuePoint)">
+            <summary>
+            Extension method
+            </summary>
+            <param name="sensorPoint">Current point</param>
+            <returns>Object with new field</returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksPostFilterParameters">
+            <summary>
+            Represents parameters for the sensor data breaks post filter
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksPostFilterParameters.MaxInterval">
+            <summary>
+            Date for the points interval
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksPostFilterParameters.#ctor">
+            <summary>
+            Initial contstructor without paramaters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.BreaksFilter.SensorDataBreaksPostFilterParameters.#ctor(System.TimeSpan)">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+            <param name="interval">Date for the points interval</param>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ISensorDataProcessingPostFilter">
+            <summary>
+            Sensor data processing post-filter interface.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ISensorDataProcessingPreFilter">
+            <summary>
+            Sensor data processing pre-filter interface.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.Kalman.KalmanFilterParameters.Q">
+            <summary>
+            Standart deviation of process.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.Kalman.KalmanFilterParameters.R">
+            <summary>
+            Standart deviation of measurement.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.Kalman.KalmanFilterParameters.X0">
+            <summary>
+            Initial state.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.NoDataFilter.NoDataPreFilterParameters.Period">
+            <summary>
+            Gets or sets the time period.
+            If during the period nor coodrinates were received - the filter set the <see cref="F:TotalApi.Telematics.DeviceStates.NoCoordinates"/>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.NoDataFilter.NoDataPreFilterParameters.State">
+            <summary>
+            Gets or set the state to set when triggered
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.PeakDetection.PeakDetectionHelper">
+            <summary>
+            Helper class for sensor filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.PeakDetection.PeakDetectionHelper.PeakDetectionPointExtension">
+            <summary>
+            Extends sensor point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.PeakDetection.PeakDetectionHelper.PeakDetectionPointExtension.IsPeak">
+            <summary>
+            Filter for overseas
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.PeakDetection.PeakDetectionHelper.PeakFilter(TotalApi.Telematics.SensorValuePoint)">
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.CancelFilterParameters">
+            <summary>
+            Параметр псевдофильтра, помещение которого в цепочку фильтров обрывает обработку данных после него.
+            Как такового фильтра нет - менеджер пайплайна знает про этот тип параметров фильтров и просто не выстраивает цепочку дальше.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.SimplificateFilter.SensorDataSimplificatePostFilterParameters.Tolerance">
+            <summary>
+            Tolerance value.
+            If less than 0 - filter would not be applied.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.SimplificateFilter.SensorDataSimplificatePreFilterParameters.KeyPeriod">
+            <summary>
+            If the last recorded date earlier than this value (relative to current date), then the new value will be recorded, even if it exceeds the threshold.
+            Used to indicate that device works and sends coordinates, even the same.
+            <see cref="F:System.TimeSpan.Zero"/> means that the parameter will be ignored.
+            Default value is 1 minute.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdHelper">
+            <summary>
+            Helper class for sensor filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdHelper.SensorDataThresholderPointExtension">
+            <summary>
+            Extends sensor point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdHelper.SensorDataThresholderPointExtension.IsOverThreshold">
+            <summary>
+            Filter for overseas
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdHelper.ThresholdFilter(TotalApi.Telematics.SensorValuePoint)">
+            <returns></returns>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition">
+            <summary>
+            Snsor data threshold post filter type
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition.Greater">
+            <summary>
+            Mark values that greater 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition.GreaterOrEqual">
+            <summary>
+            Mark values that greater or equal 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition.Lower">
+            <summary>
+            Mark values that lower
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition.LowerOrEqual">
+            <summary>
+            Mark values that lower or equal
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters">
+            <summary>
+            Represents patameters for the sensor data threshold post filter
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters.Threshold">
+            <summary>
+            Filter parameter, by default is 1 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters.Period">
+            <summary>
+            Фильтр сработает, если превышение порогового значения продлится более указанного промежутка времени.
+            Нулевое (или меньше нуля) значение периода означает моментальное срабатывание в тот же самый момент как значение вышло за границу.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters.Condition">
+            <summary>
+            Filter type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters.#ctor">
+            <summary>
+            Initial contstructor without paramaters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPostFilterParameters.#ctor(System.Double,TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPreFilterParameters">
+            <summary>
+            Represents patameters for the sensor data threshold pre filter
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPreFilterParameters.State">
+            <summary>
+            Gets or set the state to set when triggered
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPreFilterParameters.#ctor">
+            <summary>
+            Initial constructor without parameters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.SensorDataThresholdPreFilterParameters.#ctor(System.Int64,System.Double,TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPreFilterParameters">
+            <summary>
+            Represents patameters for the sensor data transormation pre filter.
+            The filter makes the transormation <c>f(x) = K*x + B</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPreFilterParameters.#ctor">
+            <summary>
+            Initial contstructor without paramaters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPreFilterParameters.#ctor(System.Double,System.Double)">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPostFilterParameters">
+            <summary>
+            Represents patameters for the sensor data transormation post filter.
+            The filter makes the transormation <c>f(x) = K*x + B</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPostFilterParameters.K">
+            <summary>
+            Gets or sets <c>K</c> parameter of the transformation <c>f(x) = K*x + B</c>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPostFilterParameters.B">
+            <summary>
+            Gets or sets <c>B</c> parameter of the transformation <c>f(x) = K*x + B</c>
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPostFilterParameters.#ctor">
+            <summary>
+            Initial contstructor without paramaters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.SensorsData.Tranform.TransformPostFilterParameters.#ctor(System.Double,System.Double)">
+            <summary>
+            Initial constructor with parameters
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.DeviceWriteMonitor.BeginWriteBlock(System.String)">
@@ -247,15 +675,17 @@
             Может вызываться 
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.ICoordinateFilter">
-            <summary>
-            Coordinate filter interface.
-            </summary>
-        </member>
         <member name="T:TotalApi.Telematics.Coordinate">
             <summary>
             Represents a telematics coordinate object.
             </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Coordinate.IsDateAcceptedForLastStatus(System.DateTime)">
+            <summary>
+            Gets whether the date is acceptable to be set in last status
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
         </member>
         <member name="P:TotalApi.Telematics.Coordinate.UtcDate">
             <summary>
@@ -445,48 +875,6 @@
             The object value.
             </returns>
         </member>
-        <member name="T:TotalApi.Telematics.CoordinateFilterTemplate">
-            <summary>
-            Template for a coordinate filter.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>
-            The name.
-            </value>
-        </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.FilterData">
-            <summary>
-            Gets or sets the filter data.
-            </summary>
-            <value>
-            The filter data.
-            </value>
-        </member>
-        <member name="P:TotalApi.Telematics.CoordinateFilterTemplate.Filters">
-            <summary>
-            Gets the filters.
-            </summary>
-            <value>
-            The filters.
-            </value>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilterTemplate.AddFilter(System.String,System.Object)">
-            <summary>
-            Adds the filter.
-            </summary>
-            <param name="filterId">The filter identifier.</param>
-            <param name="filterParameters">The filter parameters.</param>
-        </member>
-        <member name="M:TotalApi.Telematics.CoordinateFilterTemplate.RemoveFilter(System.Int32)">
-            <summary>
-            Removes the filter.
-            </summary>
-            <param name="filterIndex">Index of the filter.</param>
-        </member>
         <member name="T:TotalApi.Telematics.CoordinatePoint">
             <summary>
             Class representing coordinate.
@@ -547,12 +935,12 @@
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.IsStop">
             <summary>
-            The point is a stop. This property fills by stops filter (see <seealso cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters"/>).
+            The point is a stop. This property fills by stops filter (see <seealso cref="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters"/>).
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.IsBreak">
             <summary>
-            The point is a break point. This property fills by breaks filter (see <seealso cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters"/>).
+            The point is a break point. This property fills by breaks filter (see <seealso cref="T:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters"/>).
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.CoordinatePoint.CanOptimize">
@@ -591,7 +979,7 @@
             Coordinate points representing class.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.CoordinatePoints.SourceId">
+        <member name="P:TotalApi.Telematics.CoordinatePoints.Source">
             <summary>
             Gets the source unique identifier.
             It can be Device database identifier or Sensor database identifier
@@ -652,11 +1040,11 @@
             Constructor without parameters needed for object deserialization.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.CoordinatePoints.#ctor(System.String,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
+        <member name="M:TotalApi.Telematics.CoordinatePoints.#ctor(TotalApi.Telematics.SourceInfo,System.Collections.Generic.IEnumerable{TotalApi.Telematics.Coordinate})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Telematics.CoordinatePoints"/> class.
             </summary>
-            <param name="deviceId">Device database id</param>
+            <param name="source">Device source</param>
             <param name="coordinates">The coordinates.</param>
         </member>
         <member name="M:TotalApi.Telematics.CoordinatePoints.RemoveDetailsInfo">
@@ -983,9 +1371,9 @@
             Device GPS sensor is connected to satellites and getting actual data.
             </summary>
         </member>
-        <member name="T:TotalApi.Telematics.ICoordinatePoints">
+        <member name="F:TotalApi.Telematics.DeviceStates.NoCoordinates">
             <summary>
-            Interface representing coordinate point
+            Device doesn't send the coordinates.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.ISeriesDataPoints">
@@ -993,10 +1381,9 @@
             Interface representing the series of data points
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.ISeriesDataPoints.SourceId">
+        <member name="P:TotalApi.Telematics.ISeriesDataPoints.Source">
             <summary>
-            Gets the source unique identifier.
-            It can be Device database identifier or Sensor database identifier
+            Gets the source information.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.ISeriesDataPoints.UserData">
@@ -1249,57 +1636,6 @@
             <c>true</c> if this instance can optimize; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="T:TotalApi.Telematics.ISensorValuePoint">
-            <summary>
-            Interface respresenting sen value point.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.UtcDate">
-            <summary>
-            Gets the date and time in UTC format when the coordinate data was received from GPS source.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.UserData">
-            <summary>
-            User data. Will not be transmitted over the network.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.Value">
-            <summary>
-            Gets the sensor value.
-            </summary>
-            <value>
-            The value.
-            </value>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.CanOptimize">
-            <summary>
-            Gets or sets a value indicating whether sensor point can be optimize.
-            </summary>
-            <value>
-            <c>true</c> if this instance can optimize; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.SensorType">
-            <summary>
-            Sensor type.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.Number">
-            <summary>
-            Sensor number (for the sensors of the same type).
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.ISensorValuePoint.DataType">
-            <summary>
-            Sensor value type.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Telematics.ISensorValues">
-            <summary>
-            Interface for a collection of sensor values.
-            </summary>
-        </member>
         <member name="T:TotalApi.Telematics.ITelematicsDbContext">
             <summary>
             Implementation of ITelematicsDbContext.
@@ -1330,7 +1666,7 @@
             If device not found - return <c>null</c>.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindPhysicalSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
             <summary>
             Searching for a device's sensor by device identifier and port identifier.
             If no device found, or the sensor on specified port is not configured - return <c>null</c>.
@@ -1339,10 +1675,16 @@
             <param name="portId">Port identifier.</param>
             <param name="address">Sensor address.</param>
         </member>
-        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.SensorType,System.Int32)">
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
             <summary>
             Synchronous searching for a sensor by its <paramref name="deviceId"/>.
             If device not found - return <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.FindSensor(System.String)">
+            <summary>
+            Synchronous searching for a sensor by its <paramref name="sensorId"/>.
+            If sensor not found - return <c>null</c>.
             </summary>
         </member>
         <member name="M:TotalApi.Telematics.ITelematicsDbContext.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
@@ -1446,7 +1788,7 @@
             <summary>
             Array of filters parameters used for data post-processing.
             Filters are determined automatically based on the definitions. Currently supported 5 types of filters decribed by correspondent parameters: 
-            <see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters"/>. 
+            <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters"/>, <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters"/>, <see cref="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters"/>. 
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.ReadDeviceDataParams.FilterServiceContracts">
@@ -1533,6 +1875,11 @@
             Database identifier of the device
             </summary>
         </member>
+        <member name="P:TotalApi.Telematics.Sensor.Name">
+            <summary>
+            Internal name of the device.
+            </summary>
+        </member>
         <member name="P:TotalApi.Telematics.Sensor.SensorType">
             <summary>
             Predefined sensor type
@@ -1564,21 +1911,6 @@
             Set <c>0</c> to use global default value of time to live.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.Sensor.Threshold">
-            <summary>
-            Minimum threshold between two successive sensor values at which data will be written into the database. 
-            Used for removing the "bounce".
-            0 - means that all of incoming the data will be written, even if they have not changed.
-            It makes no sense for logical sensors.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Telematics.Sensor.KeyPeriod">
-            <summary>
-            If the last recorded date earlier than this value (relative to current date), then the new value will be recorded, even if it exceeds the threshold.
-            Used to indicate that sensor is working and sends the data, even the same.
-            <see cref="F:System.TimeSpan.Zero"/> means that the parameter will be ignored.
-            </summary>
-        </member>
         <member name="T:TotalApi.Telematics.SensorPort">
             <summary>
             Sensor port.
@@ -1606,127 +1938,6 @@
             <returns>
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
-        </member>
-        <member name="T:TotalApi.Telematics.SensorType">
-            <summary>
-            Known types of sensors.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.SOS">
-            <summary>
-            SOS button sensor.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.Power">
-            <summary>
-            Power voltage.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.Charge">
-            <summary>
-            Battery charge level (0 - 100. 0 means external power).
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.GSM">
-            <summary>
-            GSM signal level (0 - 31).
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsPower">
-            <summary>
-            Power source flag (0 - battery, 1 - external power).
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsGPS">
-            <summary>
-            GPS is active.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsGSM">
-            <summary>
-            Registration in GSM network.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsGPRS">
-            <summary>
-            GPRS is registered.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsSIM">
-            <summary>
-            SIM is accepted.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.IsCharge">
-            <summary>
-            Battery is charging.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.AccAxes">
-            <summary>
-            Accelerometer axes values.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.LLS">
-            <summary>
-            Fuel level sensor.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.TEMP">
-            <summary>
-            Tempoerature sensor.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.RFID">
-            <summary>
-            RFID sensor.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.L3SA">
-            <summary>
-            3SA sensor.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.SIV">
-            <summary>
-            WMS sensor (weight measurement system).
-            </summary>
-        </member>
-        <member name="F:TotalApi.Telematics.SensorType.Custom">
-            <summary>
-            All the values till 1000 are reserved.
-            All the values over 1000 are custom user sensor types. 
-            </summary>
-        </member>
-        <member name="T:TotalApi.Telematics.SensorTypeExtensions">
-            <summary>
-            SensorType extensions
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.SensorTypeExtensions.GetSensorDataType(TotalApi.Telematics.SensorType)">
-            <summary>
-            Gets sensor data type
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.SensorTypeExtensions.GetSensorDataType``1(TotalApi.Telematics.SensorType,``0)">
-            <summary>
-            Gets sensor data type
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.SensorTypeExtensions.GetValueType(TotalApi.Telematics.SensorDataType)">
-            <summary>
-            Gets sensor data type
-            </summary>
-        </member>
-        <member name="M:TotalApi.Telematics.SensorTypeExtensions.ConvertValue(TotalApi.Telematics.SensorDataType,System.Object)">
-            <summary>
-            Converts sensor value to the type according to it.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Telematics.SensorValuePoint">
-            <summary>
-            
-            </summary>
         </member>
         <member name="P:TotalApi.Telematics.SensorValuePoint.UserData">
             <summary>
@@ -1809,7 +2020,7 @@
             Gets or set a bit mask determines the last states of the device or sensor.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.SensorValues.SourceId">
+        <member name="P:TotalApi.Telematics.SensorValues.Source">
             <summary>
             Gets the source unique identifier.
             It can be Device database identifier or Sensor database identifier
@@ -1830,16 +2041,37 @@
             Constructor without parameters needed for object deserialization.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.SensorValues.#ctor(System.String,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+        <member name="M:TotalApi.Telematics.SensorValues.#ctor(TotalApi.Telematics.SourceInfo,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Telematics.SensorValues"/> class.
             </summary>
-            <param name="sensorId">Sensor Id</param>
+            <param name="source">Sensor source info</param>
             <param name="values">Source sensor data values.</param>
         </member>
         <member name="M:TotalApi.Telematics.SensorValues.RemoveDetailsInfo">
             <summary>
             Removes sensors values, keeps only summary info.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SourceInfo.SensorType">
+            <summary>
+            Sensor type representation of the SourceInfo (applied for sensors only)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SourceInfo.SensorNumber">
+            <summary>
+            Sensor number representation of the SourceInfo (applied for sensors only)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TelematicsSystemData.FullKey">
+            <summary>
+            Unique identifier of the object.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.TelematicsSystemData.ApiKey">
+            <summary>
+            Unique and secret api key. 
+            Mandatory property and used for result filtering.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.Events.ITelematicEvents">
@@ -1913,6 +2145,156 @@
             Gets event hash to determinate that the events are equal.
             </summary>
         </member>
+        <member name="T:TotalApi.Telematics.Interfaces.IDataFilterManager">
+            <summary>
+            DataFilter manager interface declaration.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetCoordinatesPreFiltersPipeline(TotalApi.Telematics.Device)">
+            <summary>
+            Creates pre-processing filters pipeline for coordinates handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            The pipeline for coordinates pre-processing is always linear and sequential.
+            </summary>
+            <param name="device">Optional reference for the device. Used for device-dependent values of the filter parameters. (Not implemented yet)</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetCoordinatesPreFiltersPipeline(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings)">
+            <summary>
+            Creates post-processing filters pipeline for coordinates handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            The post processing pipeline is always linear and sequential.
+            </summary>
+            <param name="pipelineSettings">The pipeline settings.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetCoordinatesPostFiltersPipeline(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings)">
+            <summary>
+            Creates post-processing filters pipeline for coordinates handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            The post processing pipeline is always linear and sequential.
+            </summary>
+            <param name="pipelineSettings">The pipeline settings.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetCoordinatesPostFiltersPipelineSettings(System.String)">
+            <summary>
+            Get post filter coordinates pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetCoordinatesPreFiltersPipelineSettings(System.String)">
+            <summary>
+            Get pre filter coordinates pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.SetCoordinatesPostFiltersPipelineSettings(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.String)">
+            <summary>
+            Set post filter coordinates pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="pipelineSettings">Pipeline settings</param>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.SetCoordinatesPreFiltersPipelineSettings(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.String)">
+            <summary>
+            Set pre filter coordinates pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="pipelineSettings">Pipeline settings</param>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.AssignDefaultCoordinatesPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.AssignDefaultCoordinatesPreFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming coordinates will be processed the coordinates pre process filter with <paramref name="name"/>.
+            To remove default coordinate pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetSensorDataPreFiltersPipeline(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings)">
+            <summary>
+            Creates post-processing filters pipeline for sensor data handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            The post processing pipeline is always linear and sequential.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetSensorDataPreFiltersPipeline(TotalApi.Telematics.Sensor)">
+            <summary>
+            Creates post-processing filters pipeline for sensor data handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            The post processing pipeline is always linear and sequential.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetSensorDataPostFiltersPipeline(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings)">
+            <summary>
+            Creates pre-processing filters pipeline for sensor data handling.
+            If no filters found - returns not null pipeline with <see cref="!:IDataProcessingFilterPipeline.IsEmpty"/> equals <c>true</c>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetSensorDataPostFiltersPipelineSettings(System.String)">
+            <summary>
+            Get post filter sensor data pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetSensorDataPreFiltersPipelineSettings(System.String)">
+            <summary>
+            Get pre filter sensor data pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.SetSensorDataPostFiltersPipelineSettings(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.String)">
+            <summary>
+            Set post filter sensor data pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="pipelineSettings">Pipeline settings</param>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.SetSensorDataPreFiltersPipelineSettings(TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.String)">
+            <summary>
+            Set pre filter sensor data pipeline settings by <paramref name="name"/>. 
+            When <paramref name="name"/> is <c>null</c> returns default pipeline settings if it is defined.
+            </summary>
+            <param name="pipelineSettings">Pipeline settings</param>
+            <param name="name">Pipeline name</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.AssignDefaultSensorDataPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default sensor data pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default sensor data pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.AssignDefaultSensorDataPreFiltersPipeline(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming sensor data will be processed the pre process filter with <paramref name="name"/>.
+            To remove default sensor data pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data pre filter pipeline name.</param>
+            <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
+            <param name="sensorNumber">Sensor number. Can be null if the pipeline applied to all sensors of sensor type.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.IDataFilterManager.GetFilterPipelineNames(System.Boolean,System.Boolean)">
+            <summary>
+            Gets the list of the all registered pipeline names.
+            Returned pipeline names can end with '~' indicates that the name is default pipeline.
+            For sensor data prefilter pipelines the default names can end with ~[SensorType]~[SensorNumber]
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.Interfaces.ITelematics">
             <summary>
             Implementation methods of the telematics module.
@@ -1981,11 +2363,11 @@
             Filters are determined automatically based on the definitions.
              Currently supported 5 types of filters decribed by correspondent parameters:
              <list type="bullet">
-             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SimplificateFilter.SimplificatePostFilterParameters"/></description></item>
-             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.BreaksFilter.BreaksPostFilterParameters"/></description></item>
-             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.RosePointsFilter.RosePointsPostFilterParameters"/></description></item>
-             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.StopsFilter.StopsPostFilterParameters"/></description></item>
-             <item><description><see cref="T:TotalApi.Telematics.CoordinateFilters.SpeedFilter.SpeedPostFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters"/></description></item>
+             <item><description><see cref="T:TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters"/></description></item>
              </list>
              </param>
         </member>
@@ -2000,7 +2382,7 @@
             Writes the coordinates data for the particular device. If no device found doing nothing.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindPhysicalSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
             <summary>
             Searching for a device's sensor by device identifier and port identifier.
             If no device found, or the sensor on specified port is not configured - return <c>null</c>.
@@ -2009,7 +2391,7 @@
             <param name="portId">Port identifier.</param>
             <param name="address">Sensor address.</param>
         </member>
-        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,TotalApi.Telematics.SensorType,System.Int32)">
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.FindSensor(TotalApi.Telematics.DeviceIdentifier,System.Int32,System.Int32)">
             <summary>
             Searches for a device sensor by its <paramref name="sensorType"/> and <paramref name="number"/>.
             If device not found or if sensor on this port is not configured - returns <c>null</c>.
@@ -2028,7 +2410,7 @@
             If sensor with such port number and address is not registered - transmitted values will be ignored.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetLastSensorsStatus(TotalApi.Telematics.DeviceIdentifier)">
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetSensorsLastStatus(TotalApi.Telematics.DeviceIdentifier)">
             <summary>
             Gets device sensor data last values by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>.
             If the device is not found returns <c>null</c>.
@@ -2043,6 +2425,66 @@
             </summary>
             <param name="readParams">Parameters for reading sensors values <see cref="T:TotalApi.Telematics.ReadSensorValuesParams"/>.</param>
             <returns>Collection of <see cref="T:TotalApi.Telematics.SensorValuePoint"/> or <c>null</c> if no sensor values found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetFiltersPipeline(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets filter pipeline by <paramref name="name"/>. 
+            If no filter pipeline with the name - returns <c>null</c>.
+            </summary>
+            <param name="name">Pipeline name</param>
+            <param name="isCoordinatesPipeline">If <c>true</c> - returns filter pipeline for coordinates and for sensor data otherwithe.</param>
+            <param name="isPreFiltersPipeline">If <c>true</c> - returns pre filter pipeline and post filter pipeline otherwithe.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.SetFiltersPipeline(System.String,TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.Boolean,System.Boolean)">
+            <summary>
+            Sets filter pipeline by <paramref name="name"/>. 
+            To remove the pipeline by <paramref name="name"/> pass the <paramref name="pipeline"/> equals <c>null</c>.
+            </summary>
+            <param name="name">Pipeline name</param>
+            <param name="pipeline">Pipeline settings</param>
+            <param name="isCoordinatesPipeline">If <c>true</c> - returns filter pipeline for coordinates and for sensor data otherwithe.</param>
+            <param name="isPreFiltersPipeline">If <c>true</c> - returns pre filter pipeline and post filter pipeline otherwithe.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.GetFilterPipelineNames(System.Boolean,System.Boolean)">
+            <summary>
+            Gets the list of the all registered pipeline names.
+            Returned pipeline names can end with '~' indicates that the name is default pipeline.
+            For sensor data prefilter pipelines the default names can end with ~[SensorType]~[SensorNumber]
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.AssignDefaultCoordinatesPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.AssignDefaultCoordinatesPreFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming coordinates will be processed the coordinates pre process filter with <paramref name="name"/>.
+            To remove default coordinate pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.AssignDefaultSensorDataPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default sensor data pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default sensor data pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematics.AssignDefaultSensorDataPreFiltersPipeline(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming sensor data will be processed the pre process filter with <paramref name="name"/>.
+            To remove default sensor data pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data pre filter pipeline name.</param>
+            <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
+            <param name="sensorNumber">Sensor number. Can be null if the pipeline applied to all sensors of sensor type.</param>
         </member>
         <member name="T:TotalApi.Telematics.Interfaces.ITelematicsInternal">
             <summary>
@@ -2067,13 +2509,33 @@
             If sensor with such port number and address is not registered - transmitted values will be ignored.
             </summary>
         </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.GetSystemDataValue``1(System.String,System.String)">
+            <summary>
+            Gets a system data value of the telematics module.
+            You can store and get any serializable value to a telematics database.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="key">Unique key of the value in ApiKey keyspace.</param>
+            <param name="apiKey">ApiKey of the getting value. Will be set automatically to the current ApiKey.</param>
+            <returns>Stored value or <c>null</c> if no value was stored.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.Interfaces.ITelematicsInternal.SetSystemDataValue``1(System.String,``0,System.String)">
+            <summary>
+            Stores a system data value of the telematics module.
+            You can store and get any serializable value to a telematics database.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="key">Unique key of the value in ApiKey keyspace.</param>
+            <param name="value">Stored value</param>
+            <param name="apiKey">ApiKey of the getting value. Will be set automatically to the current ApiKey.</param>
+        </member>
         <member name="T:TotalApi.Telematics.SensorData">
             <summary>
             Sensor values. 
             POCO of the values stored in C* database.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.SensorData.Create``1(TotalApi.Telematics.SensorType,``0,System.Int32,System.Nullable{System.DateTime})">
+        <member name="M:TotalApi.Telematics.SensorData.Create``1(System.Int32,``0,System.Int32,System.Nullable{System.DateTime})">
             <summary>
             Creates the correct initialized instance of the sensor data.
             </summary>
@@ -2081,21 +2543,26 @@
             <param name="sensorType">The sensor type</param>
             <param name="value">The sensor value</param>
             <param name="number">The sensor number. By default - 0.</param>
-            <param name="dateTime">The value date time. By default - now</param>
+            <param name="dateTime">The value utcDate time. By default - now</param>
         </member>
-        <member name="M:TotalApi.Telematics.SensorData.Create(TotalApi.Telematics.ISensorValuePoint)">
+        <member name="M:TotalApi.Telematics.SensorData.Create(TotalApi.Telematics.SensorValuePoint)">
             <summary>
-            Creates instance of the sensor data by ISensorValuePoint source.
+            Creates instance of the sensor data by SensorValuePoint source.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.SensorData.Create(TotalApi.Telematics.ISensorValuePoint,System.Object)">
+        <member name="M:TotalApi.Telematics.SensorData.Create(TotalApi.Telematics.SensorValuePoint,System.Object)">
             <summary>
-            Creates instance of the sensor data by ISensorValuePoint source and set custom value.
+            Creates instance of the sensor data by SensorValuePoint source and set custom value.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorData.Create(TotalApi.Telematics.SensorValuePoint,System.Object,System.DateTime)">
+            <summary>
+            Creates instance of the sensor data by SensorValuePoint source and set custom value.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.SensorData.UtcDate">
             <summary>
-            Gets or sets the date and time in UTC format when the position's data was received from GPS source.
+            Gets or sets the utcDate and time in UTC format when the position's data was received from GPS source.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.SensorData.SensorType">
@@ -2151,6 +2618,26 @@
             The object value.
             </returns>
         </member>
+        <member name="T:TotalApi.Telematics.SensorDataTypeHelper">
+            <summary>
+            SensorType extensions
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataTypeHelper.GetSensorDataType``1(``0)">
+            <summary>
+            Gets sensor data type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataTypeHelper.GetValueType(TotalApi.Telematics.SensorDataType)">
+            <summary>
+            Gets sensor data type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorDataTypeHelper.ConvertValue(TotalApi.Telematics.SensorDataType,System.Object)">
+            <summary>
+            Converts sensor value to the type according to it.
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.ServiceContracts.ITelematicsService">
             <summary>
             Telematics API service.
@@ -2179,7 +2666,7 @@
         <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.WriteSensorData(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
             <summary>
             Writes data from the sensors of specified device.
-            The sensors are identified by <see cref="T:TotalApi.Telematics.SensorType"/> and number.
+            The sensors are identified by <see cref="!:SensorType"/> and number.
             </summary>
             <param name="deviceId">Device identifier.</param>
             <param name="sensorData">Array of sensors data.</param>
@@ -2228,7 +2715,7 @@
             <param name="devId">Identifier value according its <paramref name="type"/>.</param>
             <returns><see cref="T:TotalApi.Telematics.DeviceStatus"/> or <c>null</c> if device status not found.</returns>
         </member>
-        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindSensor(System.String,System.String,System.String,System.String)">
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.FindPhysicalSensor(System.String,System.String,System.String,System.String)">
             <summary>
             Finds sensor by its <see cref="P:TotalApi.Telematics.Device.DeviceId"/>, type and port identifier.
             If the sensor is not found returns <c>null</c>.
@@ -2246,7 +2733,7 @@
             </summary>
             <param name="type">Device identifier type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.DeviceIdentifierTypes"/>.</param>
             <param name="devId">Identifier value according its <paramref name="type"/>.</param>
-            <param name="sensorType">Sensor type. It is the text representation of the items of <see cref="T:TotalApi.Telematics.SensorType"/>.</param>
+            <param name="sensorType">Sensor type.</param>
             <param name="number">Sensor number.</param>
             <returns>Found <see cref="T:TotalApi.Telematics.Sensor"/> or <c>null</c> if device not found.</returns>
         </member>
@@ -2266,6 +2753,66 @@
             </summary>
             <param name="readParams">Parameters for reading sensors values <see cref="T:TotalApi.Telematics.ReadSensorValuesParams"/>.</param>
             <returns>Collection of <see cref="T:TotalApi.Telematics.SensorValuePoint"/> or <c>null</c> if no sensor values found.</returns>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetFiltersPipeline(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets filter pipeline by <paramref name="name"/>. 
+            If no filter pipeline with the name - returns <c>null</c>.
+            </summary>
+            <param name="name">Pipeline name</param>
+            <param name="isCoordinatesPipeline">If <c>true</c> - returns filter pipeline for coordinates and for sensor data otherwithe.</param>
+            <param name="isPreFiltersPipeline">If <c>true</c> - returns pre filter pipeline and post filter pipeline otherwithe.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.GetFilterPipelineNames(System.Boolean,System.Boolean)">
+            <summary>
+            Gets the list of the all registered pipeline names.
+            Returned pipeline names can end with '~' indicates that the name is default pipeline.
+            For sensor data prefilter pipelines the default names can end with ~[SensorType]~[SensorNumber]
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.SetFiltersPipeline(System.String,TotalApi.Telematics.DataFilters.FilterPipeline.PipelineSettings,System.Boolean,System.Boolean)">
+            <summary>
+            Sets filter pipeline by <paramref name="name"/>. 
+            To remove the pipeline by <paramref name="name"/> pass the <paramref name="pipeline"/> equals <c>null</c>.
+            </summary>
+            <param name="name">Pipeline name</param>
+            <param name="pipeline">Pipeline settings</param>
+            <param name="isCoordinatesPipeline">If <c>true</c> - returns filter pipeline for coordinates and for sensor data otherwithe.</param>
+            <param name="isPreFiltersPipeline">If <c>true</c> - returns pre filter pipeline and post filter pipeline otherwithe.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.AssignDefaultCoordinatesPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.AssignDefaultCoordinatesPreFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming coordinates will be processed the coordinates pre process filter with <paramref name="name"/>.
+            To remove default coordinate pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The coordinates post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.AssignDefaultSensorDataPostFiltersPipeline(System.String)">
+            <summary>
+            Assigns the default sensor data pipeline post filter.
+            When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
+            To remove default sensor data pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data post filter pipeline name.</param>
+        </member>
+        <member name="M:TotalApi.Telematics.ServiceContracts.ITelematicsService.AssignDefaultSensorDataPreFiltersPipeline(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Assigns the default coordinate pipeline pre filter.
+            All the incoming sensor data will be processed the pre process filter with <paramref name="name"/>.
+            To remove default sensor data pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            </summary>
+            <param name="name">The sensor data pre filter pipeline name.</param>
+            <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
+            <param name="sensorNumber">Sensor number. Can be null if the pipeline applied to all sensors of sensor type.</param>
         </member>
         <member name="T:TotalApi.Telematics.TelematicsApi">
             <summary>
@@ -2289,7 +2836,8 @@
         </member>
         <member name="P:TotalApi.Telematics.TelematicsApi.DataFilterManager">
             <summary>
-            Interface for working with totalApi data filters manager.
+            Interface for working with totalApi data filters manager. 
+            Accessable in server part of telematics module only.
             </summary>
         </member>
         <member name="T:TotalApi.DataModel.Telematics.Reference">
