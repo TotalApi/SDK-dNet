@@ -1687,7 +1687,7 @@
             If sensor not found - return <c>null</c>.
             </summary>
         </member>
-        <member name="M:TotalApi.Telematics.ITelematicsDbContext.WriteSensorValuesAsync(TotalApi.Telematics.DeviceIdentifier,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
+        <member name="M:TotalApi.Telematics.ITelematicsDbContext.WriteSensorValuesAsync(TotalApi.Telematics.Sensor,System.Collections.Generic.IEnumerable{TotalApi.Telematics.SensorData})">
             <summary>
             Asynchronous write of sensor values for the device.
             If device not found - does nothing.
@@ -2208,7 +2208,7 @@
             <summary>
             Assigns the default coordinate pipeline post filter.
             When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
-            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The coordinates post filter pipeline name.</param>
         </member>
@@ -2216,7 +2216,7 @@
             <summary>
             Assigns the default coordinate pipeline pre filter.
             All the incoming coordinates will be processed the coordinates pre process filter with <paramref name="name"/>.
-            To remove default coordinate pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The coordinates post filter pipeline name.</param>
         </member>
@@ -2274,7 +2274,7 @@
             <summary>
             Assigns the default sensor data pipeline post filter.
             When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
-            To remove default sensor data pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The sensor data post filter pipeline name.</param>
         </member>
@@ -2282,7 +2282,7 @@
             <summary>
             Assigns the default coordinate pipeline pre filter.
             All the incoming sensor data will be processed the pre process filter with <paramref name="name"/>.
-            To remove default sensor data pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The sensor data pre filter pipeline name.</param>
             <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
@@ -2456,7 +2456,7 @@
             <summary>
             Assigns the default coordinate pipeline post filter.
             When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadCoordinates(TotalApi.Telematics.ReadCoordinatesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
-            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The coordinates post filter pipeline name.</param>
         </member>
@@ -2464,7 +2464,7 @@
             <summary>
             Assigns the default coordinate pipeline pre filter.
             All the incoming coordinates will be processed the coordinates pre process filter with <paramref name="name"/>.
-            To remove default coordinate pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The coordinates post filter pipeline name.</param>
         </member>
@@ -2472,7 +2472,7 @@
             <summary>
             Assigns the default sensor data pipeline post filter.
             When calling <see cref="M:TotalApi.Telematics.Interfaces.ITelematics.ReadSensorValues(TotalApi.Telematics.ReadSensorValuesParams)"/> w/o filters the pipeline with <paramref name="name"/> will be used.
-            To remove default sensor data pipeline post filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The sensor data post filter pipeline name.</param>
         </member>
@@ -2480,7 +2480,7 @@
             <summary>
             Assigns the default coordinate pipeline pre filter.
             All the incoming sensor data will be processed the pre process filter with <paramref name="name"/>.
-            To remove default sensor data pipeline pre filter call this method with <paramref name="name"/> equals <c>null</c>.
+            To remove default coordinate pipeline post filter call this method with <paramref name="name"/> equals <c>null or '-'</c>.
             </summary>
             <param name="name">The sensor data pre filter pipeline name.</param>
             <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
