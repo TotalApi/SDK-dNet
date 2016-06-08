@@ -54,7 +54,7 @@ namespace DataFilters
                 SensorNumber = 1,
                 DeviceId = device.DeviceId,
                 From = DateTime.Now.AddHours(-5),
-                Filters = new object[] { new MedianPostFilterParameters { PointsNumber = 11 } }
+                Filters = new object[] { new SensorDataThresholdPostFilterParameters(280, EqualCondition.Greater, TimeSpan.FromSeconds(1)) }
             });
             Console.WriteLine($"Count values after perosnal filter: {sensorValuesWithFilterPersonal.Values.Count}");
 
