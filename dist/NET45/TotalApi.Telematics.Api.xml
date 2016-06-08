@@ -675,6 +675,21 @@
             Может вызываться 
             </summary>
         </member>
+        <member name="P:TotalApi.Telematics.FastNativeWriters.PhysicalSensorsData.ModelCode">
+            <summary>
+            If not zero - device will be created automatically.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeWriters.CoordinatesData.ModelCode">
+            <summary>
+            If not zero - device will be created automatically.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeWriters.JsonData.WaitConfirmation">
+            <summary>
+            If not zero - device will be created automatically.
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.Coordinate">
             <summary>
             Represents a telematics coordinate object.
@@ -1124,6 +1139,14 @@
             <summary>
             Gets or sets the device tag.
             </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Device.LastWriteTime">
+            <summary>
+            Gets or sets the last write time of the sensor value (can be different from the LastActivityTime in LastStatus in the case by DataSampleRateLimit restriction).
+            </summary>
+            <value>
+            The last write time.
+            </value>
         </member>
         <member name="T:TotalApi.Telematics.DeviceIdentifier">
             <summary>
@@ -1910,6 +1933,14 @@
             Gets or sets time to live of the coordinates of the device.
             Set <c>0</c> to use global default value of time to live.
             </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.Sensor.LastWriteTime">
+            <summary>
+            Gets or sets the last write time of the sensor value (can be different from the LastActivityTime in LastStatus in the case by DataSampleRateLimit restriction).
+            </summary>
+            <value>
+            The last write time.
+            </value>
         </member>
         <member name="T:TotalApi.Telematics.SensorPort">
             <summary>
@@ -2813,6 +2844,66 @@
             <param name="name">The sensor data pre filter pipeline name.</param>
             <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
             <param name="sensorNumber">Sensor number. Can be null if the pipeline applied to all sensors of sensor type.</param>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ListenerTcpPort">
+            <summary>
+            Tcp порт, который будет слушать принимальщик координат
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ListenerConcurrencyLevel">
+            <summary>
+            Количество потоков, одновременно обрабатывающих запросы.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.InternalTcpServers">
+            <summary>
+            Список адресов телематических серверов TotalApi на которые следует отправлять данные по TCP-протоколу. 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.TcpServers">
+            <summary>
+            Список адресов телематических серверов TotalApi на которые следует слать координаты по TCP-протоколу. 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.QueueLevel">
+            <summary>
+            Размер очереди отправки данных. 
+            Все приходящие координаты и данные сенсоров попадают в LIFO-очередь (одна для координат, другая для сенсоров) из которой и идёт отправка в TotalApi. 
+            Первыми отправляются данные, пришедшие последними. Если очередь переполняется, то более старые данные будут потеряны.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ConcurrencyLevel">
+            <summary>
+            Количество потоков отправки данных в TotalApi, разгребающих очередь. 
+            Создаётся две очереди (одна для координат, другая для сенсоров), так что фактически потоков будет в два раза больше.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.WaitForConfirmation">
+            <summary>
+            Следует ли ждать подтверждающего ответа от сервера TotalApi об окончании записи данных. 
+            (Применимо только для TCP-передачи)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.SendSensorData">
+            <summary>
+            Следует ли отправлять данные сенсоров.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.LogFilePath">
+            <summary>
+            Путь к файлу дополнительного протокола передачи данных.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.LogDevices">
+            <summary>
+            Список идентификаторов устройств, требующих протоколирования в отдельный файл.
+            Можно указать * для всех устройств.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.CanSendData">
+            <summary>
+            Есть ли передачи по TCP-протоколу.
+            </summary>
         </member>
         <member name="T:TotalApi.Telematics.TelematicsApi">
             <summary>
