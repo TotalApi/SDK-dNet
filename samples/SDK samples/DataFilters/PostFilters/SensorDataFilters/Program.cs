@@ -15,7 +15,9 @@ namespace DataFilters
         {
             TotalApiBootstrapper.Create();
 
-            var device = CoreApi.Repository.ExecuteQuery<Device>(q => q.Where(x => x.PhoneNumber == "+555-0005")).FirstOrDefault();
+            //var ddd = TelematicsApi.Telematics.FindDevice(DeviceIdentifier.PhoneNumber("+555-0006"));
+
+            var device = TelematicsApi.Telematics.FindDevice(DeviceIdentifier.PhoneNumber("+555-0006"));
             var sensor = CoreApi.Repository.ExecuteQuery<Sensor>(q => q.Where(x => x.DeviceId == device.Id)).FirstOrDefault();
 
             // Create two filterls
@@ -36,7 +38,7 @@ namespace DataFilters
                     SensorType = 0,
                     SensorNumber = 1,
                     DeviceId = device.DeviceId,
-                    From = DateTime.Now.AddHours(-5)
+                    From = DateTime.UtcNow.AddHours(-5)
                 };
 
                 // Get sensor values without frilters
