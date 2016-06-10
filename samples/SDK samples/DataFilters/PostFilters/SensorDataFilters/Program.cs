@@ -15,7 +15,7 @@ namespace DataFilters
         {
             TotalApiBootstrapper.Create();
 
-            var device = TelematicsApi.Telematics.FindDevice(DeviceIdentifier.PhoneNumber("+555-0006"));
+            var device = CoreApi.Repository.ExecuteQuery<Device>(q => q.Where(x => x.PhoneNumber == "+555-0006")).FirstOrDefault();
             var sensor = CoreApi.Repository.ExecuteQuery<Sensor>(q => q.Where(x => x.DeviceId == device.Id)).FirstOrDefault();
 
             // Create two filterls
