@@ -39,7 +39,7 @@ namespace DataFilters
                     From = DateTime.UtcNow.AddHours(-5)
                 };
 
-                // Get sensor values without frilters
+                // Get sensor values without filters
                 var sensorValues = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
             
 

@@ -25,6 +25,7 @@ namespace SensorDataPreFilter
             source = source?.Replace("\r\n", separator.AsString());
             source = source?.Replace("\r", separator.AsString());
             source = source?.Replace("\n", separator.AsString());
+            //var now = DateTime.Today;
             var now = DateTime.Today;
             var c = 0;
             return source == null
