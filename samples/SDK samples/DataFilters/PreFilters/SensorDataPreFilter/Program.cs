@@ -22,14 +22,13 @@ namespace SensorDataPreFilter
             TotalApiBootstrapper.Create();
 
             const int sensorType = 9;
-            const int sensorNumber = 1;
-
             const int sensorPort = 5;
+            const int sensorNumber = 1;
             const int sensorAddress = 4;
 
             var devicePhone = $"+TEST-{Guid.NewGuid()}";
 
-
+            // If device is not found, create it
             var device = TelematicsApi.Telematics.FindDevice(DeviceIdentifier.PhoneNumber(devicePhone));
             if (device == null)
             {
@@ -43,7 +42,7 @@ namespace SensorDataPreFilter
             }
             Console.WriteLine($"Current device Id: {device.Id} with Phone: {device.PhoneNumber}");
 
-
+            // If sensor is not found, create it
             var sensor = TelematicsApi.Telematics.FindSensor(device.DeviceId, sensorType, sensorNumber);
             if (sensor == null)
             {
@@ -59,17 +58,7 @@ namespace SensorDataPreFilter
             }
             Console.WriteLine($"Current sensor Id: {sensor.Id}");
 
-            var sensorValuesParams = new ReadSensorValuesParams
-            {
-                SensorType = sensorType,
-                SensorNumber = sensorNumber,
-                DeviceId = device.DeviceId,
-                From = DateTime.Today
-            };
-
-            
-            /*Console.WriteLine($"Count sensor values before using pipeline: {sensorValues.Count()}");*/
-
+            // Subscribe to velocityPipeline pre events
             var customEvent = new EventSensorDataChanged();
             CoreApi.EventManager.Subscribe(customEvent);
 
@@ -79,9 +68,6 @@ namespace SensorDataPreFilter
             const long longStopState = 4;
             const double stopSpeedValue = 6;
             const double overSpeedValue = 40;
-            var overSpeedPeriod = TimeSpan.FromSeconds(1);
-            var shortStopPeriod = TimeSpan.FromMinutes(1);
-            var longStopPeriod = TimeSpan.FromMinutes(10);
 
             // I want filtering my sensor speed data by parameters before saving to cloud
             var velocityPipeline = PipelineSettings.CreateFromFilterParameters(
@@ -98,15 +84,11 @@ namespace SensorDataPreFilter
             // Assign pipeline for the all sensors by sensor type and sensor number
             TelematicsApi.Telematics.AssignDefaultSensorDataPreFiltersPipeline(pipelineName, sensorType, sensorNumber);
 
+            // Load emulation sensor data
             var source = DataSourceEmulation.LoadSensorValues("noisy", true, sensorType, sensorNumber);
             TelematicsApi.Telematics.WriteSensorValues(device.DeviceId, sensor.PortId, sensor.Address, source.Values.ToDictionary(svp => svp.UtcDate, svp => svp.Value));
-            Console.WriteLine("Waiting for write sensor values");
-            Thread.Sleep(3000);
 
-            var sensorValues = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
-            Console.WriteLine($"Count sensor values after using pipeline: {sensorValues.Count()}");
-
-            //Console.Read();
+            // Console sniff
             ConsoleListener.Start();
         }
 
@@ -114,7 +96,7 @@ namespace SensorDataPreFilter
         {
             public void HandleEvent(OnSensorStatusChanged e)
             {
-                Console.WriteLine($"SensorStatus {e.SensorStatus.Id}: {e.SensorStatus.LastStates}");
+                Console.WriteLine($"SensorStatus is changed: {e.SensorStatus.Id}: {e.SensorStatus.LastStates}");
             }
 
             public void HandleEvent(OnPing e)
