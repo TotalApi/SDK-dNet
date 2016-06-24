@@ -86,42 +86,48 @@ namespace SensorDataPreFilter
             // Assign pipeline for the all sensors by sensor type and sensor number
             TelematicsApi.Telematics.AssignDefaultSensorDataPreFiltersPipeline(testPipelineName, sensorType, sensorNumber);
 
-            do
+            try
             {
-                try
-                {
-                    var source = DataSourceEmulation.LoadSensorValues("noisy", true, sensorType, sensorNumber);
-                    Console.WriteLine("Writting values");
-                    var priorTime = DateTime.MinValue;
-                    foreach (var sensorValuePoint in source.Values)
-                    {
-                        Console.Write(".");
-                        if (priorTime != DateTime.MinValue)
-                            Thread.Sleep(sensorValuePoint.UtcDate - priorTime);
-                        priorTime = sensorValuePoint.UtcDate;
-                        TelematicsApi.Telematics.WriteSensorValues(device.DeviceId, sensor.PortId, sensor.Address, new Dictionary<DateTime, object> { { sensorValuePoint.UtcDate, sensorValuePoint.Value } });
-                    }
-                    Console.WriteLine();
+                var source = DataSourceEmulation.LoadSensorValues("noisy", true, sensorType, sensorNumber);
+                Console.WriteLine("Writting values");
 
-                    var sensorValuesParams = new ReadSensorValuesParams
-                    {
-                        SensorType = sensorType,
-                        SensorNumber = sensorNumber,
-                        DeviceId = device.DeviceId,
-                        From = DateTime.Today
-                    };
+// Writting all the data by a single block
 
-                    var sensorValues = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
-                    Console.WriteLine($"Count sensor values after using pipeline: {sensorValues.Count()}");
-                }
-                catch (Exception e)
+// Serial data writting
+                var priorTime = DateTime.MinValue;
+                foreach (var sensorValuePoint in source.Values)
                 {
-                    e.Error();
+                    Console.Write(".");
+                    if (priorTime != DateTime.MinValue)
+                        Thread.Sleep(sensorValuePoint.UtcDate - priorTime);
+                    priorTime = sensorValuePoint.UtcDate;
+                    TelematicsApi.Telematics.WriteSensorValues(device.DeviceId, sensor.PortId, sensor.Address, new Dictionary<DateTime, object> { { sensorValuePoint.UtcDate, sensorValuePoint.Value } });
                 }
-            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+                Console.WriteLine();
+
+                var sensorValuesParams = new ReadSensorValuesParams
+                {
+                    SensorType = sensorType,
+                    SensorNumber = sensorNumber,
+                    DeviceId = device.DeviceId,
+                    From = DateTime.Today
+                };
+
+                var sensorValues = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
+                Console.WriteLine($"Count sensor values after using pipeline: {sensorValues.Count()}");
+            }
+            catch (Exception e)
+            {
+                e.Error();
+            }
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
 
-        public class EventSensorDataChanged : IEvent<OnSensorStateChanged>
+        public class EventSensorDataChanged :
+            // IEvent<OnSensorStatusChanged>,  // Uncomment this line if you want to get OnSensorStatusChanged events
+            IEvent<OnSensorStateChanged>
         {
             public void HandleEvent(OnSensorStatusChanged e)
             {
