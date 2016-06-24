@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoordinateDataPreFilter", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDataPreFilter", "PreFilters\SensorDataPreFilter\SensorDataPreFilter.csproj", "{499B9A40-88BF-442F-8177-B3EC1F5FBC1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoordinateDataPostFilter", "PostFilters\CoordinateDataFilters\CoordinateDataPostFilter.csproj", "{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDataPostFilter", "PostFilters\SensorDataFilters\SensorDataPostFilter.csproj", "{1116AC33-0250-42D0-9238-71E621179AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoordinateDataPostFilter", "PostFilters\CoordinateDataFilters\CoordinateDataPostFilter.csproj", "{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +29,14 @@ Global
 		{499B9A40-88BF-442F-8177-B3EC1F5FBC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499B9A40-88BF-442F-8177-B3EC1F5FBC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499B9A40-88BF-442F-8177-B3EC1F5FBC1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1116AC33-0250-42D0-9238-71E621179AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1116AC33-0250-42D0-9238-71E621179AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1116AC33-0250-42D0-9238-71E621179AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1116AC33-0250-42D0-9238-71E621179AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,7 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{215EE74D-1691-4EA3-B5CA-2CC9F37A3F11} = {1A50C737-B0C6-4B8B-B82F-FAA7BE935D9A}
 		{499B9A40-88BF-442F-8177-B3EC1F5FBC1F} = {1A50C737-B0C6-4B8B-B82F-FAA7BE935D9A}
-		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E} = {69708E84-49A2-4F8D-96F9-56E22C786B36}
 		{1116AC33-0250-42D0-9238-71E621179AF9} = {69708E84-49A2-4F8D-96F9-56E22C786B36}
+		{D81CCF9A-E37D-4CC1-B34A-4AABC277152E} = {69708E84-49A2-4F8D-96F9-56E22C786B36}
 	EndGlobalSection
 EndGlobal

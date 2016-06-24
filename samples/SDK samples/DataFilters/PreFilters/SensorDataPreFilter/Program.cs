@@ -11,7 +11,6 @@ using TotalApi.Telematics.Events;
 using TotalApi.Utils;
 using TotalApi.Utils.Console;
 using TotalApi.Utils.ErrorManager;
-using TotalApi.Utils.Wcf.Events;
 
 namespace SensorDataPreFilter
 {
@@ -64,6 +63,7 @@ namespace SensorDataPreFilter
             var customEvent = new EventSensorDataChanged();
             CoreApi.EventManager.Subscribe(customEvent);
 
+            
             // |-----------------------+-----+-----------------------+----------------------
             // | [lowerSpeedState = 1] | [0] | [overSpeed1State = 2] | [overSpeed2State = 4]
             // 0                       3     4                       6
@@ -88,12 +88,10 @@ namespace SensorDataPreFilter
 
             do
             {
-//                Console.Clear();
                 try
                 {
                     var source = DataSourceEmulation.LoadSensorValues("noisy", true, sensorType, sensorNumber);
                     Console.WriteLine("Writting values");
-//                    TelematicsApi.Telematics.WriteSensorValues(device.DeviceId, sensor.PortId, sensor.Address, source.Values.ToDictionary(svp => svp.UtcDate, svp => svp.Value));
                     var priorTime = DateTime.MinValue;
                     foreach (var sensorValuePoint in source.Values)
                     {
@@ -123,7 +121,7 @@ namespace SensorDataPreFilter
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
 
-        public class EventSensorDataChanged :/* IEvent<OnSensorStatusChanged>, */IEvent<OnSensorStateChanged>
+        public class EventSensorDataChanged : IEvent<OnSensorStateChanged>
         {
             public void HandleEvent(OnSensorStatusChanged e)
             {
