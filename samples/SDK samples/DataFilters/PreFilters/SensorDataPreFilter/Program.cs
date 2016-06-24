@@ -22,9 +22,8 @@ namespace SensorDataPreFilter
             TotalApiBootstrapper.Create();
 
             const int sensorType = 9;
-            const int sensorNumber = 1;
-
             const int sensorPort = 5;
+            const int sensorNumber = 1;
             const int sensorAddress = 4;
 
             // Find test device. If it is not found - create it.
@@ -61,6 +60,7 @@ namespace SensorDataPreFilter
             }
             Console.WriteLine($"Current sensor Id: {sensor.Id}");
 
+            // Subscribe to velocityPipeline pre events
             var customEvent = new EventSensorDataChanged();
             CoreApi.EventManager.Subscribe(customEvent);
 
