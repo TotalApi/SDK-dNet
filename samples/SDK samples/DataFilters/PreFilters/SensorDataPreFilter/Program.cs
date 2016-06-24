@@ -11,7 +11,6 @@ using TotalApi.Telematics.Events;
 using TotalApi.Utils;
 using TotalApi.Utils.Console;
 using TotalApi.Utils.ErrorManager;
-using TotalApi.Utils.Wcf.Events;
 
 namespace SensorDataPreFilter
 {
@@ -64,6 +63,7 @@ namespace SensorDataPreFilter
             var customEvent = new EventSensorDataChanged();
             CoreApi.EventManager.Subscribe(customEvent);
 
+            
             // |-----------------------+-----+-----------------------+----------------------
             // | [lowerSpeedState = 1] | [0] | [overSpeed1State = 2] | [overSpeed2State = 4]
             // 0                       3     4                       6
@@ -92,7 +92,6 @@ namespace SensorDataPreFilter
                 Console.WriteLine("Writting values");
 
 // Writting all the data by a single block
-//                    TelematicsApi.Telematics.WriteSensorValues(device.DeviceId, sensor.PortId, sensor.Address, source.Values.ToDictionary(svp => svp.UtcDate, svp => svp.Value));
 
 // Serial data writting
                 var priorTime = DateTime.MinValue;
