@@ -1656,7 +1656,7 @@
             Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter"/>
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
+        <member name="F:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
             <summary>
             Gets or sets the value of time window period in milliseconds.
             </summary>
@@ -3259,8 +3259,13 @@
         </member>
         <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.GetEventManagerServices(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
-            Возвращает множество кортежей вида: (SubSystem, ServiceContract, ApiKey)
+            Возвращает множество кортежей вида: (SubSystem, ServiceContract, ApiKey) подсистем которые могут отправлять или принимать сообщения
             </summary>
+            <param name="eventName">Идентификатор сообщения</param>
+            <param name="incoming"><c>true</c> - возвратить список подсистем, которые могут принимать данное сообщение. <c>false</c> - возвратить список подсистем, которые могут отправлять данное сообщение.</param>
+            <param name="readEvents"><c>true</c> - получаем список подсистем , которые могут отправлять данное сообщение для подписки на это сообщение. Применимо только для приложений и при <paramref name="incoming"/> == <c>false</c>.</param>
+            <param name="apiKey">ApiKey</param>
+            <returns></returns>
         </member>
         <member name="M:TotalApi.Core.Events.TotalApiEventManagerBase.DoRecreateSubscriptionService(System.Tuple{TotalApi.Billing.SubSystem,TotalApi.Core.ServiceContracts.Events.IEventManagerService,System.String})">
             <summary>
@@ -4762,6 +4767,12 @@
             <param name="id">Entity identifier.</param>
             <returns></returns>
         </member>
+        <member name="M:TotalApi.Core.IDbDataContext.Truncate``1">
+            <summary>
+            Truncate (remove all) database set.
+            </summary>
+            <typeparam name="TEntityObject">The type of the entity object.</typeparam>
+        </member>
         <member name="T:TotalApi.Core.IDbDataContextAsync">
             <summary>
             Database data context interface for asynchronous operations.
@@ -4817,6 +4828,12 @@
             <param name="id">The identifier.</param>
             <param name="cancellationToken">The cancellation token.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.IDbDataContextAsync.TruncateAsync``1(System.Threading.CancellationToken)">
+            <summary>
+            Truncate (remove all) database set asynchronously.
+            </summary>
+            <typeparam name="TEntityObject">The type of the entity object.</typeparam>
         </member>
         <member name="T:TotalApi.Core.IDbUntypedDataContext">
             <summary>
@@ -4978,6 +4995,12 @@
             <typeparam name="TEntityObjectId">The type of the entity object.</typeparam>
             <param name="id">Entity identifier.</param>
             <returns></returns>
+        </member>
+        <member name="M:TotalApi.Core.ProxyDbDataContext.Truncate``1">
+            <summary>
+            Truncate (remove all) database set.
+            </summary>
+            <typeparam name="TEntityObject">The type of the entity object.</typeparam>
         </member>
         <member name="T:TotalApi.Core.Debug.DebugConsoleKeyHandler">
             <summary>
@@ -6535,11 +6558,12 @@
             <param name="eventName"></param>
             <returns></returns>
         </member>
-        <member name="M:TotalApi.Billing.SubSystem.IsOutgoingEventAllowed(System.String)">
+        <member name="M:TotalApi.Billing.SubSystem.IsOutgoingEventAllowed(System.String,System.Boolean)">
             <summary>
             Returns <c>true</c> if the event allowed as an outgoing event.
             </summary>
-            <param name="eventName"></param>
+            <param name="eventName">Идентификатор сообщения</param>
+            <param name="readEvents"><c>true</c> - получаем список подсистем , которые могут отправлять данное сообщение для подписки на это сообщение. Применимо только для приложений.</param>
             <returns></returns>
         </member>
         <member name="T:TotalApi.Billing.SubSystemConfigParams">

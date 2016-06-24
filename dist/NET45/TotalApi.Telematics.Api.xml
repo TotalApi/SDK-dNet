@@ -1479,16 +1479,25 @@
             UTC Date (date of the server) of the last connection session with device.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.SensorStatus.IsReceived">
+        <member name="P:TotalApi.Telematics.SensorStatus.FromCurrentSubSystem">
             <summary>
-            This flag sets by telematics module during retrieving device status on event (from another telematics module).
-            This happens during caches synchronization. In this case, the status would not be rebroadcasted by state monitor.
+            This flag sets by telematics module during set device status.
+            The flag was not send from source telematics module to anothe ones.
+            It helps OnSensorStatusChanged event hadler to ignore events raised by the own telematics module and handle the events from another ones.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.SensorStatus.LastStates">
             <summary>
             Last sensor state.
             </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.SensorStatus.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
         </member>
         <member name="T:TotalApi.Telematics.SensorStatusExtension">
             <summary>
@@ -1526,10 +1535,11 @@
             Last device state.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.DeviceStatus.IsReceived">
+        <member name="P:TotalApi.Telematics.DeviceStatus.FromCurrentSubSystem">
             <summary>
-            This flag sets by telematics module during retrieving device status on event (from another telematics module).
-            This happens during caches synchronization. In this case, the status would not be rebroadcasted by state monitor.
+            This flag sets by telematics module during set device status.
+            The flag was not send from source telematics module to anothe ones.
+            It helps OnSensorStatusChanged event hadler to ignore events raised by the own telematics module and handle the events from another ones.
             </summary>
         </member>
         <member name="T:TotalApi.Telematics.DeviceStatusExtension">
@@ -2118,6 +2128,14 @@
             <param name="apiKey">The API key.</param>
             <param name="userId">The user identifier.</param>
         </member>
+        <member name="M:TotalApi.Telematics.Events.ITelematicEvents.OnDeviceStateChanged(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Called when device state changed.
+            </summary>
+            <param name="deviceStatus">The device status.</param>
+            <param name="apiKey">The API key.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
         <member name="M:TotalApi.Telematics.Events.ITelematicEvents.OnSensorStatusChanged(TotalApi.Telematics.SensorStatus,System.String,System.String)">
             <summary>
             Called when sensor status changed.
@@ -2126,9 +2144,47 @@
             <param name="apiKey">The API key.</param>
             <param name="userId">The user identifier.</param>
         </member>
+        <member name="M:TotalApi.Telematics.Events.ITelematicEvents.OnSensorStateChanged(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Called when sensor state changed.
+            </summary>
+            <param name="sensorStatus">The sensor status.</param>
+            <param name="apiKey">The API key.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="T:TotalApi.Telematics.Events.OnDeviceStateChanged">
+            <summary>
+            Notification about a device state changing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnDeviceStateChanged.#ctor(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Contructor implementation.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnDeviceStateChanged.Post(TotalApi.Telematics.DeviceStatus,System.String,System.String)">
+            <summary>
+            Posts the event.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.Events.OnSensorStateChanged">
+            <summary>
+            Notification about a sensor state changing.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStateChanged.#ctor(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Contructor implementation.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStateChanged.Post(TotalApi.Telematics.SensorStatus,System.String,System.String)">
+            <summary>
+            Posts the event.
+            </summary>
+        </member>
         <member name="T:TotalApi.Telematics.Events.OnSensorStatusChanged">
             <summary>
-            Notification about a device status changing.
+            Notification about a sensor state changing.
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.Events.OnSensorStatusChanged.SensorStatus">
@@ -2150,6 +2206,14 @@
             <summary>
             Gets event hash to determinate that the events are equal.
             </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.Events.OnSensorStatusChanged.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
         </member>
         <member name="T:TotalApi.Telematics.Events.OnDeviceStatusChanged">
             <summary>
@@ -2845,62 +2909,67 @@
             <param name="sensorType">Sensor type. Can be null if the pipeline applied to all sensors.</param>
             <param name="sensorNumber">Sensor number. Can be null if the pipeline applied to all sensors of sensor type.</param>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ListenerTcpPort">
+        <member name="T:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings">
+            <summary>
+            Параметры TotalApi TCP хаба
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.ListenerTcpPort">
             <summary>
             Tcp порт, который будет слушать принимальщик координат
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ListenerConcurrencyLevel">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.ListenerConcurrencyLevel">
             <summary>
             Количество потоков, одновременно обрабатывающих запросы.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.InternalTcpServers">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.InternalTcpServers">
             <summary>
             Список адресов телематических серверов TotalApi на которые следует отправлять данные по TCP-протоколу. 
             </summary>
         </member>
-        <member name="F:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.TcpServers">
+        <member name="F:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.TcpServers">
             <summary>
             Список адресов телематических серверов TotalApi на которые следует слать координаты по TCP-протоколу. 
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.QueueLevel">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.QueueLevel">
             <summary>
             Размер очереди отправки данных. 
             Все приходящие координаты и данные сенсоров попадают в LIFO-очередь (одна для координат, другая для сенсоров) из которой и идёт отправка в TotalApi. 
             Первыми отправляются данные, пришедшие последними. Если очередь переполняется, то более старые данные будут потеряны.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.ConcurrencyLevel">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.ConcurrencyLevel">
             <summary>
             Количество потоков отправки данных в TotalApi, разгребающих очередь. 
             Создаётся две очереди (одна для координат, другая для сенсоров), так что фактически потоков будет в два раза больше.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.WaitForConfirmation">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.WaitForConfirmation">
             <summary>
             Следует ли ждать подтверждающего ответа от сервера TotalApi об окончании записи данных. 
             (Применимо только для TCP-передачи)
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.SendSensorData">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.SendSensorData">
             <summary>
             Следует ли отправлять данные сенсоров.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.LogFilePath">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.LogFilePath">
             <summary>
             Путь к файлу дополнительного протокола передачи данных.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.LogDevices">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.LogDevices">
             <summary>
             Список идентификаторов устройств, требующих протоколирования в отдельный файл.
             Можно указать * для всех устройств.
             </summary>
         </member>
-        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpSenderSettings.CanSendData">
+        <member name="P:TotalApi.Telematics.FastNativeSenderReceiver.TcpHubSettings.CanSendData">
             <summary>
             Есть ли передачи по TCP-протоколу.
             </summary>
