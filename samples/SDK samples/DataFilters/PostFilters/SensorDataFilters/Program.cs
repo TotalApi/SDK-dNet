@@ -41,7 +41,6 @@ namespace DataFilters
 
                 // Get sensor values without filters
                 var sensorValues = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
-            
 
                 // Get sensor value with pipeline of two filters
                 sensorValuesParams.Filters = new object[]
@@ -53,16 +52,13 @@ namespace DataFilters
                 };
                 var sensorValuesWithPersonalPipeline = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
             
-
                 // Use custom filter by name after saving to cloud
                 sensorValuesParams.Filters = new object[] { medianFilter };
                 var sensorValuesWithPipelineCustom = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
 
-
                 // Use custom filter by name after saving to cloud
                 sensorValuesParams.Filters = new object[] { pipelineName };
                 var sensorValuesWithSavedCustimpipeline = TelematicsApi.Telematics.ReadSensorValues(sensorValuesParams);
-
 
                 Console.WriteLine($"Count output values: {sensorValues.Values.Count}");
                 Console.WriteLine($"Count output values after perosnal filter: {sensorValuesWithPersonalPipeline.Values.Count}");

@@ -91,9 +91,9 @@ namespace SensorDataPreFilter
                 var source = DataSourceEmulation.LoadSensorValues("noisy", true, sensorType, sensorNumber);
                 Console.WriteLine("Writting values");
 
-// Writting all the data by a single block
+                // Writting all the data by a single block
 
-// Serial data writting
+                // Serial data writting
                 var priorTime = DateTime.MinValue;
                 foreach (var sensorValuePoint in source.Values)
                 {
