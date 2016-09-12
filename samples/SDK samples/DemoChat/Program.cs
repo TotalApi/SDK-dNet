@@ -77,6 +77,7 @@ namespace DemoChat
             catch (Exception e)
             {
                 ColorConsole.Do(ConsoleColor.Red, ()=> Console.WriteLine(e.FullMessage()));
+                Console.ReadKey();
             }
         }
     }
