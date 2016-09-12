@@ -1,11 +1,8 @@
 ﻿using System;
-using System.ServiceModel;
 using TotalApi.Billing;
 using TotalApi.Core;
 using TotalApi.Core.Api;
 using TotalApi.Core.Authentication;
-using TotalApi.Core.Events;
-using TotalApi.Core.Exceptions;
 using TotalApi.Utils.Console;
 using TotalApi.Utils.ErrorManager;
 
@@ -45,8 +42,6 @@ namespace DemoChat
                         // If auth is invalid exception will be thrown
                         isExists = CoreApi.ApiUsers.IsExists(userLogin);
 
-//                        TotalApiEventManagerBase.Instance.UpdateApplicationSubscriptions(true);
-
                         // Initialize subscriber.
                         // If auth is invalid - exception will NOT be thrown
                         CoreApi.EventManager.Subscribe(Subscriber.Instance);
@@ -77,6 +72,7 @@ namespace DemoChat
             catch (Exception e)
             {
                 ColorConsole.Do(ConsoleColor.Red, ()=> Console.WriteLine(e.FullMessage()));
+                Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
             }
         }
