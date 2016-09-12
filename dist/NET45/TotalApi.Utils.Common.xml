@@ -19,6 +19,624 @@
             Object properties.
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.ClientServer.ServerBase.Listen(System.Int32,System.String,System.Int32)">
+            <summary>
+            Starts listening the data on the specified port and address.
+            </summary>
+            <param name="port">Tcp server port.</param>
+            <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
+            <param name="concurrencyLevel">Количество потоков, одновременно обрабатывающих запросы. Если обработчик HandleRequestAsync реально асинхронный - рекомендуется установить в единицую.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.ServerBase.Stop">
+            <summary>
+            Stops the listening the data.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient">
+            <summary>
+            Implements client for <see cref="T:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Host">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> host.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Port">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> port.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Client">
+            <summary>
+            Establish connection and gets <see cref="T:System.Net.Sockets.TcpClient"/>. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Implementation of the class constructor.
+            </summary>
+            <param name="host"><see cref="T:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase"/> host.</param>
+            <param name="port"><see cref="T:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase"/> port.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Disconnect">
+            <summary>
+            Disconnects client. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.NotifyAsync``1(``0)">
+            <summary>
+            Sends data to the server without result.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpClient.Notify``1(``0)">
+            <summary>
+            Sends data to the server without result.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase">
+            <summary>
+            Implements async TCP server with keep alive sessions.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.Server">
+            <summary>
+            Gets the instance of the <see cref="T:System.Net.Sockets.UdpClient"/> assotiated with the current <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/>.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRawRequestAsync">
+            <summary>
+            Gets or sets handler of the raw request.
+            If this hander is set none of the others handles won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRequestAsync">
+            <summary>
+            Gets or sets async handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRawRequestAsync"/> is set.
+            If this hander is set <see cref="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRequest"/> handler won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRequest">
+            <summary>
+            Gets or sets handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRawRequestAsync"/> or <see cref="F:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.OnHandleRequestAsync"/> are set.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.Listen(System.Int32,System.String,System.Int32)">
+            <summary>
+            Starts listening the data on the specified port and address.
+            </summary>
+            <param name="port">Tcp server port.</param>
+            <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
+            <param name="concurrencyLevel">Количество потоков, одновременно обрабатывающих запросы. Если обработчик HandleRequestAsync реально асинхронный - рекомендуется установить в единицую.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.Stop">
+            <summary>
+            Stops the listening the data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.AsyncUdpServerBase.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Udp.UdpClientContext">
+            <summary>
+            Impements context of the client connection to TcpServer.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.UdpClientContext.#ctor(TotalApi.Utils.ClientServer.ClientServerBase,System.Net.Sockets.UdpClient)">
+            <summary>
+            Object contructor.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.Client">
+            <summary>
+            Gets the <see cref="T:System.Net.Sockets.TcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.Data">
+            <summary>
+            Gets an array of bytes readed from <see cref="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.Client"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.DataSize">
+            <summary>
+            Gets count of bytes readed from <see cref="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.Client"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.LastAccessTime">
+            <summary>
+            Gets or sets the last access time to this context.
+            This value is used for determine whether the connection should be closed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.UdpClientContext.UpdateAccessTime">
+            <summary>
+            Updates the <see cref="P:TotalApi.Utils.ClientServer.Udp.UdpClientContext.LastAccessTime"/> with current time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Udp.UdpClientContext.Close">
+            <summary>
+            Closes the context connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Tcp.TcpClientContext">
+            <summary>
+            Impements context of the client connection to TcpServer.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.#ctor(TotalApi.Utils.ClientServer.ClientServerBase,System.Net.Sockets.TcpClient)">
+            <summary>
+            Object contructor.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Client">
+            <summary>
+            Gets the <see cref="T:System.Net.Sockets.TcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Stream">
+            <summary>
+            Gets the <see cref="T:System.Net.Sockets.NetworkStream"/> of the <see cref="T:System.Net.Sockets.TcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Data">
+            <summary>
+            Gets an array of bytes readed from <see cref="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Stream"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.DataSize">
+            <summary>
+            Gets count of bytes readed from <see cref="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Stream"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.LastAccessTime">
+            <summary>
+            Gets or sets the last access time to this context.
+            This value is used for determine whether the connection should be closed.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.UpdateAccessTime">
+            <summary>
+            Updates the <see cref="P:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.LastAccessTime"/> with current time.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.TcpClientContext.Close">
+            <summary>
+            Closes the context connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Tcp.BufferContext">
+            <summary>
+            Impements the internal class of the buffer context.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.BufferContext.PreBuffer">
+            <summary>
+            Gets or set the pre-buffer.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.BufferContext.Buffer">
+            <summary>
+            Gets or sets the main buffer.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.BufferContext.#ctor(System.Func{System.Byte[]},System.Action{System.Byte[]},System.Byte[])">
+            <summary>
+            Implements the object constructor.
+            </summary>
+            <param name="getBuffer">Delegate to get custom buffer.</param>
+            <param name="setBuffer">Delegate to set custom buffer.</param>
+            <param name="preBuffer">Custom pre-buffer.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.BufferContext.#ctor(System.Byte[])">
+            <summary>
+            Implements the object constructor.
+            </summary>
+            <param name="preBuffer">Custom pre-buffer.</param>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient">
+            <summary>
+            Implements client for <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.Host">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> host.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.Port">
+            <summary>
+            Gets the <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> port.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.Client">
+            <summary>
+            Establish connection and gets <see cref="T:System.Net.Sockets.TcpClient"/>. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Implementation of the class constructor.
+            </summary>
+            <param name="host"><see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> host.</param>
+            <param name="port"><see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/> port.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.Disconnect">
+            <summary>
+            Disconnects client. 
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.ExecuteAsync``2(``1)">
+            <summary>
+            Sends data of the specified type to the server and gets result of the specified type.
+            You can't call the method while result is not received.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <typeparam name="TResult">Result type.</typeparam>
+            <typeparam name="TParameter">Parameter type.</typeparam>
+            <param name="data">Sending data.</param>
+            <returns>Result data.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.ExecuteAsync(System.Object)">
+            <summary>
+            Sends untyped data to the server and gets untyped result.
+            You can't call the method while result is not received.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+            <returns>Result data.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpClient.NotifyAsync``1(``0)">
+            <summary>
+            Sends data to the server without result.
+            WARNING!!! This method is not thread safe.
+            </summary>
+            <param name="data">Sending data.</param>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase">
+            <summary>
+            Implements async TCP server with keep alive sessions.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.Server">
+            <summary>
+            Gets the instance of the <see cref="T:System.Net.Sockets.TcpListener"/> assotiated with the current <see cref="T:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase"/>.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRawRequestAsync">
+            <summary>
+            Gets or sets handler of the raw request.
+            If this hander is set none of the others handles won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRequestAsync">
+            <summary>
+            Gets or sets async handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRawRequestAsync"/> is set.
+            If this hander is set <see cref="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRequest"/> handler won't be called.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRequest">
+            <summary>
+            Gets or sets handler of the request of the untyped data.
+            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
+            and has to return a result which will be written to the stream.
+            This handler is ignored if <see cref="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRawRequestAsync"/> or <see cref="F:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.OnHandleRequestAsync"/> are set.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.Listen(System.Int32,System.String,System.Int32)">
+            <summary>
+            Starts listening the data on the specified port and address.
+            </summary>
+            <param name="port">Tcp server port.</param>
+            <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
+            <param name="concurrencyLevel">Количество потоков, одновременно обрабатывающих запросы. Если обработчик HandleRequestAsync реально асинхронный - рекомендуется установить в единицую.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.Stop">
+            <summary>
+            Stops the listening the data.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.AsyncTcpServerBase.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension">
+            <summary>
+            Implements NetworkStream utilities.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.ReadBytesAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Async reads data from <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="buffer">Target buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to write data.</param>
+            <param name="count">Count of the bytes to read.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.ClientServer.Tcp.BufferContext,System.Threading.CancellationToken)">
+            <summary>
+            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="context">Buffer context.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.ClientServer.Tcp.BufferContext)">
+            <summary>
+            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            If connection is closed returns <c>0</c>0.
+            </summary>
+            <param name="stream">Source stream.</param>
+            <param name="context">Buffer context.</param>
+            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
+            <param name="count">Count of the writting bytes.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
+            <param name="count">Count of the writting bytes.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32)">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+            <param name="count">Count of the writting bytes.</param>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.Tcp.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[])">
+            <summary>
+            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
+            The packet has predefined format:
+            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
+            </summary>
+            <param name="stream">Target stream.</param>
+            <param name="buffer">Source buffer.</param>
+        </member>
+        <member name="T:TotalApi.Utils.ClientServer.ClientServerBase">
+            <summary>
+            Implements Tcp client and server with keep alive session and asyncronous reads/writes.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.ClientServerBase.PreBufferSize">
+            <summary>
+            Gets or sets the buffer to read packet prefix. 
+            If the packet is not too big it can be readed in the pre-buffer and makes reading faster.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.ClientServer.ClientServerBase.KeepAliveConnectionTime">
+            <summary>
+            Gets or sets the keep alive time period. 
+            If client or server connection is waiting longer then tin value it will be closed.
+            Default value is 1 minute.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.ClientServerBase.OnLog">
+            <summary>
+            Gets or sets a delegate to write log messages.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.ClientServerBase.OnToBytes">
+            <summary>
+            Gets or sets custom method to serialize object to byte array. 
+            If not set - binary serialization will be used.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ClientServer.ClientServerBase.OnFromBytes">
+            <summary>
+            Gets or sets custom method to deserialize object from byte array. 
+            The second paraameter set the data size.
+            If not set - binary deserialization will be used.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.ClientServerBase.Dispose">
+            <summary>
+            Dispose connection.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.ClientServerBase.ToBytes``1(``0)">
+            <summary>
+            Serialize a value to byte array.
+            </summary>
+            <typeparam name="T">Value type</typeparam>
+            <param name="value">Value</param>
+            <returns>Byte array passed to network stream.</returns>
+        </member>
+        <member name="M:TotalApi.Utils.ClientServer.ClientServerBase.FromBytes``1(System.Byte[],System.Int32)">
+            <summary>
+            Deserialize a byte array to value.
+            </summary>
+            <typeparam name="T">Value type</typeparam>
+            <param name="bytes">Source byte array</param>
+            <param name="count">Count of bytes in the array to process.</param>
+        </member>
+        <member name="T:TotalApi.Utils.Concurrent.GroupedQueueManagerBase`1">
+            <summary>
+            Имплементирует группу очередей.
+            Объекты с одинаковым хэшем ставяться в свою очередь c заданным <see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.ConcurrencyLevel"/>.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.GroupedQueueManagerBase`1.#ctor(System.Int32,System.Int32,System.Nullable{System.Int32},System.Boolean,System.String)">
+            <summary>
+            Конструктор по умолчанию.
+            </summary>
+            <param name="subQueuesPoolSize">Размер пула очередей из которого будут выбираться свободные очереди для постановки запроса в очередь.</param>
+            <param name="subQueueConcurrencyLevel"><see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.ConcurrencyLevel"/> рабочих очередей.</param>
+            <param name="subQueueLevel"><see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.Level"/> рабочих очередей.</param>
+            <param name="subQueueUseStack">Стратегия выбора данных из рабочих очередей.</param>
+            <param name="threadName">Название потока очереди</param>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.GroupedQueueManagerBase`1.GetHash(`0)">
+            <summary>
+            Возвращает хэш данного элемента очереди.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.GroupedQueueManagerBase`1.ProcessData(`0)">
+            <summary>
+            Обрабатывает элемент очереди.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.GroupedQueueManager`1.GetHash(`0)">
+            <summary>
+            Возвращает хэш данного элемента очереди.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.GroupedQueueManager`1.ProcessData(`0)">
+            <summary>
+            Обрабатывает элемент очереди.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.IQueueManager.UserData">
+            <summary>
+            Any user specified data
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.IQueueManager.Delay">
+            <summary>
+            Gets or sets the delay between handling of the queue items in one thread.
+            <c>null</c> value - no delay.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.IQueueManager.Level">
+            <summary>
+            Gets or sets the maximum queue size.<para></para>
+              <c>null</c> - No limit for queue size.<para></para>
+              <c>0</c> - No queue. All extra queue items will be waited to add to queue.<para></para>
+              <c>Positive value</c> - If the queue is full all extra queue items will be waited to add to queue.<para></para>
+              <c>Negative value</c> - If the queue is full the first queue item in queue will be skipped and extra queue item will be added to the end of the queue.
+            <remarks>
+            Changing this value doesn't affect to the current quantity of the queue items.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.IQueueManager.Name">
+            <summary>
+            Gets the queue name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.IQueueManager.ConcurrencyLevel">
+            <summary>
+            Количество потоков, одновременно обрабатывающих поступающие в очередь элементы.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.Concurrent.ConcurrentHashSet`1">
+            <summary>
+            Implementation of the thread-safe hash set.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Utils.Concurrent.ConcurrentWeakedHashSet`1">
+            <summary>
+            Implementation of the thread-safe has set of the weaked referenced objects.
+            Added objects are stored in the set, but allow to be killed by the garbage collector.
+            If the referece was killed its reference in the set would be removed.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.UserData">
+            <summary>
+            Any user specified data
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.Delay">
+            <summary>
+            Gets or sets the delay between handling of the queue items in one thread.
+            <c>null</c> value - no delay.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.Level">
+            <summary>
+            Gets or sets the maximum queue size.<para></para>
+              <c>null</c> - No limit for queue size.<para></para>
+              <c>0</c> - No queue. All extra queue items will be waited to add to queue.<para></para>
+              <c>Positive value</c> - If the queue is full all extra queue items will be waited to add to queue.<para></para>
+              <c>Negative value</c> - If the queue is full the first queue item in queue will be skipped and extra queue item will be added to the end of the queue.
+            <remarks>
+            Changing this value doesn't affect to the current quantity of the queue items.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.Name">
+            <summary>
+            Gets the queue name.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.ConcurrencyLevel">
+            <summary>
+            Количество потоков, одновременно обрабатывающих поступающие в очередь элементы.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.QueueManager`1.#ctor(System.Int32,System.Boolean,System.String)">
+            <summary>
+            Creates a queue with its async handler with specified <paramref name="concurrencyLevel"/> and <see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.Level"/>.
+            </summary>
+            <param name="concurrencyLevel">Sets the maximum quantity of the simultaneously executing handlers.</param>
+            <param name="useStack">If <c>true</c> new queue item will be set to stack instead of the queue.</param>
+            <param name="threadName">The name to use for each of the handler threads.</param>
+        </member>
+        <member name="M:TotalApi.Utils.Concurrent.QueueManager`1.#ctor(System.Action{`0},System.Int32,System.Boolean,System.String)">
+            <summary>
+            Creates a queue with its async handler with specified <paramref name="concurrencyLevel"/> and <see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.Level"/>.
+            </summary>
+            <param name="queueHandler">The handler action of the queue item.</param>
+            <param name="concurrencyLevel">Sets the maximum quantity of the simultaneously executing handlers.</param>
+            <param name="useStack">If <c>true</c> new queue item will be set to stack instead of the queue.</param>
+            <param name="threadName">The name to use for each of the handler threads.</param>
+        </member>
         <member name="T:TotalApi.Utils.DebugConsoleKeyHandler">
             <summary>
             Handler for keyboard keys.
@@ -618,6 +1236,11 @@
         <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.CreateDirectory(System.String,System.Boolean)">
             <summary>
             Creates directory if it doesn't exist. Returns short name of the directory and set access right if <paramref name="setAllUsersAccess"/> set to true.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ClearDirectory(System.String)">
+            <summary>
+            Removes all the files and directories in the <paramref name="folder"/>.
             </summary>
         </member>
         <member name="M:TotalApi.Utils.Extensions.FileSystemExtension.ReadAllBytes(System.String)">
@@ -2805,53 +3428,6 @@
             List of the files in command line
             </summary>
         </member>
-        <member name="T:TotalApi.Utils.Concurrent.ConcurrentHashSet`1">
-            <summary>
-            Implementation of the thread-safe hash set.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Utils.Concurrent.ConcurrentWeakedHashSet`1">
-            <summary>
-            Implementation of the thread-safe has set of the weaked referenced objects.
-            Added objects are stored in the set, but allow to be killed by the garbage collector.
-            If the referece was killed its reference in the set would be removed.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.Delay">
-            <summary>
-            Gets or sets the delay between handling of the queue items in one thread.
-            <c>null</c> value - no delay.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.Concurrent.QueueManager`1.Level">
-            <summary>
-            Gets or sets the maximum queue size.<para></para>
-              <c>null</c> - No limit for queue size.<para></para>
-              <c>0</c> - No queue. All extra queue items will be ignored.<para></para>
-              <c>Positive value</c> - If the queue is full all extra queue items will be ignored.<para></para>
-              <c>Negative value</c> - If the queue is full the first queue item in queue will be skipped and extra queue item will be added to the end of the queue.
-            <remarks>
-            Changing this value doesn't affect to the current quantity of the queue items.
-            </remarks>
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.Concurrent.QueueManager`1.#ctor(System.Int32,System.Boolean,System.String)">
-            <summary>
-            Creates a queue with its async handler with specified <paramref name="concurrencyLevel"/> and <see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.Level"/>.
-            </summary>
-            <param name="concurrencyLevel">Sets the maximum quantity of the simultaneously executing handlers.</param>
-            <param name="useStack">If <c>true</c> new queue item will be set to stack instead of the queue.</param>
-            <param name="threadName">The name to use for each of the handler threads.</param>
-        </member>
-        <member name="M:TotalApi.Utils.Concurrent.QueueManager`1.#ctor(System.Action{`0},System.Int32,System.Boolean,System.String)">
-            <summary>
-            Creates a queue with its async handler with specified <paramref name="concurrencyLevel"/> and <see cref="P:TotalApi.Utils.Concurrent.QueueManager`1.Level"/>.
-            </summary>
-            <param name="queueHandler">The handler action of the queue item.</param>
-            <param name="concurrencyLevel">Sets the maximum quantity of the simultaneously executing handlers.</param>
-            <param name="useStack">If <c>true</c> new queue item will be set to stack instead of the queue.</param>
-            <param name="threadName">The name to use for each of the handler threads.</param>
-        </member>
         <member name="T:TotalApi.Utils.Console.ConsoleListener">
             <summary>
             Создаёт SynchronizationContext для консольного приложения и вызывает события-обработчики нажатых клавиш.
@@ -3118,7 +3694,7 @@
         <member name="M:TotalApi.Utils.EventManager.InternalPublish(System.Object,System.Security.Principal.IPrincipal)">
             <summary>
             Непосредственная доставка события подписчикам.
-            Вызывается <see cref="F:TotalApi.Utils.EventManager._eventRunner"/> после "накопительной задержки".
+            Вызывается <see cref="F:TotalApi.Utils.EventManager.EventRunner"/> после "накопительной задержки".
             Все события вызываются в отдельном потоке, но по одному за раз в порядке поступления.
             Это сделано, во-первых, для экономии ресурсов и, во-вторых, для обеспечения правильной 
             последовательности вызовов событий.
@@ -3418,6 +3994,16 @@
             т.е. вычисляется гипотенуза - 1й катет - расстойние между точками на сфере, 2й катет - возвышение первой точки над второй
             </summary>
         </member>
+        <member name="M:TotalApi.Utils.Spatials.GeoUtils.CalculateDistance(TotalApi.Utils.Spatials.ICoordinate,TotalApi.Utils.Spatials.ICoordinate,System.Boolean)">
+            <summary>
+            Возвращает расстояние между двумя точками на сфере в метрах (!!)
+            </summary>
+        </member>
+        <member name="M:TotalApi.Utils.Spatials.GeoUtils.CalculateTrackDistance(System.Collections.Generic.IEnumerable{TotalApi.Utils.Spatials.ICoordinate},System.Boolean)">
+            <summary>
+            Возвращает длину трека на сфере в метрах (!!)
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.Spatials.GeoUtils.CalculateDistanceDegrees(System.Double,System.Double,System.Double,System.Double)">
             <summary>
             Возвращает расстояние между двумя точками в метрах
@@ -3444,6 +4030,22 @@
             <param name="longitude">Долгота</param>
             <param name="bbox">4 значения, задающие квадрат bounding box'а</param>
             <returns></returns>
+        </member>
+        <member name="P:TotalApi.Utils.Spatials.ICoordinate.LatitudeDegree">
+            <summary>
+            Gets the latitude degree.
+            </summary>
+            <value>
+            The latitude degree.
+            </value>
+        </member>
+        <member name="P:TotalApi.Utils.Spatials.ICoordinate.LongitudeDegree">
+            <summary>
+            Gets the longitude degree.
+            </summary>
+            <value>
+            The longitude degree.
+            </value>
         </member>
         <member name="T:TotalApi.Utils.IniFile">
             <summary>
@@ -3969,6 +4571,12 @@
             Implementation of the task scheduler with specified <c>ConcurrencyLevel</c> and <c>QueueLevel</c> and an ability to cancel active and queued tasks.
             </summary>
         </member>
+        <member name="P:TotalApi.Utils.Tasks.TaskSchedulerEx.Delay">
+            <summary>
+            Gets or sets the delay between handling of the queue items in one thread.
+            <c>null</c> value - no delay.
+            </summary>
+        </member>
         <member name="P:TotalApi.Utils.Tasks.TaskSchedulerEx.IsCompleted">
             <summary>
             Gets whether the sheduler hasn't got active tasks and is empty.
@@ -4324,6 +4932,31 @@
             Gets whether an exception is abort action.
             </summary>
         </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Info">
+            <summary>
+            Info message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Warning">
+            <summary>
+            Warning message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Error">
+            <summary>
+            Error message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Alarm">
+            <summary>
+            Alarm message.
+            </summary>
+        </member>
+        <member name="F:TotalApi.Utils.ErrorManager.MessageBoxIcon.Error">
+            <summary>
+            Error icon
+            </summary>
+        </member>
         <member name="M:TotalApi.Utils.ErrorManager.Messages.Error(System.String)">
             <summary>
             Default show an error
@@ -4347,26 +4980,6 @@
         <member name="M:TotalApi.Utils.ErrorManager.Messages.Abort(System.Exception,System.String)">
             <summary>
             Raises abort exception. 
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Error">
-            <summary>
-            Error message
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Warning">
-            <summary>
-            Warning message
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.ErrorManager.MessageType.Info">
-            <summary>
-            Info message
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.ErrorManager.MessageBoxIcon.Error">
-            <summary>
-            Error icon
             </summary>
         </member>
         <member name="T:TotalApi.Utils.FileStreamCreator">
@@ -4778,6 +5391,16 @@
             Gets the name of config. The app.config has name as empty string.
             </summary>
         </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig.IsMainConfig">
+            <summary>
+            Gets the flag whether the config file is main (app.json)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Utils.Params.JsonConfig.MainConfigPropertyName">
+            <summary>
+            Gets the config property name. Applies to nested object paraameters.
+            </summary>
+        </member>
         <member name="P:TotalApi.Utils.Params.JsonConfig.Value">
             <summary>
             Gets or sets the config value. The value can be either <see cref="T:System.Collections.Generic.Dictionary`2"/> for untyped config or typed otherwise.
@@ -4823,7 +5446,7 @@
             <param name="name"></param>
             <param name="config"></param>
         </member>
-        <member name="M:TotalApi.Utils.Params.JsonConfig`1.ProcessValues(System.Action{`0},System.String[])">
+        <member name="M:TotalApi.Utils.Params.JsonConfig`1.ProcessValues(System.Action{`0,System.Collections.Generic.IList{TotalApi.Utils.ChangedValue}},System.String[])">
             <summary>
             Calls the <paramref name="action"/> immediately and when any parameter 
             enumerated in <paramref name="paramNames"/> has been changed.
@@ -5063,338 +5686,6 @@
             <param name="s"></param>
             <param name="separator"></param>
             <returns></returns>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.TcpClientContext">
-            <summary>
-            Impements context of the client connection to TcpServer.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.#ctor(TotalApi.Utils.TcpClientServer.TcpClientServer,System.Net.Sockets.TcpClient)">
-            <summary>
-            Object contructor.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Client">
-            <summary>
-            Gets the <see cref="T:System.Net.Sockets.TcpClient"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream">
-            <summary>
-            Gets the <see cref="T:System.Net.Sockets.NetworkStream"/> of the <see cref="T:System.Net.Sockets.TcpClient"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Data">
-            <summary>
-            Gets an array of bytes readed from <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.DataSize">
-            <summary>
-            Gets count of bytes readed from <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientContext.LastAccessTime">
-            <summary>
-            Gets or sets the last access time to this context.
-            This value is used for determine whether the connection should be closed.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.UpdateAccessTime">
-            <summary>
-            Updates the <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.LastAccessTime"/> with current time.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientContext.Close">
-            <summary>
-            Closes the context connection.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.BufferContext">
-            <summary>
-            Impements the internal class of the buffer context.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.BufferContext.PreBuffer">
-            <summary>
-            Gets or set the pre-buffer.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.BufferContext.Buffer">
-            <summary>
-            Gets or sets the main buffer.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.BufferContext.#ctor(System.Func{System.Byte[]},System.Action{System.Byte[]},System.Byte[])">
-            <summary>
-            Implements the object constructor.
-            </summary>
-            <param name="getBuffer">Delegate to get custom buffer.</param>
-            <param name="setBuffer">Delegate to set custom buffer.</param>
-            <param name="preBuffer">Custom pre-buffer.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.BufferContext.#ctor(System.Byte[])">
-            <summary>
-            Implements the object constructor.
-            </summary>
-            <param name="preBuffer">Custom pre-buffer.</param>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.TcpClientServer">
-            <summary>
-            Implements Tcp client and server with keep alive session and asyncronous reads/writes.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientServer.PreBufferSize">
-            <summary>
-            Gets or sets the buffer to read packet prefix. 
-            If the packet is not too big it can be readed in the pre-buffer and makes reading faster.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.TcpClientServer.KeepAliveConnectionTime">
-            <summary>
-            Gets or sets the keep alive time period. 
-            If client or server connection is waiting longer then tin value it will be closed.
-            Default value is 1 minute.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnLog">
-            <summary>
-            Gets or sets a delegate to write log messages.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnToBytes">
-            <summary>
-            Gets or sets custom method to serialize object to byte array. 
-            If not set - binary serialization will be used.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.TcpClientServer.OnFromBytes">
-            <summary>
-            Gets or sets custom method to deserialize object from byte array. 
-            The second paraameter set the data size.
-            If not set - binary deserialization will be used.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.Dispose">
-            <summary>
-            Dispose connection.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.ToBytes``1(``0)">
-            <summary>
-            Serialize a value to byte array.
-            </summary>
-            <typeparam name="T">Value type</typeparam>
-            <param name="value">Value</param>
-            <returns>Byte array passed to network stream.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.TcpClientServer.FromBytes``1(System.Byte[],System.Int32)">
-            <summary>
-            Deserialize a byte array to value.
-            </summary>
-            <typeparam name="T">Value type</typeparam>
-            <param name="bytes">Source byte array</param>
-            <param name="count">Count of bytes in the array to process.</param>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.AsyncTcpClient">
-            <summary>
-            Implements client for <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpClient"/>.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Host">
-            <summary>
-            Gets the <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> host.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Port">
-            <summary>
-            Gets the <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> port.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Client">
-            <summary>
-            Establish connection and gets <see cref="T:System.Net.Sockets.TcpClient"/>. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.#ctor(System.String,System.Int32)">
-            <summary>
-            Implementation of the class constructor.
-            </summary>
-            <param name="host"><see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> host.</param>
-            <param name="port"><see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/> port.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Dispose">
-            <summary>
-            Dispose connection.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.Disconnect">
-            <summary>
-            Disconnects client. 
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.ExecuteAsync``2(``1)">
-            <summary>
-            Sends data of the specified type to the server and gets result of the specified type.
-            You can't call the method while result is not received.
-            WARNING!!! This method is not thread safe.
-            </summary>
-            <typeparam name="TResult">Result type.</typeparam>
-            <typeparam name="TParameter">Parameter type.</typeparam>
-            <param name="data">Sending data.</param>
-            <returns>Result data.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.ExecuteAsync(System.Object)">
-            <summary>
-            Sends untyped data to the server and gets untyped result.
-            You can't call the method while result is not received.
-            WARNING!!! This method is not thread safe.
-            </summary>
-            <param name="data">Sending data.</param>
-            <returns>Result data.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpClient.NotifyAsync``1(``0)">
-            <summary>
-            Sends data to the server without result.
-            WARNING!!! This method is not thread safe.
-            </summary>
-            <param name="data">Sending data.</param>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer">
-            <summary>
-            Implements async TCP server with keep alive sessions.
-            </summary>
-        </member>
-        <member name="P:TotalApi.Utils.TcpClientServer.AsyncTcpServer.TcpServer">
-            <summary>
-            Gets the instance of the <see cref="T:System.Net.Sockets.TcpListener"/> assotiated with the current <see cref="T:TotalApi.Utils.TcpClientServer.AsyncTcpServer"/>.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync">
-            <summary>
-            Gets or sets handler of the raw request.
-            The handler has handle readed from <see cref="T:System.Net.Sockets.NetworkStream"/> data
-            using <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Data"/> and write to the <see cref="P:TotalApi.Utils.TcpClientServer.TcpClientContext.Stream"/>
-            result using <see cref="!:TcpServerUtils.WritePacketAsync(System.IO.Stream,byte[])"/>.
-            If this hander is set none of the others handles won't be called.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequestAsync">
-            <summary>
-            Gets or sets async handler of the request of the untyped data.
-            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
-            and has to return a result which will be written to the stream.
-            This handler is ignored if <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync"/> is set.
-            If this hander is set <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequest"/> handler won't be called.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequest">
-            <summary>
-            Gets or sets handler of the request of the untyped data.
-            The handler gets the untyped data readed from <see cref="T:System.Net.Sockets.NetworkStream"/> 
-            and has to return a result which will be written to the stream.
-            This handler is ignored if <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRawRequestAsync"/> or <see cref="F:TotalApi.Utils.TcpClientServer.AsyncTcpServer.OnHandleRequestAsync"/> are set.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Listen(System.Int32,System.String,System.Int32)">
-            <summary>
-            Starts listening the data on the specified port and address.
-            </summary>
-            <param name="port">Tcp server port.</param>
-            <param name="address">Tcp server address. You can use `*` to start listening on all interfaces.</param>
-            <param name="concurrencyLevel">Количество потоков, одновременно обрабатывающих запросы. Если обработчик HandleRequestAsync реально асинхронный - рекомендуется установить в единицую.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Stop">
-            <summary>
-            Stops the listening the data.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.AsyncTcpServer.Dispose">
-            <summary>
-            Dispose connection.
-            </summary>
-        </member>
-        <member name="T:TotalApi.Utils.TcpClientServer.NetworkStreamExtension">
-            <summary>
-            Implements NetworkStream utilities.
-            </summary>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadBytesAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Async reads data from <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            If connection is closed returns <c>0</c>0.
-            </summary>
-            <param name="stream">Source stream.</param>
-            <param name="buffer">Target buffer.</param>
-            <param name="offset">Offset in the <paramref name="buffer"/> to write data.</param>
-            <param name="count">Count of the bytes to read.</param>
-            <param name="cancellationToken">The cancellation token to cancel operation.</param>
-            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.TcpClientServer.BufferContext,System.Threading.CancellationToken)">
-            <summary>
-            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            If connection is closed returns <c>0</c>0.
-            </summary>
-            <param name="stream">Source stream.</param>
-            <param name="context">Buffer context.</param>
-            <param name="cancellationToken">The cancellation token to cancel operation.</param>
-            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.ReadPacketAsync(System.Net.Sockets.NetworkStream,TotalApi.Utils.TcpClientServer.BufferContext)">
-            <summary>
-            Reads data packet from the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            If connection is closed returns <c>0</c>0.
-            </summary>
-            <param name="stream">Source stream.</param>
-            <param name="context">Buffer context.</param>
-            <returns>Count of readed bytes or <c>0</c> if connection is closed.</returns>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            </summary>
-            <param name="stream">Target stream.</param>
-            <param name="buffer">Source buffer.</param>
-            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
-            <param name="count">Count of the writting bytes.</param>
-            <param name="cancellationToken">The cancellation token to cancel operation.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            </summary>
-            <param name="stream">Target stream.</param>
-            <param name="buffer">Source buffer.</param>
-            <param name="offset">Offset in the <paramref name="buffer"/> to read data.</param>
-            <param name="count">Count of the writting bytes.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32)">
-            <summary>
-            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            </summary>
-            <param name="stream">Target stream.</param>
-            <param name="buffer">Source buffer.</param>
-            <param name="count">Count of the writting bytes.</param>
-        </member>
-        <member name="M:TotalApi.Utils.TcpClientServer.NetworkStreamExtension.WritePacketAsync(System.Net.Sockets.NetworkStream,System.Byte[])">
-            <summary>
-            Writess data packet to the <see cref="T:System.Net.Sockets.NetworkStream"/>.
-            The packet has predefined format:
-            { DataSizeCRC16(2 bytes) }{ DataSize(4 bytes) }{ Data (DataSize bytes)}
-            </summary>
-            <param name="stream">Target stream.</param>
-            <param name="buffer">Source buffer.</param>
         </member>
         <member name="P:TotalApi.Utils.TextExpressions.ExpressionToTextEventArgs.Data">
             <summary>

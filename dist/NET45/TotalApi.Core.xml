@@ -382,14 +382,16 @@
             Base abstract class for any custom loggers.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.BaseLogger.ConfigSectionName">
+        <member name="P:TotalApi.Core.Api.BaseLogger.OnSystemLogInstanceWrapper.CategoryName">
             <summary>
-            The name of the section with settings in <c>app.config</c> file.
+            Gets the name of the log category.
+            The logging parameters can setup each log category separately.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.BaseLogger.AsyncLogging">
+        <member name="P:TotalApi.Core.Api.BaseLogger.OnSystemLogInstanceWrapper.SourceName">
             <summary>
-            Gets or set whether log writing is asyncronous.
+            Gets the name of the log source.
+            The logging parameters can setup each log category separately.
             </summary>
         </member>
         <member name="T:TotalApi.Core.Api.BaseLogger.LogInstanceInfo">
@@ -417,6 +419,11 @@
             Gets the log category name.
             </summary>
         </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.SourceName">
+            <summary>
+            Gets the log source description.
+            </summary>
+        </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.LogInstanceInfo.Create(System.Object,System.Exception)">
             <summary>
             Creates the specified logger source <see cref="T:TotalApi.Core.Api.BaseLogger.LogInstanceInfo"/>.
@@ -430,9 +437,42 @@
             Object passed to logging methods as an source instance can implement this interface to extend logging information.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Api.BaseLogger.ILogInstance.CategoryName">
+        <member name="T:TotalApi.Core.Api.BaseLogger.ICategoryLogInstance">
+            <summary>
+            Object passed to logging methods as an source instance can implement this interface to extend logging information.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.ICategoryLogInstance.CategoryName">
             <summary>
             Gets the name of the log category.
+            The logging parameters can setup each log category separately.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.BaseLogger.ISourceLogInstance">
+            <summary>
+            Object passed to logging methods as an source instance can implement this interface to extend logging information.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.ISourceLogInstance.SourceName">
+            <summary>
+            Gets the name of the log source.
+            The logging parameters can setup each log category separately.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Core.Api.BaseLogger.ICategorySourceLogInstance">
+            <summary>
+            Object passed to logging methods as an source instance can implement this interface to extend logging information.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.LogInstance.CategoryName">
+            <summary>
+            Gets the name of the log category.
+            The logging parameters can setup each log category separately.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.BaseLogger.LogInstance.SourceName">
+            <summary>
+            Gets the name of the log source.
             The logging parameters can setup each log category separately.
             </summary>
         </member>
@@ -445,6 +485,12 @@
             <summary>
             Gets the category name of the source instance.
             Returns null if no category is specified.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.GetSourceName(System.Object)">
+            <summary>
+            Gets the source description of the source instance.
+            Returns null if no source is specified.
             </summary>
         </member>
         <member name="E:TotalApi.Core.Api.BaseLogger.OnLog">
@@ -550,6 +596,21 @@
             </summary>
             <param name="source">The source.</param>
             <param name="msg">Statistic message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.Alarm(System.String,System.Object[])">
+            <summary>
+            Logs an alarm message.
+            </summary>
+            <param name="msg">Alarm message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.BaseLogger.AlarmInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs an alarm message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Alarm message.</param>
             <param name="args">The message arguments.</param>
         </member>
         <member name="M:TotalApi.Core.Api.BaseLogger.EnqueueLog(System.String,TotalApi.Core.Api.LogMessageType,System.Object)">
@@ -939,6 +1000,127 @@
             <value>
             The files elements collection.
             </value>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.File">
+            <summary>
+            Имя файла протокола. Если полный путь не задан - он расширяется относительно каталога запуска программы.
+            Если указано имя <c>CON</c> - вывод будет вестись не в файл, а в консоль.
+            Поддерживаются макроподстановки, используемые в методе <see cref="M:TotalApi.Utils.Extensions.FileSystemExtension.ExpandPath(System.String,System.String)"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Level">
+            <summary>
+            Битовая маска, задающая уровень протоколирования.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Console">
+            <summary>
+            Дублировать вывод в файл с выводом в консоль.
+            Неприменимо, если установлен фильтр по категориям.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Append">
+            <summary>
+            Создавать файл протокола заново при старте программы или дописывать в существующий.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Persistent">
+            <summary>
+            Сохранять файл протокола при старте программы. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Игнорируется если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Append"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.SplitDays">
+            <summary>
+            Создавать новый файл протокола каждые <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.SplitDays"/> дня. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Если значение меньше или равно нулю - разбиения файла не происходит.
+            Если значение не задано, то оно равно <c>1</c> если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Append"/> или <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Persistent"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.SplitSizeMb">
+            <summary>
+            Создавать новый файл протокола когда его размер превышает <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.SplitSizeMb"/> мегабайт. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Если значение меньше или равно нулю - разбиения файла не происходит.
+            Если значение не задано, то оно равно <c>100</c> если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Append"/> или <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Persistent"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.IsDisabled">
+            <summary>
+            Gets or sets whether the current log file is disabled.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Categories">
+            <summary>
+            Перечень названий категорий, которые должны протоколироваться в этот файл.
+            Если категории не указаны - протоколируется всё.
+            Если перед названиями категорий стоит символ - (минус), то протоколируется всё кроме этих категорий. 
+            Фильтр по категориям дополняет фильтр по уровню протоколирования <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Level"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.LogFileSettings.Separator">
+            <summary>
+            Разделитель данных в протоколе.
+            Если не указан - используется глобальный разделитель <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Separator"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.AsyncLogging">
+            <summary>
+            <c>true</c> - все сообщения логгера попадают в очередь, которая обрабатывается одним отдельным потоком.
+            <c>false</c> - без очереди(может существенно замедлить работу программы).
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.File">
+            <summary>
+            Имя файла протокола. Если полный путь не задан - он расширяется относительно каталога запуска программы.
+            Если указано имя <c>CON</c> - вывод будет вестись не в файл, а в консоль.
+            Поддерживаются макроподстановки, используемые в методе <see cref="M:TotalApi.Utils.Extensions.FileSystemExtension.ExpandPath(System.String,System.String)"/>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.Level">
+            <summary>
+            Битовая маска, задающая уровень протоколирования.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.Console">
+            <summary>
+            Дублировать вывод в файл с выводом в консоль. В DEBUG сборке значение этого параметра по умолчанию равно true.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.Append">
+            <summary>
+            Создавать файл протокола заново при старте программы или дописывать в существующий.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.Persistent">
+            <summary>
+            Сохранять файл протокола при старте программы. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Игнорируется если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Append"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.SplitDays">
+            <summary>
+            Создавать новый файл протокола каждые <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.SplitDays"/> дня. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Если значение меньше или равно нулю - разбиения файла не происходит.
+            Если значение не задано, то оно равно <c>1</c> если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Append"/> или <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Persistent"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.SplitSizeMb">
+            <summary>
+            Создавать новый файл протокола когда его размер превышает <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.SplitSizeMb"/> мегабайт. 
+            Старый файл переименовывается в <c>{имя файла}.yy-MM-dd.{расширение}</c>. 
+            Если значение меньше или равно нулю - разбиения файла не происходит.
+            Если значение не задано, то оно равно <c>100</c> если <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Append"/> или <see cref="P:TotalApi.Core.Api.TotalApiLogSettings.Persistent"/> равно <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.Api.TotalApiLogSettings.Separator">
+            <summary>
+            Разделитель данных в протоколе по умолчанию.
+            </summary>
         </member>
         <member name="T:TotalApi.Core.Api.IRepositoryId`1">
             <summary>
@@ -1656,7 +1838,7 @@
             Base class for using <see cref="T:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter"/>
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
+        <member name="P:TotalApi.Core.Api.Statistics.RealtimeTotalApiStatisticsWriter.TimeWindowWidth">
             <summary>
             Gets or sets the value of time window period in milliseconds.
             </summary>
@@ -2019,6 +2201,21 @@
             </summary>
             <param name="changeAction">Action called with cloned object as a parameter.</param>
         </member>
+        <member name="M:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.Create(System.String,System.String,System.String)">
+            <summary>
+            Creates the statistics class.
+            </summary>
+            <param name="operationName">Operation name.</param>
+            <param name="methodName">Method name.</param>
+            <param name="moduleName">ModuleName name.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TotalApi.Core.Api.Statistics.ExecutionStatisticsData.CategoryName">
+            <summary>
+            Gets the name of the log category.
+            The logging parameters can setup each log category separately.
+            </summary>
+        </member>
         <member name="T:TotalApi.Core.Api.Statistics.ExecutionStatisticsHelper">
             <summary>
             
@@ -2350,9 +2547,14 @@
             Logging messages types.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.LogMessageType.Info">
+        <member name="F:TotalApi.Core.Api.LogMessageType.Alarm">
             <summary>
-            The informational message.
+            The alarm message
+            </summary>
+        </member>
+        <member name="F:TotalApi.Core.Api.LogMessageType.Error">
+            <summary>
+            The error message.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Api.LogMessageType.Warning">
@@ -2360,9 +2562,9 @@
             The warning message.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.Api.LogMessageType.Error">
+        <member name="F:TotalApi.Core.Api.LogMessageType.Info">
             <summary>
-            The error message.
+            The informational message.
             </summary>
         </member>
         <member name="F:TotalApi.Core.Api.LogMessageType.Debug">
@@ -2481,6 +2683,21 @@
             <param name="msg">Statistic message.</param>
             <param name="args">The message arguments.</param>
         </member>
+        <member name="M:TotalApi.Core.Api.ILogger.Alarm(System.String,System.Object[])">
+            <summary>
+            Logs an alarm message.
+            </summary>
+            <param name="msg">Alarm message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
+        <member name="M:TotalApi.Core.Api.ILogger.AlarmInstance(System.Object,System.String,System.Object[])">
+            <summary>
+            Logs an alarm message from the source.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="msg">Alarm message.</param>
+            <param name="args">The message arguments.</param>
+        </member>
         <member name="E:TotalApi.Core.Api.ILogger.OnLog">
             <summary>
             Logging event.
@@ -2502,6 +2719,11 @@
         <member name="M:TotalApi.Core.Api.TraceLogger.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TotalApi.Core.Api.TraceLogger"/> class.
+            </summary>
+        </member>
+        <member name="M:TotalApi.Core.Api.TraceLogger.FormatMessage(System.String,TotalApi.Core.Api.LogMessageType,TotalApi.Core.Api.BaseLogger.LogInstanceInfo,System.Boolean,System.String)">
+            <summary>
+            Formats the log message before its outputting to the log file.
             </summary>
         </member>
         <member name="M:TotalApi.Core.Api.TraceLogger.DoLog(System.String,TotalApi.Core.Api.LogMessageType,TotalApi.Core.Api.BaseLogger.LogInstanceInfo)">
@@ -2613,12 +2835,12 @@
             Defined on server side. Remote origin address info about connection.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.ToJson(System.Security.Principal.IIdentity)">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.ToJsonInfo(System.Security.Principal.IIdentity)">
             <summary>
             Converts current identity to json.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.FromJson(System.Security.Principal.IIdentity,System.String)">
+        <member name="M:TotalApi.Core.Authentication.TotalApiIdentity.FromJsonInfo(System.Security.Principal.IIdentity,System.String)">
             <summary>
             Deserializes identity from json.
             </summary>
@@ -2846,7 +3068,7 @@
             Gets the primary claims identity associated with this claims principal.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateFromJson(System.String)">
+        <member name="M:TotalApi.Core.Authentication.TotalApiPrincipal.CreateFromJsonInfo(System.String)">
             <summary>
             Creates the principal using json information.
             </summary>
@@ -3638,23 +3860,23 @@
             <param name="progress">The progress.</param>
             <param name="statusText">The status text.</param>
         </member>
-        <member name="T:TotalApi.Core.Events.OnSubSytemRegistered">
+        <member name="T:TotalApi.Core.Events.OnSubSystemRegistered">
             <summary>
             Event, fires by billing subsystem to all subscribers, indicating about new subsystem registration.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.Events.OnSubSytemRegistered.SubSystemId">
+        <member name="P:TotalApi.Core.Events.OnSubSystemRegistered.SubSystemId">
             <summary>
             Gets or sets the subsystem identifier.
             </summary>
         </member>
-        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.#ctor(System.String)">
+        <member name="M:TotalApi.Core.Events.OnSubSystemRegistered.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnSubSytemRegistered"/> class.
+            Initializes a new instance of the <see cref="T:TotalApi.Core.Events.OnSubSystemRegistered"/> class.
             </summary>
             <param name="subSystemId">The subsystem identifier.</param>
         </member>
-        <member name="M:TotalApi.Core.Events.OnSubSytemRegistered.Post(System.String)">
+        <member name="M:TotalApi.Core.Events.OnSubSystemRegistered.Post(System.String)">
             <summary>
             Publishes the event.
             </summary>
@@ -6346,7 +6568,7 @@
         </member>
         <member name="P:TotalApi.Billing.Application.RestrictionsJson">
             <summary>
-            Do not use this field to set restrictions of the subsytem. Use <see cref="P:TotalApi.Billing.Application.Restrictions"/> instead.
+            Do not use this field to set restrictions of the subsystem. Use <see cref="P:TotalApi.Billing.Application.Restrictions"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.Application.Restrictions">
@@ -6411,27 +6633,27 @@
         </member>
         <member name="P:TotalApi.Billing.SubSystem.RestrictionsJson">
             <summary>
-            Do not use this field to set restrictions of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.Restrictions"/> instead.
+            Do not use this field to set restrictions of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.Restrictions"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.IncomingEventsStr">
             <summary>
-            Do not use this field to set incoming events of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.IncomingEvents"/> instead.
+            Do not use this field to set incoming events of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.IncomingEvents"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.OutgoingEventsStr">
             <summary>
-            Do not use this field to set outgoing events of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.OutgoingEvents"/> instead.
+            Do not use this field to set outgoing events of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.OutgoingEvents"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.RepositoryClassesStr">
             <summary>
-            Do not use this field to set repository classes of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.RepositoryClasses"/> instead.
+            Do not use this field to set repository classes of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.RepositoryClasses"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.ServiceContractsStr">
             <summary>
-            Do not use this field to set service contracts of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.ServiceContracts"/> instead.
+            Do not use this field to set service contracts of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.ServiceContracts"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.Restrictions">
@@ -6472,7 +6694,7 @@
         </member>
         <member name="P:TotalApi.Billing.SubSystem.Applications">
             <summary>
-            Do not use this field to set the application list of the subsytem. Use <see cref="P:TotalApi.Billing.SubSystem.ApiKeys"/> instead.
+            Do not use this field to set the application list of the subsystem. Use <see cref="P:TotalApi.Billing.SubSystem.ApiKeys"/> instead.
             </summary>
         </member>
         <member name="P:TotalApi.Billing.SubSystem.IsHidden">
@@ -6553,17 +6775,17 @@
         </member>
         <member name="M:TotalApi.Billing.SubSystem.IsIncomingEventAllowed(System.String)">
             <summary>
-            Returns <c>true</c> if the event allowed as an incoming event.
+            Returns <c>true</c> if the event allowed as an incoming event of the current subsystem.
             </summary>
             <param name="eventName"></param>
             <returns></returns>
         </member>
         <member name="M:TotalApi.Billing.SubSystem.IsOutgoingEventAllowed(System.String,System.Boolean)">
             <summary>
-            Returns <c>true</c> if the event allowed as an outgoing event.
+            Returns <c>true</c> if the event allowed as an outgoing event of the current subsystem.
             </summary>
             <param name="eventName">Идентификатор сообщения</param>
-            <param name="readEvents"><c>true</c> - получаем список подсистем , которые могут отправлять данное сообщение для подписки на это сообщение. Применимо только для приложений.</param>
+            <param name="readEvents"><c>true</c> - получаем список подсистем, которые могут отправлять данное сообщение для подписки на это сообщение. Применимо только для приложений.</param>
             <returns></returns>
         </member>
         <member name="T:TotalApi.Billing.SubSystemConfigParams">
