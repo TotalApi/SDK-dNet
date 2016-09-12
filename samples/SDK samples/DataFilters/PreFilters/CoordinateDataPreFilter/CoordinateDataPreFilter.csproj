@@ -51,14 +51,40 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TotalApi.Billing.Client">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Billing.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Core">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.EventManager.Client">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.EventManager.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Telematics.Api">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Telematics.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Telematics.Client">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Telematics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Utils.Common">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Utils.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Utils.IoC">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Utils.IoC.dll</HintPath>
+    </Reference>
+    <Reference Include="TotalApi.Utils.Wcf">
+      <HintPath>..\..\..\..\..\dist\NET45\TotalApi.Utils.Wcf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoordinateSourceEmulation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="gpx\track1.gpx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
