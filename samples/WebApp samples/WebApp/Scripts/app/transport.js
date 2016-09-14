@@ -65,7 +65,7 @@
     };
 
     // loading and proccessing transports
-    $.get(TRANSPORTS_URL).success(function (transports) {
+    $.get(TRANSPORTS_URL).done(function (transports) {
         transports.forEach(function (t) {
             addToTable(t);
         });
