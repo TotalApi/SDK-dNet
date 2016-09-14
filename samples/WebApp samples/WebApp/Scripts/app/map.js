@@ -10,7 +10,7 @@
      * API URL constants
      */
     var TRANSPORTS_URL = '/api/transport/';
-    var TRACK_URL = 'totalapi/telematics/readcoordinates';
+    var TRACK_URL = '/totalapi/telematics/readcoordinates';
 
     /**
      * Creating and initialization the map on the "map" div
@@ -102,7 +102,7 @@
      */
     function drawTrack(data) {
         // no coordinates
-        if (!data.$values.length) {
+        if (!data.Points.length) {
             map.closePopup();
             alert('During this period coordinates is not found!');
             return;
@@ -115,12 +115,12 @@
         if (trackLayerGroup)
             map.removeLayer(trackLayerGroup);
 
-        trackLatlngs = data.$values.map(function (t) { return [t.Latitude * 180 / Math.PI, t.Longitude * 180 / Math.PI] });
+        trackLatlngs = data.Points.map(function (t) { return [t.Latitude * 180 / Math.PI, t.Longitude * 180 / Math.PI] });
         // creating track
         var track = L.polyline(trackLatlngs, { color: 'green' });
         trackLayers.push(track);
 
-        data.$values.forEach(function (t) {
+        data.Points.forEach(function (t) {
             if (t.IsStop) {
                 // creating stop markers
                 var stopMarker = L.circleMarker([t.Latitude * 180 / Math.PI, t.Longitude * 180 / Math.PI], {

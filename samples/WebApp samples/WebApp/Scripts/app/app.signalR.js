@@ -7,12 +7,6 @@
 
     app.events = new app.AppEvents();
 
-    app.OnReadySignalR = function (isReconnect) {
-        if (isReconnect)
-            console.log('SignalR: Now reconnected, connection id = ' + $.connection.hub.id);
-        else
-            console.log('SignalR: Now connected, connection id = ' + $.connection.hub.id);
-    };
     app.OnErrorSignalR = function (err, isReconnect) {
         if (isReconnect === undefined) {
             console.error('SignalR: ' + err);
@@ -25,9 +19,6 @@
             console.error('SignalR: Could not connect: ' + err);
         }
     };
-    app.OnSlowConnectionSignalR = function () {
-        console.warn('SignalR: We are currently experiencing difficulties with the connection.');
-    };
 
     function startHub(isReconnect) {
         if (isReconnect === void 0) { isReconnect = false; }
@@ -36,7 +27,6 @@
         $.connection.hub.start()
             .done(function () {
                 started = true;
-                app.OnReadySignalR(isReconnect);
             })
             .fail(function (err) { return app.OnErrorSignalR(err, isReconnect); });
     }
@@ -53,7 +43,6 @@
         noRestart = true;
         $.connection.hub.stop(true);
     }
-    $.connection.hub.connectionSlow(app.OnSlowConnectionSignalR);
     $.connection.hub.error(app.OnErrorSignalR);
     $.connection.hub.disconnected(function () {
         started = false;
@@ -61,7 +50,7 @@
             setTimeout(function () { return startHub(true); }, 10);
     });
     $(document).ready(function () {
-        //$.connection.hub.logging = true;
+        $.connection.hub.logging = false;
         $.connection.messagingHub.client.Update = updateHub;
         $.connection.messagingHub.client.Stop = stopHub;
     });

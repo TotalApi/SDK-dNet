@@ -1,5 +1,4 @@
-﻿@using Lion.Utils.Mvc.Web
-<div class="container">
+﻿<div class="container">
 
     <script id="objectModel" type="text/C#">
         
@@ -133,12 +132,12 @@ internal class SampleDbContext : ISampleDbContext
                     <pre class="brush: csharp;" sample-id="dbContextInterface"></pre>
                 </li>
                 <li>
-                    Create the interface that implements @Html.Span("IRepositoryId<SampleObjectModel>"):
+                    Create the interface that implements <b>IRepositoryId&lt;SampleObjectModel&gt;</b>:
 
                     <pre class="brush: csharp;" sample-id="objectModelExportedInterface"></pre>
                 </li>
                 <li>
-                    Create the class that should implement the interface above, and the @Html.Span("RepositoryId<SampleObjectModel>") interfacem that actually declares custom class as repository item:
+                    Create the class that should implement the interface above, and the <b>RepositoryId&lt;SampleObjectModel&gt;</b> interfacem that actually declares custom class as repository item:
 
                     <pre class="brush: csharp;" sample-id="objectModelImplementation"></pre>
                 </li>

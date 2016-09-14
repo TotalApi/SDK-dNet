@@ -1,7 +1,4 @@
-﻿@using Lion.Utils.Mvc.Web
-
-
-<div class="container">
+﻿<div class="container">
 
     <h2 class="sdk_sample_step">Async tasks</h2>
 
@@ -162,7 +159,7 @@
 
         <p>
             To allow using custom modules you need to create class derived from AsyncTaskObject, the name of this class will be determined as the event name.
-            To implement the logic of the task, you need to create a handler class, derived from @Html.Span("AsyncTaskHandler<TTask, TResult>") , and export it as IAsyncTaskHandler.
+            To implement the logic of the task, you need to create a handler class, derived from <b>AsyncTaskHandler&lt;TTask, TResult&gt;</b>, and export it as IAsyncTaskHandler.
             After implementing logic in overriden Start method, the task will be ready.
         </p>
 
@@ -173,8 +170,8 @@
             We can use this class to create a custom event that could be fired during asynk task execution.
             In the sample code we created class called CustomAsyncTaskEvent, the only change from the base class is custom string Message property.
             So, we can now fire this event through CoreApi.EventManager.Publish(...) method.
-            To catch this event, you need to use subscriber class, that must implement generic interface @Html.Span("IEvent<TTaskEvent>") of a newly created task event
-        </p>
+            To catch this event, you need to use subscriber class, that must implement generic interface <b>IEvent&lt;TTaskEvent&gt;</b> of a newly created task event
+</p>
 
 
 

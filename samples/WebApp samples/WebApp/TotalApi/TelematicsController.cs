@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using TotalApi.Telematics;
-using TotalApi.Telematics.CoordinateFilters;
-using TotalApi.Telematics.CoordinateFilters.StopsFilter;
+using TotalApi.Telematics.DataFilters.Coordinates;
+using TotalApi.Telematics.DataFilters.FilterPipeline;
 using TotalApi.Telematics.ServiceContracts;
 using TotalApi.Utils.Extensions;
 using WebApp.Api;
@@ -68,6 +68,11 @@ namespace WebApp.TotalApi
         public DeviceStatus GetDeviceIdentifierLastStatus(string type, string devId)
         {
             return TelematicsApi.Telematics.GetDeviceLastStatus(DeviceIdentifier.Create(devId, type.As<int>().As<DeviceIdentifierTypes>()));
+        }
+
+        public Sensor FindPhysicalSensor(string type, string devId, string portId, string address)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -148,6 +153,41 @@ namespace WebApp.TotalApi
         /// </returns>
         [HttpPost, Route("ReadSensorValues")]
         public SensorValues ReadSensorValues(ReadSensorValuesParams readParams)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PipelineSettings GetFiltersPipeline(string name, bool isCoordinatesPipeline, bool isPreFiltersPipeline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] GetFilterPipelineNames(bool isCoordinatesPipeline, bool isPreFiltersPipeline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetFiltersPipeline(string name, PipelineSettings pipeline, bool isCoordinatesPipeline, bool isPreFiltersPipeline)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignDefaultCoordinatesPostFiltersPipeline(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignDefaultCoordinatesPreFiltersPipeline(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignDefaultSensorDataPostFiltersPipeline(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignDefaultSensorDataPreFiltersPipeline(string name, int? sensorType, int? sensorNumber)
         {
             throw new NotImplementedException();
         }
