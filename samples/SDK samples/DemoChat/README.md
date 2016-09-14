@@ -13,12 +13,11 @@ Demo Chat
 Настройка `app.config`
 ----------------------
 Укажем протокол и адрес подключения к серверу **TotalApi**.  
-После [регистрации](http://billing.totalapi.io/#/login/free) своего приложения вы получите пару ключей `ApiKey` и `AppKey`, а также адрес подключения к серверу **TotalApi**.
+После [регистрации](http://billing.totalapi.io/#/register/free) своего приложения вы получите пару ключей `ApiKey` и `AppKey`, а также адрес подключения к серверу **TotalApi**.
 Параметры подключения **должны** отличаться от приведенных в примере. Вы должны подставить значения, которые вы получите после регистрации своего приложения.
 ```xml
     <appSettings>
-        <add key="serverProtocol" value="http" />
-        <add key="serverHost" value="services.totalapi.io:1202" />
+        <add key="serverHost" value="http://services.totalapi.io:1202" />
         <add key="appKey" value="07088143-08e7-416f-8c33-01e80f59ccae" />
     </appSettings>
 ```
@@ -39,7 +38,7 @@ Demo Chat
 
 Инициализация SDK TotalApi
 --------------------------
-Первой строчкой нашего приложения должна быть:
+Первой строкой нашего приложения должна быть:
 ```C#
 TotalApiBootstrapper.Create();
 ```
