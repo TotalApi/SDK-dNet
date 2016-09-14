@@ -5552,7 +5552,14 @@
             <typeparam name="T">Type of parameter value</typeparam>
             <param name="name">Parameter name</param>
             <param name="defValue">Default value</param>
-            <returns></returns>
+        </member>
+        <member name="M:TotalApi.Utils.Params.GetTyped(System.String,System.Type,System.Object)">
+            <summary>
+            Gets parameter value casted to specified type
+            </summary>
+            <param name="name">Parameter name</param>
+            <param name="type">Type of parameter value</param>
+            <param name="defValue">Default value</param>
         </member>
         <member name="M:TotalApi.Utils.Params.GetConnectionString(System.String,System.String)">
             <summary>

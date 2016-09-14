@@ -70,6 +70,131 @@
             Если моментальное значение скорости УС меньше <see cref="P:TotalApi.Telematics.DataFilters.Coordinates.SpeedSensorPreFilterParameters.MinSpeed"/> в течение этого периода будет установлен флаг <see cref="F:TotalApi.Telematics.DeviceStates.Stopped"/> - в противном случае флаг будет сброшен.
             </summary>
         </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition">
+            <summary>
+            Equal condition types
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition.Greater">
+            <summary>
+            Mark values that greater 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition.GreaterOrEqual">
+            <summary>
+            Mark values that greater or equal 
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition.Lower">
+            <summary>
+            Mark values that lower
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition.LowerOrEqual">
+            <summary>
+            Mark values that lower or equal
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue">
+            <summary>
+            Equal condition
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue.Velocity">
+            <summary>
+            Velocity
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue.Altitude">
+            <summary>
+            Altitude
+            </summary>
+        </member>
+        <member name="F:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue.Direction">
+            <summary>
+            Direction
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters">
+            <summary>
+            Represents patameters for the sensor data threshold post filter
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.Value">
+            <summary>
+            Checking coordinate value
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.Threshold">
+            <summary>
+            Filter parameter, by default is 1 
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.PeriodOn">
+            <summary>
+            Статус установится, если превышение порогового значения продлится более указанного промежутка времени.
+            Нулевое (или меньше нуля) значение периода означает моментальное срабатывание в тот же самый момент как значение вышло за границу.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.PeriodOff">
+            <summary>
+            Статус сбросится, если значение меньше порогового продлится более указанного промежутка времени.
+            Нулевое (или меньше нуля) значение периода означает моментальное срабатывание в тот же самый момент как значение вернулось в границу.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.Condition">
+            <summary>
+            Filter type
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.#ctor">
+            <summary>
+            Initial contstructor without paramaters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters.#ctor(TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue,System.Double,TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPreFilterParameters">
+            <summary>
+            Represents patameters for the sensor data threshold pre filter
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPreFilterParameters.DeviceState">
+            <summary>
+            Gets or set the device state to set when triggered
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPreFilterParameters.#ctor">
+            <summary>
+            Initial constructor without parameters
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPreFilterParameters.#ctor(TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue,System.Int64,System.Double,TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.EqualCondition,System.Nullable{System.TimeSpan})">
+            <summary>
+            Initial constructor with parameters
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdHelper">
+            <summary>
+            Helper class for sensor filter.
+            </summary>
+        </member>
+        <member name="T:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdHelper.CoordinateThresholderPointExtension">
+            <summary>
+            Extends sensor point data.
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdHelper.CoordinateThresholderPointExtension.IsOverThreshold">
+            <summary>
+            Filter for overseas
+            </summary>
+        </member>
+        <member name="M:TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdHelper.ThresholdFilter(TotalApi.Telematics.ICoordinatePoint,TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinateValue)">
+            <returns></returns>
+        </member>
         <member name="T:TotalApi.Telematics.DataFilters.Coordinates.DefaultFilterParameters">
             <summary>
             Factory of the default coordinate filters
@@ -481,7 +606,7 @@
         </member>
         <member name="T:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition">
             <summary>
-            Snsor data threshold post filter type
+            Equal condition types
             </summary>
         </member>
         <member name="F:TotalApi.Telematics.DataFilters.SensorsData.ThresholdFilter.EqualCondition.Greater">
@@ -2174,6 +2299,11 @@
         <member name="P:TotalApi.Telematics.SourceInfo.SensorNumber">
             <summary>
             Sensor number representation of the SourceInfo (applied for sensors only)
+            </summary>
+        </member>
+        <member name="P:TotalApi.Telematics.SourceInfo.UserData">
+            <summary>
+            Any user specified data
             </summary>
         </member>
         <member name="P:TotalApi.Telematics.TelematicsSystemData.FullKey">

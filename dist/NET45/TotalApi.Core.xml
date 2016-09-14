@@ -6173,26 +6173,21 @@
             This class is needed for setting the addresses of module's WCF services.
             It is possible, for any module of the system to be hosted on a separate workstation and even have another endpoint,
             that is because we need the possibility to resolve the addresses of modules services based on their contracts.
-            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
+            Method <see cref="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.String,System.Int32)"/> searches in a configuration file setting for services endpoints and addresses of module's workstations for the given contract for the first time,
             and if such is not found, default value would be used, specified in a configuration file, and even if so is not found - takes default values,
-            specified in static fields  <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceHost"/> and <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/>.
+            specified in static fields  <see cref="P:TotalApi.Core.TotalApiEndpoint.ServiceUri"/> and <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/>.
             Parameter <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint"/> should (and must) contain string templates <c>{ServiceHost}</c> and <c>{ServiceContract}</c>, 
             which will be replaced by correspondent values.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceProtocol">
+        <member name="P:TotalApi.Core.TotalApiEndpoint.ServiceUri">
             <summary>
-            Default service protocol.
+            Default service uri.
             </summary>
         </member>
-        <member name="P:TotalApi.Core.TotalApiEndpoint.DefaultServicePort">
+        <member name="P:TotalApi.Core.TotalApiEndpoint.ServerUri">
             <summary>
-            Default service port.
-            </summary>
-        </member>
-        <member name="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceHost">
-            <summary>
-            Default service host.
+            Default server uri.
             </summary>
         </member>
         <member name="F:TotalApi.Core.TotalApiEndpoint.DefaultApplicationName">
@@ -6218,13 +6213,13 @@
         <member name="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceEndpoint">
             <summary>
             WCF service endpoint address.
-            Cooresspondent string templates in a brackets would be replaced by values in the settings.
+            Correspondent string templates in a brackets would be replaced by values in the settings.
             </summary>
         </member>
-        <member name="F:TotalApi.Core.TotalApiEndpoint.DefaultServerEndpoint">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.DefaultServerEndpoint(System.String)">
             <summary>
             Default WCF service endpoint address.
-            Cooresspondent string templates in a brackets would be replaced by values in the settings.
+            Correspondent string templates in a brackets would be replaced by values in the settings.
             </summary>
         </member>
         <member name="E:TotalApi.Core.TotalApiEndpoint.ConfigureServiceEndpoint">
@@ -6246,27 +6241,29 @@
             <typeparam name="TServiceContract">The type of the service contract.</typeparam>
             <returns></returns>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.Int32,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri(System.String,System.Boolean,System.String,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
             <param name="serviceContractName">Short name of the service contract.</param>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.Int32)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri(System.String,System.Boolean,System.String,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
             <param name="serviceContractName">Short name of the service contract.</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.ParamsUri``1(System.Boolean,System.String,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns connection address Url for specified service, adding additional parameters to the address.
             </summary>
@@ -6274,39 +6271,43 @@
             <param name="apiType">API type.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String,System.Int32)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Uri``1(System.Boolean,System.String,System.String,System.Int32)">
             <summary>
             Returns connection address Url for specified service.
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.Int32,System.String,System.Object[])">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.CreateWithParams``1(System.Boolean,System.String,System.String,System.Int32,System.String,System.Object[])">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
             <param name="fmtParams">Formatted parameters string.</param>
             <param name="args">List of parameters.</param>
         </member>
-        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String,System.Int32)">
+        <member name="M:TotalApi.Core.TotalApiEndpoint.Create``1(System.Boolean,System.String,System.String,System.Int32)">
             <summary>
             Returns <see cref="T:System.ServiceModel.EndpointAddress"/> of a connection to specified service, adding additional parameters to the address. 
             </summary>
             <param name="isClientUri"><c>true</c> - if connection address would be retrieved from client side.</param>
             <param name="apiType">API type.</param>
+            <param name="uriScheme">Connection URI scheme. If not set - default value will be used.</param>
             <param name="port">Connection port. If equals to zero - default value will be used.</param>
         </member>
         <member name="M:TotalApi.Core.TotalApiEndpoint.GetBinding(System.String)">
             <summary>
             Returns default binding value for a given protocol.
             </summary>
-            <param name="uriScheme">Protocol scheme. If not set - used <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceProtocol"/>.</param>
+            <param name="uriScheme">Protocol scheme. If not set - used scheme from <see cref="P:TotalApi.Core.TotalApiEndpoint.ServiceUri"/>.</param>
         </member>
         <member name="M:TotalApi.Core.TotalApiEndpoint.GetBinding(System.ServiceModel.EndpointAddress)">
             <summary>
@@ -6325,7 +6326,7 @@
             <summary>
             Returns WebApi binding value for a given protocol.
             </summary>
-            <param name="uriScheme">Protocol scheme. If not set - used <see cref="F:TotalApi.Core.TotalApiEndpoint.DefaultServiceProtocol"/>.</param>
+            <param name="uriScheme">Protocol scheme. If not set - used protocol from <see cref="P:TotalApi.Core.TotalApiEndpoint.ServiceUri"/>.</param>
         </member>
         <member name="T:TotalApi.Core.ConfigureServiceEndpointEvent">
             <summary>
@@ -6383,8 +6384,14 @@
         </member>
         <member name="P:TotalApi.Core.ConfigureServiceEndpointEventArgs.Host">
             <summary>
-            Input/Output parameter: Services hosting workstation address. Address might include port address.
-            For example: "127.0.0.1:8888".
+            Input/Output parameter: Services hosting workstation address.
+            For example: "127.0.0.1".
+            </summary>
+        </member>
+        <member name="P:TotalApi.Core.ConfigureServiceEndpointEventArgs.Port">
+            <summary>
+            Input/Output parameter: Services hosting workstation port.
+            For example: 8888.
             </summary>
         </member>
         <member name="P:TotalApi.Core.ConfigureServiceEndpointEventArgs.ApplicationName">
