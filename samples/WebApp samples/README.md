@@ -5,7 +5,7 @@
 Описание
 --------
 Это пример примитивного приложения отображающего пердвижение транспортных средств, связанных с известными устройствами слежения на карте. 
-Ознакомьтесь предварительно с примерами использования TotalApi SDK, в папке [SDK samples](https://github.com/TotalApi/SDK-dNet/tree/master/samples/SDK%20samples), например, [DemoChat](https://github.com/TotalApi/SDK-dNet/tree/master/samples/SDK%20samples/DemoChat).
+Ознакомьтесь предварительно с примерами использования TotalApi SDK, в папке [SDK samples](../SDK%20samples), например, [DemoChat](../SDK%20samples/DemoChat).
 
 
 Начальные шаги
