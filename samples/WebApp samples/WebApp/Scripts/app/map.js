@@ -1,5 +1,12 @@
 ﻿(function () {
 
+    var ROSEPOINTS_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter.RosePointsPostFilterParameters';
+    var BREAKS_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter.BreaksPostFilterParameters';
+    var STOPS_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.StopsFilter.StopsPostFilterParameters';
+    var SPEED_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter.SpeedPostFilterParameters';
+    var THERSHOLD_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter.CoordinatesThresholdPostFilterParameters';
+    var SIMPLIFICATE_FILTER = 'TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter.SimplificatePostFilterParameters';
+
     var map;
     var popup;
     var markers = [];
@@ -11,6 +18,8 @@
      */
     var TRANSPORTS_URL = '/api/transport/';
     var TRACK_URL = '/totalapi/telematics/readcoordinates';
+
+    $.ajaxSetup({ contentType: "application/json; charset=utf-8" });
 
     /**
      * Creating and initialization the map on the "map" div
@@ -175,19 +184,24 @@
             var hourPeriod = $('.range-track-period').val();
             var date = new Date();
             var params = {
-                DeviceId: {
-                    Id: clickedMarkerId,
-                    // database ID
-                    Type: 0
-                },
+                DeviceId: { Type: 0 /* database ID */, Id: clickedMarkerId },
                 // the past hour
                 From: new Date(date.setHours(date.getHours() - hourPeriod)).toISOString(),
-                To: new Date().toISOString()
+                To: new Date().toISOString(),
+                Filters: [
+//                    { ClassName: ROSEPOINTS_FILTER, Properties: { Radius: 5, MinPointsCount: 5 } },
+//                    { ClassName: BREAKS_FILTER, Properties: { MinDistance: 3, MaxDistance: 30, AvgSpeed: 10 } },
+//                    { ClassName: SPEED_FILTER, Properties: { MaxSpeed: 70, Tolerance: 5 } },
+//                    { ClassName: THERSHOLD_FILTER, Properties: { Value: 0 /* Velocity */, Condition: 1 /* Greater */, Threshold: 40, PeriodOn: "00:00:30" } },
+                    { ClassName: STOPS_FILTER, Properties: { MinSpeed: 0.1, MinStopDuration: "00:05:00", FilterAction: 0 /* Default */ } },
+                    { ClassName: SIMPLIFICATE_FILTER, Properties: { Tolerance: 0.00000001 } },
+                ]
             }
             // disabling button and displaying loading animation button inside
             $('.button-build-track').html('<i class="glyphicon glyphicon-refresh spin"></i> Loading...').attr('disabled', '');
+
             // loading data to build the track
-            $.post(TRACK_URL, params, drawTrack);
+            $.post(TRACK_URL, JSON.stringify(params), drawTrack);
         });
 
         $('.range-track-period').on('change', function() {

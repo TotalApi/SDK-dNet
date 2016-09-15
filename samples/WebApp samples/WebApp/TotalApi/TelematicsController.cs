@@ -5,6 +5,12 @@ using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using TotalApi.Telematics;
 using TotalApi.Telematics.DataFilters.Coordinates;
+using TotalApi.Telematics.DataFilters.Coordinates.BreaksFilter;
+using TotalApi.Telematics.DataFilters.Coordinates.RosePointsFilter;
+using TotalApi.Telematics.DataFilters.Coordinates.SimplificateFilter;
+using TotalApi.Telematics.DataFilters.Coordinates.SpeedFilter;
+using TotalApi.Telematics.DataFilters.Coordinates.StopsFilter;
+using TotalApi.Telematics.DataFilters.Coordinates.ThresholdFilter;
 using TotalApi.Telematics.DataFilters.FilterPipeline;
 using TotalApi.Telematics.ServiceContracts;
 using TotalApi.Utils.Extensions;
@@ -46,9 +52,38 @@ namespace WebApp.TotalApi
         [HttpPost, Route("ReadCoordinates")]
         public CoordinatePoints ReadCoordinates(ReadCoordinatesParams readParams)
         {
-            readParams.Filters = DefaultFilterParameters.Create(readParams.Filters);
-            //readParams.Filters = new[] {new StopsPostFilterParameters() {FilterAction = StopsPostFilterParameters.Action.Default, MinSpeed = 10, MinStopDuration = TimeSpan.FromSeconds(10)} };
-            return TelematicsApi.Telematics.ReadCoordinates(readParams);
+            if (readParams.Filters == null)
+            {
+                readParams.Filters = DefaultFilterParameters.Create(readParams.Filters);
+/*
+                readParams.Filters = new object[]
+                {
+                    new RosePointsPostFilterParameters { MinPointsCount = 5, Radius = 5 },
+                    new BreaksPostFilterParameters { AvgSpeed = 10, MinDistance = 3, MaxDistance = 30 },
+                    new StopsPostFilterParameters
+                    {
+                        FilterAction = StopsPostFilterParameters.Action.Default,
+                        MinSpeed = 10,
+                        MinStopDuration = TimeSpan.FromSeconds(10)
+                    },
+                    new SpeedPostFilterParameters { MaxSpeed = 40, Tolerance = 5 },
+                    new CoordinatesThresholdPostFilterParameters
+                    {
+                        Value = CoordinateValue.Velocity,
+                        Condition = EqualCondition.Greater,
+                        Threshold = 40,
+                        PeriodOn = TimeSpan.FromSeconds(30) 
+                    },
+                    new SimplificatePostFilterParameters { Tolerance = 1E-08 }
+                };
+*/
+            }
+            var res = TelematicsApi.Telematics.ReadCoordinates(readParams);
+/*
+            var speed1 = res.Points.Where(p => p.SpeedFilter().SpeedExceededFlag == true).ToArray();
+            var speed2 = res.Points.Where(p => p.ThresholdFilter(CoordinateValue.Velocity).IsOverThreshold).ToArray();
+*/
+            return res;
         }
 
         [HttpGet, Route("{id}")]
