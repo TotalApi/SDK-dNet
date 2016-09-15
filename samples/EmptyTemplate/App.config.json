@@ -1,0 +1,17 @@
+﻿{
+    "serverHost": "http://services.totalapi.io:1202",
+    "apiKey": "DemoApiKey",
+    "appId": "Empty.Template.Project",
+    "appTitle": "Empty Template Project",
+
+    "totalapi.log": {
+        "async": true,
+        "files": [
+            { "file": "log.txt", "level": 0x1f, "persistent": false, "isDisabled": false, "console":  true },
+            { "file": "log_error.txt", "persistent": true, "level": 0x7, "isDisabled": false }
+        ]
+    },
+
+    "ConnectionStrings": {
+    }
+}
